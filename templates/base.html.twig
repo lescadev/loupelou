@@ -3,10 +3,53 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <Link rel="stylesheet" href="/css.css">
+
         {% block stylesheets %}{% endblock %}
+
     </head>
     <body>
+        {% block navbar %}
+            <div class="tete">
+                <a href="/home"><img src="/logoloup.png" alt="logo lou pélou" class="logolou"></a>
+                <h1>Notre Monnaie nous appartient redonnons lui du sens ! </h1>
+                <a href="/header/login"><img src="/iconuser.svg" alt="connection/inscription"></a>
+            
+            </div>
+            <ul>
+                <li><a href="/header/procurer">OU S'EN PROCURER</a></li>
+                <li><a href="/header/utiliser">OU LES UTILISER</a></li>
+                <li class="dropdown">
+                    <a href="/header/rejoindre" class="dropbtn">NOUS REJOINDRE</a>
+                    <div class="dropdown-content">
+                    <a href="/header/rejoindre/particuliers">PARTICULIERS</a>
+                    <a href="/header/rejoindre/professionnels">PROFESSIONNELS</a>
+                    </div>
+                </li>
+                <li><a href="/header/contacter">NOUS CONTACTER</a></li>
+                <li><a href="/header/evenement">EVENEMENTS</a></li>
+                <li><a href="/header/blog">BLOG</a></li>
+                <li><a href="https://www.facebook.com/lechemindupelou/" target="_blank"><img class="fb" src="/Facebookicon.png" alt="fb"></a></li>
+            </ul>
+            
+        {% endblock %}
+
+        <div class="container">
         {% block body %}{% endblock %}
+        </div>
+        
+        {% block footer %}
+            <ul>
+                <li><a href="/footer/mentionL">MENTIONS LEGALES</a></li>
+                <li><a href="/footer/cgv">CGV</a></li>
+                <li><a href="/footer/cgu">CGU</a></li>
+                <li><a href="/footer/statut">STATUT</a></li>
+                <li><a href="/footer/reglement">REGLEMENT INTERIEUR</a></li>
+                <li><a href="/footer/rendu">COMPTE RENDUAG 2019</a></li>
+                <li><a href="/header/contacter">CONTACT</a></li>
+                <li><a href="https://www.facebook.com/lechemindupelou/" target="_blank"><img class="fb" src="/Facebookicon.png"></img></a></li>
+            </ul>
+        {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>
