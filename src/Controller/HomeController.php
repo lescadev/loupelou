@@ -16,12 +16,12 @@ class HomeController extends AbstractController
     }
     
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="index")
      */
 
-    public function home()
+    public function index()
     {
-        return $this->render('/home.html.twig');
+        return $this->render('index.html.twig');
     }
 
 
@@ -108,12 +108,12 @@ class HomeController extends AbstractController
         return $this->render('footer/cgu.html.twig');
     }
     /**
-     * @Route("/mentionL", name="mentionL")
+     * @Route("/mentions", name="mentions")
      */
 
-    public function mentionL()
+    public function mentions()
     {
-        return $this->render('footer/mentionL.html.twig');
+        return $this->render('footer/mentions.html.twig');
     }
     /**
      * @Route("/reglement", name="reglement")

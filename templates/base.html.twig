@@ -13,9 +13,9 @@
         {% block navbar %}
         
         <header class="header">
-                <a href="/home"><img src="/logoloup.png" alt="logo lou pélou" class="logolou"></a>
+                <a href={{ path('index') }}><img src="/logoloup.png" alt="logo lou pélou" class="logolou"></a>
                 <h1>Notre Monnaie nous appartient redonnons lui du sens ! </h1>
-                <a href="/header/login"><img src="/iconuser.svg" alt="connection/inscription" class="iconuser"></a>
+                <a href={{ path('login') }}><img src="/iconuser.svg" alt="connection/inscription" class="iconuser"></a>
             
         </header>
         <navbar class="head2">
@@ -32,7 +32,7 @@
                 <li><a href={{ path('contacter') }}>Nous contacter</a></li>
                 <li><a href={{ path('evenements') }}>Evenements</a></li>
                 <li><a href={{ path('blog') }}>Blog</a></li>
-                <li><a href="https://www.facebook.com/lechemindupelou/" target="_blank"><img class="fb" src="/Facebookicon.png" alt="fb"></a></li>
+                <li><a href="https://www.facebook.com/lechemindupelou/" target="_blank"><img class="fb" src="/facebookicon.png" alt="fb"></a></li>
             </ul>
         </navbar>
         {% endblock %}
@@ -44,14 +44,14 @@
         {% block footer %}
         <footer class="footer">
             <ul>
-                <li><a href={{ path('mentionL') }}>Mentions légales</a></li>
+                <li><a href={{ path('mentions') }}>Mentions légales</a></li>
                 <li><a href={{ path('cgv') }}>Cgv</a></li>
                 <li><a href={{ path('cgu') }}>Cgu</a></li>
                 <li><a href={{ path('statut') }}>Statut</a></li>
                 <li><a href={{ path('reglement') }}>Règlement interieur</a></li>
                 <li><a href={{ path('rendu') }}>Compte rendu ag 2019</a></li>
                 <li><a href={{ path('contacter') }}>Contact</a></li>
-                <li><a href="https://www.facebook.com/lechemindupelou/" target="_blank"><img class="fb" src="/Facebookicon.png"></img></a></li>
+                <li><a href="https://www.facebook.com/lechemindupelou/" target="_blank"><img class="fb" src="/facebookicon.png"></img></a></li>
             </ul>
         </footer>    
         {% endblock %}
