@@ -3,10 +3,58 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        
+
         {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="/normalize.css">
+        <link rel="stylesheet" href="/style.css">
     </head>
     <body>
+        {% block navbar %}
+        
+        <header class="header">
+                <a href={{ path('index') }}><img src="/logoloup.png" alt="logo lou pélou" class="logolou"></a>
+                <h1>Notre Monnaie nous appartient redonnons lui du sens ! </h1>
+                <a href={{ path('login') }}><img src="/iconuser.svg" alt="connection/inscription" class="iconuser"></a>
+            
+        </header>
+        <navbar class="head2">
+            <ul>
+                <li><a href={{ path('procurer') }}>Ou s'en procurer</a></li>
+                <li><a href={{ path('utiliser') }}>Ou les utiliser</a></li>
+                <li class="dropdown">
+                    <a href={{ path('rejoindre') }} class="dropbtn">Nous rejoindre</a>
+                    <div class="dropdown-content">
+                    <a href={{ path('particuliers') }}>Particuliers</a>
+                    <a href={{ path('professionnels') }}>Professionnels</a>
+                    </div>
+                </li>
+                <li><a href={{ path('contacter') }}>Nous contacter</a></li>
+                <li><a href={{ path('evenements') }}>Evenements</a></li>
+                <li><a href={{ path('blog') }}>Blog</a></li>
+                <li><a href="https://www.facebook.com/lechemindupelou/" target="_blank"><img class="fb" src="/facebookicon.png" alt="fb"></a></li>
+            </ul>
+        </navbar>
+        {% endblock %}
+
+        <div class="container">
         {% block body %}{% endblock %}
+        </div>
+        
+        {% block footer %}
+        <footer class="footer">
+            <ul>
+                <li><a href={{ path('mentions') }}>Mentions légales</a></li>
+                <li><a href={{ path('cgv') }}>Cgv</a></li>
+                <li><a href={{ path('cgu') }}>Cgu</a></li>
+                <li><a href={{ path('statut') }}>Statut</a></li>
+                <li><a href={{ path('reglement') }}>Règlement interieur</a></li>
+                <li><a href={{ path('rendu') }}>Compte rendu ag 2019</a></li>
+                <li><a href={{ path('contacter') }}>Contact</a></li>
+                <li><a href="https://www.facebook.com/lechemindupelou/" target="_blank"><img class="fb" src="/facebookicon.png"></img></a></li>
+            </ul>
+        </footer>    
+        {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>
