@@ -21,7 +21,7 @@ class AppFixtures extends Fixture
         $manager->flush();
 
 
-        //Génère les fixtures de l'entité "Informations"
+        //Création des fixtures de l'entité "Informations"
         $infos = new Informations();
 
         $infos->setPresentation("");
