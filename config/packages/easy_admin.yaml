@@ -12,6 +12,8 @@ easy_admin:
         User:
             class: App\Entity\User
             label: "Membre"
+            list:
+                fields: [{ property: 'is_active',  type: 'toggle' }, 'prenom', 'nom', 'email', 'adresse','code_postal', 'ville']
             form:
                 fields:
                     - {property: 'email'}

@@ -75,6 +75,11 @@ class User implements UserInterface
      */
     private $adhesions;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default":true})
+     */
+    private $isActive = true;
+
     public function __construct()
     {
         $this->adhesions = new ArrayCollection();
@@ -276,5 +281,17 @@ class User implements UserInterface
     public function __toString()
     {
         return $this->getNom();
+    }
+
+    public function getIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
+
+        return $this;
     }
 }
