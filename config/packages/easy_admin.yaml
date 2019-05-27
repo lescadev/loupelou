@@ -10,7 +10,7 @@ easy_admin:
                   - {entity: 'Comptoir'}
 
             - label: "Informations" 
-              icon: "user-o"
+              icon: "newspaper"
               entity: 'Informations'
             
 
@@ -37,4 +37,7 @@ easy_admin:
             class: App\Entity\Comptoir
         Informations:
             class: App\Entity\Informations
-            disabled_actions: ['new']
+            edit:
+                actions: ['-new', '-delete']
+            list:
+                actions: ['-new', '-delete']
