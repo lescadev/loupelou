@@ -1,0 +1,38 @@
+easy_admin:
+    design:
+        menu:
+            - label: "Utilisateurs"
+              icon: "user-o"
+              children:
+                  - {entity: 'User'}
+                  - {entity: 'Particulier'}
+                  - {entity: 'Prestataire'}
+                  - {entity: 'Comptoir'}
+    entities:
+        User:
+            class: App\Entity\User
+            label: "Membre"
+            list:
+                fields: [{ property: 'is_active',  type: 'toggle' }, 'prenom', 'nom', 'email', 'adresse','code_postal', 'ville']
+            form:
+                fields:
+                    - {property: 'email'}
+                    - {property: 'password'}
+                    - {property: 'prenom'}
+                    - {property: 'nom'}
+                    - {property: 'telephone'}
+                    - {property: 'adresse'}
+                    - {property: 'ville'}
+                    - {property: 'code_postal'}
+                    - {property: 'date_creation'}
+        Particulier:
+            class: App\Entity\Particulier
+        Prestataire:
+            class: App\Entity\Prestataire
+        Comptoir:
+            class: App\Entity\Comptoir
+
+
+
+
+
