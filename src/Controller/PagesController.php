@@ -23,7 +23,7 @@ class PagesController extends AbstractController
 
     public function utiliser()
     {
-        return $this->render('pages/utiliser.html.twig');
+        return $this->render('/utiliser.html.twig');
     }
 
 
@@ -33,7 +33,7 @@ class PagesController extends AbstractController
 
     public function rejoindre()
     {
-        return $this->render('pages/rejoindre.html.twig');
+        return $this->render('/rejoindre.html.twig');
     }
 
 
@@ -43,7 +43,7 @@ class PagesController extends AbstractController
 
     public function contacter()
     {
-        return $this->render('pages/contacter.html.twig');
+        return $this->render('/contacter.html.twig');
     }
 
 
@@ -66,15 +66,6 @@ class PagesController extends AbstractController
         return $this->render('pages/evenements.html.twig');
     }
 
-
-    /**
-     * @Route("/particuliers/rejoindre", name="particuliers")
-     */
-
-    public function particuliers()
-    {
-        return $this->render('pages/particuliers.html.twig');
-    }
     /**
      * @Route("/cgv", name="cgv")
      */
@@ -113,7 +104,7 @@ class PagesController extends AbstractController
 
     public function rendu()
     {
-        return $this->render('pages/rendu.html.twig');
+        return $this->render('/rendu.html.twig');
     }
     /**
      * @Route("/statut", name="statut")
@@ -121,7 +112,7 @@ class PagesController extends AbstractController
 
     public function statut()
     {
-        return $this->render('pages/statut.html.twig');
+        return $this->render('/statut.html.twig');
     }
     /**
      * @Route("/logins", name="logins")
@@ -129,14 +120,14 @@ class PagesController extends AbstractController
 
     public function logins()
     {
-        return $this->render('pages/logins.html.twig');
+        return $this->render('/logins.html.twig');
     }
     /**
      * @Route("/procurer", name="procurer")
      */
     public function procurer()
     {
-        return $this->render('pages/procurer.html.twig');
+        return $this->render('/procurer.html.twig');
         
     }
 }
