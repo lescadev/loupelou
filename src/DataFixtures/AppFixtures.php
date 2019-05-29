@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Admin;
+use App\Entity\Informations;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -18,5 +19,14 @@ class AppFixtures extends Fixture
 
         $manager->persist($admin);
         $manager->flush();
+
+
+        // Création des fixtures de l'entité "Informations"
+        $infos = new Informations();
+
+        $infos->setPresentation("");
+
+        $manager->persist($infos);
+        $manager->flush();   
     }
 }
