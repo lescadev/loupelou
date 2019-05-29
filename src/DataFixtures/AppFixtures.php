@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Admin;
+use App\Entity\Prestataire;
 use App\Entity\User;
 use App\Entity\Comptoir;
 use App\Entity\Informations;
@@ -59,10 +60,18 @@ class AppFixtures extends Fixture
         $comptoir->setUser($user);
         $comptoir2 = new Comptoir();
         $comptoir2->setUser($user2);
+        $presta = new Prestataire();
+        $presta->setSiret("2");
+        $presta->setUser($user);
+        $presta2 = new Prestataire();
+        $presta2->setSiret("2");
+        $presta2->setUser($user2);
         $manager->persist($user);
         $manager->persist($user2);
         $manager->persist($comptoir);
         $manager->persist($comptoir2);
+        $manager->persist($presta);
+        $manager->persist($presta2);
         $manager->persist($admin);
         $manager->flush();
     }

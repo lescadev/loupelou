@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ComptoirRepository;
+use App\Repository\PrestataireRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,23 +14,34 @@ class ApiController extends AbstractController
     /**
      * @Route("/api", name="api")
      */
-    public function api(UserRepository $userRepository, ComptoirRepository $comptoirRepository) : Response
+    public function api(UserRepository $userRepository, ComptoirRepository $comptoirRepository, PrestataireRepository $prestataireRepository) : Response
     {
         $response = new Response();
 
         $comptoir = $comptoirRepository->findAll();
+        $prestataire = $prestataireRepository->findAll();
         $object = (object) [];
 
         for ($i=0; $i < count($comptoir); $i++) {
-            $adresse= $userRepository->find($comptoir[$i]->getUser());
+            $adresseComptoir= $userRepository->find($comptoir[$i]->getUser());
             $object->comptoir[$i] = [[
-                'name' => $adresse->getNom(),
+                'name' => $adresseComptoir->getNom(),
                 'coordonnees' => [
-                    'lng' => $adresse->getLongitude(),
-                    'lat' =>$adresse->getLatitude()
+                    'lng' => $adresseComptoir->getLongitude(),
+                    'lat' =>$adresseComptoir->getLatitude()
                 ]]];
         }
 
+        for ($j=0; $j < count($prestataire); $j++) {
+            $adressePresta = $userRepository->find($prestataire[$j]->getUser());
+            $object->prestataire[$j] = [[
+                'name' => $adressePresta->getNom(),
+                'coordonnees' => [
+                    'lng' => $adressePresta->getLongitude(),
+                    'lat' =>$adressePresta->getLatitude()
+                ]]];
+
+        }
 
         $response->setContent(json_encode($object, JSON_UNESCAPED_UNICODE));
         $response->headers->set('Content-Type', 'application/json');
