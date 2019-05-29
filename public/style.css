@@ -88,3 +88,21 @@ li.dropdown {
   margin-right: 70px;
   margin-bottom: 70px;
 }
+
+#map {
+  height: 300px;
+  width: 400px;
+}
+
+.herePopup {
+    text-align: center;
+    font-size: 1vmin;
+    margin: 0;
+    padding: 0;
+}
+
+.mainPopup {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
