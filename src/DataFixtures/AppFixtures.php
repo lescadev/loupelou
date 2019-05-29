@@ -56,16 +56,40 @@ class AppFixtures extends Fixture
             ->setLatitude(45.8230892)
             ->setLongitude(1.22248224664746)
             ->setRoles(['ROLE_USER']);
+        $user3 = new User();
+        $user3->setPrenom("")
+            ->setNom("Callune")
+            ->setDateCreation(date_create())
+            ->setVille("Eymoutiers")
+            ->setAdresse("Bussy")
+            ->setPassword("test")
+            ->setEmail("Callune@gmail.com")
+            ->setCodePostal("87120")
+            ->setLatitude(45.724834)
+            ->setLongitude(1.6817552)
+            ->setRoles(['ROLE_USER']);
+        $user4 = new User();
+        $user4->setPrenom("")
+            ->setNom("Guarana Café")
+            ->setDateCreation(date_create())
+            ->setVille("Brive-La-Gaillarde")
+            ->setAdresse("158 avenue Ribot")
+            ->setPassword("test")
+            ->setEmail("Guarna@gmail.com")
+            ->setCodePostal("19100")
+            ->setLatitude(45.1646424)
+            ->setLongitude(1.502554)
+            ->setRoles(['ROLE_USER']);
         $comptoir = new Comptoir();
         $comptoir->setUser($user);
         $comptoir2 = new Comptoir();
         $comptoir2->setUser($user2);
         $presta = new Prestataire();
         $presta->setSiret("2");
-        $presta->setUser($user);
+        $presta->setUser($user3);
         $presta2 = new Prestataire();
         $presta2->setSiret("2");
-        $presta2->setUser($user2);
+        $presta2->setUser($user4);
         $manager->persist($user);
         $manager->persist($user2);
         $manager->persist($comptoir);
