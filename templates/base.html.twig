@@ -2,13 +2,13 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Lou Pelou{% endblock %}</title>
-        
-
-        {% block stylesheets %}
+        <title>{% block title %}LouPelou{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
         <link rel="stylesheet" href="/normalize.css">
         <link rel="stylesheet" href="/style.css">
-        {% endblock %}
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+              integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+              crossorigin=""/>
     </head>
 
     <body>
@@ -16,7 +16,7 @@
         <header>
             <a href={{ path('index') }}><img id="logo" src="/logoloup.png" alt="logo lou pélou"></a>
             <h1 id="slogan">notre monnaie nous appartient<br>redonnons lui du sens !</h1>
-            <a href={{ path('login') }}><img id="iconuser" src="/iconuser.png" alt="connexion/inscription"></a>
+            <a href={{ path('logins') }}><img id="iconuser" src="/iconuser.png" alt="connexion/inscription"></a>
         </header>
 
         <nav>
