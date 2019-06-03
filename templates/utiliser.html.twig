@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} LouPelou{% endblock %}
+
+{% block body %}
+    <div id="map"></div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin="">
+    </script>
+    <script src="/js/set_map.js"></script>
+    <script src="/js/map_presta.js"></script>
+{% endblock %}

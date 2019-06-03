@@ -19,4 +19,5 @@
 ###< symfony/web-server-bundle ###
 
 .DS_Store
+/error_l
 public/error_l

@@ -3,11 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        
-
         {% block stylesheets %}{% endblock %}
         <link rel="stylesheet" href="/normalize.css">
         <link rel="stylesheet" href="/style.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+              integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+              crossorigin=""/>
     </head>
     <body>
         {% block navbar %}
@@ -15,7 +16,7 @@
         <header class="header">
                 <a href={{ path('index') }}><img src="/logoloup.png" alt="logo lou pélou" class="logolou"></a>
                 <h1>Notre Monnaie nous appartient redonnons lui du sens ! </h1>
-                <a href={{ path('login') }}><img src="/iconuser.svg" alt="connection/inscription" class="iconuser"></a>
+                <a href={{ path('logins') }}><img src="/iconuser.svg" alt="connection/inscription" class="iconuser"></a>
             
         </header>
         <navbar class="head2">
