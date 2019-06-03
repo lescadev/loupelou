@@ -3,6 +3,9 @@
 namespace App\DataFixtures;
 
 use App\Entity\Admin;
+use App\Entity\Prestataire;
+use App\Entity\User;
+use App\Entity\Comptoir;
 use App\Entity\Informations;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -27,6 +30,73 @@ class AppFixtures extends Fixture
         $infos->setPresentation("");
 
         $manager->persist($infos);
-        $manager->flush();   
+        $manager->flush();
+
+        $user = new User();
+        $user->setPrenom("")
+            ->setNom("Biocoop Au p’tit épeautre")
+            ->setDateCreation(date_create())
+            ->setVille("Saint-Junien")
+            ->setAdresse("La croix Blanche")
+            ->setPassword("test")
+            ->setEmail("BioSaintJu@gmail.com")
+            ->setCodePostal("87200")
+            ->setLatitude(45.9016165)
+            ->setLongitude(0.922393)
+            ->setRoles(['ROLE_USER']);
+        $user2 = new User();
+        $user2->setPrenom("")
+            ->setNom("Biocoop l’Aubre")
+            ->setDateCreation(date_create())
+            ->setVille("Limoges")
+            ->setAdresse("337 rue François Perrin")
+            ->setPassword("test")
+            ->setEmail("BioLimoges@gmail.com")
+            ->setCodePostal("87000")
+            ->setLatitude(45.8230892)
+            ->setLongitude(1.22248224664746)
+            ->setRoles(['ROLE_USER']);
+        $user3 = new User();
+        $user3->setPrenom("")
+            ->setNom("Callune")
+            ->setDateCreation(date_create())
+            ->setVille("Eymoutiers")
+            ->setAdresse("Bussy")
+            ->setPassword("test")
+            ->setEmail("Callune@gmail.com")
+            ->setCodePostal("87120")
+            ->setLatitude(45.724834)
+            ->setLongitude(1.6817552)
+            ->setRoles(['ROLE_USER']);
+        $user4 = new User();
+        $user4->setPrenom("")
+            ->setNom("Guarana Café")
+            ->setDateCreation(date_create())
+            ->setVille("Brive-La-Gaillarde")
+            ->setAdresse("158 avenue Ribot")
+            ->setPassword("test")
+            ->setEmail("Guarna@gmail.com")
+            ->setCodePostal("19100")
+            ->setLatitude(45.1646424)
+            ->setLongitude(1.502554)
+            ->setRoles(['ROLE_USER']);
+        $comptoir = new Comptoir();
+        $comptoir->setUser($user);
+        $comptoir2 = new Comptoir();
+        $comptoir2->setUser($user2);
+        $presta = new Prestataire();
+        $presta->setSiret("2");
+        $presta->setUser($user3);
+        $presta2 = new Prestataire();
+        $presta2->setSiret("2");
+        $presta2->setUser($user4);
+        $manager->persist($user);
+        $manager->persist($user2);
+        $manager->persist($comptoir);
+        $manager->persist($comptoir2);
+        $manager->persist($presta);
+        $manager->persist($presta2);
+        $manager->persist($admin);
+        $manager->flush();
     }
 }
