@@ -104,7 +104,7 @@ class PagesController extends AbstractController
 
     public function rendu()
     {
-        return $this->render('/rendu.html.twig');
+        return $this->render('pages/rendu.html.twig');
     }
     /**
      * @Route("/statut", name="statut")
