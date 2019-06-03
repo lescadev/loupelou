@@ -3,8 +3,13 @@
 {% block title %} LouPelou{% endblock %}
 
 {% block body %}
-<h1> procurer</h1>
-<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum repellat ipsa aspernatur nostrum nihil necessitatibus perferendis, velit, exercitationem facilis atque, assumenda magni enim deserunt quia molestiae esse. Assumenda numquam ab corrupti ad officiis! Quasi a excepturi exercitationem. Dicta porro nulla ab dolores ut dolore illo quia recusandae delectus. Rem, rerum.</p>
-<p>Facere nam corrupti ratione ex repudiandae pariatur dolor nobis sunt perferendis, ducimus porro eum minus fuga libero blanditiis asperiores quaerat veritatis molestiae eos. Provident earum rerum eos blanditiis, corrupti facilis distinctio eligendi inventore sequi, eveniet quos! Qui, officia maiores molestias laborum officiis ut incidunt optio unde! Sequi tempore repellat iste.</p>
-<p>Voluptatem atque sit, pariatur necessitatibus debitis ex! Distinctio quasi consequuntur id dolorem. Vitae culpa corporis, ipsum deserunt ab nobis sit amet illum quidem. Consequatur consectetur ad quasi laborum suscipit impedit perspiciatis deserunt magnam animi vero adipisci esse similique sint aperiam alias facilis aspernatur cupiditate quas, repudiandae dignissimos incidunt ipsa. Consequatur.</p>
+    <div id="map"></div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin="">
+    </script>
+    <script src="/js/set_map.js"></script>
+    <script src="/js/map_comptoir.js"></script>
 {% endblock %}
