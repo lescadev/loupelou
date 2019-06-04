@@ -1,10 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} LouPelou{% endblock %}
-
 {% block body %}
-<h1>particulier</h1>
-<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum repellat ipsa aspernatur nostrum nihil necessitatibus perferendis, velit, exercitationem facilis atque, assumenda magni enim deserunt quia molestiae esse. Assumenda numquam ab corrupti ad officiis! Quasi a excepturi exercitationem. Dicta porro nulla ab dolores ut dolore illo quia recusandae delectus. Rem, rerum.</p>
-<p>Facere nam corrupti ratione ex repudiandae pariatur dolor nobis sunt perferendis, ducimus porro eum minus fuga libero blanditiis asperiores quaerat veritatis molestiae eos. Provident earum rerum eos blanditiis, corrupti facilis distinctio eligendi inventore sequi, eveniet quos! Qui, officia maiores molestias laborum officiis ut incidunt optio unde! Sequi tempore repellat iste.</p>
-<p>Voluptatem atque sit, pariatur necessitatibus debitis ex! Distinctio quasi consequuntur id dolorem. Vitae culpa corporis, ipsum deserunt ab nobis sit amet illum quidem. Consequatur consectetur ad quasi laborum suscipit impedit perspiciatis deserunt magnam animi vero adipisci esse similique sint aperiam alias facilis aspernatur cupiditate quas, repudiandae dignissimos incidunt ipsa. Consequatur.</p>
+
+<h1> Devenez Adhérent!</h1>
+    
+    {{ form_start(form) }} 
+            {{ form_row(form.nom) }}
+            {{ form_row(form.prenom) }}
+            {{ form_row(form.adresse) }}
+            {{ form_row(form.code_postal) }}
+            {{ form_row(form.ville) }}
+            {{ form_row(form.telephone) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.password.first) }}
+            {{ form_row(form.password.second) }}
+            <button type="submit">  Adhérez en ligne</button>
+            <button type="submit"> Imprimez le formulaire</button>
+    {{ form_end(form) }}   
+     
 {% endblock %}
