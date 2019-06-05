@@ -44,7 +44,7 @@ class ParticuliersController extends AbstractController
             $entityManager->persist($particulier);
             $entityManager->flush();
             
-            $this->addFlash('success', 'Inscription réussi!');
+            $this->addFlash('success', 'Inscription réussie!');
             return $this->redirectToRoute('sucess');
         }
 
