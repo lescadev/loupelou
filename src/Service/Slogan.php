@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Service;
 use Doctrine\ORM\EntityManager;
 use Twig\Extension\AbstractExtension;
@@ -6,7 +7,8 @@ use Twig\Extension\GlobalsInterface;
 use App\Repository\InformationsRepository;
 
 
-class Slogan extends AbstractExtension {
+class Slogan extends AbstractExtension 
+{
 
     private $informationsrepository;
 
@@ -15,7 +17,8 @@ class Slogan extends AbstractExtension {
       $this->informationsrepository = $informationsrepository;
    }
 
-    public function getInfo(){
+    public function getInfo()
+    {
         $info = $this->informationsrepository->find(1)->getSlogan();
         return $info;
     }
