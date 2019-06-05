@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    LouPelou
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('style/contacter.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block body %}
+    <section class="contact-container">
+        <div class="main-title">
+            <h2>Nous sommes là pour vous répondre!</h2>
+        </div>
+
+        <main
+            class="content-display">
+            {# Formulaire d'inscription #}
+            {{form_start(form, {'attr': {'id': 'contact-form'}})}}
+            <label class="form-label" for="firstName">Prénom :</label>
+            {{ form_widget(form.firstName, {'attr' : {'placeholder': "Prénom"}}) }}
+            <br>
+            <label class="form-label" for="firstName">Nom :</label>
+            {{ form_widget(form.lastName, {'attr' : {'placeholder': "Nom"}}) }}
+            <br>
+            <label class="form-label" for="firstName">Email :</label>
+            {{ form_widget(form.email, {'attr' : {'placeholder': "Email"}}) }}
+            <br>
+            <label class="form-label" for="firstName">Objet :</label>
+            {{ form_widget(form.object, {'attr' : {'placeholder': "Objet"}}) }}
+            <br>
+            <label class="form-label" for="firstName">Message :</label>
+            {{ form_widget(form.message, {'attr' : {'placeholder': "Votre message", 'class': 'message'}}) }}
+            <br>
+            <div class="btn-form">
+                <button id="btn-form">Envoyer</button>
+            </div>
+            {{form_end(form)}}
+            {# Fin formulaire d'inscription #}
+
+            {# Informations contact #}
+                <section class="contact"> <h3 class="title">Autres moyens de nous contacter:</h3>
+
+                <div class="content-infos">
+
+                    <div class="display">
+                        <label class="form-label" for="email">Email
+                        </label>
+                        <img src="{{asset('/images/_ionicons_svg_md-mail.svg')}}" width="15" height="15" alt="email icon">:</img>
+                </div>
+                <p>01monnaielocalelimousine@gmail.com</p>
+
+                <div class="display">
+                    <label class="form-label" for="email">Téléphone
+                    </label>
+                    <img src="{{asset('/images/phone.svg')}}" width="15" height="15" alt="email icon">:</img>
+            </div>
+            <p>05-55-55-55-55</p>
+
+
+            <div class="display">
+                <label class="form-label" for="reseau">Facebook :</label>
+            </div>
+            <a href="{{asset('https://www.facebook.com/lechemindupelou/')}}"><img class="icon" src="{{asset('facebookicon.png')}}" alt=""></a>
+
+        </div>
+        {% for message in app.flashes('success') %}
+            <div class="success-msg">
+                {{ message }}
+                <img src="{{asset('/images/check.svg')}}" width="15" height="15" alt="valid icon">
+            </div>
+        {% endfor %}
+        {% if not form.vars.valid %}
+            <div class="error-msg">
+                Les champs doivent contenir au moins 2 charactères et le message 10 charactères.
+                <img src="{{asset('/images/error.svg')}}" width="15" height="15" alt="error icon">
+            </div>
+        {% endif %}
+    </section>
+</main></section>{% endblock %}

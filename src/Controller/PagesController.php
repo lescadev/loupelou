@@ -38,16 +38,6 @@ class PagesController extends AbstractController
 
 
     /**
-     * @Route("/contacter", name="contacter")
-     */
-
-    public function contacter()
-    {
-        return $this->render('/contacter.html.twig');
-    }
-
-
-    /**
      * @Route("/blog", name="blog")
      */
 
