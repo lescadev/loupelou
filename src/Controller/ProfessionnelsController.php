@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class ProfessionnelsController extends AbstractController
 {
     /**
-     * @Route("/professionnels", name="professionnels")
+     * @Route("/professionnel/inscription", name="inscription_pro")
      */
     public function inscriptionPro(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -44,25 +44,49 @@ class ProfessionnelsController extends AbstractController
             if(!empty($data['compt'])) {
                 $comptoir = new Comptoir;
                 $comptoir->setUser($user);
-                $comptoir ->setSiret($data["siret"]);
-                $comptoir ->setSiteInternet($data["site_internet"]);
+                $user -> setRoles(["ROLE_COMPTOIR"]);
+
+                if(!empty($data['siret'])){
+                    $comptoir ->setSiret($data["siret"]);
+                }
+                if(!empty($data['site_internet'])){
+                    $comptoir ->setSiteInternet($data["site_internet"]);
+                }
+
+                $comptoir ->setDenomination($data["denomination"]);
+
                 $entityManager->persist($comptoir);
             }
 
             if(!empty($data['presta'])) {
                 $prestataire = new Prestataire;
                 $prestataire->setUser($user);
-                $prestataire ->setSiret($data["siret"]);
-                $prestataire ->setSiteInternet($data["site_internet"]);
+                $user -> setRoles(["ROLE_PRESTATAIRE"]);
+
+                if(!empty($data['siret'])){ 
+                    $prestataire ->setSiret($data["siret"]);
+                }
+                if(!empty($data['site_internet'])){
+                    $prestataire ->setSiteInternet($data["site_internet"]);
+                }
+
+                $prestataire ->setDenomination($data["denomination"]);
+                
                 $entityManager->persist($prestataire);
             }
-            
-            if(!empty($data['compt']) | !empty($data['presta'])) {
-                $entityManager->flush();
-                return $this->redirectToRoute('index');
+
+
+            if(!empty($data['compt']) && !empty($data['presta'])){
+                $user -> setRoles(["ROLE_PRESTA&COMPT"]);
             }
 
-            
+            if(!empty($data['compt']) | !empty($data['presta'])) {
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Inscription réussi!');
+                return $this->redirectToRoute('sucess');
+                
+            }
         }
 
 

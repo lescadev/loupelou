@@ -11,18 +11,23 @@ class InscriptionProType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('site_internet')
-            ->add('siret')
+            ->add('denomination', null, [
+                'required'   => true,
+            ])
+            ->add('site_internet', null, [
+                'required'   => false,
+            ])
+            ->add('siret', null, [
+                'required'   => false,
+            ])
             ->add('compt', CheckboxType::class, [
                 'label'    => 'Comptoir',
                 'required' => false,
-                ]
-            )
+            ])
             ->add('presta', CheckboxType::class, [
                 'label'    => 'Prestataire',
                 'required' => false,
-                ]
-            )
+            ])
         ;
     }
 }

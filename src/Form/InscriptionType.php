@@ -9,14 +9,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class InscriptionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+                'required'   => true,
+                ]
+            )
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Mots de passes différents',
@@ -31,16 +34,22 @@ class InscriptionType extends AbstractType
             ->add('nom', null, [
                 'required'   => true,
             ])
-            ->add('telephone', NumberType::class, [
+            ->add('telephone', TextType::class, [
                 'invalid_message' => 'Numéro invalide',
                 'attr' => [
                     'min' => 10,
                     'max' => 10
                 ]
             ])
-            ->add('adresse')
-            ->add('ville')
-            ->add('code_postal')
+            ->add('adresse', null, [
+                'required'   => true,
+            ])
+            ->add('ville', null, [
+                'required'   => true,
+            ])
+            ->add('code_postal', null, [
+                'required'   => true,
+            ])
         ;
     }
 

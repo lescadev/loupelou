@@ -14,12 +14,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class ParticuliersController extends AbstractController
 {
     /**
-     * @Route("/particuliers", name="particuliers")
+     * @Route("/particulier/inscription", name="inscription_particulier")
      */
     public function inscription(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = new User();
         $user -> setDateCreation(date_create());
+        $user -> setRoles(["ROLE_PARTICULIER"]);
 
         $particulier = new Particulier();
         $particulier ->setUser($user);
