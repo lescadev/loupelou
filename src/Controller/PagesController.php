@@ -65,31 +65,7 @@ class PagesController extends AbstractController
     {
         return $this->render('pages/evenements.html.twig');
     }
-
-    /**
-     * @Route("/cgv", name="cgv")
-     */
-
-    public function cgv()
-    {
-        return $this->render('pages/cgv.html.twig');
-    }
-    /**
-     * @Route("/cgu", name="cgu")
-     */
-
-    public function cgu()
-    {
-        return $this->render('pages/cgu.html.twig');
-    }
-    /**
-     * @Route("/mentions", name="mentions")
-     */
-
-    public function mentions()
-    {
-        return $this->render('pages/mentions.html.twig');
-    }
+            
     /**
      * @Route("/reglement", name="reglement")
      */
