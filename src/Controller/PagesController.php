@@ -130,4 +130,13 @@ class PagesController extends AbstractController
         return $this->render('/procurer.html.twig');
         
     }
+    /**
+     * @Route("/success", name="sucess")
+     */
+    public function success()
+    {
+        return $this->render('/success.html.twig');
+        
+    }
 }
+
