@@ -25,8 +25,6 @@ class ParticuliersController extends AbstractController
         $particulier = new Particulier();
         $particulier ->setUser($user);
 
-        
-
         $form = $this->createForm(InscriptionType::class, $user);
         $form -> handleRequest($request);
         
@@ -46,7 +44,8 @@ class ParticuliersController extends AbstractController
             $entityManager->persist($particulier);
             $entityManager->flush();
             
-            return $this->redirectToRoute('index');
+            $this->addFlash('success', 'Inscription réussi!');
+            return $this->redirectToRoute('sucess');
         }
 
 

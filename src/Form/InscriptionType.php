@@ -18,23 +18,26 @@ class InscriptionType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'required'   => true,
-                ]
-            )
+                'label' => "Email  *"
+            ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Mots de passes différents',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Répéter votre mot de passe'],
+                'first_options'  => ['label' => 'Mot de passe  *'],
+                'second_options' => ['label' => 'Répéter votre mot de passe  *'],
             ])
             ->add('prenom', null, [
                 'required'   => true,
+                'label' => "Prenom  *"
             ])
             ->add('nom', null, [
                 'required'   => true,
+                'label' => "Nom  *"
             ])
             ->add('telephone', TextType::class, [
+                'label' => "Téléphone",
                 'invalid_message' => 'Numéro invalide',
                 'attr' => [
                     'min' => 10,
@@ -43,12 +46,15 @@ class InscriptionType extends AbstractType
             ])
             ->add('adresse', null, [
                 'required'   => true,
+                'label' => "Adresse  *"
             ])
             ->add('ville', null, [
                 'required'   => true,
+                'label' => "Ville  *"
             ])
             ->add('code_postal', null, [
                 'required'   => true,
+                'label' => "Code Postal  *"
             ])
         ;
     }

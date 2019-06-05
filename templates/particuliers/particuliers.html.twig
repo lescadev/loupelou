@@ -4,18 +4,21 @@
 
 <h1> Devenez Adhérent!</h1>
     
-    {{ form_start(form) }} 
-            {{ form_row(form.nom) }}
-            {{ form_row(form.prenom) }}
-            {{ form_row(form.adresse) }}
-            {{ form_row(form.code_postal) }}
-            {{ form_row(form.ville) }}
-            {{ form_row(form.telephone) }}
-            {{ form_row(form.email) }}
-            {{ form_row(form.password.first) }}
-            {{ form_row(form.password.second) }}
-            <button type="submit">  Adhérez en ligne</button>
-            <button> Imprimez le formulaire</button>
-    {{ form_end(form) }}   
+{{ form_start(form) }} 
+    {{ form_row(form.nom) }}
+    {{ form_row(form.prenom) }}
+    {{ form_row(form.adresse) }}
+    {{ form_row(form.code_postal) }}
+    {{ form_row(form.ville) }}
+    {{ form_row(form.telephone) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.password.first) }}
+    {{ form_row(form.password.second) }}
+    <button type="submit">  Adhérez en ligne</button>
+    <button> Imprimez le formulaire</button>
+{{ form_end(form) }}   
+
+</br>
+<p> * Champs Obligatoire </p>
      
 {% endblock %}

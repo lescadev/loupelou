@@ -13,12 +13,15 @@ class InscriptionProType extends AbstractType
         $builder
             ->add('denomination', null, [
                 'required'   => true,
+                'label' => "Nom de l'enseigne  *"
             ])
             ->add('site_internet', null, [
                 'required'   => false,
+                'label' => "Site Internet"
             ])
             ->add('siret', null, [
                 'required'   => false,
+                'label' => "Siret"
             ])
             ->add('compt', CheckboxType::class, [
                 'label'    => 'Comptoir',
