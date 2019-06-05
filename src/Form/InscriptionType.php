@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\Length;
 
 class InscriptionType extends AbstractType
 {
@@ -37,13 +38,11 @@ class InscriptionType extends AbstractType
                 'label' => "Nom  *"
             ])
             ->add('telephone', TextType::class, [
+                'required'   => false,
                 'label' => "Téléphone",
-                'invalid_message' => 'Numéro invalide',
-                'attr' => [
-                    'min' => 10,
-                    'max' => 10
-                ]
-            ])
+                'constraints' => new Length(['min' => 10, 'max' => 10]),
+                ])
+            
             ->add('adresse', null, [
                 'required'   => true,
                 'label' => "Adresse  *"
