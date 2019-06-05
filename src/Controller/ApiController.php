@@ -31,7 +31,7 @@ class ApiController extends AbstractController
             for ($i=0; $i < count($comptoir); $i++) {
                 $adresseComptoir= $userRepository->find($comptoir[$i]->getUser());
                 $object->comptoir[$i] = [[
-                    'name' => $adresseComptoir->getNom(),
+                    'name' => $comptoir[$i]->getDenomination(),
                     'coordonnees' => [
                         'lng' => $adresseComptoir->getLongitude(),
                         'lat' =>$adresseComptoir->getLatitude()
@@ -43,7 +43,7 @@ class ApiController extends AbstractController
             for ($j=0; $j < count($prestataire); $j++) {
                 $adressePresta = $userRepository->find($prestataire[$j]->getUser());
                 $object->prestataire[$j] = [[
-                    'name' => $adressePresta->getNom(),
+                    'name' => $prestataire[$j]->getDenomination(),
                     'coordonnees' => [
                         'lng' => $adressePresta->getLongitude(),
                         'lat' =>$adressePresta->getLatitude()

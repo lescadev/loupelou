@@ -11,6 +11,7 @@ use App\Entity\Prestataire;
 use App\Form\InscriptionType;
 use App\Form\InscriptionProType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use GuzzleHttp\Client;
 
 class ProfessionnelsController extends AbstractController
 {
@@ -40,6 +41,31 @@ class ProfessionnelsController extends AbstractController
             $data = $formPro->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
+
+            //Conversion de l'adresse en coordonnées GPS pour la map
+            $client = new Client();
+
+            $address = $form->get('adresse')->getData();
+            $ville = $form->get('ville')->getData();
+            $address_f = $address . " " . $ville;
+            $prepAddr = str_replace(' ','+',$address_f);
+
+            try {
+                $res = $client->request('GET', 'https://api-adresse.data.gouv.fr/search/?q='.$prepAddr);
+
+                $json = $res->getBody();
+                $json_d = json_decode($json);
+
+                $lon = $json_d->features[0]->geometry->coordinates[0];
+                $lat = $json_d->features[0]->geometry->coordinates[1];
+
+            } catch (\Exception $exception) {
+                $lat = null;
+                $lon = null;
+            }
+
+            $user->setLongitude($lon);
+            $user->setLatitude($lat);
 
             if(!empty($data['compt'])) {
                 $comptoir = new Comptoir;
