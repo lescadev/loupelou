@@ -11,8 +11,7 @@ easy_admin:
                   
             - label: "Informations Légales"
               icon: "file-alt"
-              children:
-                 - {entity: 'InformationsLegales'} 
+              entity: 'InformationsLegales' 
              
 
             - label: "Informations" 
@@ -44,12 +43,20 @@ easy_admin:
             class: App\Entity\Comptoir
            
         InformationsLegales:
-            class: App\Entity\InformationsLegales    
+            class: App\Entity\InformationsLegales
+            disabled_actions: ['search','delete','new']
+            list:
+                fields: ['cgu', 'cgv', 'mentionsLegales']   
             form:
                 fields:
                     - {property: 'cgu'}    
                     - {property: 'cgv'}
                     - {property: 'mentionsLegales'}
+            edit:
+                actions: ['-new', '-delete']
+          
+                
+               
                 
         Informations:
             class: App\Entity\Informations
