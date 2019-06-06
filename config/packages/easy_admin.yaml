@@ -8,6 +8,13 @@ easy_admin:
                   - {entity: 'Particulier'}
                   - {entity: 'Prestataire'}
                   - {entity: 'Comptoir'}
+                  
+            - label: "Informations Légales"
+              icon: "file-alt"
+              children:
+                 - {entity: 'InformationsLegales'} 
+             
+
             - label: "Informations" 
               icon: "newspaper"
               entity: 'Informations'
@@ -35,6 +42,15 @@ easy_admin:
             class: App\Entity\Prestataire
         Comptoir:
             class: App\Entity\Comptoir
+           
+        InformationsLegales:
+            class: App\Entity\InformationsLegales    
+            form:
+                fields:
+                    - {property: 'cgu'}    
+                    - {property: 'cgv'}
+                    - {property: 'mentionsLegales'}
+                
         Informations:
             class: App\Entity\Informations
             edit:

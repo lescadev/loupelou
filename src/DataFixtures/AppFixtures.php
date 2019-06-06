@@ -82,14 +82,18 @@ class AppFixtures extends Fixture
             ->setRoles(['ROLE_USER']);
         $comptoir = new Comptoir();
         $comptoir->setUser($user);
+        $comptoir->setDenomination("Biocoop Au p’tit épeautre");
         $comptoir2 = new Comptoir();
         $comptoir2->setUser($user2);
+        $comptoir2->setDenomination("Biocoop l’Aubre");
         $presta = new Prestataire();
         $presta->setSiret("2");
         $presta->setUser($user3);
+        $presta->setDenomination("Callune");
         $presta2 = new Prestataire();
         $presta2->setSiret("2");
         $presta2->setUser($user4);
+        $presta2->setDenomination("Guarana Café");
         $manager->persist($user);
         $manager->persist($user2);
         $manager->persist($comptoir);
