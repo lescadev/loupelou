@@ -1,3 +1,4 @@
+/************ Typographie ****************/
 @font-face {
   font-family: 'Oswald';
   font-style: normal;
@@ -6,8 +7,9 @@
   src: url(https://fonts.gstatic.com/s/oswald/v23/TK3iWkUHHAIjg752GT8Gl-1PKw.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+/**************************************************************************************/
 
-/************ style global *******************/
+/************ Style général *******************/
 
 .contact-container {
   font-family: 'Oswald';
@@ -24,6 +26,7 @@
   justify-content: center;
   text-transform: uppercase;
   font-size: 1.5rem;
+  text-align: center;
 }
 
 .content-display {
@@ -32,6 +35,16 @@
   grid-column-gap: 10vw;
 }
 
+.contact {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
 
 .content-infos {
   display: grid;
@@ -40,9 +53,10 @@
   padding: 5px;
 }
 
-/************ fin style global *******************/
 
-/************ style formulaire *******************/
+/**************************************************************************************/
+
+/************ Style formulaire *******************/
 
 #contact-form {
   display: grid;
@@ -96,18 +110,9 @@
   box-shadow: 0 .2rem .5rem rgba(0, 0, 0, .2);
 }
 
-/************ fin style formulaire *******************/
+/**************************************************************************************/
 
-/************ style infos contact *******************/
-.contact {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-
+/************ Style infos contact *******************/
 
 .title {
   font-size: 1.2rem;
@@ -139,10 +144,15 @@ img {
   justify-content: start;
 }
 
+.center {
+  text-align: center;
+}
+
 .success-msg {
-  margin-top: 1rem;
   padding: 2rem;
+  margin-bottom: 1rem;
   width: 100%;
+  height: 5vh;
   display: flex;
   justify-content: space-between;
   border-radius: .2rem;
@@ -150,19 +160,19 @@ img {
 }
 
 .error-msg {
-  margin-top: 1rem;
-  padding: 2rem;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
   width: 100%;
+  height: 5vw;
   border-radius: .2rem;
   display: flex;
+  justify-items: baseline;
   justify-content: space-between;
   background-color: rgba(224, 73, 46, 0.4)
 }
+/**************************************************************************************/
 
-
-/************ style infos contact *******************/
-
-/************ style responsive *******************/
+/************ Style responsive *******************/
 
 @media screen and (max-width: 800px) {
   .main-title {
@@ -180,22 +190,65 @@ img {
     font-size: .8rem;
   }
 
+  .input {
+    transition: all .2s;
+  }
+
+  .input:focus {
+    transform: scale(1.3) translateX(-2rem);
+    outline-color: rgba(45, 46, 46, 0.336);
+    outline-width: 1px;
+  }
+
   #btn-form,
   #btn-form:link,
   #btn-form:visited {
     font-size: .8rem;
+  margin-top: 1rem;
   }
 
   .contact {
     grid-row: 1/2;
-  }
-
-  .error-msg {
+    grid-column: 1/2;
     margin-bottom: 1rem;
   }
 
+  .title {
+    font-size: .9rem;
+  }
+
+  .error-msg, .success-msg {
+    font-size: 1.3rem;
+  }
+  
+}
+
+@media screen and (max-width: 600px) {
+  .error-msg,
   .success-msg {
-    margin-bottom: 1rem;
-    ;
+    font-size: 1rem;
+    height: 8vw;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .main-title {
+    font-size: 1rem;
+    word-break: break-word;
+  } 
+
+  .error-msg,
+  .success-msg {
+    font-size: 1rem;
+    height: 9vw;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .error-msg,
+  .success-msg {
+    font-size: .9rem;
+    height: 10vw;
+  }
+}
+/**************************************************************************************/
