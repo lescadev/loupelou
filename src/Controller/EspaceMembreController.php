@@ -1,5 +1,6 @@
 <?php
 namespace App\Controller;
+use App\Form\InscriptionType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +31,24 @@ class EspaceMembreController extends AbstractController {
      */
     public function modifmdp(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em)
     {
+
+        $user = $this->getUser();
+
+        $form = $this->createForm(InscriptionType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->get('password')->isValid()) {
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('password')->getData()
+                ));
+            $em->persist($user);
+            $em->flush();
+        }
+
         return $this->render("/espaceMembre/modifMdp.html.twig", [
+            'form' => $form->createView()
         ]);
     }
     /**
@@ -38,7 +56,22 @@ class EspaceMembreController extends AbstractController {
      */
     public function modifemail(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em)
     {
+        $user = $this->getUser();
+        $user = $this->getUser();
+
+        $form = $this->createForm(InscriptionType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->get('email')->isValid()) {
+
+            $user->setEmail($form->get('email')->getData());
+
+            $em->persist($user);
+            $em->flush();
+        }
+
         return $this->render("/espaceMembre/modifEmail.html.twig", [
+            "form" => $form->createView(),
             "mail" => $user->getEmail()
         ]);
     }
@@ -47,7 +80,28 @@ class EspaceMembreController extends AbstractController {
      */
     public function modifinfo(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em)
     {
+        $user = $this->getUser();
+
+        $form = $this->createForm(InscriptionType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->get('prenom')->isValid() && $form->get('nom')->isValid()
+        && $form->get('telephone')->isValid() && $form->get('adresse')->isValid()
+        && $form->get('ville')->isValid() && $form->get('code_postal')->isValid()) {
+
+            $user->setEmail($user->getEmail());
+            $user->setPrenom($form->get('prenom')->getData());
+            $user->setNom($form->get('nom')->getData());
+            $user->setTelephone($form->get('telephone')->getData());
+            $user->setAdresse($form->get('adresse')->getData());
+            $user->setVille($form->get('ville')->getData());
+            $user->setCodePostal($form->get('code_postal')->getData());
+            $em->persist($user);
+            $em->flush();
+        }
         return $this->render("/espaceMembre/modifInfo.html.twig", [
+            'form' => $form->createView(),
+            'user' => $user
         ]);
     }
 }

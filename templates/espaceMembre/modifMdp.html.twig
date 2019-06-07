@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="/css/stylesProfil.css">{% endblock %}
+{% block body %}
+<div id="containerProfil">
+{% include "espaceMembre/menuModif.html.twig" %}
+<div id="blockProfil">
+
+    <h2 id="profilTitle">Modifier mon mot de passe</h2>
+    {{form_start(form)}}
+        {{ form_row(form.password.first) }}
+        {{ form_row(form.password.second) }}
+        <button type="submit">Valider</button>
+    {{ form_end(form, {'render_rest': false}) }}
+    
+
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="/css/stylesProfil.css">{% endblock %}
+{% block body %}
+<div id="containerProfil">
+{% include "espaceMembre/menuModif.html.twig" %}
+<div id="blockProfil">
+    <h2 id="profilTitle">Modifier mes informations personnelles</h1>
+    {{form_start(form)}}  
+        {{ form_row(form.prenom, {'value' : user.prenom }) }}
+        {{ form_row(form.nom, {'value' : user.nom }) }}
+        {{ form_row(form.telephone,{'value' : user.telephone }) }}
+        {{ form_row(form.ville,{'value' : user.ville }) }}
+        {{ form_row(form.adresse,{'value' : user.adresse }) }}
+        {{ form_row(form.code_postal,{'value' : user.codePostal }) }}
+        <button type="submit">Valider</button>
+    {{ form_end(form, {'render_rest': false}) }}
+</div>
+</div>
+{% endblock %}
