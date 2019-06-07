@@ -16,7 +16,11 @@
         <header>
             <a href={{ path('index') }}><img id="logo" src="/logoloup.png" alt="logo lou pélou"></a>
             <h1 id="slogan">notre monnaie nous appartient<br>redonnons lui du sens !</h1>
-            <a href={{ path('login') }}><img id="iconuser" src="/iconuser.png" alt="connexion/inscription"></a>
+            {% if not app.user %}
+                <a href={{ path('login') }}><img id="iconuser" src="/iconuser.png" alt="connexion/inscription"></a>
+            {% else %}
+                <a href={{ path('profil') }}><img id="iconuser" src="/iconuser.png" alt="connexion/inscription"></a>
+            {% endif %}
         </header>
 
         <nav>
