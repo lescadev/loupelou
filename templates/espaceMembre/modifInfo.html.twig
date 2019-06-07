@@ -4,7 +4,7 @@
 <div id="containerProfil">
 {% include "espaceMembre/menuModif.html.twig" %}
 <div id="blockProfil">
-    <h2 id="profilTitle">Modifier mes informations personnelles</h1>
+    <h2 id="profilTitle">Modifier mes informations personnelles</h2>
     {{form_start(form)}}  
         {{ form_row(form.prenom, {'value' : user.prenom }) }}
         {{ form_row(form.nom, {'value' : user.nom }) }}
