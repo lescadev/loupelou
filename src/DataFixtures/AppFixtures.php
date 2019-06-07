@@ -7,6 +7,7 @@ use App\Entity\Prestataire;
 use App\Entity\User;
 use App\Entity\Comptoir;
 use App\Entity\Informations;
+use App\Entity\InformationsLegales;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -14,23 +15,33 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
+
+        // Création des fixtures de l'entité "admin"
+
         $admin = new Admin();
 
         $admin->setUsername("admin");
         $admin->setPassword('$argon2i$v=19$m=1024,t=2,p=2$NWtZbUNFQWVNeFF5RngyOQ$6FiZQR/Dfk39XzDI53ge+fAsUC4Kix5ddKFOVG1F55s');
         $admin->setRoles(['ROLE_ADMIN']);
-
         $manager->persist($admin);
-        $manager->flush();
 
 
         // Création des fixtures de l'entité "Informations"
+
         $infos = new Informations();
-
-        $infos->setPresentation("");
-
+        $infos->setPresentation("Presentation")
+            ->setSlogan("Coucou");           
         $manager->persist($infos);
-        $manager->flush();
+
+        //fixtures de l'entité "InformationsLegales"
+
+        $infosL = new InformationsLegales();
+        $infosL->setCgv("zefzefzefz")
+            ->setCgu("zefzefzefz")
+            ->setMentionsLegales("zfzfzfzfzefzefzgegze");
+        $manager->persist($infosL);
+
+        //fixtures de l'entité "User"
 
         $user = new User();
         $user->setPrenom("")
@@ -44,6 +55,8 @@ class AppFixtures extends Fixture
             ->setLatitude(45.9016165)
             ->setLongitude(0.922393)
             ->setRoles(['ROLE_USER']);
+        $manager->persist($user);
+
         $user2 = new User();
         $user2->setPrenom("")
             ->setNom("Biocoop l’Aubre")
@@ -56,6 +69,8 @@ class AppFixtures extends Fixture
             ->setLatitude(45.8230892)
             ->setLongitude(1.22248224664746)
             ->setRoles(['ROLE_USER']);
+        $manager->persist($user2);
+
         $user3 = new User();
         $user3->setPrenom("")
             ->setNom("Callune")
@@ -68,6 +83,7 @@ class AppFixtures extends Fixture
             ->setLatitude(45.724834)
             ->setLongitude(1.6817552)
             ->setRoles(['ROLE_USER']);
+
         $user4 = new User();
         $user4->setPrenom("")
             ->setNom("Guarana Café")
@@ -80,23 +96,29 @@ class AppFixtures extends Fixture
             ->setLatitude(45.1646424)
             ->setLongitude(1.502554)
             ->setRoles(['ROLE_USER']);
+        
+        //fixtures de l'entité "Comptoir"
+
         $comptoir = new Comptoir();
         $comptoir->setUser($user);
+        $manager->persist($comptoir);
+
         $comptoir2 = new Comptoir();
         $comptoir2->setUser($user2);
+        $manager->persist($comptoir2);
+
+        //fixtures de l'entité "Prestataire"
+
         $presta = new Prestataire();
         $presta->setSiret("2");
         $presta->setUser($user3);
+        $manager->persist($presta);
+
         $presta2 = new Prestataire();
         $presta2->setSiret("2");
         $presta2->setUser($user4);
-        $manager->persist($user);
-        $manager->persist($user2);
-        $manager->persist($comptoir);
-        $manager->persist($comptoir2);
-        $manager->persist($presta);
         $manager->persist($presta2);
-        $manager->persist($admin);
+       
         $manager->flush();
     }
 }
