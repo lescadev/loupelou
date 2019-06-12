@@ -4,27 +4,37 @@ security:
             algorithm: argon2i
         App\Entity\Admin:
             algorithm: argon2i
-
-
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
         Admin:
             entity:
                 class: App\Entity\Admin
                 property: username
+        User:
+            entity: 
+                class: App\Entity\User
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
+        main_user:
+            pattern: ^/(?!(login_admin|_admin_back))
+            anonymous: true
+            provider: User
+            form_login:
+                login_path: login
+                check_path: login
+            logout:
+                path: app_logout
+        main_admin:
+            provider: Admin
             anonymous: true
             guard:
                 authenticators:
                     - App\Security\AdminAuthenticator
             logout:
-                path:   app_logout
-
+                path: app_logout
             # activate different ways to authenticate
 
             # http_basic: true
@@ -37,4 +47,4 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/_admin_back, roles: ROLE_ADMIN }
-         #- { path: ^/profile, roles: ROLE_USER }
+         - { path : ^/profil, roles: ROLE_USER}

@@ -1,0 +1,61 @@
+#loginBox { 
+    margin: 0 auto;
+    text-align: center;
+    width: 25%;
+}
+  
+.blockInput {
+    display: block;
+    margin: 2vmin auto;
+}
+  
+.boutonConnexion {
+    margin: 2vmin auto;
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px;
+    color: black;
+    border: 0.5px solid rgb(122, 128, 123);
+    margin-top: 10px;
+    outline: none;
+    width: 65%;
+}
+  
+.boutonConnexion:hover {
+    background-color: #c0c0c0;
+}
+  
+#blockProfil {
+    min-height: 42vmin;
+    margin: 0 auto;
+    width: 100%;
+    grid-area: pro;
+    text-align: center;
+}
+  
+#containerProfil {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-areas: "menu pro";
+}
+  
+#menuModif {
+    grid-area: menu;
+    text-align: center;
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+}
+  
+.modif {
+    text-decoration: none;
+}
+  
+.itemMenu {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+  
