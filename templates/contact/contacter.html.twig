@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    LouPelou
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('style/contacter.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block body %}
+    <section class="contact-container">
+        {#Titre Principal#}
+        <div class="main-title">
+            <h2>
+                Nous sommes là pour vous répondre!
+            </h2>
+        </div>
+        {# ****************************************************************** #}
+
+        {# Contenu de la vue #}
+        <main class="content-display">
+
+            {# Formulaire d'inscription #}
+            {{form_start(form, {'attr': {'id': 'contact-form'}})}}
+                <label class="form-label" for="firstName">Prénom :</label>
+                {{ form_widget(form.firstName, {'attr' : {'placeholder': "Prénom", "name":"firstName", "class": "input"}}) }}
+                <br>
+                <label class="form-label" for="lastName">Nom :</label>
+                {{ form_widget(form.lastName, {'attr' : {'placeholder': "Nom", "name":"lastName", "class": "input"}}) }}
+                <br>
+                <label class="form-label" for="email">Email :</label>
+                {{ form_widget(form.email, {'attr' : {'placeholder': "exemple@gmail.com", "name":"email", "class": "input"}}) }}
+                <br>
+                <label class="form-label" for="objet">Objet :</label>
+                {{ form_widget(form.object, {'attr' : {'placeholder': "Objet", "name":"object", "class": "input"}}) }}
+                <br>
+                <label class="form-label" for="message">Message :</label>
+                {{ form_widget(form.message, {'attr' : {'placeholder': "Votre message", 'class': 'message', "name":"message", "class": "input"}}) }}
+                <br>
+                <div class="btn-form">
+                    <button id="btn-form">Envoyer</button>
+                </div>
+            {{form_end(form)}}
+            {# ****************************************************************** #}
+
+
+            {# Informations de contact #}
+            <section class="contact">
+
+                {# Message de succès de l'envoi du formulaire #}
+                {% for message in app.flashes('success') %}
+                    <div class="success-msg"> 
+                        <span>{{ message }}</span>
+                        <img src="{{asset('/images/check.svg')}}" width="15" height="15" alt="valid icon">
+                    </div>
+                {% endfor %}
+                {# ****************************************************************** #}
+                {# Message d'échec de l'envoi du formulaire #}
+                {% if not form.vars.valid %}
+
+                    <div class="error-msg">
+                        <div class="center">
+                            <span>Les champs doivent contenir au moins 2 caractères et le message 10 caractères.</span>
+                        </div>
+                        <img src="{{asset('/images/error.svg')}}" width="15" height="15" alt="error icon">
+                    </div>
+                {% endif %}
+                {# ****************************************************************** #}
+
+                <h3 class="title">
+                    Autres moyens de nous contacter:
+                </h3>
+
+                <div class="content-infos">
+
+                    <div class="display">
+                        <label class="form-label" for="email">Email
+                        </label>
+                        <img src="{{asset('/images/_ionicons_svg_md-mail.svg')}}" width="15" height="15" alt="email icon">:</img>
+                    </div>
+                    <p>01monnaielocalelimousine@gmail.com</p>
+
+                    <div class="display">
+                        <label class="form-label" for="telephone">Téléphone</label>
+                        <img src="{{asset('/images/phone.svg')}}" width="15" height="15" alt="email icon">:</img>
+                    </div>
+                    <p>05-55-55-55-55</p>
+
+                    <div class="display">
+                        <label class="form-label" for="reseau">Facebook :</label>
+                    </div>
+                    <a href="{{asset('https://www.facebook.com/lechemindupelou/')}}"><img class="icon" src="{{asset('facebookicon.svg')}}" alt="icon facebook"></a>
+                </div>
+            </section>
+            {# ****************************************************************** #}
+
+        </main>
+        {# ****************************************************************** #}
+
+    </section>
+{% endblock %}
