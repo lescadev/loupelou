@@ -38,16 +38,6 @@ class PagesController extends AbstractController
 
 
     /**
-     * @Route("/contacter", name="contacter")
-     */
-
-    public function contacter()
-    {
-        return $this->render('/contacter.html.twig');
-    }
-
-
-    /**
      * @Route("/blog", name="blog")
      */
 
@@ -106,4 +96,13 @@ class PagesController extends AbstractController
         return $this->render('/procurer.html.twig');
         
     }
+    /**
+     * @Route("/success", name="sucess")
+     */
+    public function success()
+    {
+        return $this->render('/success.html.twig');
+        
+    }
 }
+

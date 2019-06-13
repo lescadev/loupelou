@@ -32,6 +32,11 @@ class Comptoir
      */
     private $siret;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $denomination;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class Comptoir
     public function setSiret(?string $siret): self
     {
         $this->siret = $siret;
+
+        return $this;
+    }
+
+    public function getDenomination(): ?string
+    {
+        return $this->denomination;
+    }
+
+    public function setDenomination(string $denomination): self
+    {
+        $this->denomination = $denomination;
 
         return $this;
     }

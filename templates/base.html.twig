@@ -2,21 +2,25 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}LouPelou{% endblock %}</title>
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <title>{% block title %}Loupelou{% endblock %}
+        </title>
         {% block stylesheets %}{% endblock %}
-        <link rel="stylesheet" href="/normalize.css">
-        <link rel="stylesheet" href="/style.css">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-              integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-              crossorigin=""/>
+        <link href="/normalize.css" rel="stylesheet">
+        <link href="/style.css" rel="stylesheet">
+        <link crossorigin="" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" rel="stylesheet"/>
     </head>
 
     <body>
         {% block navbar %}
         <header>
             <a href={{ path('index') }}><img id="logo" src="/logoloup.png" alt="logo lou pélou"></a>
-            <h1 id="slogan">{{ slogan.info }}</h1>
-            <a href={{ path('logins') }}><img id="iconuser" src="/iconuser.png" alt="connexion/inscription"></a>
+            <h1 id="slogan">notre monnaie nous appartient<br>redonnons lui du sens !</h1>
+            {% if not app.user %}
+                <a href={{ path('login') }}><img id="iconuser" src="/iconuser.png" alt="connexion/inscription"></a>
+            {% else %}
+                <a href={{ path('profil') }}><img id="iconuser" src="/iconuser.png" alt="connexion/inscription"></a>
+            {% endif %}
         </header>
 
         <nav>
@@ -26,8 +30,8 @@
                 <li class="dropdown">
                     <a href={{ path('rejoindre') }} class="dropbtn">nous rejoindre</a>
                     <div class="dropdown-content">
-                        <a href={{ path('particuliers') }}>particuliers</a>
-                        <a href={{ path('professionnels') }}>professionnels</a>
+                        <a href={{ path('inscription_particulier') }}>particuliers</a>
+                        <a href={{ path('inscription_pro') }}>professionnels</a>
                     </div>
                 </li>
                 <li><a href={{ path('contacter') }}>nous contacter</a></li>

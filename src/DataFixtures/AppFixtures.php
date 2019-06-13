@@ -101,22 +101,23 @@ class AppFixtures extends Fixture
 
         $comptoir = new Comptoir();
         $comptoir->setUser($user);
-        $manager->persist($comptoir);
-
+        $comptoir->setDenomination("Biocoop Au p’tit épeautre");
         $comptoir2 = new Comptoir();
         $comptoir2->setUser($user2);
-        $manager->persist($comptoir2);
-
-        //fixtures de l'entité "Prestataire"
-
+        $comptoir2->setDenomination("Biocoop l’Aubre");
         $presta = new Prestataire();
         $presta->setSiret("2");
         $presta->setUser($user3);
-        $manager->persist($presta);
-
+        $presta->setDenomination("Callune");
         $presta2 = new Prestataire();
         $presta2->setSiret("2");
         $presta2->setUser($user4);
+        $presta2->setDenomination("Guarana Café");
+        $manager->persist($user);
+        $manager->persist($user2);
+        $manager->persist($comptoir);
+        $manager->persist($comptoir2);
+        $manager->persist($presta);
         $manager->persist($presta2);
        
         $manager->flush();
