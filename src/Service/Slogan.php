@@ -19,7 +19,7 @@ class Slogan extends AbstractExtension
 
     public function getInfo()
     {
-        $info = $this->informationsrepository->find(1)->getSlogan();
+        $info = $this->informationsrepository->findAll()[0]->getSlogan();
         return $info;
     }
 }
