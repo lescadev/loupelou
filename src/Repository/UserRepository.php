@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Entity\Prestataire;
+use App\Entity\Comptoir;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -18,6 +20,35 @@ class UserRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, User::class);
     }
+
+    public function findByParams(array $params){
+
+        $query = $this->createQueryBuilder('user');
+
+        if(!empty($params['search']))
+            $query->andWhere("user.nom LIKE :search")
+                ->setParameter('search',  $params['search']. '%');
+
+        //TODO: Create "categorie" field in user model
+        if(!empty($params['filter']))
+            $query->andWhere("user.categorie = :filter")
+                ->setParameter('filter', $params['filter']);
+
+        if(!empty($params['status'])){
+            if($params['status'] === 'prestataire')
+                $query->join(prestataire::class, 'prestataire')
+                ->andWhere('user.id = prestataire.user');
+            elseif ($params['status'] === 'comptoir')
+                $query->join(comptoir::class, 'comptoir')
+                    ->andWhere('user.id = comptoir.user');
+        }
+
+        $res = $query->getQuery()->getArrayResult();
+
+        return $res;
+    }
+
+
 
     // /**
     //  * @return User[] Returns an array of User objects
