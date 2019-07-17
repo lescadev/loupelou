@@ -38,16 +38,6 @@ class PagesController extends AbstractController
 
 
     /**
-     * @Route("/contacter", name="contacter")
-     */
-
-    public function contacter()
-    {
-        return $this->render('/contacter.html.twig');
-    }
-
-
-    /**
      * @Route("/blog", name="blog")
      */
 
@@ -65,31 +55,7 @@ class PagesController extends AbstractController
     {
         return $this->render('pages/evenements.html.twig');
     }
-
-    /**
-     * @Route("/cgv", name="cgv")
-     */
-
-    public function cgv()
-    {
-        return $this->render('pages/cgv.html.twig');
-    }
-    /**
-     * @Route("/cgu", name="cgu")
-     */
-
-    public function cgu()
-    {
-        return $this->render('pages/cgu.html.twig');
-    }
-    /**
-     * @Route("/mentions", name="mentions")
-     */
-
-    public function mentions()
-    {
-        return $this->render('pages/mentions.html.twig');
-    }
+            
     /**
      * @Route("/reglement", name="reglement")
      */
@@ -104,7 +70,7 @@ class PagesController extends AbstractController
 
     public function rendu()
     {
-        return $this->render('/rendu.html.twig');
+        return $this->render('pages/rendu.html.twig');
     }
     /**
      * @Route("/statut", name="statut")
@@ -130,4 +96,13 @@ class PagesController extends AbstractController
         return $this->render('/procurer.html.twig');
         
     }
+    /**
+     * @Route("/success", name="sucess")
+     */
+    public function success()
+    {
+        return $this->render('/success.html.twig');
+        
+    }
 }
+

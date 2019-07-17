@@ -2,60 +2,67 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <title>{% block title %}Loupelou{% endblock %}
+        </title>
         {% block stylesheets %}{% endblock %}
-        <link rel="stylesheet" href="/normalize.css">
-        <link rel="stylesheet" href="/style.css">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-              integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-              crossorigin=""/>
+        <link href="/normalize.css" rel="stylesheet">
+        <link href="/style.css" rel="stylesheet">
+        <link crossorigin="" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" rel="stylesheet"/>
     </head>
+
     <body>
         {% block navbar %}
-        
-        <header class="header">
-                <a href={{ path('index') }}><img src="/logoloup.png" alt="logo lou pélou" class="logolou"></a>
-                <h1>Notre Monnaie nous appartient redonnons lui du sens ! </h1>
-                <a href={{ path('logins') }}><img src="/iconuser.svg" alt="connection/inscription" class="iconuser"></a>
-            
+        <header>
+            <a href={{ path('index') }}><img id="logo" src="/logoloup.png" alt="logo lou pélou"></a>
+            <h1 id="slogan">notre monnaie nous appartient<br>redonnons lui du sens !</h1>
+            {% if not app.user %}
+                <a href={{ path('login') }}><img id="iconuser" src="/iconuser.png" alt="connexion/inscription"></a>
+            {% else %}
+                <a href={{ path('profil') }}><img id="iconuser" src="/iconuser.png" alt="connexion/inscription"></a>
+            {% endif %}
         </header>
-        <navbar class="head2">
-            <ul>
-                <li><a href={{ path('procurer') }}>Ou s'en procurer</a></li>
-                <li><a href={{ path('utiliser') }}>Ou les utiliser</a></li>
+
+        <nav>
+            <ul id="ul1">
+                <li><a href={{ path('procurer') }}>où s'en procurer</a></li>
+                <li><a href={{ path('utiliser') }}>où les utiliser</a></li>
                 <li class="dropdown">
-                    <a href={{ path('rejoindre') }} class="dropbtn">Nous rejoindre</a>
+                    <a href={{ path('rejoindre') }} class="dropbtn">nous rejoindre</a>
                     <div class="dropdown-content">
-                    <a href={{ path('particuliers') }}>Particuliers</a>
-                    <a href={{ path('professionnels') }}>Professionnels</a>
+                        <a href={{ path('inscription_particulier') }}>particuliers</a>
+                        <a href={{ path('inscription_pro') }}>professionnels</a>
                     </div>
                 </li>
-                <li><a href={{ path('contacter') }}>Nous contacter</a></li>
-                <li><a href={{ path('evenements') }}>Evenements</a></li>
-                <li><a href={{ path('blog') }}>Blog</a></li>
-                <li><a href="https://www.facebook.com/lechemindupelou/" target="_blank"><img class="fb" src="/facebookicon.png" alt="fb"></a></li>
+                <li><a href={{ path('contacter') }}>nous contacter</a></li>
+                <li><a href={{ path('evenements') }}>évènements</a></li>
+                <li><a href={{ path('blog') }}>blog</a></li>
+                <li><a href="https://www.facebook.com/lechemindupelou/" target="_blank"><img id="fb" src="/facebookicon.svg" alt="facebook"></a></li>
             </ul>
-        </navbar>
+        </nav>
         {% endblock %}
 
-        <div class="container">
-        {% block body %}{% endblock %}
-        </div>
-        
-        {% block footer %}
-        <footer class="footer">
-            <ul>
-                <li><a href={{ path('mentions') }}>Mentions légales</a></li>
-                <li><a href={{ path('cgv') }}>Cgv</a></li>
-                <li><a href={{ path('cgu') }}>Cgu</a></li>
-                <li><a href={{ path('statut') }}>Statut</a></li>
-                <li><a href={{ path('reglement') }}>Règlement interieur</a></li>
-                <li><a href={{ path('rendu') }}>Compte rendu ag 2019</a></li>
-                <li><a href={{ path('contacter') }}>Contact</a></li>
-                <li><a href="https://www.facebook.com/lechemindupelou/" target="_blank"><img class="fb" src="/facebookicon.png"></img></a></li>
-            </ul>
-        </footer>    
+        <section>
+        {% block body %}
         {% endblock %}
+        </section>
+      
+        {% block footer %}
+        <footer>
+            <ul id="ul2">
+                <li><a href={{ path('mentions') }}>mentions légales</a></li>
+                <li><a href={{ path('cgv') }}>cgv</a></li>
+                <li><a href={{ path('cgu') }}>cgu</a></li>
+                <li><a href={{ path('statut') }}>statut</a></li>
+                <li><a href={{ path('reglement') }}>règlement intérieur</a></li>
+                <li><a href={{ path('rendu') }}>compte rendu ag 2019</a></li>
+                <li><a href={{ path('contacter') }}>contact</a></li>
+                <li><a href="https://www.facebook.com/lechemindupelou/" target="_blank"><img id="fb" src="/facebookicon.svg"></img></a></li>
+            </ul>
+        </footer>
+        {% endblock %}
+
         {% block javascripts %}{% endblock %}
+    
     </body>
 </html>

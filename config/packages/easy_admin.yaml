@@ -8,6 +8,12 @@ easy_admin:
                   - {entity: 'Particulier'}
                   - {entity: 'Prestataire'}
                   - {entity: 'Comptoir'}
+                  
+            - label: "Informations Légales"
+              icon: "file-alt"
+              entity: 'InformationsLegales' 
+             
+
             - label: "Informations" 
               icon: "newspaper"
               entity: 'Informations'
@@ -35,6 +41,23 @@ easy_admin:
             class: App\Entity\Prestataire
         Comptoir:
             class: App\Entity\Comptoir
+           
+        InformationsLegales:
+            class: App\Entity\InformationsLegales
+            disabled_actions: ['search','delete','new']
+            list:
+                fields: ['cgu', 'cgv', 'mentionsLegales']   
+            form:
+                fields:
+                    - {property: 'cgu'}    
+                    - {property: 'cgv'}
+                    - {property: 'mentionsLegales'}
+            edit:
+                actions: ['-new', '-delete']
+          
+                
+               
+                
         Informations:
             class: App\Entity\Informations
             edit:
