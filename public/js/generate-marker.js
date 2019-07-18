@@ -53,9 +53,9 @@ function displayMap(data) {
     layerGroup.clearLayers();
     for (let i = 0; i < data.length; i++) {
         L.marker([
-            data[i].latitude,
-            data[i].longitude,
-        ], {icon: resto}).bindPopup(data[i].nom).addTo(layerGroup);
+            data[i][0].latitude,
+            data[i][0].longitude,
+        ], {icon: resto}).bindPopup(data[i][0].nom).addTo(layerGroup);
     }
 }
 //findAdress();

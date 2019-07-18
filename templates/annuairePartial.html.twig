@@ -1,10 +1,11 @@
 {% if response is defined%}
     <div class="row pre-scrollable">
     {%for result in response  %}
-            <div class="card border-dark ml-1" style="width: 10rem;">
-                <div class="card-header">{{result.nom}}</div>
+            <div class="card border-dark ml-1" style="width: 17rem;">
+                <div class="card-header">{{result.denomination}}</div>
                 <div class="card-body text-dark">
-                    <p class="card-text">Adresse: {{ result.adresse }}</p>
+                    <p class="card-text"><i class="fas fa-phone-alt"></i> Tel : {{ result.0.telephone }}</p>
+                    <p class="card-text"><i class="fas fa-map-marker-alt"></i> Adresse: {{ result.0.adresse }}</p>
                 </div>
             </div>
     {%endfor%}

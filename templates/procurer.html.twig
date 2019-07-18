@@ -34,5 +34,13 @@
     <script src="/js/set_map.js"></script>
     <script src="/js/generate-marker.js"></script>
     <script src="/js/ajax-annuaire.js"></script>
+    <script>
+        search.addEventListener("input", function(){
+            ajaxPostList('comptoir');
+            ajaxPostMap('comptoir');
+        });
+        ajaxPostList('comptoir');
+        ajaxPostMap('comptoir');
+    </script>
 
 {% endblock %}

@@ -25,22 +25,33 @@ class UserRepository extends ServiceEntityRepository
 
         $query = $this->createQueryBuilder('user');
 
-        if(!empty($params['search']))
-            $query->andWhere("user.nom LIKE :search")
-                ->setParameter('search',  $params['search']. '%');
-
         //TODO: Create "categorie" field in user model
         if(!empty($params['filter']))
             $query->andWhere("user.categorie = :filter")
                 ->setParameter('filter', $params['filter']);
 
         if(!empty($params['status'])){
-            if($params['status'] === 'prestataire')
-                $query->join(prestataire::class, 'prestataire')
-                    ->andWhere('user.id = prestataire.user');
-            elseif ($params['status'] === 'comptoir')
-                $query->join(comptoir::class, 'comptoir')
-                    ->andWhere('user.id = comptoir.user');
+            if($params['status'] === 'prestataire') {
+
+                $query->innerJoin(prestataire::class, 'prestataire')
+                    ->andWhere('user.id = prestataire.user')
+                    ->select('user', 'prestataire.denomination');
+
+                if(!empty($params['search']))
+                    $query->andWhere("prestataire.denomination LIKE :search")
+                        ->setParameter('search',  $params['search']. '%');
+            }
+
+            elseif ($params['status'] === 'comptoir') {
+
+                $query->innerJoin(comptoir::class, 'comptoir')
+                    ->andWhere('user.id = comptoir.user')
+                    ->select('user', 'comptoir.denomination');
+
+                if(!empty($params['search']))
+                    $query->andWhere("comptoir.denomination LIKE :search")
+                        ->setParameter('search',  $params['search']. '%');
+            }
         }
 
         $res = $query->getQuery()->getArrayResult();

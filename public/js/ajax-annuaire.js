@@ -1,11 +1,6 @@
 let search = document.getElementById("search");
 let annuaire = document.getElementById('annuaire');
 
-search.addEventListener("input", function(){
-    ajaxPostList('prestataire');
-    ajaxPostMap('prestataire');
-});
-
 function ajaxPostList(status) {
 
     let data = {
@@ -46,5 +41,3 @@ function ajaxPostMap(status) {
         });
 }
 
-ajaxPostList('prestataire');
-ajaxPostMap('prestataire');
