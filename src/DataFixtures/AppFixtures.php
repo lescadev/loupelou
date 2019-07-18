@@ -6,6 +6,8 @@ use App\Entity\Admin;
 use App\Entity\Prestataire;
 use App\Entity\User;
 use App\Entity\Comptoir;
+use App\Entity\PrestataireHasCategorie;
+use App\Entity\Categorie;
 use App\Entity\Informations;
 use App\Entity\InformationsLegales;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -96,7 +98,22 @@ class AppFixtures extends Fixture
             ->setLatitude(45.1646424)
             ->setLongitude(1.502554)
             ->setRoles(['ROLE_USER']);
-        
+
+        $user5 = new User();
+        $user5->setPrenom("Brigitte")
+            ->setNom("Froidefond")
+            ->setDateCreation(date_create())
+            ->setVille("LIMOGES")
+            ->setAdresse("74 rue Santos Dumont")
+            ->setPassword("test")
+            ->setTelephone('0568452154')
+            ->setEmail("Gthsfdfga@gmail.com")
+            ->setCodePostal("87000")
+            ->setLatitude(45.811710)
+            ->setLongitude(1.274990)
+            ->setRoles(['ROLE_USER']);
+
+
         //fixtures de l'entité "Comptoir"
 
         $comptoir = new Comptoir();
@@ -113,13 +130,31 @@ class AppFixtures extends Fixture
         $presta2->setSiret("2");
         $presta2->setUser($user4);
         $presta2->setDenomination("Guarana Café");
+        $presta3 = new Prestataire();
+        $presta3->setUser($user5)
+            ->setDenomination('Bridgets Muffins');
+
+
+        //Set category
+        $categoryList = ['Association', 'Alimentation', 'Artisanat', 'Santé',
+            'Culture', 'Education', 'Hotellerie', 'Social', 'Magasin', 'Restauration', 'Service'];
+        for($i=0; $i<count($categoryList); $i++){
+            $category[$i] = new Categorie();
+            $category[$i]->setNom($categoryList[$i]);
+            $manager->persist($category[$i]);
+            $manager->flush();
+        }
+
         $manager->persist($user);
         $manager->persist($user2);
+        $manager->persist($user5);
+        $manager->persist($presta3);
         $manager->persist($comptoir);
         $manager->persist($comptoir2);
         $manager->persist($presta);
         $manager->persist($presta2);
-       
+
         $manager->flush();
+
     }
 }

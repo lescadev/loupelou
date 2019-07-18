@@ -1,12 +1,20 @@
 let search = document.getElementById("search");
 let annuaire = document.getElementById('annuaire');
+let selectFilter = document.getElementById('sel1');
 
 function ajaxPostList(status) {
+
+    let filter;
+    if(selectFilter)
+        filter = selectFilter.value;
+    else
+        filter = null;
 
     let data = {
         'search' : search.value,
         'display': 'list',
-        'status' : status
+        'status' : status,
+        'filter': filter
     };
 
     fetch("/ajax-annuaire", {
@@ -24,10 +32,18 @@ function ajaxPostList(status) {
 }
 
 function ajaxPostMap(status) {
+
+    let filter;
+    if(selectFilter)
+        filter = selectFilter.value;
+    else
+        filter = null;
+
     let data = {
         'search' : search.value,
         'display' : 'map',
-        'status': status
+        'status': status,
+        'filter': filter
     };
     fetch("/ajax-annuaire", {
         method: "POST",

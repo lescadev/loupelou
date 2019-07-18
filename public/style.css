@@ -107,7 +107,11 @@ footer {
 }
 
 #map {
-  height: 52vh;
+  height: 56vh;
+}
+
+.card-subtitle {
+  font-size: 0.7em;
 }
 
 #list-annuaire {

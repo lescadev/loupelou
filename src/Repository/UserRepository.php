@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\Categorie;
 use App\Entity\User;
 use App\Entity\Prestataire;
 use App\Entity\Comptoir;
+use App\Entity\PrestataireHasCategorie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -25,11 +27,6 @@ class UserRepository extends ServiceEntityRepository
 
         $query = $this->createQueryBuilder('user');
 
-        //TODO: Create "categorie" field in user model
-        if(!empty($params['filter']))
-            $query->andWhere("user.categorie = :filter")
-                ->setParameter('filter', $params['filter']);
-
         if(!empty($params['status'])){
             if($params['status'] === 'prestataire') {
 
@@ -40,6 +37,23 @@ class UserRepository extends ServiceEntityRepository
                 if(!empty($params['search']))
                     $query->andWhere("prestataire.denomination LIKE :search")
                         ->setParameter('search',  $params['search']. '%');
+
+                if(!empty($params['filter'] and $params['filter'] !== 'Tous'))
+                    $query->innerJoin(PrestataireHasCategorie::class, 'prestaHasCategorie')
+                        ->innerJoin(Categorie::class, 'categorie')
+                        ->andWhere('categorie.nom = :filter')
+                        ->setParameter('filter', $params['filter'])
+                        ->andWhere('prestaHasCategorie.categorie = categorie.id')
+                        ->andWhere('prestataire.id = prestaHasCategorie.prestataire')
+                        ->andWhere('user.id = prestataire.user')
+                        ->select('user', 'prestataire.denomination', 'categorie.nom');
+                else
+                    $query->innerJoin(PrestataireHasCategorie::class, 'prestaHasCategorie')
+                        ->innerJoin(Categorie::class, 'categorie')
+                        ->andWhere('prestaHasCategorie.categorie = categorie.id')
+                        ->andWhere('prestataire.id = prestaHasCategorie.prestataire')
+                        ->andWhere('user.id = prestataire.user')
+                        ->select('user', 'prestataire.denomination', 'categorie.nom');
             }
 
             elseif ($params['status'] === 'comptoir') {

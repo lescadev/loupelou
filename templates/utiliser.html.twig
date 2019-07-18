@@ -6,7 +6,7 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <div class="col big-box" id="map">
+            <div class="col-md-6" id="map">
             </div>
             <div class="col" >
                 <div class="row">
@@ -14,9 +14,17 @@
                         <input class="form-control" type="text" placeholder="Rechercher" id="search" name="search">
                         <select class="form-control" id="sel1">
                             <option>Tous</option>
+                            <option>Association</option>
                             <option>Alimentation</option>
+                            <option>Artisanat</option>
                             <option>Santé</option>
                             <option>Culture</option>
+                            <option>Education</option>
+                            <option>Hotellerie</option>
+                            <option>Social</option>
+                            <option>Magasin</option>
+                            <option>Restauration</option>
+                            <option>Service</option>
                         </select>
                     </div>
                 </div>
@@ -36,6 +44,10 @@
     <script src="/js/ajax-annuaire.js"></script>
     <script>
         search.addEventListener("input", function(){
+            ajaxPostList('prestataire');
+            ajaxPostMap('prestataire');
+        });
+        selectFilter.addEventListener("change", function() {
             ajaxPostList('prestataire');
             ajaxPostMap('prestataire');
         });
