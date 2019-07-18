@@ -11,6 +11,9 @@
         <p>Adresse : {{ adresse }}</p>
         <p>Ville : {{ ville }}</p>
         <p>Code postal : {{ codepostal }}</p>
+        {% if not is_granted('ROLE_PARTICULIER') %}
+        <p>Description : {{ description }}</p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 use App\Form\InscriptionType;
+use App\Form\DescriptionType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +25,8 @@ class EspaceMembreController extends AbstractController {
         'nom' => $user->getNom(),
         'adresse' => $user->getAdresse(),
         'ville' => $user->getVille(),
-        'codepostal' => $user->getCodePostal()]);
+        'codepostal' => $user->getCodePostal(),
+        'description' => $user->getDescription()]);
     }
     /**
      * @Route("/profil/modifmdp", name="modifmdp")
@@ -100,6 +102,27 @@ class EspaceMembreController extends AbstractController {
             $em->flush();
         }
         return $this->render("/espaceMembre/modifInfo.html.twig", [
+            'form' => $form->createView(),
+            'user' => $user
+        ]);
+    }
+    /**
+     * @Route("/profil/modifdescription", name="modifdescription")
+     */
+    public function modifdescription(Request $request, EntityManagerInterface $em)
+    {
+        $user = $this->getUser();
+
+        $form = $this->createForm(DescriptionType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->get('description')->isValid()) {
+
+            $user->setDescription($form->get('description')->getData());
+            $em->persist($user);
+            $em->flush();
+        }
+        return $this->render("/espaceMembre/modifDescription.html.twig", [
             'form' => $form->createView(),
             'user' => $user
         ]);
