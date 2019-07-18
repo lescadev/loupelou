@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Entity\Comptoir;
 use App\Entity\Informations;
 use App\Entity\InformationsLegales;
+use App\Entity\ArticleBlog;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -119,6 +120,19 @@ class AppFixtures extends Fixture
         $manager->persist($comptoir2);
         $manager->persist($presta);
         $manager->persist($presta2);
+
+        // Blog fixtures
+
+        for($i = 1; $i <= 10; $i++){
+            $article = new ArticleBlog();
+            $article->setTitle("Titre de l'article n°$i")
+                    ->setContent("Voici le contenu de l'article n°$i Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum repellat iure laboriosam dolore esse dolor!")
+                    ->setImage("http://placehold.it/350x200")
+                    ->setImageDescription("description de l'image $i")
+                    ->setCreatedAt(new \DateTime());
+            
+            $manager->persist($article);
+        };
        
         $manager->flush();
     }

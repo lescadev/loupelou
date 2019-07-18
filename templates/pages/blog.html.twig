@@ -3,10 +3,18 @@
 {% block title %} LouPelou{% endblock %}
 
 {% block body %}
-<h1>BLOG</h1>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rem laboriosam libero vel magni ducimus cum enim delectus, quasi aut. Vel explicabo molestiae ut porro nam sequi optio eius odio a. Esse molestias illo neque dolorem, excepturi, asperiores corporis mollitia vel, optio eaque accusantium error veniam. Asperiores vel fugiat perspiciatis atque.</p>
-<p>Sapiente, quasi. Nam iste praesentium similique hic illo assumenda aliquam. Quam laborum similique harum eveniet, illo rem, ducimus, reprehenderit praesentium iusto eos saepe nostrum quasi ab recusandae blanditiis quo distinctio accusamus. Nam ducimus, consectetur maiores, eaque sed possimus perspiciatis labore aperiam, ratione fugiat minus? Odio error non blanditiis perferendis unde.</p>
-<p>Facilis provident fuga vitae earum consectetur neque, dolor modi quia deserunt assumenda perspiciatis fugit unde hic officiis amet iusto voluptas dolorum aperiam. Dicta explicabo, optio veniam nobis sint sed? Enim nulla unde fuga placeat velit earum nemo temporibus ea quibusdam quas magnam pariatur facere aspernatur, perferendis, est accusantium! Laborum, dolores!</p>
-<p>Atque qui cupiditate rem fugiat maiores nam culpa, architecto ipsa voluptatem magni dolor numquam totam? Recusandae pariatur praesentium numquam sint eligendi cupiditate totam architecto dolore eaque autem assumenda asperiores exercitationem nostrum excepturi accusantium porro dignissimos necessitatibus, nihil quae? Quidem, impedit reprehenderit. Optio ab qui sint doloremque officia sapiente? Delectus, vitae?</p>
-<p>Laboriosam optio quas, nulla aliquam facilis rem quibusdam itaque unde, reprehenderit in perspiciatis enim nobis. Eaque quam velit quos molestias eveniet eius alias veritatis nisi harum? Aspernatur porro saepe ex blanditiis dolorum. Voluptatem veniam, earum labore quo, eveniet ex tempora iure repellat placeat, atque rem quas provident nulla expedita exercitationem.</p>
+<section class="articles">
+    {% for article in articles %}
+        {% if article.isActive == true %}
+            <h2>{{article.title}}</h2>
+            <div class="metadata">Publié le {{article.createdAt | date('d/m/Y')}} à {{article.createdAt | date('H:i')}}<div>
+            <div class="content">
+                <img src="{{article.image}}" alt="{{article.imageDescription}}">
+                <p>{{article.content}}</p>
+                <a href="{{ path('blogArticle', {'id': article.id})}}" class="btn btn-primary">Lire la suite</a>
+            </div>
+            <hr>
+        {% endif %}
+    {% endfor %}
+</section>    
 {% endblock %}

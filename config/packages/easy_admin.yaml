@@ -17,6 +17,10 @@ easy_admin:
             - label: "Informations" 
               icon: "newspaper"
               entity: 'Informations'
+
+            - label: "Blog" 
+              icon: "blog"
+              entity: 'ArticleBlog'
               
     entities:
         User:
@@ -64,6 +68,22 @@ easy_admin:
                 actions: ['-new', '-delete']
             list:
                 actions: ['-new', '-delete']
+
+        
+        ArticleBlog:
+            class: App\Entity\ArticleBlog
+            label: "Blog"
+            list:
+                fields: [{ property: 'is_active',  type: 'toggle' }, 'title', 'content', 'image', createdAt, 'imageDescription']
+            form:
+                fields:
+                    - {property: 'isActive'}
+                    - {property: 'title'}
+                    - {property: 'content'}
+                    - {property: 'image'}
+                    - {property: 'createdAt'}
+                    - {property: 'imageDescription'}
+            
 
 
 
