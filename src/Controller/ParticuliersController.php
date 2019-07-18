@@ -21,6 +21,7 @@ class ParticuliersController extends AbstractController
         $user = new User();
         $user -> setDateCreation(date_create());
         $user -> setRoles(["ROLE_PARTICULIER"]);
+        $user -> setIsActive(false);
 
         $particulier = new Particulier();
         $particulier ->setUser($user);

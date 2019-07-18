@@ -22,6 +22,7 @@ class ProfessionnelsController extends AbstractController
     {
         $user = new User();
         $user -> setDateCreation(date_create());
+        $user -> setIsActive(false);
 
         $form = $this->createForm(InscriptionType::class, $user);
         $form -> handleRequest($request);
@@ -109,7 +110,7 @@ class ProfessionnelsController extends AbstractController
             if(!empty($data['compt']) | !empty($data['presta'])) {
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Inscription réussie!');
+                $this->addFlash('success', 'Votre inscription est effective et va être prise en compte prochainement.');
                 return $this->redirectToRoute('sucess');
                 
             }
