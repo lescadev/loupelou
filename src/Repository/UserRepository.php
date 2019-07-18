@@ -37,7 +37,7 @@ class UserRepository extends ServiceEntityRepository
         if(!empty($params['status'])){
             if($params['status'] === 'prestataire')
                 $query->join(prestataire::class, 'prestataire')
-                ->andWhere('user.id = prestataire.user');
+                    ->andWhere('user.id = prestataire.user');
             elseif ($params['status'] === 'comptoir')
                 $query->join(comptoir::class, 'comptoir')
                     ->andWhere('user.id = comptoir.user');

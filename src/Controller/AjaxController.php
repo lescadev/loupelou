@@ -17,18 +17,29 @@ class AjaxController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function ajaxAnnuaire(UserRepository $userRepository, Request $request) : Response
+    public function ajaxAnnuaire(UserRepository $userRepository, Request $request)
     {
 
-        $params = ["search" => 'bio',
-            "status" => "comptoir"];
+        $params = [];
+
+        if ($request->getMethod() == 'POST') {
+            $body = $request->getContent();
+            $params = json_decode($body, true);
+        }
 
         $res = $userRepository->findByParams($params);
 
-        $response = new Response();
-        $response->setContent(json_encode($res, JSON_UNESCAPED_UNICODE));
-        $response->headers->set('Content-Type', 'application/json');
-        return $response;
+        if(!empty($params['display']))
+            if($params['display'] === 'list')
+                return $this->render("annuairePartial.html.twig",
+                    array('response' => $res));
+            elseif ($params['display'] === 'map') {
+                $response = new Response();
+                $response->setContent(json_encode($res, JSON_UNESCAPED_UNICODE));
+                $response->headers->set('Content-Type', 'application/json');
+                return $response;
+            }
+
 
     }
 }

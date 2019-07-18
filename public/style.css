@@ -83,6 +83,10 @@ li.dropdown {
   height: 70px;
 }
 
+.card-text {
+  font-size: 0.8em;
+}
+
 section {
   padding-top: 70px;
   padding-left: 50px;

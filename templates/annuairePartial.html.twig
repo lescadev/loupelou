@@ -1,0 +1,12 @@
+{% if response is defined%}
+    <div class="row">
+    {%for result in response  %}
+            <div class="card border-dark ml-1" style="width: 13rem;">
+                <div class="card-header">{{result.nom}}</div>
+                <div class="card-body text-dark">
+                    <p class="card-text">Adresse: {{ result.adresse }}</p>
+                </div>
+            </div>
+    {%endfor%}
+    </div>
+{% endif %}
