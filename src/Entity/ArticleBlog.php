@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleBlogRepository")
+ * @Vich\Uploadable
  */
 class ArticleBlog
 {
@@ -30,6 +33,12 @@ class ArticleBlog
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
+
+    /**
+     * @Vich\UploadableField(mapping="article_images", fileNameProperty="image")
+     * @var File
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="datetime")
@@ -85,6 +94,23 @@ class ArticleBlog
         $this->image = $image;
 
         return $this;
+    }
+
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            $this->createdAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface

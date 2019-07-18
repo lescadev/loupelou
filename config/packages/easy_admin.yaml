@@ -74,15 +74,15 @@ easy_admin:
             class: App\Entity\ArticleBlog
             label: "Blog"
             list:
-                fields: [{ property: 'is_active',  type: 'toggle' }, 'title', 'content', 'image', createdAt, 'imageDescription']
+                fields: [{ property: 'is_active',  type: 'toggle', label: 'Activation article' }, {property: 'title', label: 'Titre'}, {property: 'content', label: 'Article'}, {property: 'image', type: 'image', label: 'Image', base_path: '%app.path.articles_images%'}, {property: 'createdAt', label: 'Date création'}, {property: 'imageDescription', label: 'Description image'}]
             form:
                 fields:
-                    - {property: 'isActive'}
-                    - {property: 'title'}
-                    - {property: 'content'}
-                    - {property: 'image'}
-                    - {property: 'createdAt'}
-                    - {property: 'imageDescription'}
+                    - {property: 'isActive', label: 'Activation article'}
+                    - {property: 'title', label: 'Titre'}
+                    - {property: 'content', label: 'Article'}
+                    - {property: 'imageFile', type: 'vich_image', label: 'Image'}
+                    - {property: 'createdAt', label: 'Date création'}
+                    - {property: 'imageDescription', label: 'Description image'}
             
 
 

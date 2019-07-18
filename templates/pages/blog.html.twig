@@ -4,17 +4,15 @@
 
 {% block body %}
 <section class="articles">
-    {% for article in articles %}
-        {% if article.isActive == true %}
+    {% for article in articles|reverse if article.isActive == true %}
             <h2>{{article.title}}</h2>
             <div class="metadata">Publié le {{article.createdAt | date('d/m/Y')}} à {{article.createdAt | date('H:i')}}<div>
             <div class="content">
-                <img src="{{article.image}}" alt="{{article.imageDescription}}">
+                <img style="max-width: 30%;" src="/uploads/images/articles/{{article.image}}" alt="{{article.imageDescription}}">
                 <p>{{article.content}}</p>
                 <a href="{{ path('blogArticle', {'id': article.id})}}" class="btn btn-primary">Lire la suite</a>
             </div>
             <hr>
-        {% endif %}
     {% endfor %}
 </section>    
 {% endblock %}
