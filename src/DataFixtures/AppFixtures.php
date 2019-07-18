@@ -120,6 +120,18 @@ class AppFixtures extends Fixture
         $manager->persist($presta);
         $manager->persist($presta2);
        
+        for($i = 1; $i <= 10; $i++){
+            $event = new Evenements();
+            $event->setTitle("Événement: $i")
+                  ->setDescription("voici la description de l'événement n°$i")
+                  ->setLogo("http://placehold.it/250x100")
+                  ->setLogoDescription("description de l'image $i")
+                  ->setLienEvent("lien de l'événement n°$i")
+                  ->setDate(new \Datetime()); 
+            
+            $manager->persist($event);
+        };
+        
         $manager->flush();
     }
 }
