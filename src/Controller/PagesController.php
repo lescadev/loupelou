@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\ArticleBlog;
 use App\Entity\Evenements;
+
 
 class PagesController extends AbstractController
 {
@@ -44,7 +46,28 @@ class PagesController extends AbstractController
 
     public function blog()
     {
-        return $this->render('pages/blog.html.twig');
+        $repo = $this->getDoctrine()->getRepository(ArticleBlog::class);
+
+        $articles = $repo->findAll();
+
+        return $this->render('pages/blog.html.twig', [
+            'articles' => $articles
+        ]);
+    }
+
+    /**
+     * @Route("/blog/{id}", name="blogArticle")
+     */
+
+    public function blogArticle($id)
+    {
+        $repo = $this->getDoctrine()->getRepository(ArticleBlog::class);
+
+        $article = $repo->find($id);
+
+        return $this->render('pages/blogArticle.html.twig', [
+            "article" => $article
+        ]);
     }
 
 

@@ -1,5 +1,7 @@
 easy_admin:
+
     site_name: 'ADMIN'
+
     design:
         assets:
             css:
@@ -22,17 +24,25 @@ easy_admin:
               icon: "newspaper"
               entity: 'Informations'
 
+            - label: "Blog" 
+              icon: "blog"
+              entity: 'ArticleBlog'
+
             - label: "Evénements" 
               icon: "event"
               entity: 'Evenements'
+
               
     entities:
         User:
             class: App\Entity\User
-            label: "Membre"
+            label: "Membres"
             list:
                 fields: [{ property: 'is_active',  type: 'toggle' }, 'prenom', 'nom', 'email', 'adresse','code_postal', 'ville']
+                actions:
+                    - {name: 'new', label: 'Ajouter membre' }
             form:
+                title: 'Adhérent'
                 fields:
                     - {property: 'email'}
                     - {property: 'password'}
@@ -44,18 +54,38 @@ easy_admin:
                     - {property: 'code_postal'}
                     - {property: 'date_creation'}
         Particulier:
+            label: "Particuliers"
             class: App\Entity\Particulier
+            form:
+                title: 'Particulier'
+            list:
+                actions:
+                    - {name: 'new', label: 'Ajouter Particuler' }
         Prestataire:
+            label: "Prestataires"
             class: App\Entity\Prestataire
+            form:
+                title: 'Prestataire'
+            list:
+                actions:
+                    - {name: 'new', label: 'Ajouter Prestataire' }
         Comptoir:
+            label: "Comptoirs"
             class: App\Entity\Comptoir
+            form:
+                title: 'Comptoir'
+            list:
+                actions:
+                    - {name: 'new', label: 'Ajouter Comptoir' }
            
         InformationsLegales:
             class: App\Entity\InformationsLegales
+            label: "Informations Légales"
             disabled_actions: ['search','delete','new']
             list:
                 fields: ['cgu', 'cgv', 'mentionsLegales']   
             form:
+                title: 'Informations Légales'
                 fields:
                     - {property: 'cgu',type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}    
                     - {property: 'cgv',type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
@@ -68,10 +98,30 @@ easy_admin:
                 
         Informations:
             class: App\Entity\Informations
+            form: 
+                title: 'Informations'
             edit:
                 actions: ['-new', '-delete']
             list:
                 actions: ['-new', '-delete']
+
+        
+        ArticleBlog:
+            class: App\Entity\ArticleBlog
+            label: "Blog"
+            list:
+                fields: [{ property: 'is_active',  type: 'toggle', label: 'Activation article' }, {property: 'title', label: 'Titre'}, {property: 'content', label: 'Article'}, {property: 'image', type: 'image', label: 'Image', base_path: '%app.path.articles_images%'}, {property: 'createdAt', label: 'Date création'}, {property: 'imageDescription', label: 'Description image'}]
+            form:
+                title: 'Article'
+                fields:
+                    - {property: 'isActive', label: 'Activation article'}
+                    - {property: 'title', label: 'Titre'}
+                    - {property: 'content', label: 'Article'}
+                    - {property: 'imageFile', type: 'vich_image', label: 'Image'}
+                    - {property: 'createdAt', label: 'Date création'}
+                    - {property: 'imageDescription', label: 'Description image'}
+            
+            
 
 
         Evenements:
