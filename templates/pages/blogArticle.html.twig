@@ -8,7 +8,11 @@
     <h2>{{article.title}}</h2>
     <div class="metadata">Publié le {{article.createdAt | date('d/m/Y')}} à {{article.createdAt | date('H:i')}}<div>
     <div class="content">
-        <img style="max-width: 50%;" src="/uploads/images/articles/{{article.image}}" alt="{{article.imageDescription}}">
+        {% if 'http' in article.image %}
+            <img style="max-width: 50%;" src="{{article.image}}" alt="{{article.imageDescription}}">
+        {% else %}
+            <img style="max-width: 50%;" src="/uploads/images/articles/{{article.image}}" alt="{{article.imageDescription}}">
+        {% endif %}
         <p>{{article.content}}</p>
     </div>
 </article>
