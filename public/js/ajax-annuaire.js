@@ -18,6 +18,8 @@ function ajaxPostList(status) {
         else
             distance = Number(selectFilterRadius.value.substring(0, 2));
 
+
+getPosition().finally(function() {
     let data = {
         'search' : search.value,
         'display': 'list',
@@ -40,6 +42,8 @@ function ajaxPostList(status) {
             annuaire.innerHTML = "";
             annuaire.insertAdjacentHTML('beforeend', data);
         });
+});
+
 }
 
 function ajaxPostMap(status) {
