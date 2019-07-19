@@ -1,5 +1,9 @@
 easy_admin:
+    site_name: 'ADMIN'
     design:
+        assets:
+            css:
+                - 'css/admin.css'
         menu:
             - label: "Utilisateurs"
               icon: "user-o"
@@ -49,9 +53,9 @@ easy_admin:
                 fields: ['cgu', 'cgv', 'mentionsLegales']   
             form:
                 fields:
-                    - {property: 'cgu'}    
-                    - {property: 'cgv'}
-                    - {property: 'mentionsLegales'}
+                    - {property: 'cgu',type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}    
+                    - {property: 'cgv',type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
+                    - {property: 'mentionsLegales',type: 'fos_ckeditor',type_options: {config_name: 'my_config_1'}}
             edit:
                 actions: ['-new', '-delete']
           
