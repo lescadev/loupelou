@@ -129,7 +129,7 @@ class AppFixtures extends Fixture
                   ->setLogoDescription("description de l'image $i")
                   ->setLienEvent("lien de l'événement n°$i")
                   ->setLieu("le lieu ce situe ici")
-                  ->setDate(new \Datetime()); 
+                  ->setDate(new \Datetime());
             
             $manager->persist($event);
         };
