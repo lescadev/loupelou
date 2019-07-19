@@ -21,6 +21,10 @@ easy_admin:
             - label: "Informations" 
               icon: "newspaper"
               entity: 'Informations'
+
+            - label: "Evénements" 
+              icon: "event"
+              entity: 'Evenements'
               
     entities:
         User:
@@ -69,6 +73,21 @@ easy_admin:
             list:
                 actions: ['-new', '-delete']
 
+
+        Evenements:
+            class: App\Entity\Evenements
+            label: "Evénements"
+            list:
+                fields: [{property: 'title', label: 'Titre'}, {property: 'description', label: 'Description'}, {property: 'logo', label: 'Logo', type: 'image'}, {property: 'date', label: 'Date evenement'}, {property: 'logoDescription', label: 'Description du logo'}, {property: 'lienEvent', label: 'LienEvenement'}, {property: 'lieu', label: 'Lieu'}]
+            form:
+                fields: 
+                    - {property: 'title'}
+                    - {property: 'description'}
+                    - {property: 'logo'}
+                    - {property: 'date'}
+                    - {property: 'logoDescription'}
+                    - {property: 'lienEvent'}
+                    - {property: 'lieu'}
 
 
 
