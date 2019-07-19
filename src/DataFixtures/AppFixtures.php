@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Entity\Comptoir;
 use App\Entity\Informations;
 use App\Entity\InformationsLegales;
+use App\Entity\Evenements;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -127,6 +128,7 @@ class AppFixtures extends Fixture
                   ->setLogo("http://placehold.it/250x100")
                   ->setLogoDescription("description de l'image $i")
                   ->setLienEvent("lien de l'événement n°$i")
+                  ->setLieu("le lieu ce situe ici")
                   ->setDate(new \Datetime()); 
             
             $manager->persist($event);
