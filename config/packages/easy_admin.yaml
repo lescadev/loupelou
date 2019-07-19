@@ -82,7 +82,7 @@ easy_admin:
             form:
                 fields: 
                     - {property: 'title'}
-                    - {property: 'description'}
+                    - {property: 'description',type: 'fos_ckeditor', type_options: {config_name: 'my_config_3'}}
                     - {property: 'logo'}
                     - {property: 'date'}
                     - {property: 'logoDescription'}
