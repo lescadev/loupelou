@@ -38,7 +38,7 @@ class UserRepository extends ServiceEntityRepository
                     $query->andWhere("prestataire.denomination LIKE :search")
                         ->setParameter('search',  $params['search']. '%');
 
-                if(!empty($params['filter'] and $params['filter'] !== 'Tous'))
+                if(!empty($params['filter'] and $params['filter'] !== 'Tous les services'))
                     $query->innerJoin(PrestataireHasCategorie::class, 'prestaHasCategorie')
                         ->innerJoin(Categorie::class, 'categorie')
                         ->andWhere('categorie.nom = :filter')

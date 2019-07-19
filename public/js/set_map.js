@@ -6,6 +6,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     accessToken: 'pk.eyJ1IjoiaGlkYXJpIiwiYSI6ImNqdzZldTY4bjF3eWU0N3Bsc2pvMnJrdzkifQ.XexB94TZjXyb2jjMzHLIiQ'
 }).addTo(mymap);
 
+
 //Token is passed
 /**async function findAdress() {
     const ip = await fetch('http://api.ipify.org/?format=json')
