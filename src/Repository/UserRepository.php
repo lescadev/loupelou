@@ -10,6 +10,7 @@ use App\Entity\PrestataireHasCategorie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
+
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
@@ -36,7 +37,7 @@ class UserRepository extends ServiceEntityRepository
 
                 if(!empty($params['search']))
                     $query->andWhere("prestataire.denomination LIKE :search")
-                        ->setParameter('search',  $params['search']. '%');
+                        ->setParameter('search', '%' . $params['search']. '%');
 
                 if(!empty($params['filter'] and $params['filter'] !== 'Tous les services'))
                     $query->innerJoin(PrestataireHasCategorie::class, 'prestaHasCategorie')
@@ -66,6 +67,21 @@ class UserRepository extends ServiceEntityRepository
                     $query->andWhere("comptoir.denomination LIKE :search")
                         ->setParameter('search',  $params['search']. '%');
             }
+
+            if(!empty($params['distance']) and !empty($params['longitude']) and !empty($params['latitude'])){
+                $query->addSelect(
+                    '( 6371 * acos(cos(radians(' . $params['latitude'] . '))' .
+                    '* cos( radians( user.latitude ) )' .
+                    '* cos( radians( user.longitude )' .
+                    '- radians(' . $params['longitude'] . ') )' .
+                    '+ sin( radians(' . $params['latitude'] . ') )' .
+                    '* sin( radians( user.latitude ) ) ) ) as distance'
+                )
+                    ->andHaving('distance < :radius')
+                    ->setParameter('radius', $params['distance']);
+            }
+
+
         }
 
         $res = $query->getQuery()->getArrayResult();

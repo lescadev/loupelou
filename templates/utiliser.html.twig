@@ -26,6 +26,13 @@
                             <option>Restauration</option>
                             <option>Service</option>
                         </select>
+                        <select class="form-control" id="sel2">
+                            <option>Toutes les distances</option>
+                            <option>15km</option>
+                            <option>30km</option>
+                            <option>50km</option>
+                            <option>80km</option>
+                        </select>
                     </div>
                 </div>
                 <div id="annuaire">
@@ -49,6 +56,10 @@
             ajaxPostMap('prestataire');
         });
         selectFilter.addEventListener("change", function() {
+            ajaxPostList('prestataire');
+            ajaxPostMap('prestataire');
+        });
+        selectFilterRadius.addEventListener("change", function() {
             ajaxPostList('prestataire');
             ajaxPostMap('prestataire');
         });
