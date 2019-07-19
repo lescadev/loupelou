@@ -10,7 +10,7 @@
                 <img src="{{event.logo}}" alt="{{event.logoDescription}}">
                 <h3>Évènement prévue le: {{event.date | date('d/m/Y')}} à {{event.date | date('H:i')}}<h3>
                 <h4>Lieu: {{ event.lieu }}</h4>
-                <p>{{event.description}}</p>
+                <p>{{ event.description | raw}}</p>
                 <a href="{{ event.lienEvent }}" class="btn btn-primary" target="_blank">Lien de l'événement</a>
             </div>
             <hr>
