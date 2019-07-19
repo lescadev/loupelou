@@ -9,14 +9,14 @@ use App\Entity\User;
 use App\Entity\Particulier;
 use App\Form\InscriptionType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
+use FOS\RestBundle\View\View;
 
 class ParticuliersController extends AbstractController
 {
     /**
      * @Route("/particulier/inscription", name="inscription_particulier")
      */
-    public function inscription(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function inscription(Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer)
     {
         $user = new User();
         $user -> setDateCreation(date_create());
@@ -44,6 +44,32 @@ class ParticuliersController extends AbstractController
             $entityManager->persist($user);
             $entityManager->persist($particulier);
             $entityManager->flush();
+
+            $message = (new \Swift_Message('Inscription loupelou'))
+            ->setFrom('anthoman0@gmail.com')
+            ->setTo( $form->get('email')->getData())
+            ->setBody(
+                $this-> renderView(
+                    'emails/inscription.html.twig',
+                    ['nom' =>  $form->get('nom')->getData(), 'prenom' =>  $form->get('prenom')->getData(), 'email' => $form->get('email')->getData()]
+                ),
+                'text/html'
+            );
+
+            $mailer->send($message);
+
+            $adminMessage = (new \Swift_Message('Inscription loupelou'))
+            ->setFrom('anthoman0@gmail.com')
+            ->setTo('lescadev@gmail.com')
+            ->setBody(
+                $this-> renderView(
+                    'emails/adminInscription.html.twig',
+                    ['nom' =>  $form->get('nom')->getData(), 'prenom' =>  $form->get('prenom')->getData(), 'email' => $form->get('email')->getData()]
+                ),
+                'text/html'
+            );
+
+            $mailer->send($adminMessage);
             
             $this->addFlash('success', 'Inscription réussie!');
             return $this->redirectToRoute('sucess');

@@ -18,7 +18,7 @@ class ProfessionnelsController extends AbstractController
     /**
      * @Route("/professionnel/inscription", name="inscription_pro")
      */
-    public function inscriptionPro(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function inscriptionPro(Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer)
     {
         $user = new User();
         $user -> setDateCreation(date_create());
@@ -109,6 +109,32 @@ class ProfessionnelsController extends AbstractController
 
             if(!empty($data['compt']) | !empty($data['presta'])) {
                 $entityManager->flush();
+
+                $message = (new \Swift_Message('Inscription loupelou'))
+                ->setFrom('anthoman0@gmail.com')
+                ->setTo( $form->get('email')->getData())
+                ->setBody(
+                $this-> renderView(
+                    'emails/inscription.html.twig',
+                    ['nom' =>  $form->get('nom')->getData(), 'prenom' =>  $form->get('prenom')->getData(), 'email' => $form->get('email')->getData()]
+                ),
+                'text/html'
+            );
+
+            $mailer->send($message);
+
+            $adminMessage = (new \Swift_Message('Inscription loupelou'))
+                ->setFrom('anthoman0@gmail.com')
+                ->setTo('lescadev@gmail.com')
+                ->setBody(
+                $this-> renderView(
+                    'emails/adminInscription.html.twig',
+                    ['nom' =>  $form->get('nom')->getData(), 'prenom' =>  $form->get('prenom')->getData(), 'email' => $form->get('email')->getData()]
+                ),
+                'text/html'
+            );
+
+            $mailer->send($adminMessage);
 
                 $this->addFlash('success', 'Votre inscription est effective et va être prise en compte prochainement.');
                 return $this->redirectToRoute('sucess');
