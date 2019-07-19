@@ -127,7 +127,7 @@ class AppFixtures extends Fixture
                   ->setDescription("voici la description de l'événement n°$i")
                   ->setLogo("http://placehold.it/250x100")
                   ->setLogoDescription("description de l'image $i")
-                  ->setLienEvent("lien de l'événement n°$i")
+                  ->setLienEvent("https://www.google.com")
                   ->setLieu("le lieu ce situe ici")
                   ->setDate(new \Datetime());
             
