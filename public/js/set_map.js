@@ -1,4 +1,4 @@
-let mymap = L.map('map').setView([45.837325, 1.48935], 7);
+let mymap = L.map('map').setView([45.837325, 1.48935], 9);
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     maxZoom: 18,
@@ -6,20 +6,80 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     accessToken: 'pk.eyJ1IjoiaGlkYXJpIiwiYSI6ImNqdzZldTY4bjF3eWU0N3Bsc2pvMnJrdzkifQ.XexB94TZjXyb2jjMzHLIiQ'
 }).addTo(mymap);
 
+let layerGroup = L.layerGroup().addTo(mymap);
 
-//Token is passed
-/**async function findAdress() {
-    const ip = await fetch('http://api.ipify.org/?format=json')
-        .then(response => response.json())
-        .then(json => json.ip);
+let Alimentation = L.icon({
+    iconUrl: '../images/marker/alimentation.png',
+    iconSize:     [25, 25]
+});
 
+let Artisanat = L.icon({
+    iconUrl: '../images/marker/artisanat.png',
+    iconSize:     [25, 25]
+});
 
-    await fetch('https://geo.ipify.org/api/v1?apiKey=at_1ZKO7mJQ1xRUUT98iJyhlPUaWN7dN&ipAddress=' + ip)
-        .then(response => response.json())
-        .then(json => {
-            const longitude = json.location.lng;
-            const latitude = json.location.lat;
-            marker = L.marker([latitude, longitude]).addTo(mymap);
-            marker.bindPopup("<p class='mainPopup'>Vous êtes ici ! <span class='herePopup'>(environ)</span>").openPopup();
-        });
-}**/
+let Association = L.icon({
+    iconUrl: '../images/marker/social.png',
+    iconSize:     [25, 25]
+});
+
+let Culture = L.icon({
+    iconUrl: '../images/marker/culture.png',
+    iconSize:     [25, 25]
+});
+let Education = L.icon({
+    iconUrl: '../images/marker/formation.png',
+    iconSize:     [25, 25]
+});
+
+let Hotellerie = L.icon({
+    iconUrl: '../images/marker/hotellerie.png',
+    iconSize:     [25, 25]
+});
+
+let Magasin = L.icon({
+    iconUrl: '../images/marker/magasin.png',
+    iconSize:     [25, 25]
+});
+
+let Restauration = L.icon({
+    iconUrl: '../images/marker/resto.png',
+    iconSize:     [25, 25]
+});
+
+let Sante = L.icon({
+    iconUrl: '../images/marker/santébienetre.png',
+    iconSize:     [25, 25]
+});
+
+let Service = L.icon({
+    iconUrl: '../images/marker/service.png',
+    iconSize:     [25, 25]
+});
+let Social = L.icon({
+    iconUrl: '../images/marker/social.png',
+    iconSize:     [25, 25]
+});
+
+let Comptoir = L.icon({
+    iconUrl: '../images/marker/comptoir.png',
+    iconSize:     [25, 25]
+});
+
+function ifCategory(data, i) {
+    if(data[i].nom)
+        return eval(data[i].nom);
+    else
+        return eval("Comptoir")
+}
+
+function displayMap(data) {
+    layerGroup.clearLayers();
+    for (let i = 0; i < Object.keys( data ).length - 1; i++) {
+        L.marker([
+            data[i][0].latitude,
+            data[i][0].longitude,
+        ], {icon: ifCategory(data, i)}).bindPopup(data[i].denomination).addTo(layerGroup);
+    }
+}
+

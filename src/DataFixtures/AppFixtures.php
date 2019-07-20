@@ -136,15 +136,29 @@ class AppFixtures extends Fixture
 
 
         //Set category
-        $categoryList = ['Association', 'Alimentation', 'Artisanat', 'Santé',
+        $categoryList = ['Association', 'Alimentation', 'Artisanat', 'Sante',
             'Culture', 'Education', 'Hotellerie', 'Social', 'Magasin', 'Restauration', 'Service'];
         for($i=0; $i<count($categoryList); $i++){
             $category[$i] = new Categorie();
             $category[$i]->setNom($categoryList[$i]);
             $manager->persist($category[$i]);
-            $manager->flush();
-        }
+    }
 
+        $prestaHasCategorie = new PrestataireHasCategorie();
+        $prestaHasCategorie->setPrestataire($presta);
+        $prestaHasCategorie->setCategorie($category[0]);
+
+        $prestaHasCategorie1 = new PrestataireHasCategorie();
+        $prestaHasCategorie1->setPrestataire($presta2);
+        $prestaHasCategorie1->setCategorie($category[9]);
+
+        $prestaHasCategorie2 = new PrestataireHasCategorie();
+        $prestaHasCategorie2->setPrestataire($presta3);
+        $prestaHasCategorie2->setCategorie($category[1]);
+
+        $manager->persist($prestaHasCategorie);
+        $manager->persist($prestaHasCategorie1);
+        $manager->persist($prestaHasCategorie2);
         $manager->persist($user);
         $manager->persist($user2);
         $manager->persist($user5);

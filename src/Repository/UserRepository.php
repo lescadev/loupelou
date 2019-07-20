@@ -46,15 +46,15 @@ class UserRepository extends ServiceEntityRepository
                         ->setParameter('filter', $params['filter'])
                         ->andWhere('prestaHasCategorie.categorie = categorie.id')
                         ->andWhere('prestataire.id = prestaHasCategorie.prestataire')
-                        ->andWhere('user.id = prestataire.user')
-                        ->select('user', 'prestataire.denomination', 'categorie.nom');
+                        ->andWhere('user.id = prestataire.user');
                 else
                     $query->innerJoin(PrestataireHasCategorie::class, 'prestaHasCategorie')
                         ->innerJoin(Categorie::class, 'categorie')
                         ->andWhere('prestaHasCategorie.categorie = categorie.id')
                         ->andWhere('prestataire.id = prestaHasCategorie.prestataire')
-                        ->andWhere('user.id = prestataire.user')
-                        ->select('user', 'prestataire.denomination', 'categorie.nom');
+                        ->andWhere('user.id = prestataire.user');
+
+                $query->select('user', 'prestataire.denomination', 'categorie.nom');
             }
 
             elseif ($params['status'] === 'comptoir') {
@@ -65,7 +65,7 @@ class UserRepository extends ServiceEntityRepository
 
                 if(!empty($params['search']))
                     $query->andWhere("comptoir.denomination LIKE :search")
-                        ->setParameter('search',  $params['search']. '%');
+                        ->setParameter('search',  '%' . $params['search']. '%');
             }
 
             if(!empty($params['distance']) and !empty($params['longitude']) and !empty($params['latitude'])){
@@ -80,8 +80,6 @@ class UserRepository extends ServiceEntityRepository
                     ->andHaving('distance < :radius')
                     ->setParameter('radius', $params['distance']);
             }
-
-
         }
 
         $res = $query->getQuery()->getArrayResult();

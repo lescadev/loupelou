@@ -29,19 +29,7 @@ class AjaxController extends AbstractController
 
         $res = $userRepository->findByParams($params);
 
-        if(!empty($params['display']))
-            if($params['display'] === 'list') {
-                //var_dump($res);
-                return $this->render("annuairePartial.html.twig",
-                    array('response' => $res));
-            }
-            elseif ($params['display'] === 'map') {
-                $response = new Response();
-                $response->setContent(json_encode($res, JSON_UNESCAPED_UNICODE));
-                $response->headers->set('Content-Type', 'application/json');
-                return $response;
-            }
-
-
+        return $this->render('annuairePartial.html.twig',
+            array('response' => $res));
     }
 }

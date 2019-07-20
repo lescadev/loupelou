@@ -107,7 +107,7 @@ footer {
 }
 
 #map {
-  height: 58vh;
+  height: 50vh;
 }
 
 .card-subtitle {
@@ -124,12 +124,16 @@ footer {
     text-align: center;
 }
 
+.card {
+  width: 48%;
+}
+
 @media screen and (max-width: 900px){
   header {
     padding-left: 20px;
     padding-right: 20px;
   }
-  
+
   #ul1, #ul2 {
     padding-left: 10px;
     padding-right: 10px; 
@@ -138,5 +142,11 @@ footer {
   section {
     padding-left: 20px;
     padding-right: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card {
+    width: 100% !important;
   }
 }

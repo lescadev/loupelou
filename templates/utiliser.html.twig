@@ -4,7 +4,6 @@
 {% block stylesheets %}<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">{% endblock %}
 
 {% block body %}
-    <div class="container">
         <div class="row">
             <div class="col-md-6" id="map">
             </div>
@@ -39,31 +38,18 @@
                 </div>
             </div>
         </div>
-    </div>
 
 {% endblock %}
 
 {% block javascripts %}
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin="">
     </script>
-    <script src="/js/ajax-annuaire.js"></script>
-    <script src="/js/set_map.js"></script>
     <script src="/js/geolocalisation.js"></script>
-    <script src="/js/generate-marker.js"></script>
+    <script src="/js/set_map.js"></script>
+    <script src="/js/ajax-annuaire.js"></script>
+    <script src="/js/event.js"></script>
     <script>
-        search.addEventListener("input", function(){
-            ajaxPostList('prestataire');
-            ajaxPostMap('prestataire');
-        });
-        selectFilter.addEventListener("change", function() {
-            ajaxPostList('prestataire');
-            ajaxPostMap('prestataire');
-        });
-        selectFilterRadius.addEventListener("change", function() {
-            ajaxPostList('prestataire');
-            ajaxPostMap('prestataire');
-        });
-        ajaxPostList('prestataire');
-        ajaxPostMap('prestataire');</script>
+        setEvent('{{ status }}');
+    </script>
 
 {% endblock %}
