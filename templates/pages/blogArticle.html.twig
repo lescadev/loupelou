@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} LouPelou{% endblock %}
+
+{% block body %}
+<a href="{{ path('blog')}}" class="btn btn-primary">Retour</a>
+<article>
+    <h2>{{article.title}}</h2>
+    <div class="metadata">Publié le {{article.createdAt | date('d/m/Y')}} à {{article.createdAt | date('H:i')}}<div>
+    <div class="content">
+        {% if 'http' in article.image %}
+            <img style="max-width: 50%;" src="{{article.image}}" alt="{{article.imageDescription}}">
+        {% else %}
+            <img style="max-width: 50%;" src="/uploads/images/articles/{{article.image}}" alt="{{article.imageDescription}}">
+        {% endif %}
+        <p>{{article.content}}</p>
+    </div>
+</article>
+{% endblock %}

@@ -1,0 +1,22 @@
+# Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
+
+twig:
+    form_themes:
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+fos_ck_editor:
+    configs:
+        my_config_1:
+            toolbar: "toolbar_mention"
+            
+        my_config_2:
+            toolbar: "toolbar_blog"
+            
+        my_config_3:
+            toolbar: "toolbar_evenement"
+            
+    toolbars:
+        configs:
+            toolbar_mention: [ ["Bold", "-", "Italic", "-", "Underline", "-", "Strike","-","Blockquote", "-", "Link", "-", "Unlink", "-", "Image", "-", "Maximize"] ]
+            toolbar_blog: [ ["Bold", "-", "Italic", "-", "Underline", "-", "Blockquote", "-", "Link", "-", "Unlink", "-", "Maximize"] ]
+            toolbar_evenement:  [ ["Bold", "-", "Italic", "-", "Underline", "-", "Blockquote", "-", "Maximize"] ]
+        

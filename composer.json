@@ -9,6 +9,8 @@
         "beberlei/doctrineextensions": "^1.2",
         "doctrine/annotations": "^1.6",
         "easycorp/easyadmin-bundle": "^2.1",
+        "friendsofsymfony/ckeditor-bundle": "^2.1",
+        "friendsofsymfony/rest-bundle": "^2.5",
         "guzzlehttp/guzzle": "~6.0",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "4.2.*",
@@ -28,7 +30,8 @@
         "symfony/twig-bundle": "4.2.*",
         "symfony/validator": "4.2.*",
         "symfony/web-link": "4.2.*",
-        "symfony/yaml": "4.2.*"
+        "symfony/yaml": "4.2.*",
+        "vich/uploader-bundle": "^1.10"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.1",

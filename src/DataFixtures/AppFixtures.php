@@ -10,6 +10,8 @@ use App\Entity\PrestataireHasCategorie;
 use App\Entity\Categorie;
 use App\Entity\Informations;
 use App\Entity\InformationsLegales;
+use App\Entity\ArticleBlog;
+use App\Entity\Evenements;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -167,6 +169,32 @@ class AppFixtures extends Fixture
         $manager->persist($comptoir2);
         $manager->persist($presta);
         $manager->persist($presta2);
+
+        // Blog fixtures
+
+        for($i = 1; $i <= 10; $i++){
+            $article = new ArticleBlog();
+            $article->setTitle("Titre de l'article n°$i")
+                    ->setContent("Voici le contenu de l'article n°$i Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum repellat iure laboriosam dolore esse dolor!")
+                    ->setImage("http://placehold.it/350x200")
+                    ->setImageDescription("description de l'image $i")
+                    ->setCreatedAt(new \DateTime());
+
+            $manager->persist($article);
+        };
+
+        for($i = 1; $i <= 10; $i++){
+            $event = new Evenements();
+            $event->setTitle("Événement: $i")
+                  ->setDescription("voici la description de l'événement n°$i")
+                  ->setLogo("http://placehold.it/250x100")
+                  ->setLogoDescription("description de l'image $i")
+                  ->setLienEvent("https://www.google.com")
+                  ->setLieu("le lieu ce situe ici")
+                  ->setDate(new \Datetime());
+
+            $manager->persist($event);
+        };
 
         $manager->flush();
 
