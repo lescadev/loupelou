@@ -10,11 +10,11 @@
 
 <body>
         {% block navbar %}
-        <header class="bordeaux bg-jaune">
-            <h1 style="font-size: 1rem; margin-bottom:0px; padding-bottom: 3px;" class="text-center" id="slogan">notre monnaie nous appartient, redonnons lui du sens !</h1>
+        <header class="bordeaux bg-light">
+            <h1 style="font-size: 1rem; margin-bottom:0px; padding-bottom: 3px;" class="text-center" id="slogan">Notre monnaie nous appartient, redonnons lui du sens !</h1>
         </header>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-bordeaux">
+    <nav class="navbar navbar-expand-md navbar-dark bg-bordeaux sticky-top">
         <a class="navbar-brand" href={{ path('index') }}><img src="/images/logo-lou-pelou.png" width="70"
                 alt="lou pelou"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
@@ -49,10 +49,10 @@
                 </li>
             </ul>
             {% if not app.user %}
-                <a class="btn btn-outline jaune border-rouge-jaune" href={{ path('login') }}>connexion / inscription</a>
+                <a class="nav-link btn-sm btn-outline text-center jaune border-rouge-jaune" href={{ path('login') }}>connexion</a>
             {% else %}
-                <a href={{ path('app_logout') }}>Se déconnecter</a>
-                <a href={{ path('profil') }}><img id="iconuser" src="/iconuser.png" alt="connexion/inscription"></a>
+                <a href={{ path('app_logout') }} class="jaune">déconnexion</a>
+                <a class="nav-link jaune" href={{ path('profil') }}><i class="fas fa-user"></i></a>
             {% endif %}
         </div>
     </nav>
@@ -89,13 +89,11 @@
                     <a class="nav-link jaune opac-moyen" href={{ path('contacter') }}>contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link jaune opac-moyen" href="https://www.facebook.com/lechemindupelou/"
-                        target="_blank"><i class="fab fa-facebook-square facebook-icon"></i></a>
+                    <a class="nav-link jaune opac-moyen" href="https://www.facebook.com/lechemindupelou/"target="_blank"><i class="fab fa-facebook-square facebook-icon"></i></a>
                 </li>
             </ul>
         </nav>
     </footer>
-
     {% endblock %}
     <script src="/js/jquery.min.js"></script>
     <script src="/js/popper.min.js"></script>
