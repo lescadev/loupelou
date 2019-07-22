@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
+    "content-hash": "a800bd6f5dc2b2acb82a809bb3416d2d",
+=======
     "content-hash": "dc9e57f8fff4d140d62c3a4e811056b4",
+>>>>>>> 81c98cef9917b7ca33c8be612dd1ec74134dfb1b
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -1390,6 +1394,18 @@
         },
         {
             "name": "egulias/email-validator",
+<<<<<<< HEAD
+            "version": "2.1.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/egulias/EmailValidator.git",
+                "reference": "128cc721d771ec2c46ce59698f4ca42b73f71b25"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/128cc721d771ec2c46ce59698f4ca42b73f71b25",
+                "reference": "128cc721d771ec2c46ce59698f4ca42b73f71b25",
+=======
             "version": "2.1.10",
             "source": {
                 "type": "git",
@@ -1400,6 +1416,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/a6c8d7101b19a451c1707b1b79bbbc56e4bdb7ec",
                 "reference": "a6c8d7101b19a451c1707b1b79bbbc56e4bdb7ec",
+>>>>>>> 81c98cef9917b7ca33c8be612dd1ec74134dfb1b
                 "shasum": ""
             },
             "require": {
@@ -1444,7 +1461,11 @@
                 "validation",
                 "validator"
             ],
+<<<<<<< HEAD
+            "time": "2019-06-23T10:14:27+00:00"
+=======
             "time": "2019-07-19T20:52:08+00:00"
+>>>>>>> 81c98cef9917b7ca33c8be612dd1ec74134dfb1b
         },
         {
             "name": "fig/link-util",
@@ -6189,6 +6210,8 @@
                 "templating"
             ],
             "time": "2019-06-18T15:37:11+00:00"
+<<<<<<< HEAD
+=======
         },
         {
             "name": "vich/uploader-bundle",
@@ -6283,6 +6306,7 @@
                 "upload"
             ],
             "time": "2019-07-11T13:00:05+00:00"
+>>>>>>> 81c98cef9917b7ca33c8be612dd1ec74134dfb1b
         },
         {
             "name": "webmozart/assert",
