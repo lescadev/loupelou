@@ -83,6 +83,10 @@ li.dropdown {
   height: 70px;
 }
 
+.card-text {
+  font-size: 0.8em;
+}
+
 section {
   padding-top: 70px;
   padding-left: 50px;
@@ -94,11 +98,6 @@ footer {
   width: 100%;
   background-color: rgb(178, 69, 41);
 }
- 
-#map {
-  height: 300px;
-  width: 400px;
-}
 
 .herePopup {
     text-align: center;
@@ -107,10 +106,26 @@ footer {
     padding: 0;
 }
 
+#map {
+  height: 57vh;
+}
+
+.card-subtitle {
+  font-size: 0.7em;
+}
+
+#list-annuaire {
+  height: 300px;
+}
+
 .mainPopup {
     margin: 0;
     padding: 0;
     text-align: center;
+}
+
+.card {
+  width: 48%;
 }
 
 @media screen and (max-width: 900px){
@@ -118,7 +133,7 @@ footer {
     padding-left: 20px;
     padding-right: 20px;
   }
-  
+
   #ul1, #ul2 {
     padding-left: 10px;
     padding-right: 10px; 
@@ -127,5 +142,11 @@ footer {
   section {
     padding-left: 20px;
     padding-right: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card {
+    width: 100% !important;
   }
 }

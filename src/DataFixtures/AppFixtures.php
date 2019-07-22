@@ -6,6 +6,8 @@ use App\Entity\Admin;
 use App\Entity\Prestataire;
 use App\Entity\User;
 use App\Entity\Comptoir;
+use App\Entity\PrestataireHasCategorie;
+use App\Entity\Categorie;
 use App\Entity\Informations;
 use App\Entity\InformationsLegales;
 use App\Entity\ArticleBlog;
@@ -98,7 +100,22 @@ class AppFixtures extends Fixture
             ->setLatitude(45.1646424)
             ->setLongitude(1.502554)
             ->setRoles(['ROLE_USER']);
-        
+
+        $user5 = new User();
+        $user5->setPrenom("Brigitte")
+            ->setNom("Froidefond")
+            ->setDateCreation(date_create())
+            ->setVille("LIMOGES")
+            ->setAdresse("74 rue Santos Dumont")
+            ->setPassword("test")
+            ->setTelephone('0568452154')
+            ->setEmail("Gthsfdfga@gmail.com")
+            ->setCodePostal("87000")
+            ->setLatitude(45.811710)
+            ->setLongitude(1.274990)
+            ->setRoles(['ROLE_USER']);
+
+
         //fixtures de l'entité "Comptoir"
 
         $comptoir = new Comptoir();
@@ -115,8 +132,39 @@ class AppFixtures extends Fixture
         $presta2->setSiret("2");
         $presta2->setUser($user4);
         $presta2->setDenomination("Guarana Café");
+        $presta3 = new Prestataire();
+        $presta3->setUser($user5)
+            ->setDenomination('Bridgets Muffins');
+
+
+        //Set category
+        $categoryList = ['Association', 'Alimentation', 'Artisanat', 'Sante',
+            'Culture', 'Education', 'Hotellerie', 'Social', 'Magasin', 'Restauration', 'Service'];
+        for($i=0; $i<count($categoryList); $i++){
+            $category[$i] = new Categorie();
+            $category[$i]->setNom($categoryList[$i]);
+            $manager->persist($category[$i]);
+    }
+
+        $prestaHasCategorie = new PrestataireHasCategorie();
+        $prestaHasCategorie->setPrestataire($presta);
+        $prestaHasCategorie->setCategorie($category[0]);
+
+        $prestaHasCategorie1 = new PrestataireHasCategorie();
+        $prestaHasCategorie1->setPrestataire($presta2);
+        $prestaHasCategorie1->setCategorie($category[9]);
+
+        $prestaHasCategorie2 = new PrestataireHasCategorie();
+        $prestaHasCategorie2->setPrestataire($presta3);
+        $prestaHasCategorie2->setCategorie($category[1]);
+
+        $manager->persist($prestaHasCategorie);
+        $manager->persist($prestaHasCategorie1);
+        $manager->persist($prestaHasCategorie2);
         $manager->persist($user);
         $manager->persist($user2);
+        $manager->persist($user5);
+        $manager->persist($presta3);
         $manager->persist($comptoir);
         $manager->persist($comptoir2);
         $manager->persist($presta);
@@ -131,10 +179,10 @@ class AppFixtures extends Fixture
                     ->setImage("http://placehold.it/350x200")
                     ->setImageDescription("description de l'image $i")
                     ->setCreatedAt(new \DateTime());
-            
+
             $manager->persist($article);
         };
-       
+
         for($i = 1; $i <= 10; $i++){
             $event = new Evenements();
             $event->setTitle("Événement: $i")
@@ -144,10 +192,11 @@ class AppFixtures extends Fixture
                   ->setLienEvent("https://www.google.com")
                   ->setLieu("le lieu ce situe ici")
                   ->setDate(new \Datetime());
-            
+
             $manager->persist($event);
         };
-        
+
         $manager->flush();
+
     }
 }
