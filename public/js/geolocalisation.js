@@ -9,7 +9,6 @@ function displayCurrentPos() {
         L.marker([value.coords.latitude, value.coords.longitude]).bindPopup("<p class='mainPopup'>Vous êtes ici !</p>").addTo(mymap).openPopup();
     }).catch(e =>{
         console.log(e.message);
-        selectFilterRadius.disabled = true;
     })
 }
 
@@ -47,6 +46,7 @@ function sendData(status) {
                 ajaxPost(data);
             });
         })).catch(() => {
+        selectFilterRadius.disabled = true;
             getData(status).then(data => {
                 ajaxPost(data);
             });
