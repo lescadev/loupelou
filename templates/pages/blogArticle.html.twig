@@ -13,7 +13,7 @@
         {% else %}
             <img style="max-width: 50%;" src="/uploads/images/articles/{{article.image}}" alt="{{article.imageDescription}}">
         {% endif %}
-        <p>{{article.content}}</p>
+        <p>{{article.content | raw}}</p>
     </div>
 </article>
 {% endblock %}

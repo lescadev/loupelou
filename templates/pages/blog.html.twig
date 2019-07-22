@@ -13,7 +13,7 @@
                 {% else %}
                     <img style="max-width: 50%;" src="/uploads/images/articles/{{article.image}}" alt="{{article.imageDescription}}">
                 {% endif %}                
-                <p>{{article.content}}</p>
+                <p>{{article.content |easyadmin_truncate(100) |raw }}</p>
                 <a href="{{ path('blogArticle', {'id': article.id})}}" class="btn btn-primary">Lire la suite</a>
             </div>
             <hr>
