@@ -71,7 +71,7 @@ class ParticuliersController extends AbstractController
 
             $mailer->send($adminMessage);
             
-            $this->addFlash('success', 'Inscription réussie!');
+            $this->addFlash('success', 'Votre inscription est effective et va être prise en compte prochainement');
             return $this->redirectToRoute('sucess');
         }
 
