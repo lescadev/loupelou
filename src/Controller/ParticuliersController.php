@@ -46,7 +46,7 @@ class ParticuliersController extends AbstractController
             $entityManager->flush();
 
             $message = (new \Swift_Message('Inscription loupelou'))
-            ->setFrom('anthoman0@gmail.com')
+            ->setFrom($this->getParameter('mail.site'))
             ->setTo( $form->get('email')->getData())
             ->setBody(
                 $this-> renderView(
@@ -59,8 +59,8 @@ class ParticuliersController extends AbstractController
             $mailer->send($message);
 
             $adminMessage = (new \Swift_Message('Inscription loupelou'))
-            ->setFrom('anthoman0@gmail.com')
-            ->setTo('lescadev@gmail.com')
+            ->setFrom($this->getParameter('mail.site'))
+            ->setTo($this->getParameter('mail.admin'))
             ->setBody(
                 $this-> renderView(
                     'emails/adminInscription.html.twig',
