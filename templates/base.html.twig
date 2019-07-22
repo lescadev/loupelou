@@ -1,13 +1,5 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <title>{% block title %}Loupelou - {% endblock %}
-    </title>
-    {% block stylesheets %}{% endblock %}
-
     <link href="css/normalize.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link crossorigin="" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
@@ -17,7 +9,10 @@
 </head>
 
 <body>
-    {% block navbar %}
+        {% block navbar %}
+        <header class="bordeaux bg-jaune">
+            <h1 style="font-size: 1rem; margin-bottom:0px; padding-bottom: 3px;" class="text-center" id="slogan">notre monnaie nous appartient, redonnons lui du sens !</h1>
+        </header>
 
     <nav class="navbar navbar-expand-md navbar-dark bg-bordeaux">
         <a class="navbar-brand" href={{ path('index') }}><img src="/images/logo-lou-pelou.png" width="70"
@@ -44,26 +39,29 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href={{ path('contacter') }}>nous contacter</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href={{ path('evenements') }}>événements</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href={{ path('blog') }}>blog</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href={{ path('contacter') }}>contact</a>
+                </li>
             </ul>
-            <a class="btn btn-outline jaune border-rouge-jaune" href={{ path('login') }}>connexion</a>
+            {% if not app.user %}
+                <a class="btn btn-outline jaune border-rouge-jaune" href={{ path('login') }}>connexion / inscription</a>
+            {% else %}
+                <a href={{ path('app_logout') }}>Se déconnecter</a>
+                <a href={{ path('profil') }}><img id="iconuser" src="/iconuser.png" alt="connexion/inscription"></a>
+            {% endif %}
         </div>
     </nav>
     {% endblock %}
 
-    <section>
         <div class="container mt-5 mb-5">
             {% block body %}
             {% endblock %}
         </div>
-    </section>
 
     {% block footer %}
     <footer class="mt-5">
@@ -102,8 +100,7 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/84a428c253.js"></script>
     {% block javascripts %}{% endblock %}
-
-</body>
-
+    </body>
 </html>

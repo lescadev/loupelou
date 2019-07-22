@@ -116,7 +116,7 @@ easy_admin:
                 fields:
                     - {property: 'isActive', label: 'Activation article'}
                     - {property: 'title', label: 'Titre'}
-                    - {property: 'content', label: 'Article'}
+                    - {property: 'content', label: 'Article', type: 'fos_ckeditor', type_options: {config_name: 'my_config_2'}}
                     - {property: 'imageFile', type: 'vich_image', label: 'Image'}
                     - {property: 'createdAt', label: 'Date création'}
                     - {property: 'imageDescription', label: 'Description image'}

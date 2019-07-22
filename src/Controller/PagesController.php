@@ -26,7 +26,9 @@ class PagesController extends AbstractController
 
     public function utiliser()
     {
-        return $this->render('/utiliser.html.twig');
+        return $this->render('/utiliser.html.twig', [
+            'status' => 'prestataire'
+        ]);
     }
 
 
@@ -123,7 +125,9 @@ class PagesController extends AbstractController
      */
     public function procurer()
     {
-        return $this->render('/procurer.html.twig');
+        return $this->render('/procurer.html.twig', [
+            'status' => 'comptoir'
+        ]);
         
     }
     /**

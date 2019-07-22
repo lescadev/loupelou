@@ -43,3 +43,13 @@ cd dockerSetup
 ```bash
 docker-compose down
 ```
+## Configuration de SwiftMailer
+```bash
+composer install
+```
+à mettre dans le .env.local
+MAILER_URL=gmail://username:password@localhost?encryption=tls&auth_mode=oauth
+gmail crée pour le test :
+username = anthonam0 
+password = GkAd9k4G8
+le compte qui reçoit l'alerte d'inscription est celui de l'escadev.
