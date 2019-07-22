@@ -27,7 +27,6 @@
    --gray: #95a5a6;
    --gray-dark: #343a40;
    /* --primary: #2C3E50; */
-   --primary: #fd7e14; /* custom */
    --secondary: #95a5a6;
    --success: #18BC9C;
    --info: #3498DB;
@@ -10758,7 +10757,21 @@
 .navbar-dark .navbar-nav .nav-link.active {
   color: #FFE800 !important;
   font-weight: bolder;
-}*/
+}
+
+
+/* Blanc */
+.blanc {
+  color: #FFFFFF !important;
+}
+
+.bg-blanc {
+  background-color: #FFFFFF !important;
+}
+
+.border-blanc {
+  border: 1px solid #FFFFFF !important;
+}
 
 /* Bordeaux */
 .bordeaux {
@@ -10770,8 +10783,9 @@
 }
 
 .border-bordeaux {
-  border-color: #BD2F3A !important;
+  border: 1px solid #BD2F3A !important;
 }
+
 
 /* Rouge */
 .rouge {
@@ -10782,7 +10796,7 @@
 }
 
 .border-rouge {
-  border-color: #960A00 !important;
+  border: 1px solid #960A00 !important;
 }
 
 /* Jaune */
@@ -10795,11 +10809,15 @@
 }
 
 .border-jaune {
-  border-color: #960A00 !important;  
+  border: 1px solid #FFE800 !important;
 }
 
-.border-jaune:hover {
-  border-color: #FFE800 !important;
+.border-rouge-jaune {
+  border: 1px solid #960A00 !important;  
+}
+
+.border-rouge-jaune:hover {
+  border: 1px solid #FFE800 !important;
 }
 
 /***** Menu *****/
@@ -10826,5 +10844,10 @@
 /* Facabook icon*/
 .facebook-icon {
   color: #FFE800 !important;
+  font-size: 1.5rem !important;
+}
+
+.facebook-icon-contact {
+  color: #BD2F3A !important;
   font-size: 1.5rem !important;
 }

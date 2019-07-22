@@ -3,20 +3,30 @@
 {% block title %} LouPelou{% endblock %}
 
 {% block body %}
-<section class="articles">
-    {% for article in articles|reverse if article.isActive == true %}
-            <h2>{{article.title}}</h2>
-            <div class="metadata">Publié le {{article.createdAt | date('d/m/Y')}} à {{article.createdAt | date('H:i')}}<div>
-            <div class="content">
-                {% if 'http' in article.image %}
-                    <img style="max-width: 50%;" src="{{article.image}}" alt="{{article.imageDescription}}">
-                {% else %}
-                    <img style="max-width: 50%;" src="/uploads/images/articles/{{article.image}}" alt="{{article.imageDescription}}">
-                {% endif %}                
-                <p>{{article.content}}</p>
-                <a href="{{ path('blogArticle', {'id': article.id})}}" class="btn btn-primary">Lire la suite</a>
+
+<h1 class="bordeaux mb-3">Blog</h1>
+
+<div class="row d-flex justify-content-center">
+{% for article in articles|reverse if article.isActive == true %}
+    <div class="col-12 py-3 px-3">
+        <div class="card border-bordeaux">
+            <div class="card-header bordeaux">
+                <h4 class="card-title">{{article.title}}</h4>
             </div>
-            <hr>
-    {% endfor %}
-</section>    
+            <div class="card-body">
+                <p class="text-muted">Publié le {{article.createdAt | date('d/m/Y')}} &nbsp; à {{article.createdAt | date('H:i')}}</p>
+                {% if 'http' in article.image %}
+                    <img style="max-width: 50%;" src="{{article.image}}" alt="{{article.imageDescription}}" class="py-4">
+                {% else %}
+                    <img style="max-width: 50%;" src="/uploads/images/articles/{{article.image}}" alt="{{article.imageDescription}}" class="py-4">
+                {% endif %}
+                <p class="card-text mb-4">{{article.content}}</p>
+                <a href={{ path('blogArticle', {'id': article.id})}} class="btn blanc bg-bordeaux" target="_blank">lire la suite &nbsp; &#62;</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
 {% endblock %}
+

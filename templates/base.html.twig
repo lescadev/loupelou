@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <title>{% block title %}Loupelou{% endblock %}
+    <title>{% block title %}Loupelou - {% endblock %}
     </title>
     {% block stylesheets %}{% endblock %}
 
@@ -20,7 +20,7 @@
     {% block navbar %}
 
     <nav class="navbar navbar-expand-md navbar-dark bg-bordeaux">
-        <a class="navbar-brand" href={{ path('index') }}><img src="/images/logo-lou-pelou.png" width="40"
+        <a class="navbar-brand" href={{ path('index') }}><img src="/images/logo-lou-pelou.png" width="70"
                 alt="lou pelou"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
             aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +30,7 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto flex-fill justify-content-center">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">où s'en procurer</a>
+                    <a class="nav-link" href={{ path('procurer') }}>où s'en procurer</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href={{ path('utiliser') }}>où les utiliser</a>
@@ -47,13 +47,13 @@
                     <a class="nav-link" href={{ path('contacter') }}>nous contacter</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href={{ path('evenements') }}>évènements</a>
+                    <a class="nav-link" href={{ path('evenements') }}>événements</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href={{ path('blog') }}>blog</a>
                 </li>
             </ul>
-            <a class="btn btn-outline jaune border-jaune" href={{ path('login') }}>connexion</a>
+            <a class="btn btn-outline jaune border-rouge-jaune" href={{ path('login') }}>connexion</a>
         </div>
     </nav>
     {% endblock %}

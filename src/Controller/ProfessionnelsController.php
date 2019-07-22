@@ -109,7 +109,7 @@ class ProfessionnelsController extends AbstractController
             if(!empty($data['compt']) | !empty($data['presta'])) {
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Inscription réussie!');
+                $this->addFlash('success', 'Inscription réussie !');
                 return $this->redirectToRoute('sucess');
                 
             }
