@@ -54,14 +54,14 @@ class UserRepository extends ServiceEntityRepository
                         ->andWhere('prestataire.id = prestaHasCategorie.prestataire')
                         ->andWhere('user.id = prestataire.user');
 
-                $query->select('user', 'prestataire.denomination', 'categorie.nom');
+                $query->select('user', 'prestataire.denomination', 'categorie.nom', 'prestataire.site_internet');
             }
 
             elseif ($params['status'] === 'comptoir') {
 
                 $query->innerJoin(comptoir::class, 'comptoir')
                     ->andWhere('user.id = comptoir.user')
-                    ->select('user', 'comptoir.denomination');
+                    ->select('user', 'comptoir.denomination', 'comptoir.site_internet');
 
                 if(!empty($params['search']))
                     $query->andWhere("comptoir.denomination LIKE :search")
