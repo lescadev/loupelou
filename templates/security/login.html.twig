@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}
+    Connexion - {{ parent() }}
+{% endblock %}
 
 {% block body %}
 <div class="row">
@@ -24,9 +26,9 @@
            value="{{ csrf_token('authenticate') }}"
     >
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
+        {#
+            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+            See https://symfony.com/doc/current/security/remember_me.html
 
         <div class="checkbox mb-3">
             <label>

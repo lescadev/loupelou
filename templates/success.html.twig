@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} LouPelou{% endblock %}
+{% block title %}
+    Inscription réussie - {{ parent() }}
+{% endblock %}
 
 {% block body %}
 
@@ -19,12 +21,5 @@
     </div>
 </div>
 
-{# {% for message in app.flashes('success') %}
-    <div class="alert alert-success">
-        {{ message }}
-    </div>
-{% endfor %}
-
-<a class="btn blanc bg-bordeaux" href={{ path('login') }}>Se Connecter</a> #}
 
 {% endblock %}
