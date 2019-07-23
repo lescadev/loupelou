@@ -8,6 +8,7 @@
         "ext-json": "*",
         "beberlei/doctrineextensions": "^1.2",
         "doctrine/annotations": "^1.6",
+        "dompdf/dompdf": "^0.8.3",
         "easycorp/easyadmin-bundle": "^2.1",
         "friendsofsymfony/ckeditor-bundle": "^2.1",
         "friendsofsymfony/rest-bundle": "^2.5",
