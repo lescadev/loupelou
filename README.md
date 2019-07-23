@@ -56,5 +56,5 @@ le compte qui reçoit l'alerte d'inscription est celui de l'escadev.
 
 ## Configuration Google ReCaptcha
 *.env*  
-GOOGLE_RECAPTCHA_SITE_KEY=*6LcwBa8UAAAAAETn_c5rzbBqFU3MVB2zqs_CPEK8*
-GOOGLE_RECAPTCHA_SECRET=*6LcwBa8UAAAAAAZgeFafgMSnqzMkz5DvxiavB2w1*
+GOOGLE_RECAPTCHA_SITE_KEY=6LcwBa8UAAAAAETn_c5rzbBqFU3MVB2zqs_CPEK8
+GOOGLE_RECAPTCHA_SECRET=6LcwBa8UAAAAAAZgeFafgMSnqzMkz5DvxiavB2w1
