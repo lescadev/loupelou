@@ -8,6 +8,8 @@ parameters:
     app.path.articles_images: /uploads/images/articles
     mail.site: '%env(MAIL_SITE)%' 
     mail.admin: '%env(MAIL_ADMIN)%' 
+    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
+    google_recaptcha_secret: '%env(GOOGLE_RECAPTCHA_SECRET)%'
 
 services:
     # default configuration for services in *this* file
