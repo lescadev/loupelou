@@ -17,7 +17,7 @@
         {% block navbar %}
             <header>
                 <a href={{ path('index') }}><img alt="logo lou pélou" id="logo" src="/images/logoloup.png"></a>
-                <h1 id="slogan">notre monnaie nous appartient<br>redonnons lui du sens !</h1>
+                <h1 id="slogan">{{ slogan.getInfo() | raw }}</h1>
                 {% if not app.user %}
                     <a href={{ path('login') }}><img alt="connexion/inscription" id="iconuser" src="/images/iconuser.png"></a>
                 {% else %}
