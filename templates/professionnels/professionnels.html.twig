@@ -21,8 +21,24 @@
 {{ form_row(formPro.compt) }}
 
 <input type="submit" class="btn" value="S'inscrire"/>
+<input id="recaptchaToken" name="recaptchaToken" type="hidden">
 {{ form_end(form) }}
 
 </br>
 <p> * Champs Obligatoires </p>
+{% endblock %}
+
+
+{% block javascripts %}
+
+<script src="https://www.google.com/recaptcha/api.js?render={{siteKey}}"></script>
+
+<script>
+  grecaptcha.ready(function() {
+      grecaptcha.execute("{{siteKey}}", {action: 'homepage'}).then(function(token) {
+        document.getElementById('recaptchaToken').value = token;
+      });
+  });
+</script>
+
 {% endblock %}
