@@ -36,7 +36,7 @@ class UserRepository extends ServiceEntityRepository
                     ->select('user', 'prestataire.denomination');
 
                 if(!empty($params['search']))
-                    $query->andWhere("prestataire.denomination LIKE :search")
+                    $query->andWhere("prestataire.denomination LIKE :search OR user.description LIKE :search")
                         ->setParameter('search', '%' . $params['search']. '%');
 
                 if(!empty($params['filter'] and $params['filter'] !== 'Tous les services'))
@@ -64,7 +64,7 @@ class UserRepository extends ServiceEntityRepository
                     ->select('user', 'comptoir.denomination', 'comptoir.site_internet');
 
                 if(!empty($params['search']))
-                    $query->andWhere("comptoir.denomination LIKE :search")
+                    $query->andWhere("comptoir.denomination LIKE :search OR user.description LIKE :search")
                         ->setParameter('search',  '%' . $params['search']. '%');
             }
 
