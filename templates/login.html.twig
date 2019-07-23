@@ -1,5 +1,13 @@
 {% extends "base.html.twig" %}
-{% block stylesheets %}<link rel="stylesheet" href="/css/stylesEspaceMembres.css">{% endblock %}
+
+{% block title %}
+    Connexion - {{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/stylesEspaceMembres.css" />
+{% endblock %}
+
 {% block body %}
     <div id="loginBox">
         <h2>Connexion</h2>
