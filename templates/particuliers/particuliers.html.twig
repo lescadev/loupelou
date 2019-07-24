@@ -50,6 +50,7 @@
                 <div class="form-group text-right mt-4">
                     <button  class="btn principale border-principale ml-2 mb-2">Imprimer le formulaire</button>
                     <button type="submit" class="btn blanc bg-principale ml-2 mb-2">Adhérer en ligne</button>
+                    <input id="recaptchaToken" name="recaptchaToken" type="hidden">
                 </div>
                 {{ form_end(form) }}
             </form>
@@ -58,5 +59,19 @@
         </div>
     </div>
 </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script src="https://www.google.com/recaptcha/api.js?render={{siteKey}}"></script>
+
+<script>
+  grecaptcha.ready(function() {
+      grecaptcha.execute("{{siteKey}}", {action: 'homepage'}).then(function(token) {
+        document.getElementById('recaptchaToken').value = token;
+      });
+  });
+</script>
 
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Où s'en procurer - {{ parent() }}
+Où s'en procurer - {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -10,13 +10,13 @@
 <div class="row py-3 px-3">
     <div class="input-group mb-3">
         <input class="form-control " type="text" placeholder="Rechercher" id="search" name="search">
-            <select class="custom-select" id="sel2">
-                <option>Toutes les distances</option>
-                <option>15km</option>
-                <option>30km</option>
-                <option>50km</option>
-                <option>80km</option>
-            </select>
+        <select class="custom-select" id="sel2">
+            <option>Toutes les distances</option>
+            <option>15km</option>
+            <option>30km</option>
+            <option>50km</option>
+            <option>80km</option>
+        </select>
     </div>
     <div class="col-md-6 mt-3 mr-3" id="map">
     </div>
@@ -25,7 +25,7 @@
         </div>
     </div>
 </div>
-
+<div><a href={{ path('pdf_comptoir') }}>Annuaire comptoir</a></div>
 {% endblock %}
 
 {% block javascripts %}

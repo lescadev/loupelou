@@ -86,7 +86,8 @@ class AppFixtures extends Fixture
             ->setCodePostal("87120")
             ->setLatitude(45.724834)
             ->setLongitude(1.6817552)
-            ->setRoles(['ROLE_USER']);
+            ->setRoles(['ROLE_USER'])
+            ->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac ipsum eleifend, convallis tellus ut, convallis nibh. Integer vitae lobortis quam, in auctor odio. Duis pulvinar sollicitudin leo, ut tincidunt diam hendrerit sit amet. Praesent porta vehicula neque sed fringilla. Integer eu commodo lorem, id egestas ipsum. Praesent lobortis ut turpis a cursus. Aenean suscipit ut nunc at sodales. Duis congue sollicitudin turpis eu volutpat. Nunc sed urna vitae lectus bibendum iaculis. Mauris elementum magna mi. Suspendisse orci felis, vulputate a auctor vel, luctus vitae justo.');
 
         $user4 = new User();
         $user4->setPrenom("")
@@ -99,7 +100,8 @@ class AppFixtures extends Fixture
             ->setCodePostal("19100")
             ->setLatitude(45.1646424)
             ->setLongitude(1.502554)
-            ->setRoles(['ROLE_USER']);
+            ->setRoles(['ROLE_USER'])
+            ->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac ipsum eleifend, convallis tellus ut, convallis nibh. Integer vitae lobortis quam, in auctor odio. Duis pulvinar sollicitudin leo, ut tincidunt diam hendrerit sit amet. Praesent porta vehicula neque sed fringilla. Integer eu commodo lorem, id egestas ipsum. Praesent lobortis ut turpis a cursus. Aenean suscipit ut nunc at sodales. Duis congue sollicitudin turpis eu volutpat. Nunc sed urna vitae lectus bibendum iaculis. Mauris elementum magna mi. Suspendisse orci felis, vulputate a auctor vel, luctus vitae justo.');
 
         $user5 = new User();
         $user5->setPrenom("Brigitte")
@@ -113,7 +115,9 @@ class AppFixtures extends Fixture
             ->setCodePostal("87000")
             ->setLatitude(45.811710)
             ->setLongitude(1.274990)
-            ->setRoles(['ROLE_USER']);
+            ->setRoles(['ROLE_USER'])
+            ->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac ipsum eleifend, convallis tellus ut, convallis nibh. Integer vitae lobortis quam, in auctor odio. Duis pulvinar sollicitudin leo, ut tincidunt diam hendrerit sit amet. Praesent porta vehicula neque sed fringilla. Integer eu commodo lorem, id egestas ipsum. Praesent lobortis ut turpis a cursus. Aenean suscipit ut nunc at sodales. Duis congue sollicitudin turpis eu volutpat. Nunc sed urna vitae lectus bibendum iaculis. Mauris elementum magna mi. Suspendisse orci felis, vulputate a auctor vel, luctus vitae justo.');
+
 
 
         //fixtures de l'entité "Comptoir"

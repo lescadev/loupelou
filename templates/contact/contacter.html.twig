@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-LouPelou
+Nous contacter - {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -86,7 +86,8 @@ LouPelou
             <div class="card-body">
                 <h5 class="card-title">Réseaux sociaux</h5>
                 <p class="card-text">
-                    <a class="card-link principale" href="https://www.facebook.com/lechemindupelou/" target="_blank">
+                    <a class="card-link principale" href={{asset('https://www.facebook.com/lechemindupelou/')}}
+                        target="_blank">
                         <i class="fab fa-facebook-square facebook-icon-contact"></i>&nbsp;
                         &nbsp;Facebook</a>
                 </p>
@@ -96,5 +97,21 @@ LouPelou
     {# ****************************************************************** #}
 </div>
 {# ****************************************************************** #}
+
+{% endblock %}
+
+% block javascripts %}
+
+<script src="https://www.google.com/recaptcha/api.js?render={{siteKey}}"></script>
+
+<script>
+    grecaptcha.ready(function () {
+        grecaptcha.execute("{{siteKey}}", {
+            action: 'homepage'
+        }).then(function (token) {
+            document.getElementById('recaptchaToken').value = token;
+        });
+    });
+</script>
 
 {% endblock %}

@@ -74,10 +74,9 @@
     </nav>
     {% endblock %}
 
-        <div class="container mt-5 mb-5">
-            {% block body %}
-            {% endblock %}
-        </div>
+        <section class="container mt-5 mb-5">
+            {% block body %}{% endblock %}
+        </section>
 
     {% block footer %}
     <footer class="mt-5">
@@ -117,4 +116,5 @@
     <script src="https://kit.fontawesome.com/84a428c253.js"></script>
     {% block javascripts %}{% endblock %}
     </body>
+    
 </html>
