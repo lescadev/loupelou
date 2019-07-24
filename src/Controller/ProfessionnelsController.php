@@ -13,6 +13,10 @@ use App\Form\InscriptionProType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use GuzzleHttp\Client;
 use ReCaptcha\ReCaptcha;
+use App\Form\CategorieType;
+use App\Entity\Categorie;
+use App\Repository\CategorieRepository;
+use App\Entity\PrestataireHasCategorie;
 
 class ProfessionnelsController extends AbstractController
 {
@@ -32,7 +36,10 @@ class ProfessionnelsController extends AbstractController
 
         $formPro = $this->createForm(InscriptionProType::class);
         $formPro->handleRequest($request);
-        
+
+        $formCategorie = $this->createForm(CategorieType::class);
+        $formCategorie->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             $resp = $recaptcha->verify($request->request->get('recaptchaToken'), $request->getClientIp());
@@ -95,6 +102,7 @@ class ProfessionnelsController extends AbstractController
                 if(!empty($data['presta'])) {
                     $prestataire = new Prestataire;
                     $prestataire->setUser($user);
+                    $categorie = $formCategorie->getData();
                     $user -> setRoles(["ROLE_PRESTATAIRE"]);
 
                     if(!empty($data['siret'])){ 
@@ -107,6 +115,12 @@ class ProfessionnelsController extends AbstractController
                     $prestataire ->setDenomination($data["denomination"]);
                     
                     $entityManager->persist($prestataire);
+                    // $categorieId = $categorie->getId;
+                    $prestatairehascategorie = new PrestataireHasCategorie;
+                    $prestatairehascategorie->setPrestataire($prestataire);
+                    var_dump($categorie);
+                    // $prestatairehascategorie->setCategorie($categorieId);
+                    // $entityManager->persist($prestatairehascategorie);
                 }
 
 
@@ -144,7 +158,7 @@ class ProfessionnelsController extends AbstractController
                 $mailer->send($adminMessage);
 
                     $this->addFlash('success', 'Votre inscription est effective et va être prise en compte prochainement.');
-                    return $this->redirectToRoute('sucess');
+                    // return $this->redirectToRoute('sucess');
                     
                 }
             }
@@ -152,6 +166,7 @@ class ProfessionnelsController extends AbstractController
         return $this->render('professionnels/professionnels.html.twig', [
             'form' => $form->createView(),
             'formPro' => $formPro->createView(),
+            'formCategorie' => $formCategorie->createView(),
             'siteKey' => $this->getParameter('google_recaptcha_site_key'),
         ]);
     }
