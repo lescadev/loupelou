@@ -11,20 +11,30 @@
 
 <body>
         {% block navbar %}
-        <header class="bordeaux bg-light">
-            <h1 style="font-size: 1rem; margin-bottom:0px; padding-bottom: 3px;" class="text-center" id="slogan">{{ slogan.getInfo() | raw }}</h1>
+        <header class="bordeaux bg-rouge">
+            <nav class="navbar navbar-expand-md navbar-dark bg-rouge d-flex flex-fill">
+                <a class="navbar-brand" href={{ path('index') }}><img src="/images/logo-lou-pelou.png" width="70"
+                        alt="lou pelou"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse">
+                    <h1 class="ml-auto blanc" id="slogan">{{ slogan.getInfo() | raw }}</h1>
+                    {% if not app.user %}
+                        <a class="nav-link btn-sm btn-outline text-center jaune border-rouge-jaune  ml-auto" href={{ path('login') }}>Connexion</a>
+                    {% else %}
+                        <a href={{ path('app_logout') }} class="jaune ml-auto">Déconnexion</a>
+                        <a class="nav-link jaune  ml-auto" href={{ path('profil') }}><i class="fas fa-user"></i></a>
+                    {% endif %}
+                </div>
+            </nav>
         </header>
 
     <nav class="navbar navbar-expand-md navbar-dark bg-bordeaux sticky-top">
-        <a class="navbar-brand" href={{ path('index') }}><img src="/images/logo-lou-pelou.png" width="70"
-                alt="lou pelou"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
         <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav mr-auto flex-fill justify-content-center">
+            <ul class="navbar-nav mr-auto flex-fill justify-content-between">
                 <li class="nav-item active">
                     <a class="nav-link" href={{ path('procurer') }}>Où s'en procurer</a>
                 </li>
@@ -49,12 +59,6 @@
                     <a class="nav-link" href={{ path('contacter') }}>Contact</a>
                 </li>
             </ul>
-            {% if not app.user %}
-                <a class="nav-link btn-sm btn-outline text-center jaune border-rouge-jaune" href={{ path('login') }}>Connexion</a>
-            {% else %}
-                <a href={{ path('app_logout') }} class="jaune">Déconnexion</a>
-                <a class="nav-link jaune" href={{ path('profil') }}><i class="fas fa-user"></i></a>
-            {% endif %}
         </div>
     </nav>
     {% endblock %}

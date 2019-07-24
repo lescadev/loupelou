@@ -21,7 +21,7 @@
                     <img style="max-width: 50%;" src="/uploads/images/articles/{{article.image}}" alt="{{article.imageDescription}}" class="py-4">
                 {% endif %}
                 <p class="card-text mb-4">{{article.content |easyadmin_truncate(100) |raw }}</p>
-                <a href={{ path('blogArticle', {'id': article.id})}} class="btn blanc bg-bordeaux" target="_blank">lire la suite &nbsp; &#62;</a>       
+                <a href={{ path('blogArticle', {'id': article.id})}} class="btn blanc bg-bordeaux">lire la suite &nbsp; &#62;</a>       
             </div>
         </div>
     </div>
