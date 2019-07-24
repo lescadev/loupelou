@@ -1,27 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    LouPelou
-{% endblock %}
-
-{% block stylesheets %}
-    <link href="{{ asset('style/contacter.css') }}" rel="stylesheet" type="text/css">
+    Nous contacter - {{ parent() }}
 {% endblock %}
 
 {% block body %}
     <section class="contact-container">
-        {#Titre Principal#}
         <div class="main-title">
-            <h2>
+            <h1>
                 Nous sommes là pour vous répondre!
-            </h2>
+            </h1>
         </div>
-        {# ****************************************************************** #}
 
-        {# Contenu de la vue #}
         <main class="content-display">
-
-            {# Formulaire d'inscription #}
             {{form_start(form, {'attr': {'id': 'contact-form'}})}}
                 <label class="form-label" for="firstName">Prénom :</label>
                 {{ form_widget(form.firstName, {'attr' : {'placeholder': "Prénom", "name":"firstName", "class": "input"}}) }}
@@ -41,22 +32,17 @@
                 <div class="btn-form">
                     <button id="btn-form">Envoyer</button>
                 </div>
+                <input id="recaptchaToken" name="recaptchaToken" type="hidden">
             {{form_end(form)}}
-            {# ****************************************************************** #}
 
-
-            {# Informations de contact #}
             <section class="contact">
-
-                {# Message de succès de l'envoi du formulaire #}
                 {% for message in app.flashes('success') %}
                     <div class="success-msg"> 
                         <span>{{ message }}</span>
                         <img src="{{asset('/images/check.svg')}}" width="15" height="15" alt="valid icon">
                     </div>
                 {% endfor %}
-                {# ****************************************************************** #}
-                {# Message d'échec de l'envoi du formulaire #}
+
                 {% if not form.vars.valid %}
 
                     <div class="error-msg">
@@ -66,7 +52,6 @@
                         <img src="{{asset('/images/error.svg')}}" width="15" height="15" alt="error icon">
                     </div>
                 {% endif %}
-                {# ****************************************************************** #}
 
                 <h3 class="title">
                     Autres moyens de nous contacter:
@@ -93,10 +78,20 @@
                     <a href="{{asset('https://www.facebook.com/lechemindupelou/')}}"><img class="icon" src="{{asset('facebookicon.svg')}}" alt="icon facebook"></a>
                 </div>
             </section>
-            {# ****************************************************************** #}
-
         </main>
-        {# ****************************************************************** #}
-
     </section>
+{% endblock %}
+
+{% block javascripts %}
+
+<script src="https://www.google.com/recaptcha/api.js?render={{siteKey}}"></script>
+
+<script>
+  grecaptcha.ready(function() {
+      grecaptcha.execute("{{siteKey}}", {action: 'homepage'}).then(function(token) {
+        document.getElementById('recaptchaToken').value = token;
+      });
+  });
+</script>
+
 {% endblock %}
