@@ -2,6 +2,7 @@
 <html>
     <link href="css/normalize.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/main.min.css" rel="stylesheet">
     <link crossorigin="" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
         integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
         rel="stylesheet" />
@@ -11,7 +12,7 @@
 <body>
         {% block navbar %}
         <header class="bordeaux bg-light">
-            <h1 style="font-size: 1rem; margin-bottom:0px; padding-bottom: 3px;" class="text-center" id="slogan">Notre monnaie nous appartient, redonnons lui du sens !</h1>
+            <h1 style="font-size: 1rem; margin-bottom:0px; padding-bottom: 3px;" class="text-center" id="slogan">{{ slogan.getInfo() | raw }}</h1>
         </header>
 
     <nav class="navbar navbar-expand-md navbar-dark bg-bordeaux sticky-top">
@@ -25,33 +26,33 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto flex-fill justify-content-center">
                 <li class="nav-item active">
-                    <a class="nav-link" href={{ path('procurer') }}>où s'en procurer</a>
+                    <a class="nav-link" href={{ path('procurer') }}>Où s'en procurer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href={{ path('utiliser') }}>où les utiliser</a>
+                    <a class="nav-link" href={{ path('utiliser') }}>Où les utiliser</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">nous rejoindre</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Nous rejoindre</a>
                     <div class="dropdown-menu" x-placement="bottom-start"
                         style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-                        <a class="dropdown-item" href={{ path('inscription_particulier') }}>particuliers</a>
-                        <a class="dropdown-item" href={{ path('inscription_pro') }}>professionnels</a>
+                        <a class="dropdown-item" href={{ path('inscription_particulier') }}>Particuliers</a>
+                        <a class="dropdown-item" href={{ path('inscription_pro') }}>Professionnels</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href={{ path('evenements') }}>événements</a>
+                    <a class="nav-link" href={{ path('evenements') }}>Événements</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href={{ path('blog') }}>blog</a>
+                    <a class="nav-link" href={{ path('blog') }}>Blog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href={{ path('contacter') }}>contact</a>
+                    <a class="nav-link" href={{ path('contacter') }}>Contact</a>
                 </li>
             </ul>
             {% if not app.user %}
-                <a class="nav-link btn-sm btn-outline text-center jaune border-rouge-jaune" href={{ path('login') }}>connexion</a>
+                <a class="nav-link btn-sm btn-outline text-center jaune border-rouge-jaune" href={{ path('login') }}>Connexion</a>
             {% else %}
-                <a href={{ path('app_logout') }} class="jaune">déconnexion</a>
+                <a href={{ path('app_logout') }} class="jaune">Déconnexion</a>
                 <a class="nav-link jaune" href={{ path('profil') }}><i class="fas fa-user"></i></a>
             {% endif %}
         </div>
@@ -68,25 +69,25 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-bordeaux">
             <ul class="navbar-nav mr-auto flex-fill justify-content-center">
                 <li class="nav-item ">
-                    <a class="nav-link jaune opac-moyen" href={{ path('mentions') }}>mentions légales</a>
+                    <a class="nav-link jaune opac-moyen" href={{ path('mentions') }}>Mentions légales</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link jaune opac-moyen" href={{ path('cgv') }}>cgv</a>
+                    <a class="nav-link jaune opac-moyen" href={{ path('cgv') }}>Cgv</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link jaune opac-moyen" href={{ path('cgu') }}>cgu</a>
+                    <a class="nav-link jaune opac-moyen" href={{ path('cgu') }}>Cgu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link jaune opac-moyen" href={{ path('statut') }}>statut</a>
+                    <a class="nav-link jaune opac-moyen" href={{ path('statut') }}>Statut</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link jaune opac-moyen" href={{ path('reglement') }}>règlement intérieur</a>
+                    <a class="nav-link jaune opac-moyen" href={{ path('reglement') }}>Règlement intérieur</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link jaune opac-moyen" href={{ path('rendu') }}>compte rendu ag</a>
+                    <a class="nav-link jaune opac-moyen" href={{ path('rendu') }}>Compte rendu ag</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link jaune opac-moyen" href={{ path('contacter') }}>contact</a>
+                    <a class="nav-link jaune opac-moyen" href={{ path('contacter') }}>Contact</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link jaune opac-moyen" href="https://www.facebook.com/lechemindupelou/"target="_blank"><i class="fab fa-facebook-square facebook-icon"></i></a>

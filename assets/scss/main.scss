@@ -3,7 +3,8 @@
 @import
   'abstracts/variables',
   'abstracts/functions',
-  'abstracts/mixins';
+  'abstracts/mixins',
+  'abstracts/variables-bootswatch';
 
 @import
   'vendors/normalize';
@@ -17,10 +18,12 @@
 @import
   'layout/header',
   'layout/nav',
-  'layout/footer';
+  'layout/footer',
+  'layout/bootswatch';
 
 @import
   'components/button';
 
 @import
   'pages/home';
+

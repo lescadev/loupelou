@@ -10851,3 +10851,9 @@
   color: #BD2F3A !important;
   font-size: 1.5rem !important;
 }
+
+/* Map */
+
+#map {
+  height: 57vh;
+}
