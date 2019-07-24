@@ -26,7 +26,7 @@
    --white: #fff;
    --gray: #95a5a6;
    --gray-dark: #343a40;
-   /* --primary: #2C3E50; */
+   --primary: #2C3E50;
    --secondary: #95a5a6;
    --success: #18BC9C;
    --info: #3498DB;
@@ -34,7 +34,6 @@
    --danger: #E74C3C;
    --light: #ecf0f1;
    --dark: #7b8a8b;
-   --jaune: #FFE800; /* custom */
    --breakpoint-xs: 0;
    --breakpoint-sm: 576px;
    --breakpoint-md: 768px;
@@ -10552,9 +10551,9 @@
    }
  }
  
-/* .bg-primary .navbar-nav .active > .nav-link {
+.bg-primary .navbar-nav .active > .nav-link {
    color: #18BC9C !important;
- } */
+ }
  
  .bg-dark {
    background-color: #18BC9C !important;
@@ -10746,114 +10745,3 @@
  .modal .close:not(:disabled):not(.disabled):hover, .modal .close:not(:disabled):not(.disabled):focus {
    color: #000;
  }
-
-
- /**************************************SURCHERGE*********************************/
-
- /* Couleur bouton actif dans Navbar */
-.navbar-dark .navbar-nav .show > .nav-link,
-.navbar-dark .navbar-nav .active > .nav-link,
-.navbar-dark .navbar-nav .nav-link.show,
-.navbar-dark .navbar-nav .nav-link.active {
-  color: #FFE800 !important;
-  font-weight: bolder;
-}
-
-
-/* Blanc */
-.blanc {
-  color: #FFFFFF !important;
-}
-
-.bg-blanc {
-  background-color: #FFFFFF !important;
-}
-
-.border-blanc {
-  border: 1px solid #FFFFFF !important;
-}
-
-/* Bordeaux */
-.bordeaux {
-  color: #BD2F3A !important;
-}
-
-.bg-bordeaux {
-  background-color: #BD2F3A !important;
-}
-
-.border-bordeaux {
-  border: 1px solid #BD2F3A !important;
-}
-
-
-/* Rouge */
-.rouge {
-  color: #960A00 !important;
-}
-.bg-rouge {
-  background-color: #960A00 !important;
-}
-
-.border-rouge {
-  border: 1px solid #960A00 !important;
-}
-
-/* Jaune */
-.jaune {
-  color: #FFE800 !important;
-}
-
-.bg-jaune {
-  background-color: #FFE800 !important;
-}
-
-.border-jaune {
-  border: 1px solid #FFE800 !important;
-}
-
-.border-rouge-jaune {
-  border: 1px solid #960A00 !important;  
-}
-
-.border-rouge-jaune:hover {
-  border: 1px solid #FFE800 !important;
-}
-
-/***** Menu *****/
-.dropdown-menu {
-  background-color: #BD2F3A;
-}
-.dropdown-item {
-  color: #FFE800;
-}
-.dropdown-item:hover {
-  background-color: #FFE800;
-  color: #BD2F3A;
-}
-
-
-/***** Footer *****/
-.opac-moyen {
-  opacity: 0.65;
-}
-.opac-moyen:hover {
-  opacity: 1;
-}
-
-/* Facabook icon*/
-.facebook-icon {
-  color: #FFE800 !important;
-  font-size: 1.5rem !important;
-}
-
-.facebook-icon-contact {
-  color: #BD2F3A !important;
-  font-size: 1.5rem !important;
-}
-
-/* Map */
-
-#map {
-  height: 57vh;
-}

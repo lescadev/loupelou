@@ -4,12 +4,9 @@
 LouPelou
 {% endblock %}
 
-{% block stylesheets %}
-{% endblock %}
-
 {% block body %}
 {#Titre Principal#}
-<h1 class="bordeaux mb-5">
+<h1 class="principale mb-5">
     Nous sommes là pour vous répondre
 </h1>
 {# ****************************************************************** #}
@@ -37,7 +34,7 @@ LouPelou
         {% endif %}
         {# ****************************************************************** #}
         {# Formulaire d'inscription #}
-        <div class="border-bordeaux py-3 px-3">
+        <div class="border-principale py-3 px-3">
             <form action="" method="post">
                 {{form_start(form, {'attr': {'id': 'contact-form'}})}}
                 <div class="form-group">
@@ -61,7 +58,7 @@ LouPelou
                     }}
                 </div>
                 <div class="form-group text-right">
-                    <button type="submit" class="btn blanc bg-bordeaux">envoyer</button>
+                    <button type="submit" class="btn blanc bg-principale">envoyer</button>
                 </div>
                 {{form_end(form)}}
             </form>
@@ -89,7 +86,7 @@ LouPelou
             <div class="card-body">
                 <h5 class="card-title">Réseaux sociaux</h5>
                 <p class="card-text">
-                    <a class="card-link bordeaux" href="https://www.facebook.com/lechemindupelou/" target="_blank">
+                    <a class="card-link principale" href="https://www.facebook.com/lechemindupelou/" target="_blank">
                         <i class="fab fa-facebook-square facebook-icon-contact"></i>&nbsp;
                         &nbsp;Facebook</a>
                 </p>

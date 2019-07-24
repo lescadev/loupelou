@@ -4,13 +4,13 @@
 
 {% block body %}
 
-<h1 class="bordeaux mb-3">Blog</h1>
+<h1 class="principale mb-3">Blog</h1>
 
 <div class="row d-flex justify-content-center">
 {% for article in articles|reverse if article.isActive == true %}
     <div class="col-12 py-3 px-3">
-        <div class="card border-bordeaux">
-            <div class="card-header bordeaux">
+        <div class="card border-principale">
+            <div class="card-header principale">
                 <h4 class="card-title">{{article.title}}</h4>
             </div>
             <div class="card-body">
@@ -21,7 +21,7 @@
                     <img style="max-width: 50%;" src="/uploads/images/articles/{{article.image}}" alt="{{article.imageDescription}}" class="py-4">
                 {% endif %}
                 <p class="card-text mb-4">{{article.content |easyadmin_truncate(100) |raw }}</p>
-                <a href={{ path('blogArticle', {'id': article.id})}} class="btn blanc bg-bordeaux">lire la suite &nbsp; &#62;</a>       
+                <a href={{ path('blogArticle', {'id': article.id})}} class="btn blanc bg-principale">lire la suite &nbsp; &#62;</a>       
             </div>
         </div>
     </div>

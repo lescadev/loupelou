@@ -13,7 +13,10 @@
   'base/base',
   'base/fonts',
   'base/typography',
-  'base/helpers';
+  'base/helpers',
+  'base/couleurs',
+  'base/effets',
+  'base/couleurs-elements';
 
 @import
   'layout/header',
@@ -22,7 +25,9 @@
   'layout/bootswatch';
 
 @import
-  'components/button';
+  'components/button',
+  'components/icons',
+  'components/map';
 
 @import
   'pages/home';

@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <link href="css/normalize.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/main.min.css" rel="stylesheet">
-    <link crossorigin="" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-        rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/7490257253.js"></script>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <title>
+            {% block title %}Lou Pélou - Monnaie locale{% endblock %}
+        </title>
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+
+        {% block stylesheets %}
+            <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet"/>
+            <link crossorigin="" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" rel="stylesheet"/>
+            <link href="/css/style.css" rel="stylesheet"/>
+            <link href="/css/main.min.css" rel="stylesheet"/>
+        {% endblock %}
 </head>
 
 <body>
         {% block navbar %}
-        <header class="bordeaux bg-rouge">
-            <nav class="navbar navbar-expand-md navbar-dark bg-rouge d-flex flex-fill">
+        <header class="principale bg-secondaire">
+            <nav class="navbar navbar-expand-md navbar-dark bg-secondaire d-flex flex-fill">
                 <a class="navbar-brand" href={{ path('index') }}><img src="/images/logo-lou-pelou.png" width="70"
                         alt="lou pelou"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
@@ -23,16 +34,16 @@
                 <div class="collapse navbar-collapse">
                     <h1 class="ml-auto blanc" id="slogan">{{ slogan.getInfo() | raw }}</h1>
                     {% if not app.user %}
-                        <a class="nav-link btn-sm btn-outline text-center jaune border-rouge-jaune  ml-auto" href={{ path('login') }}>Connexion</a>
+                        <a class="nav-link btn-sm btn-outline text-center alternative btn-connexion  ml-auto" href={{ path('login') }}>Connexion</a>
                     {% else %}
-                        <a href={{ path('app_logout') }} class="jaune ml-auto">Déconnexion</a>
-                        <a class="nav-link jaune  ml-auto" href={{ path('profil') }}><i class="fas fa-user"></i></a>
+                        <a href={{ path('app_logout') }} class="alternative ml-auto">Déconnexion</a>
+                        <a class="nav-link alternative  ml-auto" href={{ path('profil') }}><i class="fas fa-user"></i></a>
                     {% endif %}
                 </div>
             </nav>
         </header>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-bordeaux sticky-top">
+    <nav class="navbar navbar-expand-md navbar-dark bg-principale sticky-top">
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto flex-fill justify-content-between">
                 <li class="nav-item active">
@@ -70,31 +81,31 @@
 
     {% block footer %}
     <footer class="mt-5">
-        <nav class="navbar navbar-expand-md navbar-dark bg-bordeaux">
+        <nav class="navbar navbar-expand-md navbar-dark bg-principale">
             <ul class="navbar-nav mr-auto flex-fill justify-content-center">
                 <li class="nav-item ">
-                    <a class="nav-link jaune opac-moyen" href={{ path('mentions') }}>Mentions légales</a>
+                    <a class="nav-link alternative opac-moyen" href={{ path('mentions') }}>Mentions légales</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link jaune opac-moyen" href={{ path('cgv') }}>Cgv</a>
+                    <a class="nav-link alternative opac-moyen" href={{ path('cgv') }}>Cgv</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link jaune opac-moyen" href={{ path('cgu') }}>Cgu</a>
+                    <a class="nav-link alternative opac-moyen" href={{ path('cgu') }}>Cgu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link jaune opac-moyen" href={{ path('statut') }}>Statut</a>
+                    <a class="nav-link alternative opac-moyen" href={{ path('statut') }}>Statut</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link jaune opac-moyen" href={{ path('reglement') }}>Règlement intérieur</a>
+                    <a class="nav-link alternative opac-moyen" href={{ path('reglement') }}>Règlement intérieur</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link jaune opac-moyen" href={{ path('rendu') }}>Compte rendu ag</a>
+                    <a class="nav-link alternative opac-moyen" href={{ path('rendu') }}>Compte rendu ag</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link jaune opac-moyen" href={{ path('contacter') }}>Contact</a>
+                    <a class="nav-link alternative opac-moyen" href={{ path('contacter') }}>Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link jaune opac-moyen" href="https://www.facebook.com/lechemindupelou/"target="_blank"><i class="fab fa-facebook-square facebook-icon"></i></a>
+                    <a class="nav-link alternative opac-moyen" href="https://www.facebook.com/lechemindupelou/"target="_blank"><i class="fab fa-facebook-square facebook-icon"></i></a>
                 </li>
             </ul>
         </nav>
