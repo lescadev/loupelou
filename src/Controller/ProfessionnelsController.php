@@ -14,8 +14,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use GuzzleHttp\Client;
 use ReCaptcha\ReCaptcha;
 use App\Form\CategorieType;
-use App\Entity\Categorie;
-use App\Repository\CategorieRepository;
 use App\Entity\PrestataireHasCategorie;
 
 class ProfessionnelsController extends AbstractController
@@ -115,12 +113,19 @@ class ProfessionnelsController extends AbstractController
                     $prestataire ->setDenomination($data["denomination"]);
                     
                     $entityManager->persist($prestataire);
-                    // $categorieId = $categorie->getId;
+
                     $prestatairehascategorie = new PrestataireHasCategorie;
                     $prestatairehascategorie->setPrestataire($prestataire);
-                    var_dump($categorie);
-                    // $prestatairehascategorie->setCategorie($categorieId);
-                    // $entityManager->persist($prestatairehascategorie);
+       
+                    $categorieObject = array_reduce(
+                        $categorie,
+                        function ($result, $categorie) {
+                            return $categorie;
+                        }
+                    );
+
+                    $prestatairehascategorie->setCategorie($categorieObject);
+                    $entityManager->persist($prestatairehascategorie);
                 }
 
 
@@ -158,7 +163,7 @@ class ProfessionnelsController extends AbstractController
                 $mailer->send($adminMessage);
 
                     $this->addFlash('success', 'Votre inscription est effective et va être prise en compte prochainement.');
-                    // return $this->redirectToRoute('sucess');
+                    return $this->redirectToRoute('sucess');
                     
                 }
             }
