@@ -56,7 +56,7 @@ function setModalContent(data) {
     categorie.append(data.categorie);
     description.append(data.description);
     site.append(data.site);
-    adresse.append(data.rue + "<br>" + data.code_postal + "<br>" + data.ville);
+    adresse.append(data.rue + " " + data.code_postal + " " + data.ville);
 
 
 }
