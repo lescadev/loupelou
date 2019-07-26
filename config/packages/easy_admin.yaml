@@ -100,10 +100,23 @@ easy_admin:
             class: App\Entity\Informations
             form: 
                 title: 'Informations'
+                fields:
+                    - {property: 'imageFile', type: 'vich_image', label: 'Logo'}
+                    - {property: 'slogan', label: 'Slogan' ,type: 'fos_ckeditor', type_options: {config_name: 'my_config_3'}}
+                    - {property: 'presentation', label: 'Présentation', type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
+                    - {property: 'adresse', label: 'Adresse'}
+                    - {property: 'code_postal', label: 'Code postal'}
+                    - {property: 'ville', label: 'Ville'}
+                    - {property: 'telephone', label: 'Téléphone'}
+                    - {property: 'email', label: 'Email'}
+                    - {property: 'facebook', label: 'Facebook'}
+                    - {property: 'instagram', label: 'Instagram'}
+                    - {property: 'twitter', label: 'Twitter'}
             edit:
                 actions: ['-new', '-delete']
             list:
                 actions: ['-new', '-delete']
+                fields: [{property: 'logo', type: 'image', label: 'Logo', base_path: '%app.path.logo_images%'}, {property: 'slogan', label: 'Slogan'}, {property: 'presentation', label: 'Présentation'}, {property: 'adresse', label: 'Adresse'}, {property: 'code_postal', label: 'Code postal'}, {property: 'ville', label: 'Ville'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Email'}, {property: 'facebook', label: 'Facebook'}]
 
         
         ArticleBlog:
