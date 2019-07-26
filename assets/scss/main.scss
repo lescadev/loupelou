@@ -3,7 +3,8 @@
 @import
   'abstracts/variables',
   'abstracts/functions',
-  'abstracts/mixins';
+  'abstracts/mixins',
+  'abstracts/variables-bootswatch';
 
 @import
   'vendors/normalize';
@@ -12,15 +13,22 @@
   'base/base',
   'base/fonts',
   'base/typography',
-  'base/helpers';
+  'base/helpers',
+  'base/couleurs',
+  'base/effets',
+  'base/couleurs-elements';
 
 @import
   'layout/header',
   'layout/nav',
-  'layout/footer';
+  'layout/footer',
+  'layout/bootswatch';
 
 @import
-  'components/button';
+  'components/button',
+  'components/icons',
+  'components/map';
 
 @import
   'pages/home';
+

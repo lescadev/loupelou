@@ -2,21 +2,21 @@
     {% if response is defined%}
         <div class="row pre-scrollable">
             {%for result in response  %}
-                <div class="card border-dark ml-1" id="{{ result.0.id }}">
+                <div class="card border-dark ml-1" style="width: 100%; cursor: pointer;"id="{{ result.0.id }}">
                     <div class="card-header" style="background-color: #FFFFFF">{{result.denomination}}
                         {% if result.nom is defined %}
                             <h6 class="card-subtitle mb-2 text-muted">{{ result.nom }}</h6>
                         {% endif %}
                     </div>
-                    <p class="card-text">Description : {{ result.0.description | easyadmin_truncate(20)}}</p>
                     <div class="card-body text-dark">
                         <p class="card-text"><i class="fas fa-phone-alt"></i> Tel : {{ result.0.telephone }}</p>
                         <p class="card-text"><i class="fas fa-map-marker-alt"></i> Adresse: {{ result.0.adresse }} {{ result.0.ville }}</p>
+                        <p class="card-text">Description : {{ result.0.description | easyadmin_truncate(20)}}</p>
                     </div>
                 </div>
             {%endfor%}
         </div>
-    {% endif %}
+{% endif %}
 {% endset %}
 
 {% set response = response|merge({'card': card_construct}) %}

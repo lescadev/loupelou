@@ -1,85 +1,103 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Nous contacter - {{ parent() }}
+Nous contacter - {{ parent() }}
 {% endblock %}
 
 {% block body %}
-    <section class="contact-container">
-        <div class="main-title">
-            <h1>
-                Nous sommes là pour vous répondre!
-            </h1>
+{#Titre Principal#}
+<h1 class="principale mb-5">
+    Nous sommes là pour vous répondre
+</h1>
+{# ****************************************************************** #}
+
+{# Contenu de la vue #}
+<div class="row">
+    <div class="col-md-8 mb-5">
+        <h4>
+            Nous écrire
+        </h4>
+        {# Message de succès de l'envoi du formulaire #}
+        {% for message in app.flashes('success') %}
+        <div class="text-center alert alert-dismissible alert-success">
+            <i class="fas fa-check">&nbsp; &nbsp;</i>
+            <span>{{ message }}</span>
         </div>
-
-        <main class="content-display">
-            {{form_start(form, {'attr': {'id': 'contact-form'}})}}
-                <label class="form-label" for="firstName">Prénom :</label>
-                {{ form_widget(form.firstName, {'attr' : {'placeholder': "Prénom", "name":"firstName", "class": "input"}}) }}
-                <br>
-                <label class="form-label" for="lastName">Nom :</label>
-                {{ form_widget(form.lastName, {'attr' : {'placeholder': "Nom", "name":"lastName", "class": "input"}}) }}
-                <br>
-                <label class="form-label" for="email">Email :</label>
-                {{ form_widget(form.email, {'attr' : {'placeholder': "exemple@gmail.com", "name":"email", "class": "input"}}) }}
-                <br>
-                <label class="form-label" for="objet">Objet :</label>
-                {{ form_widget(form.object, {'attr' : {'placeholder': "Objet", "name":"object", "class": "input"}}) }}
-                <br>
-                <label class="form-label" for="message">Message :</label>
-                {{ form_widget(form.message, {'attr' : {'placeholder': "Votre message", 'class': 'message', "name":"message", "class": "input"}}) }}
-                <br>
-                <div class="btn-form">
-                    <button id="btn-form">Envoyer</button>
+        {% endfor %}
+        {# ****************************************************************** #}
+        {# Message d'échec de l'envoi du formulaire #}
+        {% if not form.vars.valid %}
+        <div class="text-center alert alert-dismissible alert-danger">
+            <i class="fas fa-times">&nbsp; &nbsp;</i>
+            <span>Les champs doivent contenir au moins 2 caractères et le message 10 caractères.</span>
+        </div>
+        {% endif %}
+        {# ****************************************************************** #}
+        {# Formulaire d'inscription #}
+        <div class="border-principale py-3 px-3">
+            <form action="" method="post">
+                {{form_start(form, {'attr': {'id': 'contact-form'}})}}
+                <div class="form-group">
+                    {{ form_widget(form.firstName, {'attr' : {'placeholder': "Prénom", "name":"firstName", "class": "form-control"}})
+                    }}
                 </div>
-                <input id="recaptchaToken" name="recaptchaToken" type="hidden">
-            {{form_end(form)}}
-
-            <section class="contact">
-                {% for message in app.flashes('success') %}
-                    <div class="success-msg"> 
-                        <span>{{ message }}</span>
-                        <img src="{{asset('/images/check.svg')}}" width="15" height="15" alt="valid icon">
-                    </div>
-                {% endfor %}
-
-                {% if not form.vars.valid %}
-
-                    <div class="error-msg">
-                        <div class="center">
-                            <span>Les champs doivent contenir au moins 2 caractères et le message 10 caractères.</span>
-                        </div>
-                        <img src="{{asset('/images/error.svg')}}" width="15" height="15" alt="error icon">
-                    </div>
-                {% endif %}
-
-                <h3 class="title">
-                    Autres moyens de nous contacter:
-                </h3>
-
-                <div class="content-infos">
-
-                    <div class="display">
-                        <label class="form-label" for="email">Email
-                        </label>
-                        <img src="{{asset('/images/_ionicons_svg_md-mail.svg')}}" width="15" height="15" alt="email icon">:</img>
-                    </div>
-                    <p>01monnaielocalelimousine@gmail.com</p>
-
-                    <div class="display">
-                        <label class="form-label" for="telephone">Téléphone</label>
-                        <img src="{{asset('/images/phone.svg')}}" width="15" height="15" alt="email icon">:</img>
-                    </div>
-                    <p>05-55-55-55-55</p>
-
-                    <div class="display">
-                        <label class="form-label" for="reseau">Facebook :</label>
-                    </div>
-                    <a href="{{asset('https://www.facebook.com/lechemindupelou/')}}"><img class="icon" src="{{asset('facebookicon.svg')}}" alt="icon facebook"></a>
+                <div class="form-group">
+                    {{ form_widget(form.lastName, {'attr' : {'placeholder': "Nom", "name":"lastName", "class": "form-control"}})
+                    }}
                 </div>
-            </section>
-        </main>
-    </section>
+                <div class="form-group">
+                    {{ form_widget(form.email, {'attr' : {'placeholder': "Adresse email (ex: pierre@bmail.com)", "name":"email", "class": "form-control"}})
+                    }}
+                </div>
+                <div class="form-group">
+                    {{ form_widget(form.object, {'attr' : {'placeholder': "Objet", "name":"object", "class": "form-control"}})
+                    }}
+                </div>
+                <div class="form-group">
+                    {{ form_widget(form.message, {'attr' : {'placeholder': "Votre message", 'class': 'message', "name":"message", "class": "form-control", 'rows': '10'}})
+                    }}
+                </div>
+                <div class="form-group text-right">
+                    <button type="submit" class="btn blanc bg-principale">envoyer</button>
+                </div>
+                {{form_end(form)}}
+            </form>
+        </div>
+        {# ****************************************************************** #}
+    </div>
+    {# Informations de contact #}
+    <div class="col-md-4">
+        <h4 class="title">
+            Nous contacter autrement
+        </h4>
+        <div class="card border text-center mb-3" style="max-width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title">Email</h5>
+                <p class="card-text">01monnaielocalelimousine@gmail.com</p>
+            </div>
+        </div>
+        <div class="card border text-center mb-3" style="max-width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title">Téléphone</h5>
+                <p class="card-text">05-55-55-55-55</p>
+            </div>
+        </div>
+        <div class="card border text-center mb-3" style="max-width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title">Réseaux sociaux</h5>
+                <p class="card-text">
+                    <a class="card-link principale" href={{asset('https://www.facebook.com/lechemindupelou/')}}
+                        target="_blank">
+                        <i class="fab fa-facebook-square facebook-icon-contact"></i>&nbsp;
+                        &nbsp;Facebook</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    {# ****************************************************************** #}
+</div>
+{# ****************************************************************** #}
+
 {% endblock %}
 
 {% block javascripts %}
@@ -87,11 +105,13 @@
 <script src="https://www.google.com/recaptcha/api.js?render={{siteKey}}"></script>
 
 <script>
-  grecaptcha.ready(function() {
-      grecaptcha.execute("{{siteKey}}", {action: 'homepage'}).then(function(token) {
-        document.getElementById('recaptchaToken').value = token;
-      });
-  });
+    grecaptcha.ready(function () {
+        grecaptcha.execute("{{siteKey}}", {
+            action: 'homepage'
+        }).then(function (token) {
+            document.getElementById('recaptchaToken').value = token;
+        });
+    });
 </script>
 
 {% endblock %}
