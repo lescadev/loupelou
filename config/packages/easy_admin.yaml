@@ -50,8 +50,9 @@ easy_admin:
                     - {property: 'nom'}
                     - {property: 'telephone'}
                     - {property: 'adresse'}
-                    - {property: 'ville'}
                     - {property: 'code_postal'}
+                    - {property: 'ville'}
+                    - {property: 'description'}
                     - {property: 'date_creation'}
         Particulier:
             label: "Particuliers"
