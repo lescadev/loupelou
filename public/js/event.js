@@ -2,6 +2,7 @@ let search = document.getElementById("search");
 let annuaire = document.getElementById('annuaire');
 let selectFilter = document.getElementById('sel1');
 let selectFilterRadius = document.getElementById('sel2');
+let cards = document.getElementsByClassName('card');
 
 function setEvent(status) {
     if(search) {
@@ -24,7 +25,6 @@ function setEvent(status) {
 
 function setEventModal() {
 
-    let cards = document.getElementsByClassName('card');
     let modalPresta = document.getElementById('modal_presta');
 
     if (cards && modalPresta) {
@@ -57,6 +57,5 @@ function setModalContent(data) {
     description.append(data.description);
     site.append(data.site);
     adresse.append(data.rue + " " + data.code_postal + " " + data.ville);
-
-
 }
+
