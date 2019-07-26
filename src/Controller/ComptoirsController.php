@@ -12,6 +12,7 @@ class ComptoirsController extends AbstractController
      */
     public function index()
     {
+    	
         return $this->render('comptoirs/comptoirs.html.twig', [
             'controller_name' => 'ComptoirsController',
         ]);

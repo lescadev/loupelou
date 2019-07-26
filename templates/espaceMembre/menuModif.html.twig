@@ -16,4 +16,10 @@
         <a class="modif" href={{path('modifdescription')}}>Modifier ma description</a>
     </div>
     {% endif %}
+    {% if is_granted('ROLE_COMPTOIR') %}
+    <div class="itemMenu">
+    <br>
+        <a class="modif" href={{path('transaction')}}>Effectuer une transaction</a>
+    </div>
+    {% endif %}
 </div>
