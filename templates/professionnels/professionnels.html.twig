@@ -96,28 +96,29 @@
 
 {% block javascripts %}
 
-<script src="https://www.google.com/recaptcha/api.js?render={{siteKey}}"></script>
+    {{ parent() }}
+    <script src="https://www.google.com/recaptcha/api.js?render={{siteKey}}"></script>
 
-<script>
-    grecaptcha.ready(function () {
-        grecaptcha.execute("{{siteKey}}", {
-            action: 'homepage'
-        }).then(function (token) {
-            document.getElementById('recaptchaToken').value = token;
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute("{{siteKey}}", {
+                action: 'homepage'
+            }).then(function (token) {
+                document.getElementById('recaptchaToken').value = token;
+            });
         });
-    });
 
 
-    function check(){
-        const categorie = document.getElementById("{{ formCategorie.categorie.vars.id }}");
-        const presta = document.getElementById("{{ formPro.presta.vars.id }}");
-        if (presta.checked){
-            categorie.disabled = false;
-        }else{
-            categorie.disabled = true;
+        function check(){
+            const categorie = document.getElementById("{{ formCategorie.categorie.vars.id }}");
+            const presta = document.getElementById("{{ formPro.presta.vars.id }}");
+            if (presta.checked){
+                categorie.disabled = false;
+            }else{
+                categorie.disabled = true;
+            }
         }
-    }
 
-</script>
+    </script>
 
 {% endblock %}
