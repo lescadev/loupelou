@@ -37,6 +37,12 @@ class Comptoir
      */
     private $denomination;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $solde;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -88,5 +94,21 @@ class Comptoir
         $this->denomination = $denomination;
 
         return $this;
+    }
+
+    public function getSolde(): ?float
+    {
+        return $this->solde;
+    }
+
+    public function setSolde(?float $solde): self
+    {
+        $this->solde = $solde;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->denomination;
     }
 }

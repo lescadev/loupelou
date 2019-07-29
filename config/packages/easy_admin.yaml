@@ -29,8 +29,12 @@ easy_admin:
               entity: 'ArticleBlog'
 
             - label: "Evénements" 
-              icon: "event"
+              icon: "calendar"
               entity: 'Evenements'
+
+            - label: "Transactions"
+              icon: "money"
+              entity: 'Transactions'
 
               
     entities:
@@ -152,6 +156,13 @@ easy_admin:
                     - {property: 'logoDescription'}
                     - {property: 'lienEvent'}
                     - {property: 'lieu'}
+
+        Transactions:
+            class: App\Entity\Transaction
+            label: "Transactions"
+            disabled_actions: ['search','delete','new','edit']
+            list:
+                fields: [{property: 'nom', label: 'Nom'}, {property: 'prenom', label: 'Prénom'}, {property: 'comptoir', label: 'Comptoir'}, {property: 'montant', label: 'Montant'}, {property: 'date_transaction', label: 'Date'}]
 
 
 
