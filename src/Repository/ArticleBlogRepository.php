@@ -7,16 +7,18 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method ArticleBlog|null find($id, $lockMode = null, $lockVersion = null)
- * @method ArticleBlog|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ArticleBlog|null find( $id, $lockMode = null, $lockVersion = null )
+ * @method ArticleBlog|null findOneBy( array $criteria, array $orderBy = null )
  * @method ArticleBlog[]    findAll()
- * @method ArticleBlog[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ArticleBlog[]    findBy( array $criteria, array $orderBy = null, $limit = null, $offset = null )
  */
-class ArticleBlogRepository extends ServiceEntityRepository
+class ArticleBlogRepository
+    extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+
+    public function __construct( RegistryInterface $registry )
     {
-        parent::__construct($registry, ArticleBlog::class);
+        parent::__construct( $registry, ArticleBlog::class );
     }
 
     // /**

@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Annuaire comptoir</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>Annuaire comptoir</title>
+    </head>
 
-<body>
-    <img src="images/pdf/comptoir.jpg" style="width: 100%">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">Nom</th>
-            <th scope="col">Adresse</th>
-            <th scope="col">Téléphone</th>
-            <th scope="col">Email</th>
-            <th scope="col">Site</th>
-        </tr>
-        </thead>
-        <tbody>
-        {%for result in comptoir  %}
-            <tr>
-                <td>{{result.denomination}}</td>
-                <td>{{ result.0.adresse }} {{ result.0.ville }}</td>
-                <td>{{ result.0.telephone }}</td>
-                <td>{{ result.0.email }}</td>
-                <td>{{ result.site_internet }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</body>
+    <body>
+        <img src="images/pdf/comptoir.jpg" style="width: 100%">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Adresse</th>
+                    <th scope="col">Téléphone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Site</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in comptoir %}
+                    <tr>
+                        <td>{{ result.denomination }}</td>
+                        <td>{{ result.0.adresse }} {{ result.0.ville }}</td>
+                        <td>{{ result.0.telephone }}</td>
+                        <td>{{ result.0.email }}</td>
+                        <td>{{ result.site_internet }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>

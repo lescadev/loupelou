@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<section class="contact-container">
+    <section class="contact-container">
         {#Titre Principal#}
         <div class="main-title">
             <h2>
@@ -13,16 +13,16 @@
         <main class="content-display">
 
             {# Formulaire de transactions #}
-            {{form_start(form, {'attr': {'id': 'transaction-form'}})}}
+            {{ form_start(form, {'attr': {'id': 'transaction-form'}}) }}
 
-                {{ form_row(form.nom) }}
-                {{ form_row(form.prenom) }}
-                {{ form_row(form.montant)}}
-               
-                <div class="btn-form">
-                    <button id="btn-form">Enregistrer</button>
-                </div>
-            {{form_end(form)}}
+            {{ form_row(form.nom) }}
+            {{ form_row(form.prenom) }}
+            {{ form_row(form.montant) }}
+
+            <div class="btn-form">
+                <button id="btn-form">Enregistrer</button>
+            </div>
+            {{ form_end(form) }}
             {# ****************************************************************** #}
 
 
@@ -31,9 +31,9 @@
 
                 {# Message de succès de l'envoi du formulaire #}
                 {% for message in app.flashes('success') %}
-                    <div class="success-msg"> 
+                    <div class="success-msg">
                         <span>{{ message }}</span>
-                        <img src="{{asset('/images/check.svg')}}" width="15" height="15" alt="valid icon">
+                        <img src="{{ asset('/images/check.svg') }}" width="15" height="15" alt="valid icon">
                     </div>
                 {% endfor %}
                 {# ****************************************************************** #}
@@ -44,11 +44,11 @@
                         <div class="center">
                             <span>{{ message }}</span>
                         </div>
-                        <img src="{{asset('/images/error.svg')}}" width="15" height="15" alt="error icon">
+                        <img src="{{ asset('/images/error.svg') }}" width="15" height="15" alt="error icon">
                     </div>
                 {% endfor %}
                 {# ****************************************************************** #}
-                </section>
+            </section>
             {# ****************************************************************** #}
 
         </main>

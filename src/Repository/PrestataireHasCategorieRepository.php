@@ -7,16 +7,18 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method PrestataireHasCategorie|null find($id, $lockMode = null, $lockVersion = null)
- * @method PrestataireHasCategorie|null findOneBy(array $criteria, array $orderBy = null)
+ * @method PrestataireHasCategorie|null find( $id, $lockMode = null, $lockVersion = null )
+ * @method PrestataireHasCategorie|null findOneBy( array $criteria, array $orderBy = null )
  * @method PrestataireHasCategorie[]    findAll()
- * @method PrestataireHasCategorie[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method PrestataireHasCategorie[]    findBy( array $criteria, array $orderBy = null, $limit = null, $offset = null )
  */
-class PrestataireHasCategorieRepository extends ServiceEntityRepository
+class PrestataireHasCategorieRepository
+    extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+
+    public function __construct( RegistryInterface $registry )
     {
-        parent::__construct($registry, PrestataireHasCategorie::class);
+        parent::__construct( $registry, PrestataireHasCategorie::class );
     }
 
     // /**

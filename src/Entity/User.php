@@ -10,8 +10,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements UserInterface
+class User
+    implements UserInterface
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -110,7 +112,7 @@ class User implements UserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail( string $email ): self
     {
         $this->email = $email;
 
@@ -136,10 +138,10 @@ class User implements UserInterface
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
+        return array_unique( $roles );
     }
 
-    public function setRoles(array $roles): self
+    public function setRoles( array $roles ): self
     {
         $this->roles = $roles;
 
@@ -154,7 +156,7 @@ class User implements UserInterface
         return (string) $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword( string $password ): self
     {
         $this->password = $password;
 
@@ -183,7 +185,7 @@ class User implements UserInterface
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): self
+    public function setPrenom( string $prenom ): self
     {
         $this->prenom = $prenom;
 
@@ -195,7 +197,7 @@ class User implements UserInterface
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom( string $nom ): self
     {
         $this->nom = $nom;
 
@@ -207,7 +209,7 @@ class User implements UserInterface
         return $this->telephone;
     }
 
-    public function setTelephone(?string $telephone): self
+    public function setTelephone( ?string $telephone ): self
     {
         $this->telephone = $telephone;
 
@@ -219,7 +221,7 @@ class User implements UserInterface
         return $this->adresse;
     }
 
-    public function setAdresse(string $adresse): self
+    public function setAdresse( string $adresse ): self
     {
         $this->adresse = $adresse;
 
@@ -231,7 +233,7 @@ class User implements UserInterface
         return $this->ville;
     }
 
-    public function setVille(string $ville): self
+    public function setVille( string $ville ): self
     {
         $this->ville = $ville;
 
@@ -243,7 +245,7 @@ class User implements UserInterface
         return $this->code_postal;
     }
 
-    public function setCodePostal(string $code_postal): self
+    public function setCodePostal( string $code_postal ): self
     {
         $this->code_postal = $code_postal;
 
@@ -255,7 +257,7 @@ class User implements UserInterface
         return $this->date_creation;
     }
 
-    public function setDateCreation(\DateTimeInterface $date_creation): self
+    public function setDateCreation( \DateTimeInterface $date_creation ): self
     {
         $this->date_creation = $date_creation;
 
@@ -270,23 +272,23 @@ class User implements UserInterface
         return $this->adhesions;
     }
 
-    public function addAdhesion(Adhesion $adhesion): self
+    public function addAdhesion( Adhesion $adhesion ): self
     {
-        if (!$this->adhesions->contains($adhesion)) {
+        if( ! $this->adhesions->contains( $adhesion ) ) {
             $this->adhesions[] = $adhesion;
-            $adhesion->setUser($this);
+            $adhesion->setUser( $this );
         }
 
         return $this;
     }
 
-    public function removeAdhesion(Adhesion $adhesion): self
+    public function removeAdhesion( Adhesion $adhesion ): self
     {
-        if ($this->adhesions->contains($adhesion)) {
-            $this->adhesions->removeElement($adhesion);
+        if( $this->adhesions->contains( $adhesion ) ) {
+            $this->adhesions->removeElement( $adhesion );
             // set the owning side to null (unless already changed)
-            if ($adhesion->getUser() === $this) {
-                $adhesion->setUser(null);
+            if( $adhesion->getUser() === $this ) {
+                $adhesion->setUser( null );
             }
         }
 
@@ -303,7 +305,7 @@ class User implements UserInterface
         return $this->isActive;
     }
 
-    public function setIsActive(bool $isActive): self
+    public function setIsActive( bool $isActive ): self
     {
         $this->isActive = $isActive;
 
@@ -315,7 +317,7 @@ class User implements UserInterface
         return $this->longitude;
     }
 
-    public function setLongitude(?float $longitude): self
+    public function setLongitude( ?float $longitude ): self
     {
         $this->longitude = $longitude;
 
@@ -327,7 +329,7 @@ class User implements UserInterface
         return $this->latitude;
     }
 
-    public function setLatitude(?float $latitude): self
+    public function setLatitude( ?float $latitude ): self
     {
         $this->latitude = $latitude;
 
@@ -339,7 +341,7 @@ class User implements UserInterface
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription( ?string $description ): self
     {
         $this->description = $description;
 
