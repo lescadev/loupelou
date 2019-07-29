@@ -6,6 +6,7 @@
 parameters:
     locale: 'en'
     app.path.articles_images: /uploads/images/articles
+    app.path.logo_images: /uploads/images/logo
     mail.site: '%env(MAIL_SITE)%' 
     mail.admin: '%env(MAIL_ADMIN)%' 
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
