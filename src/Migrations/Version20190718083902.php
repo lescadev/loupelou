@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare( strict_types=1 );
 
 namespace DoctrineMigrations;
 
@@ -10,26 +10,30 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190718083902 extends AbstractMigration
+final class Version20190718083902
+    extends AbstractMigration
 {
-    public function getDescription() : string
+
+    public function getDescription(): string
     {
         return '';
     }
 
-    public function up(Schema $schema) : void
+    public function up( Schema $schema ): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf( $this->connection->getDatabasePlatform()->getName() !== 'mysql',
+            'Migration can only be executed safely on \'mysql\'.' );
 
-        $this->addSql('ALTER TABLE article_blog ADD image_description VARCHAR(255) NOT NULL');
+        $this->addSql( 'ALTER TABLE article_blog ADD image_description VARCHAR(255) NOT NULL' );
     }
 
-    public function down(Schema $schema) : void
+    public function down( Schema $schema ): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf( $this->connection->getDatabasePlatform()->getName() !== 'mysql',
+            'Migration can only be executed safely on \'mysql\'.' );
 
-        $this->addSql('ALTER TABLE article_blog DROP image_description');
+        $this->addSql( 'ALTER TABLE article_blog DROP image_description' );
     }
 }

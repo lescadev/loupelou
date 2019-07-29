@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-Où les utiliser - {{ parent() }}
+    Où les utiliser - {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -23,8 +23,7 @@ Où les utiliser - {{ parent() }}
                 <option>Magasin</option>
                 <option>Restauration</option>
                 <option>Service</option>
-            </select>
-            <select class="custom-select" id="sel2">
+            </select> <select class="custom-select" id="sel2">
                 <option>Toutes les distances</option>
                 <option>15km</option>
                 <option>30km</option>
@@ -40,14 +39,14 @@ Où les utiliser - {{ parent() }}
             <div id="annuaire" class="prestataire"></div>
         </div>
     </div>
-    {%  include 'map/modalPartial.html.twig' %}
+    {% include 'map/modalPartial.html.twig' %}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-        integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-        crossorigin="">
+            integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+            crossorigin="">
     </script>
     <script src="/js/geolocalisation.js"></script>
     <script src="/js/set_map.js"></script>
