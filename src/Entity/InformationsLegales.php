@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class InformationsLegales
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -41,7 +42,7 @@ class InformationsLegales
         return $this->cgu;
     }
 
-    public function setCgu(string $cgu): self
+    public function setCgu( string $cgu ): self
     {
         $this->cgu = $cgu;
 
@@ -53,7 +54,7 @@ class InformationsLegales
         return $this->cgv;
     }
 
-    public function setCgv(string $cgv): self
+    public function setCgv( string $cgv ): self
     {
         $this->cgv = $cgv;
 
@@ -65,7 +66,7 @@ class InformationsLegales
         return $this->mentionsLegales;
     }
 
-    public function setMentionsLegales(string $mentionsLegales): self
+    public function setMentionsLegales( string $mentionsLegales ): self
     {
         $this->mentionsLegales = $mentionsLegales;
 

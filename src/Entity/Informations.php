@@ -12,6 +12,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class Informations
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -73,7 +74,7 @@ class Informations
      * @ORM\Column(type="string", length=255, nullable= true)
      */
     private $logo;
-    
+
     /**
      * @Vich\UploadableField(mapping="logo_images", fileNameProperty="logo")
      * @var File
@@ -95,7 +96,7 @@ class Informations
         return $this->slogan;
     }
 
-    public function setSlogan(?string $slogan): self
+    public function setSlogan( ?string $slogan ): self
     {
         $this->slogan = $slogan;
 
@@ -107,7 +108,7 @@ class Informations
         return $this->presentation;
     }
 
-    public function setPresentation(string $presentation): self
+    public function setPresentation( string $presentation ): self
     {
         $this->presentation = $presentation;
 
@@ -119,7 +120,7 @@ class Informations
         return $this->adresse;
     }
 
-    public function setAdresse(?string $adresse): self
+    public function setAdresse( ?string $adresse ): self
     {
         $this->adresse = $adresse;
 
@@ -131,7 +132,7 @@ class Informations
         return $this->code_postal;
     }
 
-    public function setCodePostal(?string $code_postal): self
+    public function setCodePostal( ?string $code_postal ): self
     {
         $this->code_postal = $code_postal;
 
@@ -143,7 +144,7 @@ class Informations
         return $this->ville;
     }
 
-    public function setVille(?string $ville): self
+    public function setVille( ?string $ville ): self
     {
         $this->ville = $ville;
 
@@ -155,7 +156,7 @@ class Informations
         return $this->telephone;
     }
 
-    public function setTelephone(?string $telephone): self
+    public function setTelephone( ?string $telephone ): self
     {
         $this->telephone = $telephone;
 
@@ -167,7 +168,7 @@ class Informations
         return $this->email;
     }
 
-    public function setEmail(?string $email): self
+    public function setEmail( ?string $email ): self
     {
         $this->email = $email;
 
@@ -179,7 +180,7 @@ class Informations
         return $this->facebook;
     }
 
-    public function setFacebook(?string $facebook): self
+    public function setFacebook( ?string $facebook ): self
     {
         $this->facebook = $facebook;
 
@@ -191,7 +192,7 @@ class Informations
         return $this->instagram;
     }
 
-    public function setInstagram(?string $instagram): self
+    public function setInstagram( ?string $instagram ): self
     {
         $this->instagram = $instagram;
 
@@ -203,7 +204,7 @@ class Informations
         return $this->twitter;
     }
 
-    public function setTwitter(?string $twitter): self
+    public function setTwitter( ?string $twitter ): self
     {
         $this->twitter = $twitter;
 
@@ -215,23 +216,25 @@ class Informations
         return $this->logo;
     }
 
-    public function setLogo(?string $logo): self
+    public function setLogo( ?string $logo ): self
     {
         $this->logo = $logo;
 
         return $this;
     }
-    public function setImageFile(File $logo = null)
+
+    public function setImageFile( File $logo = null )
     {
         $this->imageFile = $logo;
 
         // VERY IMPORTANT:
         // It is required that at least one field changes if you are using Doctrine,
         // otherwise the event listeners won't be called and the file is lost
-        if ($logo) {
-            $this->updatedAt = new \DateTime('now');
+        if( $logo ) {
+            $this->updatedAt = new \DateTime( 'now' );
         }
     }
+
     public function getImageFile()
     {
         return $this->imageFile;
@@ -242,11 +245,11 @@ class Informations
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt( \DateTimeInterface $updatedAt ): self
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
     }
-    
+
 }

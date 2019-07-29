@@ -10,23 +10,24 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ContactType extends AbstractType
+class ContactType
+    extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+
+    public function buildForm( FormBuilderInterface $builder, array $options )
     {
         $builder
-            ->add('firstName', TextType::class)
-            ->add('lastName', TextType::class)
-            ->add('email', EmailType::class)
-            ->add('object', TextType::class)
-            ->add('message', TextareaType::class)
-        ;
+            ->add( 'firstName', TextType::class )
+            ->add( 'lastName', TextType::class )
+            ->add( 'email', EmailType::class )
+            ->add( 'object', TextType::class )
+            ->add( 'message', TextareaType::class );
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions( OptionsResolver $resolver )
     {
-        $resolver->setDefaults([
+        $resolver->setDefaults( [
             'data_class' => Contact::class,
-        ]);
+        ] );
     }
 }
