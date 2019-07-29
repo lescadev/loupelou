@@ -5,40 +5,41 @@ Où s'en procurer - {{ parent() }}
 {% endblock %}
 
 {% block body %}
-
-<h1 class="principale mb-4">Où s'en procurer</h1>
-<div class="row py-3 px-3">
-    <div class="input-group mb-3">
-        <input class="form-control " type="text" placeholder="Rechercher" id="search" name="search">
-        <select class="custom-select" id="sel2">
-            <option>Toutes les distances</option>
-            <option>15km</option>
-            <option>30km</option>
-            <option>50km</option>
-            <option>80km</option>
-        </select>
-    </div>
-    <div class="col-md-6 mt-3 mr-3" id="map">
-    </div>
-    <div class="col mt-3">
-        <div id="annuaire">
+    <h1 class="principale mb-4">Où s'en procurer</h1>
+    <div class="row">
+        <div class="input-group mb-3">
+            <input class="form-control " type="text" placeholder="Rechercher" id="search" name="search">
+            <select class="custom-select" id="sel2">
+                <option>Toutes les distances</option>
+                <option>15km</option>
+                <option>30km</option>
+                <option>50km</option>
+                <option>80km</option>
+            </select>
         </div>
     </div>
-</div>
-<div><a href={{ path('pdf_comptoir') }}>Annuaire comptoir</a></div>
+    <div class="row">
+        <div class="col-md-8 mt-3">
+            <div id="map"></div>
+            <div><a href={{ path('pdf_comptoir') }}>Annuaire comptoir</a></div>
+        </div>
+        <div class="col mt-3">
+            <div id="annuaire"></div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
-<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-    crossorigin="">
-</script>
-<script src="/js/geolocalisation.js"></script>
-<script src="/js/set_map.js"></script>
-<script src="/js/ajax-annuaire.js"></script>
-<script src="/js/event.js"></script>
-<script>
-    setEvent('{{ status }}');
-</script>
-
+    {{ parent() }}
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+        integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+        crossorigin="">
+    </script>
+    <script src="/js/geolocalisation.js"></script>
+    <script src="/js/set_map.js"></script>
+    <script src="/js/ajax-annuaire.js"></script>
+    <script src="/js/event.js"></script>
+    <script>
+        setEvent('{{ status }}');
+    </script>
 {% endblock %}
