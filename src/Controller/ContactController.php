@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Repository\InformationsRepository;
 use App\Notification\ContactNotification;
 use ReCaptcha\ReCaptcha;
 
@@ -15,7 +16,7 @@ class ContactController extends AbstractController
     /**
      * @Route("/contacter", name="contacter")
      */
-    public function index(Request $request, ContactNotification $notification)
+    public function index(InformationsRepository $informationsRepository, Request $request, ContactNotification $notification)
     {
         $recaptcha = new ReCaptcha($this->getParameter('google_recaptcha_secret'));
 
@@ -31,11 +32,21 @@ class ContactController extends AbstractController
                 return $this->redirectToRoute('contacter');
             }
         }
+
+        $res = $informationsRepository->findAll();
+
+        if($res)
+            $info = $res[0];
         
         return $this->render('contact/contacter.html.twig', [
             'controller_name' => 'ContactController',
             'form' => $form -> createView(),
             'siteKey' => $this->getParameter('google_recaptcha_site_key'),
+            'tel' => $info->getTelephone(),
+            'mail' => $info->getEmail(),
+            'facebook' => $info->getFacebook(),
+            'insta' => $info->getInstagram(),
+            'twitter' => $info->getTwitter()
         ]);
     }
 }
