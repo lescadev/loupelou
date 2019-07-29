@@ -75,11 +75,19 @@ function ifCategory(data, i) {
 
 function displayMap(data) {
     layerGroup.clearLayers();
+    let markers = {};
     for (let i = 0; i < Object.keys( data ).length - 1; i++) {
-        L.marker([
+        markers[data[i][0].id] = L.marker([
             data[i][0].latitude,
             data[i][0].longitude,
         ], {icon: ifCategory(data, i)}).bindPopup(data[i].denomination).addTo(layerGroup);
     }
+    for(let card of cards) {
+        card.addEventListener("mouseover" , () => {
+            markers[card.id].openPopup();
+        });
+        card.addEventListener('mouseleave', () => {
+            mymap.closePopup();
+        });
+    }
 }
-
