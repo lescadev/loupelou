@@ -22,14 +22,14 @@
 
     <body>
         {% block navbar %}
-        <header class="principale bg-secondaire">
-            <nav class="navbar navbar-expand-md navbar-dark bg-secondaire d-flex flex-fill">
-                <a class="navbar-brand" href={{ path('index') }}><img src="/uploads/images/logo/{{logo.getInfo()}}" width="100"
-                        alt="lou pelou"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <header class="principale bg-secondaire">
+                <nav class="navbar navbar-expand-md navbar-dark bg-secondaire d-flex flex-fill">
+                    <a class="navbar-brand" href={{ path('index') }}><img src="/uploads/images/logo/{{ logo.getInfo() }}" width="100"
+                                alt="lou pelou"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+                            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
                     <div class="collapse navbar-collapse row">
                         <a href="{{ path('index') }}" class="col-10 blanc text-decoration-none"  id="slogan"> <h1> {{ slogan.getInfo() | raw }} </h1> </a> 

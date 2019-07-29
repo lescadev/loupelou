@@ -1,14 +1,14 @@
 #map {
     height: 57vh;
-  }
+}
 
-  #annuaire {
+#annuaire {
     & .card {
-      width: 100%;
+        width: 100%;
     }
 
     &.prestataire .card {
-      width: 100%;
-      cursor: pointer;
+        width: 100%;
+        cursor: pointer;
     }
-  }
+}

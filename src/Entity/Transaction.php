@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Transaction
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -42,7 +43,6 @@ class Transaction
 
     public $prenom;
 
-
     public function getId(): ?int
     {
         return $this->id;
@@ -53,7 +53,7 @@ class Transaction
         return $this->user;
     }
 
-    public function setUser(?user $user): self
+    public function setUser( ?user $user ): self
     {
         $this->user = $user;
 
@@ -65,7 +65,7 @@ class Transaction
         return $this->montant;
     }
 
-    public function setMontant(float $montant): self
+    public function setMontant( float $montant ): self
     {
         $this->montant = $montant;
 
@@ -77,7 +77,7 @@ class Transaction
         return $this->date_transaction;
     }
 
-    public function setDateTransaction(\DateTimeInterface $date_transaction): self
+    public function setDateTransaction( \DateTimeInterface $date_transaction ): self
     {
         $this->date_transaction = $date_transaction;
 
@@ -89,7 +89,7 @@ class Transaction
         return $this->comptoir;
     }
 
-    public function setComptoir(?comptoir $comptoir): self
+    public function setComptoir( ?comptoir $comptoir ): self
     {
         $this->comptoir = $comptoir;
 
@@ -98,14 +98,16 @@ class Transaction
 
     public function getNom()
     {
-        if($this->user)
+        if( $this->user ) {
             return $this->user->getNom();
+        }
     }
 
     public function getPrenom()
     {
-        if($this->user)
+        if( $this->user ) {
             return $this->user->getPrenom();
+        }
     }
 
 }

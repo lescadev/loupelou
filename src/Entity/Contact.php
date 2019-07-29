@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Contact
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -62,7 +63,7 @@ class Contact
         return $this->firstName;
     }
 
-    public function setFirstName(?string $firstName): self
+    public function setFirstName( ?string $firstName ): self
     {
         $this->firstName = $firstName;
 
@@ -74,7 +75,7 @@ class Contact
         return $this->lastName;
     }
 
-    public function setLastName(?string $lastName): self
+    public function setLastName( ?string $lastName ): self
     {
         $this->lastName = $lastName;
 
@@ -86,7 +87,7 @@ class Contact
         return $this->email;
     }
 
-    public function setEmail(?string $email): self
+    public function setEmail( ?string $email ): self
     {
         $this->email = $email;
 
@@ -98,7 +99,7 @@ class Contact
         return $this->object;
     }
 
-    public function setObject(?string $object): self
+    public function setObject( ?string $object ): self
     {
         $this->object = $object;
 
@@ -110,7 +111,7 @@ class Contact
         return $this->message;
     }
 
-    public function setMessage(?string $message): self
+    public function setMessage( ?string $message ): self
     {
         $this->message = $message;
 
