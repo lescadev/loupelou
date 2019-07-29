@@ -7,16 +7,18 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Comptoir|null find($id, $lockMode = null, $lockVersion = null)
- * @method Comptoir|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Comptoir|null find( $id, $lockMode = null, $lockVersion = null )
+ * @method Comptoir|null findOneBy( array $criteria, array $orderBy = null )
  * @method Comptoir[]    findAll()
- * @method Comptoir[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Comptoir[]    findBy( array $criteria, array $orderBy = null, $limit = null, $offset = null )
  */
-class ComptoirRepository extends ServiceEntityRepository
+class ComptoirRepository
+    extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+
+    public function __construct( RegistryInterface $registry )
     {
-        parent::__construct($registry, Comptoir::class);
+        parent::__construct( $registry, Comptoir::class );
     }
 
     // /**

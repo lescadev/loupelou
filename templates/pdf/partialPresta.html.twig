@@ -1,26 +1,26 @@
 <table class="table table-striped">
     <thead>
-    <tr>
-        <th scope="col">Nom</th>
-        <th scope="col">Adresse</th>
-        <th scope="col">Téléphone</th>
-        <th scope="col">Email</th>
-        <th scope="col">Site</th>
-    </tr>
+        <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Téléphone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Site</th>
+        </tr>
     </thead>
     <tbody>
-{% for result in presta %}
-    {% if result.nom is defined %}
-        {% if result.nom == category %}
-            <tr>
-                <td>{{result.denomination}}</td>
-                <td>{{result.0.adresse}} <br> {{result.0.code_postal}} <br> {{result.0.ville}}</td>
-                <td>{{result.0.telephone}}</td>
-                <td>{{result.0.email}}</td>
-                <td>{{result.site_internet }}</td>
-            </tr>
-        {% endif %}
-    {% endif %}
-{% endfor %}
+        {% for result in presta %}
+            {% if result.nom is defined %}
+                {% if result.nom == category %}
+                    <tr>
+                        <td>{{ result.denomination }}</td>
+                        <td>{{ result.0.adresse }} <br> {{ result.0.code_postal }} <br> {{ result.0.ville }}</td>
+                        <td>{{ result.0.telephone }}</td>
+                        <td>{{ result.0.email }}</td>
+                        <td>{{ result.site_internet }}</td>
+                    </tr>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
     </tbody>
 </table>

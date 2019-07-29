@@ -10,65 +10,69 @@ use App\Entity\PrestataireHasCategorie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-
 /**
- * @method User|null find($id, $lockMode = null, $lockVersion = null)
- * @method User|null findOneBy(array $criteria, array $orderBy = null)
+ * @method User|null find( $id, $lockMode = null, $lockVersion = null )
+ * @method User|null findOneBy( array $criteria, array $orderBy = null )
  * @method User[]    findAll()
- * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method User[]    findBy( array $criteria, array $orderBy = null, $limit = null, $offset = null )
  */
-class UserRepository extends ServiceEntityRepository
+class UserRepository
+    extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+
+    public function __construct( RegistryInterface $registry )
     {
-        parent::__construct($registry, User::class);
+        parent::__construct( $registry, User::class );
     }
 
-    public function findByParams(array $params){
+    public function findByParams( array $params )
+    {
 
-        $query = $this->createQueryBuilder('user');
+        $query = $this->createQueryBuilder( 'user' );
 
-        if(!empty($params['status'])){
-            if($params['status'] === 'prestataire') {
+        if( ! empty( $params['status'] ) ) {
+            if( $params['status'] === 'prestataire' ) {
 
-                $query->innerJoin(prestataire::class, 'prestataire')
-                    ->andWhere('user.id = prestataire.user')
-                    ->select('user', 'prestataire.denomination');
+                $query->innerJoin( prestataire::class, 'prestataire' )
+                      ->andWhere( 'user.id = prestataire.user' )
+                      ->select( 'user', 'prestataire.denomination' );
 
-                if(!empty($params['search']))
-                    $query->andWhere("prestataire.denomination LIKE :search OR user.description LIKE :search")
-                        ->setParameter('search', '%' . $params['search']. '%');
+                if( ! empty( $params['search'] ) ) {
+                    $query->andWhere( "prestataire.denomination LIKE :search OR user.description LIKE :search" )
+                          ->setParameter( 'search', '%' . $params['search'] . '%' );
+                }
 
-                if(!empty($params['filter'] and $params['filter'] !== 'Tous les services'))
-                    $query->innerJoin(PrestataireHasCategorie::class, 'prestaHasCategorie')
-                        ->innerJoin(Categorie::class, 'categorie')
-                        ->andWhere('categorie.nom = :filter')
-                        ->setParameter('filter', $params['filter'])
-                        ->andWhere('prestaHasCategorie.categorie = categorie.id')
-                        ->andWhere('prestataire.id = prestaHasCategorie.prestataire')
-                        ->andWhere('user.id = prestataire.user');
-                else
-                    $query->innerJoin(PrestataireHasCategorie::class, 'prestaHasCategorie')
-                        ->innerJoin(Categorie::class, 'categorie')
-                        ->andWhere('prestaHasCategorie.categorie = categorie.id')
-                        ->andWhere('prestataire.id = prestaHasCategorie.prestataire')
-                        ->andWhere('user.id = prestataire.user');
+                if( ! empty( $params['filter'] and $params['filter'] !== 'Tous les services' ) ) {
+                    $query->innerJoin( PrestataireHasCategorie::class, 'prestaHasCategorie' )
+                          ->innerJoin( Categorie::class, 'categorie' )
+                          ->andWhere( 'categorie.nom = :filter' )
+                          ->setParameter( 'filter', $params['filter'] )
+                          ->andWhere( 'prestaHasCategorie.categorie = categorie.id' )
+                          ->andWhere( 'prestataire.id = prestaHasCategorie.prestataire' )
+                          ->andWhere( 'user.id = prestataire.user' );
+                } else {
+                    $query->innerJoin( PrestataireHasCategorie::class, 'prestaHasCategorie' )
+                          ->innerJoin( Categorie::class, 'categorie' )
+                          ->andWhere( 'prestaHasCategorie.categorie = categorie.id' )
+                          ->andWhere( 'prestataire.id = prestaHasCategorie.prestataire' )
+                          ->andWhere( 'user.id = prestataire.user' );
+                }
 
-                $query->select('user', 'prestataire.denomination', 'categorie.nom', 'prestataire.site_internet');
+                $query->select( 'user', 'prestataire.denomination', 'categorie.nom', 'prestataire.site_internet' );
+            } elseif( $params['status'] === 'comptoir' ) {
+
+                $query->innerJoin( comptoir::class, 'comptoir' )
+                      ->andWhere( 'user.id = comptoir.user' )
+                      ->select( 'user', 'comptoir.denomination', 'comptoir.site_internet' );
+
+                if( ! empty( $params['search'] ) ) {
+                    $query->andWhere( "comptoir.denomination LIKE :search OR user.description LIKE :search" )
+                          ->setParameter( 'search', '%' . $params['search'] . '%' );
+                }
             }
 
-            elseif ($params['status'] === 'comptoir') {
-
-                $query->innerJoin(comptoir::class, 'comptoir')
-                    ->andWhere('user.id = comptoir.user')
-                    ->select('user', 'comptoir.denomination', 'comptoir.site_internet');
-
-                if(!empty($params['search']))
-                    $query->andWhere("comptoir.denomination LIKE :search OR user.description LIKE :search")
-                        ->setParameter('search',  '%' . $params['search']. '%');
-            }
-
-            if(!empty($params['distance']) and !empty($params['longitude']) and !empty($params['latitude'])){
+            if( ! empty( $params['distance'] ) and ! empty( $params['longitude'] )
+                                                   and ! empty( $params['latitude'] ) ) {
                 $query->addSelect(
                     '( 6371 * acos(cos(radians(' . $params['latitude'] . '))' .
                     '* cos( radians( user.latitude ) )' .
@@ -77,8 +81,8 @@ class UserRepository extends ServiceEntityRepository
                     '+ sin( radians(' . $params['latitude'] . ') )' .
                     '* sin( radians( user.latitude ) ) ) ) as distance'
                 )
-                    ->andHaving('distance < :radius')
-                    ->setParameter('radius', $params['distance']);
+                      ->andHaving( 'distance < :radius' )
+                      ->setParameter( 'radius', $params['distance'] );
             }
         }
 

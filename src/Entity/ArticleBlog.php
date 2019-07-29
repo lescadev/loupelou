@@ -12,6 +12,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class ArticleBlog
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -65,7 +66,7 @@ class ArticleBlog
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle( string $title ): self
     {
         $this->title = $title;
 
@@ -77,7 +78,7 @@ class ArticleBlog
         return $this->content;
     }
 
-    public function setContent(string $content): self
+    public function setContent( string $content ): self
     {
         $this->content = $content;
 
@@ -89,22 +90,22 @@ class ArticleBlog
         return $this->image;
     }
 
-    public function setImage(?string $image): self
+    public function setImage( ?string $image ): self
     {
         $this->image = $image;
 
         return $this;
     }
 
-    public function setImageFile(File $image = null)
+    public function setImageFile( File $image = null )
     {
         $this->imageFile = $image;
 
         // VERY IMPORTANT:
         // It is required that at least one field changes if you are using Doctrine,
         // otherwise the event listeners won't be called and the file is lost
-        if ($image) {
-            $this->createdAt = new \DateTime('now');
+        if( $image ) {
+            $this->createdAt = new \DateTime( 'now' );
         }
     }
 
@@ -118,7 +119,7 @@ class ArticleBlog
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt( \DateTimeInterface $createdAt ): self
     {
         $this->createdAt = $createdAt;
 
@@ -130,7 +131,7 @@ class ArticleBlog
         return $this->isActive;
     }
 
-    public function setIsActive(bool $isActive): self
+    public function setIsActive( bool $isActive ): self
     {
         $this->isActive = $isActive;
 
@@ -142,7 +143,7 @@ class ArticleBlog
         return $this->imageDescription;
     }
 
-    public function setImageDescription(string $imageDescription): self
+    public function setImageDescription( string $imageDescription ): self
     {
         $this->imageDescription = $imageDescription;
 

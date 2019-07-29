@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare( strict_types=1 );
 
 namespace DoctrineMigrations;
 
@@ -10,26 +10,30 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190729073651 extends AbstractMigration
+final class Version20190729073651
+    extends AbstractMigration
 {
-    public function getDescription() : string
+
+    public function getDescription(): string
     {
         return '';
     }
 
-    public function up(Schema $schema) : void
+    public function up( Schema $schema ): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf( $this->connection->getDatabasePlatform()->getName() !== 'mysql',
+            'Migration can only be executed safely on \'mysql\'.' );
 
-        $this->addSql('ALTER TABLE informations ADD logo VARCHAR(255) DEFAULT NULL, ADD updated_at DATETIME DEFAULT NULL, DROP image_1, DROP image_2, DROP image_3');
+        $this->addSql( 'ALTER TABLE informations ADD logo VARCHAR(255) DEFAULT NULL, ADD updated_at DATETIME DEFAULT NULL, DROP image_1, DROP image_2, DROP image_3' );
     }
 
-    public function down(Schema $schema) : void
+    public function down( Schema $schema ): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf( $this->connection->getDatabasePlatform()->getName() !== 'mysql',
+            'Migration can only be executed safely on \'mysql\'.' );
 
-        $this->addSql('ALTER TABLE informations ADD image_2 VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci, ADD image_3 VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci, DROP updated_at, CHANGE logo image_1 VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci');
+        $this->addSql( 'ALTER TABLE informations ADD image_2 VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci, ADD image_3 VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci, DROP updated_at, CHANGE logo image_1 VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci' );
     }
 }

@@ -1,30 +1,29 @@
 <div id="menuModif">
     <div class="itemMenu">
-        <a class="modif" href={{path('profil')}}>Profil</a>
+        <a class="modif" href={{ path('profil') }}>Profil</a>
     </div>
     <div class="itemMenu">
-        <a class="modif" href={{path('modifmdp')}}>Modifier mon mot de passe</a>
+        <a class="modif" href={{ path('modifmdp') }}>Modifier mon mot de passe</a>
     </div>
     <div class="itemMenu">
-        <a class="modif" href={{path('modifemail')}}>Modifier mon email</a>
+        <a class="modif" href={{ path('modifemail') }}>Modifier mon email</a>
     </div>
     <div class="itemMenu">
-        <a class="modif" href={{path('modifinfo')}}>Modifier mes informations personnelles</a>
+        <a class="modif" href={{ path('modifinfo') }}>Modifier mes informations personnelles</a>
     </div>
     {% if not is_granted('ROLE_PARTICULIER') %}
-    <div class="itemMenu">
-        <a class="modif" href={{path('modifdescription')}}>Modifier ma description</a>
-    </div>
+        <div class="itemMenu">
+            <a class="modif" href={{ path('modifdescription') }}>Modifier ma description</a>
+        </div>
     {% endif %}
     {% if is_granted('ROLE_COMPTOIR') %}
-    <div class="itemMenu">
-    <br>
-        <a class="modif" href={{path('transaction')}}>Effectuer une transaction</a>
-    </div>
+        <div class="itemMenu">
+            <br> <a class="modif" href={{ path('transaction') }}>Effectuer une transaction</a>
+        </div>
     {% endif %}
     {% if is_granted('ROLE_PARTICULIER') %}
-    <div class="itemMenu">
-        <a class="modif" href={{path('mypdf')}} target="_blank">Formulaire d'inscription</a>
-    </div>
+        <div class="itemMenu">
+            <a class="modif" href={{ path('mypdf') }} target="_blank">Formulaire d'inscription</a>
+        </div>
     {% endif %}
 </div>
