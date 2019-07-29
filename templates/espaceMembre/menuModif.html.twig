@@ -16,4 +16,9 @@
         <a class="modif" href={{path('modifdescription')}}>Modifier ma description</a>
     </div>
     {% endif %}
+    {% if is_granted('ROLE_PARTICULIER') %}
+    <div class="itemMenu">
+        <a class="modif" href={{path('mypdf')}} target="_blank">Formulaire d'inscription</a>
+    </div>
+    {% endif %}
 </div>
