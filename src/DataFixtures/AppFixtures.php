@@ -14,46 +14,56 @@ use App\Entity\ArticleBlog;
 use App\Entity\Evenements;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $encoder;
+
+    /**
+     * AppFixtures constructor
+     * @param UserPasswordEncoderInterface $userPasswordEncoder
+     */
+    public function __construct(UserPasswordEncoderInterface $userPasswordEncoder)
+    {
+        $this->encoder = $userPasswordEncoder;
+    }
+
     public function load(ObjectManager $manager)
     {
 
-        // Création des fixtures de l'entité "admin"
-
+        // Fixtures de l'entité "admin"
         $admin = new Admin();
-
         $admin->setUsername("admin");
-        $admin->setPassword('$argon2i$v=19$m=1024,t=2,p=2$NWtZbUNFQWVNeFF5RngyOQ$6FiZQR/Dfk39XzDI53ge+fAsUC4Kix5ddKFOVG1F55s');
+        $admin->setPassword($this->encoder->encodePassword($admin, 'admin'));
         $admin->setRoles(['ROLE_ADMIN']);
         $manager->persist($admin);
 
 
-        // Création des fixtures de l'entité "Informations"
-
+        // Fixtures de l'entité "Informations"
         $infos = new Informations();
-        $infos->setPresentation("Presentation")
-            ->setSlogan("Coucou");           
+        $infos->setPresentation("<h2>Présentation</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida et nulla ac lacinia. Nullam ut lorem eget leo faucibus tempus id et purus. Vivamus venenatis feugiat commodo. Donec lobortis ut lectus sit amet iaculis. Nunc fringilla turpis sem, interdum interdum dolor faucibus volutpat. Donec sed ante nisi. Cras bibendum molestie odio placerat dictum. Vestibulum venenatis nulla diam, eget mollis magna mollis sed. Cras eget sollicitudin mi. Aliquam in enim vitae libero varius lobortis ut quis libero. Etiam tincidunt egestas metus, at laoreet ante rutrum id.</p>")
+            ->setSlogan("Notre monnaie nous appartient<br />Redonnons-lui du sens !");           
         $manager->persist($infos);
 
-        //fixtures de l'entité "InformationsLegales"
-
+        // Fixtures de l'entité "InformationsLegales"
         $infosL = new InformationsLegales();
-        $infosL->setCgv("zefzefzefz")
-            ->setCgu("zefzefzefz")
-            ->setMentionsLegales("zfzfzfzfzefzefzgegze");
+        $infosL->setCgv("<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida et nulla ac lacinia. Nullam ut lorem eget leo faucibus tempus id et purus. Vivamus venenatis feugiat commodo. Donec lobortis ut lectus sit amet iaculis. Nunc fringilla turpis sem, interdum interdum dolor faucibus volutpat. Donec sed ante nisi. Cras bibendum molestie odio placerat dictum. Vestibulum venenatis nulla diam, eget mollis magna mollis sed. Cras eget sollicitudin mi. Aliquam in enim vitae libero varius lobortis ut quis libero. Etiam tincidunt egestas metus, at laoreet ante rutrum id.</p>")
+            ->setCgu("<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida et nulla ac lacinia. Nullam ut lorem eget leo faucibus tempus id et purus. Vivamus venenatis feugiat commodo. Donec lobortis ut lectus sit amet iaculis. Nunc fringilla turpis sem, interdum interdum dolor faucibus volutpat. Donec sed ante nisi. Cras bibendum molestie odio placerat dictum. Vestibulum venenatis nulla diam, eget mollis magna mollis sed. Cras eget sollicitudin mi. Aliquam in enim vitae libero varius lobortis ut quis libero. Etiam tincidunt egestas metus, at laoreet ante rutrum id.</p>")
+            ->setMentionsLegales("<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida et nulla ac lacinia. Nullam ut lorem eget leo faucibus tempus id et purus. Vivamus venenatis feugiat commodo. Donec lobortis ut lectus sit amet iaculis. Nunc fringilla turpis sem, interdum interdum dolor faucibus volutpat. Donec sed ante nisi. Cras bibendum molestie odio placerat dictum. Vestibulum venenatis nulla diam, eget mollis magna mollis sed. Cras eget sollicitudin mi. Aliquam in enim vitae libero varius lobortis ut quis libero. Etiam tincidunt egestas metus, at laoreet ante rutrum id.</p>");
         $manager->persist($infosL);
 
-        //fixtures de l'entité "User"
-
+        // Fixtures de l'entité "User"
         $user = new User();
         $user->setPrenom("")
             ->setNom("Biocoop Au p’tit épeautre")
             ->setDateCreation(date_create())
             ->setVille("Saint-Junien")
             ->setAdresse("La croix Blanche")
-            ->setPassword("test")
+            ->setPassword($this->encoder->encodePassword($user, 'test'))
             ->setEmail("BioSaintJu@gmail.com")
             ->setCodePostal("87200")
             ->setLatitude(45.9016165)
@@ -67,7 +77,7 @@ class AppFixtures extends Fixture
             ->setDateCreation(date_create())
             ->setVille("Limoges")
             ->setAdresse("337 rue François Perrin")
-            ->setPassword("test")
+            ->setPassword($this->encoder->encodePassword($user2, 'test'))
             ->setEmail("BioLimoges@gmail.com")
             ->setCodePostal("87000")
             ->setLatitude(45.8230892)
@@ -81,7 +91,7 @@ class AppFixtures extends Fixture
             ->setDateCreation(date_create())
             ->setVille("Eymoutiers")
             ->setAdresse("Bussy")
-            ->setPassword("test")
+            ->setPassword($this->encoder->encodePassword($user3, 'test'))
             ->setEmail("Callune@gmail.com")
             ->setCodePostal("87120")
             ->setLatitude(45.724834)
@@ -95,7 +105,7 @@ class AppFixtures extends Fixture
             ->setDateCreation(date_create())
             ->setVille("Brive-La-Gaillarde")
             ->setAdresse("158 avenue Ribot")
-            ->setPassword("test")
+            ->setPassword($this->encoder->encodePassword($user4, 'test'))
             ->setEmail("Guarna@gmail.com")
             ->setCodePostal("19100")
             ->setLatitude(45.1646424)
@@ -109,7 +119,7 @@ class AppFixtures extends Fixture
             ->setDateCreation(date_create())
             ->setVille("LIMOGES")
             ->setAdresse("74 rue Santos Dumont")
-            ->setPassword("test")
+            ->setPassword($this->encoder->encodePassword($user5, 'test'))
             ->setTelephone('0568452154')
             ->setEmail("Gthsfdfga@gmail.com")
             ->setCodePostal("87000")
@@ -120,8 +130,7 @@ class AppFixtures extends Fixture
 
 
 
-        //fixtures de l'entité "Comptoir"
-
+        // Fixtures de l'entité "Comptoir"
         $comptoir = new Comptoir();
         $comptoir->setUser($user);
         $comptoir->setDenomination("Biocoop Au p’tit épeautre");
@@ -141,14 +150,14 @@ class AppFixtures extends Fixture
             ->setDenomination('Bridgets Muffins');
 
 
-        //Set category
+        // Fixtures de l'entité "Categorie"
         $categoryList = ['Association', 'Alimentation', 'Artisanat', 'Sante',
             'Culture', 'Education', 'Hotellerie', 'Social', 'Magasin', 'Restauration', 'Service'];
         for($i=0; $i<count($categoryList); $i++){
             $category[$i] = new Categorie();
             $category[$i]->setNom($categoryList[$i]);
             $manager->persist($category[$i]);
-    }
+        }
 
         $prestaHasCategorie = new PrestataireHasCategorie();
         $prestaHasCategorie->setPrestataire($presta);
@@ -174,8 +183,7 @@ class AppFixtures extends Fixture
         $manager->persist($presta);
         $manager->persist($presta2);
 
-        // Blog fixtures
-
+        // Fixtures de l'entité "Blog"
         for($i = 1; $i <= 10; $i++){
             $article = new ArticleBlog();
             $article->setTitle("Titre de l'article n°$i")
@@ -187,6 +195,7 @@ class AppFixtures extends Fixture
             $manager->persist($article);
         };
 
+        // Fixtures de l'entité "Evenements"
         for($i = 1; $i <= 10; $i++){
             $event = new Evenements();
             $event->setTitle("Événement: $i")
@@ -201,6 +210,5 @@ class AppFixtures extends Fixture
         };
 
         $manager->flush();
-
     }
 }
