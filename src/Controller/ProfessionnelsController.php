@@ -13,6 +13,8 @@ use App\Form\InscriptionProType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use GuzzleHttp\Client;
 use ReCaptcha\ReCaptcha;
+use App\Form\CategorieType;
+use App\Entity\PrestataireHasCategorie;
 
 class ProfessionnelsController extends AbstractController
 {
@@ -32,7 +34,10 @@ class ProfessionnelsController extends AbstractController
 
         $formPro = $this->createForm(InscriptionProType::class);
         $formPro->handleRequest($request);
-        
+
+        $formCategorie = $this->createForm(CategorieType::class);
+        $formCategorie->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             $resp = $recaptcha->verify($request->request->get('recaptchaToken'), $request->getClientIp());
@@ -95,6 +100,7 @@ class ProfessionnelsController extends AbstractController
                 if(!empty($data['presta'])) {
                     $prestataire = new Prestataire;
                     $prestataire->setUser($user);
+                    $categorie = $formCategorie->getData();
                     $user -> setRoles(["ROLE_PRESTATAIRE"]);
 
                     if(!empty($data['siret'])){ 
@@ -107,6 +113,19 @@ class ProfessionnelsController extends AbstractController
                     $prestataire ->setDenomination($data["denomination"]);
                     
                     $entityManager->persist($prestataire);
+
+                    $prestatairehascategorie = new PrestataireHasCategorie;
+                    $prestatairehascategorie->setPrestataire($prestataire);
+       
+                    $categorieObject = array_reduce(
+                        $categorie,
+                        function ($result, $categorie) {
+                            return $categorie;
+                        }
+                    );
+
+                    $prestatairehascategorie->setCategorie($categorieObject);
+                    $entityManager->persist($prestatairehascategorie);
                 }
 
 
@@ -152,6 +171,7 @@ class ProfessionnelsController extends AbstractController
         return $this->render('professionnels/professionnels.html.twig', [
             'form' => $form->createView(),
             'formPro' => $formPro->createView(),
+            'formCategorie' => $formCategorie->createView(),
             'siteKey' => $this->getParameter('google_recaptcha_site_key'),
         ]);
     }

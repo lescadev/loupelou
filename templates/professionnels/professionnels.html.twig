@@ -53,12 +53,20 @@
                     }}
                 </div>
                 <div class="form-group">
-                    {{ form_row(formPro.presta, {'attr' : {'placeholder': "Prestataire","class": "form-control"}})
+                    {{ form_row(formPro.presta, {'attr' : {'placeholder': "Prestataire","class": "form-control", "id":"presta", "onClick":"check()"}})
                     }}
                 </div>
+              
                 <div class="form-group">
-                    {{ form_row(formPro.compt, {'attr' : {'placeholder': "Comptoir","class": "form-control"}})
+                    {{ form_row(formPro.compt, {'attr' : {'placeholder': "Comptoir","class": "form-control", "id":"presta"}})
                     }}
+                </div>
+        
+                
+                <div class="form-group">
+                    {{ form_row(formCategorie.categorie, {'attr' : {"class":"custom-select ","id":"categorie", "disabled":"disabled"}})
+                    }}
+
                 </div>
                 {# **************** #}
                 {# PASSWORD #}
@@ -98,6 +106,18 @@
             document.getElementById('recaptchaToken').value = token;
         });
     });
+
+
+    function check(){
+        const categorie = document.getElementById("{{ formCategorie.categorie.vars.id }}");
+        const presta = document.getElementById("{{ formPro.presta.vars.id }}");
+        if (presta.checked){
+            categorie.disabled = false;
+        }else{
+            categorie.disabled = true;
+        }
+    }
+
 </script>
 
 {% endblock %}
