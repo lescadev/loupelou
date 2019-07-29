@@ -32,7 +32,7 @@
                 </button>
 
                     <div class="collapse navbar-collapse row">
-                        <h1 class="col-10 blanc" id="slogan">{{ slogan.getInfo() | raw }}</h1>
+                        <a href="{{ path('index') }}" class="col-10 blanc text-decoration-none"  id="slogan"> <h1> {{ slogan.getInfo() | raw }} </h1> </a> 
                             {% if not app.user %}
                                 <div class="col-2 text-right">
                                     <a class="nav-link btn-sm text-center alternative btn-connexion" href={{ path('login') }}><i class="fa fa-2x fa-user" aria-hidden="true"></i></a>
