@@ -73,23 +73,40 @@ Nous contacter - {{ parent() }}
         <div class="card border text-center mb-3" style="max-width: 20rem;">
             <div class="card-body">
                 <h5 class="card-title">Email</h5>
-                <p class="card-text">01monnaielocalelimousine@gmail.com</p>
+                <p class="card-text">{{ mail }}</p>
             </div>
         </div>
         <div class="card border text-center mb-3" style="max-width: 20rem;">
             <div class="card-body">
                 <h5 class="card-title">Téléphone</h5>
-                <p class="card-text">05-55-55-55-55</p>
+                <p class="card-text">{{ tel }}</p>
             </div>
         </div>
         <div class="card border text-center mb-3" style="max-width: 20rem;">
             <div class="card-body">
                 <h5 class="card-title">Réseaux sociaux</h5>
                 <p class="card-text">
-                    <a class="card-link principale" href={{asset('https://www.facebook.com/lechemindupelou/')}}
-                        target="_blank">
+                    {% if facebook %}
+                    <div>
+                    <a class="card-link principale" href='{{ facebook }}' target="_blank">
                         <i class="fab fa-facebook-square facebook-icon-contact"></i>&nbsp;
                         &nbsp;Facebook</a>
+                    </div>
+                    {% endif %}
+                    {% if twitter %}
+                        <div>
+                        <a class="card-link principale" href='{{ twitter }}' target="_blank">
+                            <i class="fab fa-twitter-square facebook-icon-contact"></i>&nbsp;
+                            &nbsp;Twitter</a>
+                        </div>
+                    {% endif %}
+                    {% if insta %}
+                        <div>
+                        <a class="card-link principale" href='{{ insta }}' target="_blank">
+                            <i class="fab fa-instagram facebook-icon-contact"></i>&nbsp;
+                            &nbsp;Instagram</a>
+                        </div>
+                    {% endif %}
                 </p>
             </div>
         </div>
