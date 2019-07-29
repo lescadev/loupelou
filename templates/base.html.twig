@@ -35,7 +35,7 @@
                         <h1 class="col-10 blanc" id="slogan">{{ slogan.getInfo() | raw }}</h1>
                             {% if not app.user %}
                                 <div class="col-2 text-right">
-                                    <a class="nav-link btn-sm text-center alternative btn-connexion" href={{ path('login') }}><i class="fa fa-2x fa-sign-in" aria-hidden="true"></i></a>
+                                    <a class="nav-link btn-sm text-center alternative btn-connexion" href={{ path('login') }}><i class="fa fa-2x fa-user" aria-hidden="true"></i></a>
                                 </div>
                             {% else %}
                                 <div class="col-1">
