@@ -100,10 +100,15 @@ class TransactionController extends AbstractController
 
         }
 
+        $user = $this->getUser();
+        $comptoir = $comptoirRepository->findBy(array("user"=> $user))[0];
+
 
 		return $this->render("transaction/transaction.html.twig", [
             'controller_name' => 'TransactionController',
-            'form' => $form -> createView()
+            'nom' => $comptoir->getDenomination(),
+            'solde' => $comptoir->getSolde(),
+            'form' => $form->createView()
         ]);
 	}
 }
