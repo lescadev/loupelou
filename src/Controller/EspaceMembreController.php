@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Security;
 
 class EspaceMembreController extends AbstractController {
-
+    
 
     /**
      * @Route("/profil", name="profil")
@@ -26,7 +26,8 @@ class EspaceMembreController extends AbstractController {
         'adresse' => $user->getAdresse(),
         'ville' => $user->getVille(),
         'codepostal' => $user->getCodePostal(),
-        'description' => $user->getDescription()]);
+        'description' => $user->getDescription(),
+        "isactive" => $user->getIsActive()]);
     }
     /**
      * @Route("/profil/modifmdp", name="modifmdp")
@@ -50,7 +51,8 @@ class EspaceMembreController extends AbstractController {
         }
 
         return $this->render("/espaceMembre/modifMdp.html.twig", [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'isactive' => $user->getIsActive()
         ]);
     }
     /**
@@ -74,7 +76,8 @@ class EspaceMembreController extends AbstractController {
 
         return $this->render("/espaceMembre/modifEmail.html.twig", [
             "form" => $form->createView(),
-            "mail" => $user->getEmail()
+            "mail" => $user->getEmail(),
+            "isactive" => $user->getIsActive()
         ]);
     }
     /**
@@ -103,7 +106,8 @@ class EspaceMembreController extends AbstractController {
         }
         return $this->render("/espaceMembre/modifInfo.html.twig", [
             'form' => $form->createView(),
-            'user' => $user
+            'user' => $user,
+            'isactive' => $user->getIsActive()
         ]);
     }
     /**

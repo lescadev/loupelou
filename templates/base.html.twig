@@ -1,70 +1,122 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <meta content="width=device-width, initial-scale=1" name="viewport">
-        <title>{% block title %}Loupelou{% endblock %}
+        <meta charset="UTF-8"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <title>
+            {% block title %}Lou Pélou - Monnaie locale{% endblock %}
         </title>
-        {% block stylesheets %}{% endblock %}
-        <link href="/normalize.css" rel="stylesheet">
-        <link href="/style.css" rel="stylesheet">
-        <link crossorigin="" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" rel="stylesheet"/>
-    </head>
 
-    <body>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+
+        {% block stylesheets %}
+            <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet"/>
+            <link crossorigin="" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" rel="stylesheet"/>
+            <link href="/css/main.min.css" rel="stylesheet"/>
+        {% endblock %}
+</head>
+
+<body>
         {% block navbar %}
-        <header>
-            <a href={{ path('index') }}><img id="logo" src="/logoloup.png" alt="logo lou pélou"></a>
-            <h1 id="slogan">notre monnaie nous appartient<br>redonnons lui du sens !</h1>
-            {% if not app.user %}
-                <a href={{ path('login') }}><img id="iconuser" src="/iconuser.png" alt="connexion/inscription"></a>
-            {% else %}
-                <a href={{ path('app_logout') }}>Se déconnecter</a>
-                <a href={{ path('profil') }}><img id="iconuser" src="/iconuser.png" alt="connexion/inscription"></a>
-            {% endif %}
+        <header class="principale bg-secondaire">
+            <nav class="navbar navbar-expand-md navbar-dark bg-secondaire d-flex flex-fill">
+                <a class="navbar-brand" href={{ path('index') }}><img src="/uploads/images/logo/{{logo.getInfo()}}" width="100"
+                        alt="lou pelou"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse">
+                    <h1 class="ml-auto blanc" id="slogan">{{ slogan.getInfo() | raw }}</h1>
+                    {% if not app.user %}
+                        <a class="nav-link btn-sm btn-outline text-center alternative btn-connexion  ml-auto" href={{ path('login') }}>Connexion</a>
+                    {% else %}
+                        <a href="{{ path('app_logout') }}" class="alternative ml-auto">Déconnexion</a>
+                        <a class="nav-link alternative  ml-auto" href={{ path('profil') }}><i class="fas fa-user"></i></a>
+                    {% endif %}
+                </div>
+            </nav>
         </header>
 
-        <nav>
-            <ul id="ul1">
-                <li><a href={{ path('procurer') }}>où s'en procurer</a></li>
-                <li><a href={{ path('utiliser') }}>où les utiliser</a></li>
-                <li class="dropdown">
-                    <a href={{ path('rejoindre') }} class="dropbtn">nous rejoindre</a>
-                    <div class="dropdown-content">
-                        <a href={{ path('inscription_particulier') }}>particuliers</a>
-                        <a href={{ path('inscription_pro') }}>professionnels</a>
+    <nav class="navbar navigation navbar-expand-md navbar-dark bg-principale sticky-top">
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto flex-fill justify-content-between">
+                <li class="nav-item home-icon">
+                    <a class="nav-link" href={{ path('index') }}><i class="fas fa-home"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href={{ path('procurer') }}>Où s'en procurer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href={{ path('utiliser') }}>Où les utiliser</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Nous rejoindre</a>
+                    <div class="dropdown-menu" x-placement="bottom-start"
+                        style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <a class="dropdown-item" href={{ path('inscription_particulier') }}>Particuliers</a>
+                        <a class="dropdown-item" href={{ path('inscription_pro') }}>Professionnels</a>
                     </div>
                 </li>
-                <li><a href={{ path('contacter') }}>nous contacter</a></li>
-                <li><a href={{ path('evenements') }}>évènements</a></li>
-                <li><a href={{ path('blog') }}>blog</a></li>
-                <li><a href="https://www.facebook.com/lechemindupelou/" target="_blank"><img id="fb" src="/facebookicon.svg" alt="facebook"></a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href={{ path('evenements') }}>Événements</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href={{ path('blog') }}>Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href={{ path('contacter') }}>Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% endblock %}
+
+        <section class="container mt-5 mb-5">
+            {% block body %}{% endblock %}
+        </section>
+
+    {% block footer %}
+    <footer class="mt-5">
+        <nav class="navbar navbar-expand-md navbar-dark bg-principale">
+            <ul class="navbar-nav mr-auto flex-fill justify-content-center">
+                <li class="nav-item ">
+                    <a class="nav-link alternative opac-moyen" href={{ path('mentions') }}>Mentions légales</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link alternative opac-moyen" href={{ path('cgv') }}>Cgv</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link alternative opac-moyen" href={{ path('cgu') }}>Cgu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link alternative opac-moyen" href={{ path('statut') }}>Statut</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link alternative opac-moyen" href={{ path('reglement') }}>Règlement intérieur</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link alternative opac-moyen" href={{ path('rendu') }}>Compte rendu ag</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link alternative opac-moyen" href={{ path('contacter') }}>Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link alternative opac-moyen" href="https://www.facebook.com/lechemindupelou/"target="_blank"><i class="fab fa-facebook-square facebook-icon"></i></a>
+                </li>
             </ul>
         </nav>
-        {% endblock %}
-
-        <section>
-        {% block body %}
-        {% endblock %}
-        </section>
-      
-        {% block footer %}
-        <footer>
-            <ul id="ul2">
-                <li><a href={{ path('mentions') }}>mentions légales</a></li>
-                <li><a href={{ path('cgv') }}>cgv</a></li>
-                <li><a href={{ path('cgu') }}>cgu</a></li>
-                <li><a href={{ path('statut') }}>statut</a></li>
-                <li><a href={{ path('reglement') }}>règlement intérieur</a></li>
-                <li><a href={{ path('rendu') }}>compte rendu ag 2019</a></li>
-                <li><a href={{ path('contacter') }}>contact</a></li>
-                <li><a href="https://www.facebook.com/lechemindupelou/" target="_blank"><img id="fb" src="/facebookicon.svg"></img></a></li>
-            </ul>
-        </footer>
-        {% endblock %}
-
-        {% block javascripts %}{% endblock %}
-        <script src="https://kit.fontawesome.com/84a428c253.js"></script>
-    
+    </footer>
+    {% endblock %}
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/84a428c253.js"></script>
+    {% block javascripts %}{% endblock %}
     </body>
+    
 </html>

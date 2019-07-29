@@ -1,0 +1,28 @@
+// nav {
+//   background-color: $nav-color;
+// }
+
+// Couleur bouton actif dans Navbar
+ .navbar-dark .navbar-nav .show > .nav-link,
+ .navbar-dark .navbar-nav .active > .nav-link,
+ .navbar-dark .navbar-nav .nav-link.show,
+ .navbar-dark .navbar-nav .nav-link.active {
+   color: $alternative !important;
+   font-weight: bolder;
+ }
+
+ // Dropdown
+.dropdown-menu {
+  background-color: $principale;
+}
+.dropdown-item {
+  color: $alternative;
+}
+.dropdown-item:hover {
+  background-color: $alternative;
+  color: $principale;
+}
+
+.navigation {
+  padding: .0rem 1rem;
+}
