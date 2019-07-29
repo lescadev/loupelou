@@ -4,3 +4,4 @@ twig:
     strict_variables: '%kernel.debug%'
     globals:
         slogan: '@App\Service\Slogan'
+        logo: '@App\Service\Logo'

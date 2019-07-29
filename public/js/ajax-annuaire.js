@@ -8,7 +8,6 @@ function ajaxPost(data) {
     })
         .then(function(data){
             let json = JSON.parse(data);
-
             annuaire.innerHTML = "";
             annuaire.insertAdjacentHTML('beforeend', json.card);
             displayMap(json);
