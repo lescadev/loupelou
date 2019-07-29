@@ -32,9 +32,15 @@ class TransactionController extends AbstractController
 
             $user = $this->getUser();
             $comptoir = $comptoirRepository->findBy(array("user"=> $user))[0];
-            if(($comptoir->getSolde() - $montant) <=50)
+            if(($comptoir->getSolde() - $montant) <0)
             {
-            	$this->addFlash('error', "Non, t'es pauvre.");
+            	$this->addFlash('error', "Transaction refusée, solde insuffisant! ");
+            	return $this->redirectToRoute('transaction');
+
+            }
+            else if(($comptoir->getSolde() - $montant) <=50)
+            {
+            	$this->addFlash('error', "Transaction refusée, votre solde risque d'être trop bas! ");
             	return $this->redirectToRoute('transaction');
 
             }
@@ -50,7 +56,7 @@ class TransactionController extends AbstractController
                         }
                     );
             if(empty($adherent)){
-        	$this->addFlash('error', "Hopopop t'as faux!");
+        	$this->addFlash('error', "Adhérent non reconnu.");
         	return $this->redirectToRoute('transaction');
         }
             $transaction->setUser($adherent[0]);
