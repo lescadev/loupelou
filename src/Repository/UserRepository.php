@@ -6,8 +6,8 @@ use App\Entity\Categorie;
 use App\Entity\User;
 use App\Entity\Prestataire;
 use App\Entity\Comptoir;
-use App\Entity\PrestataireHasCategorie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 
@@ -19,71 +19,70 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class UserRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    private $em;
+
+    public function __construct(RegistryInterface $registry, EntityManagerInterface $em)
     {
         parent::__construct($registry, User::class);
+        $this->em =$em;
     }
 
     public function findByParams(array $params){
+        $query= $this->em->createNativeQuery('SELECT nom FROM categorie WHERE id = 1');
 
-        $query = $this->createQueryBuilder('user');
+        // $query = $this->createQueryBuilder('user');
 
-        if(!empty($params['status'])){
-            if($params['status'] === 'prestataire') {
+        // if(!empty($params['status'])){
+        //     if($params['status'] === 'prestataire') {
 
-                $query->innerJoin(prestataire::class, 'prestataire')
-                    ->andWhere('user.id = prestataire.user')
-                    ->select('user', 'prestataire.denomination');
+        //         $query->innerJoin(prestataire::class, 'prestataire')
+        //             ->andWhere('user.id = prestataire.user')
+        //             ->select('user', 'prestataire.denomination');
 
-                if(!empty($params['search']))
-                    $query->andWhere("prestataire.denomination LIKE :search OR user.description LIKE :search")
-                        ->setParameter('search', '%' . $params['search']. '%');
+        //         if(!empty($params['search']))
+        //             $query->andWhere("prestataire.denomination LIKE :search OR user.description LIKE :search")
+        //                 ->setParameter('search', '%' . $params['search']. '%');
 
-                if(!empty($params['filter'] and $params['filter'] !== 'Tous les services'))
-                    $query->innerJoin(PrestataireHasCategorie::class, 'prestaHasCategorie')
-                        ->innerJoin(Categorie::class, 'categorie')
-                        ->andWhere('categorie.nom = :filter')
-                        ->setParameter('filter', $params['filter'])
-                        ->andWhere('prestaHasCategorie.categorie = categorie.id')
-                        ->andWhere('prestataire.id = prestaHasCategorie.prestataire')
-                        ->andWhere('user.id = prestataire.user');
-                else
-                    $query->innerJoin(PrestataireHasCategorie::class, 'prestaHasCategorie')
-                        ->innerJoin(Categorie::class, 'categorie')
-                        ->andWhere('prestaHasCategorie.categorie = categorie.id')
-                        ->andWhere('prestataire.id = prestaHasCategorie.prestataire')
-                        ->andWhere('user.id = prestataire.user');
+        //         if(!empty($params['filter'] and $params['filter'] !== 'Tous les services'))
+        //             $query->join(Categorie::class, 'c')
+        //                   ->where("c.nom = '{$params['filter']}'");
+        //                   var_dump($query->getSQL()); exit;
+        //         // else
+        //         //     $query->innerJoin(Categorie::class, 'categorie')
+        //         //         ->andWhere('prestaHasCategorie.categorie = categorie.id')
+        //         //         ->andWhere('prestataire.id = prestaHasCategorie.prestataire')
+        //         //         ->andWhere('user.id = prestataire.user');
 
-                $query->select('user', 'prestataire.denomination', 'categorie.nom');
-            }
+        //         $query->select('user', 'prestataire.denomination', 'c.nom');
+        //     }
 
-            elseif ($params['status'] === 'comptoir') {
+        //     elseif ($params['status'] === 'comptoir') {
 
-                $query->innerJoin(comptoir::class, 'comptoir')
-                    ->andWhere('user.id = comptoir.user')
-                    ->select('user', 'comptoir.denomination');
+        //         $query->innerJoin(comptoir::class, 'comptoir')
+        //             ->andWhere('user.id = comptoir.user')
+        //             ->select('user', 'comptoir.denomination');
 
-                if(!empty($params['search']))
-                    $query->andWhere("comptoir.denomination LIKE :search OR user.description LIKE :search")
-                        ->setParameter('search',  '%' . $params['search']. '%');
-            }
+        //         if(!empty($params['search']))
+        //             $query->andWhere("comptoir.denomination LIKE :search OR user.description LIKE :search")
+        //                 ->setParameter('search',  '%' . $params['search']. '%');
+        //     }
 
-            if(!empty($params['distance']) and !empty($params['longitude']) and !empty($params['latitude'])){
-                $query->addSelect(
-                    '( 6371 * acos(cos(radians(' . $params['latitude'] . '))' .
-                    '* cos( radians( user.latitude ) )' .
-                    '* cos( radians( user.longitude )' .
-                    '- radians(' . $params['longitude'] . ') )' .
-                    '+ sin( radians(' . $params['latitude'] . ') )' .
-                    '* sin( radians( user.latitude ) ) ) ) as distance'
-                )
-                    ->andHaving('distance < :radius')
-                    ->setParameter('radius', $params['distance']);
-            }
-        }
+        //     if(!empty($params['distance']) and !empty($params['longitude']) and !empty($params['latitude'])){
+        //         $query->addSelect(
+        //             '( 6371 * acos(cos(radians(' . $params['latitude'] . '))' .
+        //             '* cos( radians( user.latitude ) )' .
+        //             '* cos( radians( user.longitude )' .
+        //             '- radians(' . $params['longitude'] . ') )' .
+        //             '+ sin( radians(' . $params['latitude'] . ') )' .
+        //             '* sin( radians( user.latitude ) ) ) ) as distance'
+        //         )
+        //             ->andHaving('distance < :radius')
+        //             ->setParameter('radius', $params['distance']);
+        //     }
+        // }
 
-        $res = $query->getQuery()->getArrayResult();
-
+        // $res = $query->getQuery()->getArrayResult();
+        $res= $query->getResult();
         return $res;
     }
 

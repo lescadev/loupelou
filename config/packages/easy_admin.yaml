@@ -10,7 +10,7 @@ easy_admin:
             - label: "Utilisateurs"
               icon: "user-o"
               children:
-                  - {entity: 'User'}
+                #   - {entity: 'User'}
                   - {entity: 'Particulier'}
                   - {entity: 'Prestataire'}
                   - {entity: 'Comptoir'}
@@ -34,49 +34,86 @@ easy_admin:
 
               
     entities:
-        User:
-            class: App\Entity\User
-            label: "Membres"
-            list:
-                fields: [{ property: 'is_active',  type: 'toggle' }, 'prenom', 'nom', 'email', 'adresse','code_postal', 'ville']
-                actions:
-                    - {name: 'new', label: 'Ajouter membre' }
-            form:
-                title: 'Adhérent'
-                fields:
-                    - {property: 'email'}
-                    - {property: 'password'}
-                    - {property: 'prenom'}
-                    - {property: 'nom'}
-                    - {property: 'telephone'}
-                    - {property: 'adresse'}
-                    - {property: 'ville'}
-                    - {property: 'code_postal'}
-                    - {property: 'date_creation'}
+        # User:
+        #     class: App\Entity\User
+        #     label: "Tous les adhérents"
+        #     list:
+        #         fields: [{ property: 'is_active',  type: 'toggle' }, 'prenom', 'nom', 'email', 'adresse','code_postal', 'ville']
+        #         actions:
+        #             - {name: 'new', label: 'Ajouter membre' }
+        #     form:
+        #         title: 'Adhérent'
+        #         fields:
+        #             - {property: 'email'}
+        #             - {property: 'prenom'}
+        #             - {property: 'nom'}
+        #             - {property: 'telephone'}
+        #             - {property: 'adresse'}
+        #             - {property: 'ville'}
+        #             - {property: 'code_postal'}
+        #             - {property: 'date_creation'}
+        #     disabled_actions: ['delete']
         Particulier:
             label: "Particuliers"
             class: App\Entity\Particulier
+            disabled_actions: ['new']
+            list:
+                fields:
+                    [{ property: 'is_active',  type: 'toggle', label: 'Actif' }, {property: 'nom', label: 'Nom'}, {property: 'prenom', label: 'Prénom'},{property: 'email', label: 'Email'}, {property: 'adresse', label: 'Adresse'}, {property: 'code_postal', label: 'Code postal'} ]
             form:
                 title: 'Particulier'
-            list:
-                actions:
-                    - {name: 'new', label: 'Ajouter Particuler' }
+                fields:
+                    - {property: 'nom', label: 'Nom', type: 'text'}
+                    - {property: 'prenom', label: 'Prénom', type: 'text'}
+                    - {property: 'telephone', label: 'Télépone', type: 'text'}
+                    - {property: 'email', label: 'Email', type: 'email'}
+                    - {property: 'adresse', label: 'Adresse', type: 'text' }
+                    - {property: 'code_postal', label: 'Code postal', type: 'text' }
+                    - {property: 'ville', label: 'Ville', type: 'text'}
+
         Prestataire:
-            label: "Prestataires"
             class: App\Entity\Prestataire
-            form:
-                title: 'Prestataire'
+            label: 'Prestataires'
+            disabled_actions: ['new']
             list:
+                fields: [{ property: 'is_active',  type: 'toggle', label: 'Actif' }, 'prenom', 'nom', {property: 'denomination', label: 'Nom enseigne'}, 'telephone']
                 actions:
                     - {name: 'new', label: 'Ajouter Prestataire' }
+            form:
+                title: 'Prestataire'
+                fields: 
+                    - {property: 'nom', label: 'Nom', type: 'text'}
+                    - {property: 'prenom', label: 'Prénom', type: 'text'}
+                    - {property: 'denomination', label: 'Nom enseigne', type: 'text'}
+                    - {property: 'telephone', label: 'Télépone', type: 'text'}
+                    - {property: 'email', label: 'Email', type: 'email'}
+                    - {property: 'adresse', label: 'Adresse', type: 'text' }
+                    - {property: 'code_postal', label: 'Code postal', type: 'text' }
+                    - {property: 'ville', label: 'Ville', type: 'text'}
+                    - {property: 'siret', label: 'Siret', type: 'text'}
+                    - {property: 'site_internet', label: 'Site', type: 'text'}
+                    - {property: 'categories', label: 'Catégorie'}        
         Comptoir:
             label: "Comptoirs"
             class: App\Entity\Comptoir
+            disabled_actions: ['new']
             form:
                 title: 'Comptoir'
+                fields:
+                    - {property: 'nom', label: 'Nom', type: 'text'}
+                    - {property: 'prenom', label: 'Prénom', type: 'text'}
+                    - {property: 'denomination', label: 'Nom enseigne', type: 'text'}
+                    - {property: 'telephone', label: 'Télépone', type: 'text'}
+                    - {property: 'email', label: 'Email', type: 'email'}
+                    - {property: 'adresse', label: 'Adresse', type: 'text' }
+                    - {property: 'code_postal', label: 'Code postal', type: 'text' }
+                    - {property: 'ville', label: 'Ville', type: 'text'}
+                    - {property: 'siret', label: 'Siret', type: 'text'}
+                    - {property: 'site_internet', label: 'Site', type: 'text'}
             list:
                 actions:
                     - {name: 'new', label: 'Ajouter Comptoir' }
+                fields: [{ property: 'is_active',  type: 'toggle', label: 'Actif' }, 'prenom', 'nom', {property: 'denomination', label: 'Nom enseigne'}, 'telephone']
            
         InformationsLegales:
             class: App\Entity\InformationsLegales

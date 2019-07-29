@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+// use Symfony\Component\Validator\Constraints\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PrestataireRepository")
@@ -37,6 +40,18 @@ class Prestataire
      */
     private $denomination;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Categorie", inversedBy="prestataires")
+     * @ORM\JoinTable(name="prestataire_categorie", 
+    *   joinColumns={ 
+    *     @ORM\JoinColumn(name="id", referencedColumnName="id")
+    *   },
+    *   inverseJoinColumns={ 
+    *     @ORM\JoinColumn(name="categorie", referencedColumnName="id")
+    *   })
+     */
+    private $categories;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -50,6 +65,24 @@ class Prestataire
     public function setUser(User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function __construct() {
+        // $this->category = new Collection();
+        $this->categories = new ArrayCollection();
+    }
+
+    public function getCategories()
+    {
+        return $this->categories;
+        
+    }
+
+    public function setCategories(Categorie $categories)
+    {
+        $this->categories = $categories;
 
         return $this;
     }
@@ -89,4 +122,103 @@ class Prestataire
 
         return $this;
     }
+
+    public function getNom()
+    {
+        return $this->getUser()->getNom();
+    }
+
+    public function setNom(string $nom)
+    {
+        return $this->getUser()->setNom($nom);
+    }
+
+    public function getPrenom()
+    {
+        return $this->getUser()->getPrenom();
+    }
+
+    public function setPrenom(string $prenom)
+    {
+        return $this->getUser()->setPrenom($prenom);
+    }
+
+    public function getIsActive()
+    {
+        return $this->getUser()->getIsActive();
+    }
+
+    public function setIsActive(bool $isActive)
+    {
+        return $this->getUser()->setIsActive($isActive);
+    }
+
+    public function getTelephone()
+    {
+        return $this->getUser()->getTelephone();
+    }
+
+    public function setTelephone(string $telephone)
+    {
+        return $this->getUser()->setTelephone($telephone);
+    }
+
+    public function getEmail()
+    {
+        return $this->getUser()->getEmail();
+    }
+
+    public function setEmail(string $email)
+    {
+        return $this->getUser()->setEmail($email);
+    }
+
+    public function getAdresse()
+    {
+        return $this->getUser()->getAdresse();
+    }
+
+    public function setAdresse(string $adresse)
+    {
+        return $this->getUser()->setAdresse($adresse);
+    }
+
+    public function getVille()
+    {
+        return $this->getUser()->getVille();
+    }
+
+    public function setVille(string $ville)
+    {
+        return $this->getUser()->setVille($ville);
+    }
+
+    public function getCodePostal()
+    {
+        return $this->getUser()->getCodePostal();
+    }
+
+    public function setCodePostal(string $codePostal)
+    {
+        return $this->getUser()->setCodePostal($codePostal);
+    }
+
+    public function addCategory(Categorie $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Categorie $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+        }
+
+        return $this;
+    }
+
 }

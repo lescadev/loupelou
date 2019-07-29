@@ -6,7 +6,6 @@ use App\Entity\Admin;
 use App\Entity\Prestataire;
 use App\Entity\User;
 use App\Entity\Comptoir;
-use App\Entity\PrestataireHasCategorie;
 use App\Entity\Categorie;
 use App\Entity\Informations;
 use App\Entity\InformationsLegales;
@@ -115,7 +114,6 @@ class AppFixtures extends Fixture
             ->setLongitude(1.274990)
             ->setRoles(['ROLE_USER']);
 
-
         //fixtures de l'entité "Comptoir"
 
         $comptoir = new Comptoir();
@@ -133,34 +131,24 @@ class AppFixtures extends Fixture
         $presta2->setUser($user4);
         $presta2->setDenomination("Guarana Café");
         $presta3 = new Prestataire();
-        $presta3->setUser($user5)
-            ->setDenomination('Bridgets Muffins');
-
-
+        $presta3->setUser($user5);
+        $presta3->setDenomination('Bridgets Muffins');
+        
         //Set category
         $categoryList = ['Association', 'Alimentation', 'Artisanat', 'Sante',
             'Culture', 'Education', 'Hotellerie', 'Social', 'Magasin', 'Restauration', 'Service'];
         for($i=0; $i<count($categoryList); $i++){
-            $category[$i] = new Categorie();
+            $category[$i] = new Categorie([]);
             $category[$i]->setNom($categoryList[$i]);
             $manager->persist($category[$i]);
     }
 
-        $prestaHasCategorie = new PrestataireHasCategorie();
-        $prestaHasCategorie->setPrestataire($presta);
-        $prestaHasCategorie->setCategorie($category[0]);
+        //Set Presta category
+        $presta->addCategory($category[1]);
+        $presta2->addCategory($category[6]);
+        $presta3->addCategory($category[3]);
 
-        $prestaHasCategorie1 = new PrestataireHasCategorie();
-        $prestaHasCategorie1->setPrestataire($presta2);
-        $prestaHasCategorie1->setCategorie($category[9]);
 
-        $prestaHasCategorie2 = new PrestataireHasCategorie();
-        $prestaHasCategorie2->setPrestataire($presta3);
-        $prestaHasCategorie2->setCategorie($category[1]);
-
-        $manager->persist($prestaHasCategorie);
-        $manager->persist($prestaHasCategorie1);
-        $manager->persist($prestaHasCategorie2);
         $manager->persist($user);
         $manager->persist($user2);
         $manager->persist($user5);
