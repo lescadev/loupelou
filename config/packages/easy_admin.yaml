@@ -36,7 +36,6 @@ easy_admin:
                 icon: "money"
                 entity: 'Transactions'
 
-
     entities:
         User:
             class: App\Entity\User
@@ -64,6 +63,7 @@ easy_admin:
             form:
                 title: 'Particulier'
             list:
+                fields: [{property: 'user.nom', label: 'Nom'}, {property: 'user.prenom', label: 'Prénom'}, {property: 'user.email', label: 'Email'}, {property: 'user.adresse', label: 'Adresse'},{property: 'user.code_postal', label: 'Code postal'}, {property: 'user.ville', label: 'Ville'}]
                 actions:
                     - {name: 'new', label: 'Ajouter Particuler' }
         Prestataire:
@@ -121,7 +121,6 @@ easy_admin:
                 actions: ['-new', '-delete']
                 fields: [{property: 'logo', type: 'image', label: 'Logo', base_path: '%app.path.logo_images%'}, {property: 'slogan', label: 'Slogan'}, {property: 'titre_presentation', label: 'Titre Présentation'}, {property: 'presentation', label: 'Présentation'}, {property: 'adresse', label: 'Adresse'}, {property: 'code_postal', label: 'Code postal'}, {property: 'ville', label: 'Ville'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Email'}]
 
-
         ArticleBlog:
             class: App\Entity\ArticleBlog
             label: "Blog"
@@ -136,9 +135,6 @@ easy_admin:
                     - {property: 'imageFile', type: 'vich_image', label: 'Image'}
                     - {property: 'createdAt', label: 'Date création'}
                     - {property: 'imageDescription', label: 'Description image'}
-
-
-
 
         Evenements:
             class: App\Entity\Evenements

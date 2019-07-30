@@ -3,11 +3,12 @@
 namespace App\DataFixtures;
 
 use App\Entity\Admin;
-use App\Entity\Prestataire;
 use App\Entity\User;
+use App\Entity\Particulier;
+use App\Entity\Prestataire;
 use App\Entity\Comptoir;
-use App\Entity\PrestataireHasCategorie;
 use App\Entity\Categorie;
+use App\Entity\PrestataireHasCategorie;
 use App\Entity\Informations;
 use App\Entity\InformationsLegales;
 use App\Entity\ArticleBlog;
@@ -76,7 +77,7 @@ class AppFixtures
              ->setCodePostal( "87200" )
              ->setLatitude( 45.9016165 )
              ->setLongitude( 0.922393 )
-             ->setRoles( [ 'ROLE_USER' ] );
+             ->setRoles( [ 'ROLE_COMPTOIR' ] );
         $manager->persist( $user );
 
         $user2 = new User();
@@ -90,7 +91,7 @@ class AppFixtures
               ->setCodePostal( "87000" )
               ->setLatitude( 45.8230892 )
               ->setLongitude( 1.22248224664746 )
-              ->setRoles( [ 'ROLE_USER' ] );
+              ->setRoles( [ 'ROLE_COMPTOIR' ] );
         $manager->persist( $user2 );
 
         $user3 = new User();
@@ -104,8 +105,9 @@ class AppFixtures
               ->setCodePostal( "87120" )
               ->setLatitude( 45.724834 )
               ->setLongitude( 1.6817552 )
-              ->setRoles( [ 'ROLE_USER' ] )
+              ->setRoles( [ 'ROLE_PRESTATAIRE' ] )
               ->setDescription( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac ipsum eleifend, convallis tellus ut, convallis nibh. Integer vitae lobortis quam, in auctor odio. Duis pulvinar sollicitudin leo, ut tincidunt diam hendrerit sit amet. Praesent porta vehicula neque sed fringilla. Integer eu commodo lorem, id egestas ipsum. Praesent lobortis ut turpis a cursus. Aenean suscipit ut nunc at sodales. Duis congue sollicitudin turpis eu volutpat. Nunc sed urna vitae lectus bibendum iaculis. Mauris elementum magna mi. Suspendisse orci felis, vulputate a auctor vel, luctus vitae justo.' );
+        $manager->persist( $user3 );
 
         $user4 = new User();
         $user4->setPrenom( "" )
@@ -118,8 +120,9 @@ class AppFixtures
               ->setCodePostal( "19100" )
               ->setLatitude( 45.1646424 )
               ->setLongitude( 1.502554 )
-              ->setRoles( [ 'ROLE_USER' ] )
+              ->setRoles( [ 'ROLE_PRESTATAIRE' ] )
               ->setDescription( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac ipsum eleifend, convallis tellus ut, convallis nibh. Integer vitae lobortis quam, in auctor odio. Duis pulvinar sollicitudin leo, ut tincidunt diam hendrerit sit amet. Praesent porta vehicula neque sed fringilla. Integer eu commodo lorem, id egestas ipsum. Praesent lobortis ut turpis a cursus. Aenean suscipit ut nunc at sodales. Duis congue sollicitudin turpis eu volutpat. Nunc sed urna vitae lectus bibendum iaculis. Mauris elementum magna mi. Suspendisse orci felis, vulputate a auctor vel, luctus vitae justo.' );
+        $manager->persist( $user4 );
 
         $user5 = new User();
         $user5->setPrenom( "Brigitte" )
@@ -133,27 +136,58 @@ class AppFixtures
               ->setCodePostal( "87000" )
               ->setLatitude( 45.811710 )
               ->setLongitude( 1.274990 )
-              ->setRoles( [ 'ROLE_USER' ] )
+              ->setRoles( [ 'ROLE_PRESTATAIRE' ] )
               ->setDescription( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac ipsum eleifend, convallis tellus ut, convallis nibh. Integer vitae lobortis quam, in auctor odio. Duis pulvinar sollicitudin leo, ut tincidunt diam hendrerit sit amet. Praesent porta vehicula neque sed fringilla. Integer eu commodo lorem, id egestas ipsum. Praesent lobortis ut turpis a cursus. Aenean suscipit ut nunc at sodales. Duis congue sollicitudin turpis eu volutpat. Nunc sed urna vitae lectus bibendum iaculis. Mauris elementum magna mi. Suspendisse orci felis, vulputate a auctor vel, luctus vitae justo.' );
+        $manager->persist( $user5 );
+
+        $user6 = new User();
+        $user6->setPrenom( "Joseph" )
+              ->setNom( "Durand" )
+              ->setDateCreation( date_create() )
+              ->setVille( "Saint-Léonard-de-Noblat" )
+              ->setAdresse( "10 rue Saint-Léonard" )
+              ->setPassword( $this->encoder->encodePassword( $user6, 'test' ) )
+              ->setTelephone( '0102030405' )
+              ->setEmail( "joseph@durand.com" )
+              ->setCodePostal( "87400" )
+              ->setRoles( [ 'ROLE_PARTICULIER' ] );
+        $manager->persist( $user6 );
 
         // Fixtures de l'entité "Comptoir"
         $comptoir = new Comptoir();
-        $comptoir->setUser( $user );
-        $comptoir->setDenomination( "Biocoop Au p’tit épeautre" );
+        $comptoir->setUser( $user )
+                 ->setDenomination( "Biocoop Au p’tit épeautre" )
+                 ->setSolde( 1000 );
+        $manager->persist( $comptoir );
+
         $comptoir2 = new Comptoir();
-        $comptoir2->setUser( $user2 );
-        $comptoir2->setDenomination( "Biocoop l’Aubre" );
+        $comptoir2->setUser( $user2 )
+                  ->setDenomination( "Biocoop l’Aubre" )
+                  ->setSolde( 1000 );
+        $manager->persist( $comptoir2 );
+
+        // Fixtures de l'entité "Prestataire"
         $presta = new Prestataire();
-        $presta->setSiret( "2" );
-        $presta->setUser( $user3 );
-        $presta->setDenomination( "Callune" );
+        $presta->setUser( $user3 )
+               ->setDenomination( "Callune" )
+               ->setSiret( "2" );
+        $manager->persist( $presta );
+
         $presta2 = new Prestataire();
-        $presta2->setSiret( "2" );
-        $presta2->setUser( $user4 );
-        $presta2->setDenomination( "Guarana Café" );
+        $presta2->setUser( $user4 )
+                ->setDenomination( "Guarana Café" )
+                ->setSiret( "2" );
+        $manager->persist( $presta2 );
+
         $presta3 = new Prestataire();
         $presta3->setUser( $user5 )
                 ->setDenomination( 'Bridgets Muffins' );
+        $manager->persist( $presta3 );
+
+        // Fixtures de l'entité "Particulier"
+        $particulier = new Particulier();
+        $particulier->setUser( $user6 );
+        $manager->persist( $particulier );
 
         // Fixtures de l'entité "Categorie"
         $categoryList = [
@@ -176,28 +210,19 @@ class AppFixtures
         }
 
         $prestaHasCategorie = new PrestataireHasCategorie();
-        $prestaHasCategorie->setPrestataire( $presta );
-        $prestaHasCategorie->setCategorie( $category[0] );
-
-        $prestaHasCategorie1 = new PrestataireHasCategorie();
-        $prestaHasCategorie1->setPrestataire( $presta2 );
-        $prestaHasCategorie1->setCategorie( $category[9] );
+        $prestaHasCategorie->setPrestataire( $presta )
+                           ->setCategorie( $category[0] );
+        $manager->persist( $prestaHasCategorie );
 
         $prestaHasCategorie2 = new PrestataireHasCategorie();
-        $prestaHasCategorie2->setPrestataire( $presta3 );
-        $prestaHasCategorie2->setCategorie( $category[1] );
-
-        $manager->persist( $prestaHasCategorie );
-        $manager->persist( $prestaHasCategorie1 );
+        $prestaHasCategorie2->setPrestataire( $presta2 )
+                            ->setCategorie( $category[9] );
         $manager->persist( $prestaHasCategorie2 );
-        $manager->persist( $user );
-        $manager->persist( $user2 );
-        $manager->persist( $user5 );
-        $manager->persist( $presta3 );
-        $manager->persist( $comptoir );
-        $manager->persist( $comptoir2 );
-        $manager->persist( $presta );
-        $manager->persist( $presta2 );
+
+        $prestaHasCategorie3 = new PrestataireHasCategorie();
+        $prestaHasCategorie3->setPrestataire( $presta3 )
+                            ->setCategorie( $category[1] );
+        $manager->persist( $prestaHasCategorie3 );
 
         // Fixtures de l'entité "Blog"
         for( $i = 1; $i <= 10; $i ++ ) {
@@ -207,7 +232,6 @@ class AppFixtures
                     ->setImage( "http://placehold.it/350x200" )
                     ->setImageDescription( "description de l'image $i" )
                     ->setCreatedAt( new \DateTime() );
-
             $manager->persist( $article );
         };
 
@@ -221,7 +245,6 @@ class AppFixtures
                   ->setLienEvent( "https://www.google.com" )
                   ->setLieu( "le lieu ce situe ici" )
                   ->setDate( new \Datetime() );
-
             $manager->persist( $event );
         };
 
