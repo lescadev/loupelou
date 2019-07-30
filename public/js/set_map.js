@@ -77,8 +77,8 @@ function displayMap(data) {
     layerGroup.clearLayers();
     for (let i = 0; i < Object.keys( data ).length - 1; i++) {
         L.marker([
-            data[i][0].latitude,
-            data[i][0].longitude,
+            data[i].latitude,
+            data[i].longitude,
         ], {icon: ifCategory(data, i)}).bindPopup(data[i].denomination).addTo(layerGroup);
     }
 }

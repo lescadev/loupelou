@@ -138,16 +138,20 @@ class AppFixtures extends Fixture
         $categoryList = ['Association', 'Alimentation', 'Artisanat', 'Sante',
             'Culture', 'Education', 'Hotellerie', 'Social', 'Magasin', 'Restauration', 'Service'];
         for($i=0; $i<count($categoryList); $i++){
-            $category[$i] = new Categorie([]);
+            $category[$i] = new Categorie();
             $category[$i]->setNom($categoryList[$i]);
             $manager->persist($category[$i]);
     }
 
-        //Set Presta category
         $presta->addCategory($category[1]);
-        $presta2->addCategory($category[6]);
-        $presta3->addCategory($category[3]);
+        $presta->addCategory($category[0]);
 
+        $presta2->addCategory($category[5]);
+        $presta2->addCategory($category[8]);
+        $presta2->addCategory($category[3]);
+
+        $presta3->addCategory($category[6]);
+        $presta3->addCategory($category[5]);
 
         $manager->persist($user);
         $manager->persist($user2);

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\UserRepository;
+use App\Repository\PrestataireRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +18,7 @@ class AjaxController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function ajaxAnnuaire(UserRepository $userRepository, Request $request)
+    public function ajaxAnnuaire(UserRepository $userRepository, PrestataireRepository $prestataireRepository, Request $request)
     {
 
         $params = [];
@@ -28,6 +29,15 @@ class AjaxController extends AbstractController
         }
 
         $res = $userRepository->findByParams($params);
+
+        if($params['status'] == 'prestataire') {
+            for($i = 0; $i<count($res); $i++){
+                $id = $res[$i]['id'];
+                $presta = $prestataireRepository->find($id);
+                $categories = $presta->getCategories();
+                $res[$i]['categories'] = $categories->getValues();
+            }
+        }
 
         return $this->render('annuairePartial.html.twig',
             array('response' => $res));

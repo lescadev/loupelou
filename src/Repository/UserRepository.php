@@ -27,62 +27,68 @@ class UserRepository extends ServiceEntityRepository
         $this->em =$em;
     }
 
-    public function findByParams(array $params){
-        $query= $this->em->createNativeQuery('SELECT nom FROM categorie WHERE id = 1');
+    public function findByParams( array $params )
+    {
 
-        // $query = $this->createQueryBuilder('user');
+        $query = $this->createQueryBuilder( 'user' );
 
-        // if(!empty($params['status'])){
-        //     if($params['status'] === 'prestataire') {
+        if( ! empty( $params['status'] ) ) {
+            if( $params['status'] === 'prestataire' ) {
 
-        //         $query->innerJoin(prestataire::class, 'prestataire')
-        //             ->andWhere('user.id = prestataire.user')
-        //             ->select('user', 'prestataire.denomination');
+                $query->innerJoin( prestataire::class, 'prestataire' )
+                    ->andWhere( 'user.id = prestataire.user' )
+                    ->select( 'user', 'prestataire.denomination' );
 
-        //         if(!empty($params['search']))
-        //             $query->andWhere("prestataire.denomination LIKE :search OR user.description LIKE :search")
-        //                 ->setParameter('search', '%' . $params['search']. '%');
+                if( ! empty( $params['search'] ) ) {
+                    $query->andWhere( "prestataire.denomination LIKE :search OR user.description LIKE :search" )
+                        ->setParameter( 'search', '%' . $params['search'] . '%' );
+                }
 
-        //         if(!empty($params['filter'] and $params['filter'] !== 'Tous les services'))
-        //             $query->join(Categorie::class, 'c')
-        //                   ->where("c.nom = '{$params['filter']}'");
-        //                   var_dump($query->getSQL()); exit;
-        //         // else
-        //         //     $query->innerJoin(Categorie::class, 'categorie')
-        //         //         ->andWhere('prestaHasCategorie.categorie = categorie.id')
-        //         //         ->andWhere('prestataire.id = prestaHasCategorie.prestataire')
-        //         //         ->andWhere('user.id = prestataire.user');
+                if( ! empty( $params['filter'] and $params['filter'] !== 'Tous les services' ) ) {
+                    $query->innerJoin( Categorie::class, 'categorie' )
+                        ->innerJoin( 'categorie.prestataires', 'prestaHasCategorie' )
+                        ->andWhere( 'categorie.nom = :filter' )
+                        ->setParameter( 'filter', $params['filter'] )
+                        ->andWhere( 'prestataire.id = prestaHasCategorie' )
+                        ->andWhere( 'user.id = prestataire.user' );
+                } else {
+                    $query->innerJoin( Categorie::class, 'categorie' )
+                        ->innerJoin( 'categorie.prestataires', 'prestaHasCategorie' )
+                        ->andWhere( 'prestataire.id = prestaHasCategorie' )
+                        ->andWhere( 'user.id = prestataire.user' );
+                }
+                $query->select('user')->distinct();
+                $query->addSelect(  'user.longitude', 'prestataire.id', 'user.latitude', 'prestataire.denomination', 'categorie.nom', 'prestataire.site_internet' );
+            } elseif( $params['status'] === 'comptoir' ) {
 
-        //         $query->select('user', 'prestataire.denomination', 'c.nom');
-        //     }
+                $query->innerJoin( comptoir::class, 'comptoir' )
+                    ->andWhere( 'user.id = comptoir.user' )
+                    ->select('user')->distinct()
+                    ->addSelect( 'user.longitude', 'user.latitude', 'comptoir.denomination', 'comptoir.site_internet' );
 
-        //     elseif ($params['status'] === 'comptoir') {
+                if( ! empty( $params['search'] ) ) {
+                    $query->andWhere( "comptoir.denomination LIKE :search OR user.description LIKE :search" )
+                        ->setParameter( 'search', '%' . $params['search'] . '%' );
+                }
+            }
 
-        //         $query->innerJoin(comptoir::class, 'comptoir')
-        //             ->andWhere('user.id = comptoir.user')
-        //             ->select('user', 'comptoir.denomination');
+            if( ! empty( $params['distance'] ) and ! empty( $params['longitude'] )
+                and ! empty( $params['latitude'] ) ) {
+                $query->addSelect(
+                    '( 6371 * acos(cos(radians(' . $params['latitude'] . '))' .
+                    '* cos( radians( user.latitude ) )' .
+                    '* cos( radians( user.longitude )' .
+                    '- radians(' . $params['longitude'] . ') )' .
+                    '+ sin( radians(' . $params['latitude'] . ') )' .
+                    '* sin( radians( user.latitude ) ) ) ) as distance'
+                )
+                    ->andHaving( 'distance < :radius' )
+                    ->setParameter( 'radius', $params['distance'] );
+            }
+        }
 
-        //         if(!empty($params['search']))
-        //             $query->andWhere("comptoir.denomination LIKE :search OR user.description LIKE :search")
-        //                 ->setParameter('search',  '%' . $params['search']. '%');
-        //     }
+        $res = $query->getQuery()->getResult();
 
-        //     if(!empty($params['distance']) and !empty($params['longitude']) and !empty($params['latitude'])){
-        //         $query->addSelect(
-        //             '( 6371 * acos(cos(radians(' . $params['latitude'] . '))' .
-        //             '* cos( radians( user.latitude ) )' .
-        //             '* cos( radians( user.longitude )' .
-        //             '- radians(' . $params['longitude'] . ') )' .
-        //             '+ sin( radians(' . $params['latitude'] . ') )' .
-        //             '* sin( radians( user.latitude ) ) ) ) as distance'
-        //         )
-        //             ->andHaving('distance < :radius')
-        //             ->setParameter('radius', $params['distance']);
-        //     }
-        // }
-
-        // $res = $query->getQuery()->getArrayResult();
-        $res= $query->getResult();
         return $res;
     }
 

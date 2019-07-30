@@ -4,9 +4,13 @@
             {%for result in response  %}
                 <div class="card border-dark ml-1">
                     <div class="card-header" style="background-color: #FFFFFF">{{result.denomination}}
-                        {% if result.nom is defined %}
-                            <h6 class="card-subtitle mb-2 text-muted">{{ result.nom }}</h6>
-                        {% endif %}
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            {% if result.categories is defined %}
+                                {% for res in result.categories %}
+                                    {{ res }}
+                                {% endfor %}
+                            {% endif %}
+                        </h6>
                     </div>
                     <p class="card-text">Description : {{ result.0.description | easyadmin_truncate(20)}}</p>
                     <div class="card-body text-dark">

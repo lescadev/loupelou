@@ -7,6 +7,7 @@ function ajaxPost(data) {
         return response.text();
     })
         .then(function(data){
+            console.log(data);
             let json = JSON.parse(data);
 
             annuaire.innerHTML = "";
