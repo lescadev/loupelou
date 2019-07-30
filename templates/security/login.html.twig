@@ -1,31 +1,34 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Connexion - {{ parent() }}
+    Connexion à l'administration- {{ parent() }}
 {% endblock %}
 
 {% block body %}
-    {% if error %}
-        <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
     <div class="row">
-        <div class="col-md-6 offset-md-3">
+        <div class="col-md-3">&nbsp;</div>
+        <div class="col-md-6">
             <div class="border-principale py-3 px-3">
-                <h2 class="principale text-center mb-3">Connexion</h2>
-                <form action="{{ path('login') }}" method="post">
+                <h2 class="principale text-center mb-3">Administration du site</h2>
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
                     <div class="form-group">
-                        <input type="text" name="_username" required class="form-control" placeholder="Adresse email" value="{{ last_username }}" />
+                        <label for="inputUsername" class="sr-only">Username</label>
+                        <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus />
                     </div>
                     <div class="form-group">
-                        <input type="password" name="_password" required class="form-control" placeholder="Mot de passe" />
+                        <label for="inputPassword" class="sr-only">Password</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required />
                     </div>
                     <div class="form-group text-center">
-                        <button type="submit" class="btn blanc bg-principale">Connexion</button>
-                        <input type="hidden" name="_target_path" value="/profil" />
+                        <button class="btn blanc bg-principale" type="submit">Sign in</button>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
 {% endblock %}

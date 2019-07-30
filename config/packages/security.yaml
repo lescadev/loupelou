@@ -11,7 +11,7 @@ security:
                 class: App\Entity\Admin
                 property: username
         User:
-            entity: 
+            entity:
                 class: App\Entity\User
                 property: email
     firewalls:
@@ -46,6 +46,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/_admin_back, roles: ROLE_ADMIN }
-         - { path : ^/profil/modifdescription, roles: [ROLE_COMPTOIR, ROLE_PRESTATAIRE, ROLE_PRESTA&COMPT] }
-         - { path : ^/profil, roles: ROLE_USER}
+        - { path: ^/_admin_back, roles: ROLE_ADMIN }
+        - { path: ^/profil/modifdescription, roles: [ROLE_COMPTOIR, ROLE_PRESTATAIRE, ROLE_PRESTA&COMPT] }
+        - { path: ^/profil, roles: ROLE_USER}

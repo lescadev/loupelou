@@ -7,18 +7,24 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class AdminController extends AbstractController
+class AdminController
+    extends AbstractController
 {
+
     /**
      * @Route("/login_admin", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login( AuthenticationUtils $authenticationUtils ): Response
     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render( 'security/login.html.twig',
+            [
+                'last_username' => $lastUsername,
+                'error'         => $error,
+            ] );
     }
 }
