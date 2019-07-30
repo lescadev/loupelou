@@ -7,36 +7,36 @@ easy_admin:
             css:
                 - 'css/admin.css'
         menu:
-            - label: "Utilisateurs"
-              icon: "user-o"
-              children:
-                  - {entity: 'User'}
-                  - {entity: 'Particulier'}
-                  - {entity: 'Prestataire'}
-                  - {entity: 'Comptoir'}
-                  
-            - label: "Informations Légales"
-              icon: "file-alt"
-              entity: 'InformationsLegales' 
-             
+            -   label: "Utilisateurs"
+                icon: "user-o"
+                children:
+                    - {entity: 'User'}
+                    - {entity: 'Particulier'}
+                    - {entity: 'Prestataire'}
+                    - {entity: 'Comptoir'}
 
-            - label: "Informations" 
-              icon: "newspaper"
-              entity: 'Informations'
+            -   label: "Informations Légales"
+                icon: "file-alt"
+                entity: 'InformationsLegales'
 
-            - label: "Blog" 
-              icon: "blog"
-              entity: 'ArticleBlog'
 
-            - label: "Evénements" 
-              icon: "calendar"
-              entity: 'Evenements'
+            -   label: "Informations"
+                icon: "newspaper"
+                entity: 'Informations'
 
-            - label: "Transactions"
-              icon: "money"
-              entity: 'Transactions'
+            -   label: "Blog"
+                icon: "blog"
+                entity: 'ArticleBlog'
 
-              
+            -   label: "Evénements"
+                icon: "calendar"
+                entity: 'Evenements'
+
+            -   label: "Transactions"
+                icon: "money"
+                entity: 'Transactions'
+
+
     entities:
         User:
             class: App\Entity\User
@@ -82,33 +82,30 @@ easy_admin:
             list:
                 actions:
                     - {name: 'new', label: 'Ajouter Comptoir' }
-           
+
         InformationsLegales:
             class: App\Entity\InformationsLegales
             label: "Informations Légales"
             disabled_actions: ['search','delete','new']
             list:
-                fields: ['cgu', 'cgv', 'mentionsLegales']   
+                fields: ['cgu', 'cgv', 'mentionsLegales']
             form:
                 title: 'Informations Légales'
                 fields:
-                    - {property: 'cgu',type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}    
+                    - {property: 'cgu',type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
                     - {property: 'cgv',type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
                     - {property: 'mentionsLegales',type: 'fos_ckeditor',type_options: {config_name: 'my_config_1'}}
             edit:
                 actions: ['-new', '-delete']
-          
-                
-               
-                
+
         Informations:
             class: App\Entity\Informations
-            form: 
+            form:
                 title: 'Informations'
                 fields:
                     - {property: 'imageFile', type: 'vich_image', label: 'Logo'}
                     - {property: 'slogan', label: 'Slogan' ,type: 'fos_ckeditor', type_options: {config_name: 'my_config_3'}}
-                    - {property: 'titrepresentation', label: 'Titre de la présentation', type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
+                    - {property: 'titrepresentation', label: 'Titre de la présentation', type: 'text'}
                     - {property: 'presentation', label: 'Présentation', type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
                     - {property: 'adresse', label: 'Adresse'}
                     - {property: 'code_postal', label: 'Code postal'}
@@ -122,9 +119,9 @@ easy_admin:
                 actions: ['-new', '-delete']
             list:
                 actions: ['-new', '-delete']
-                fields: [{property: 'logo', type: 'image', label: 'Logo', base_path: '%app.path.logo_images%'}, {property: 'slogan', label: 'Slogan'}, {property: 'titre_presentation', label: 'Titre Présentation'}, {property: 'presentation', label: 'Présentation'}, {property: 'adresse', label: 'Adresse'}, {property: 'code_postal', label: 'Code postal'}, {property: 'ville', label: 'Ville'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Email'}, {property: 'facebook', label: 'Facebook'}]
+                fields: [{property: 'logo', type: 'image', label: 'Logo', base_path: '%app.path.logo_images%'}, {property: 'slogan', label: 'Slogan'}, {property: 'titre_presentation', label: 'Titre Présentation'}, {property: 'presentation', label: 'Présentation'}, {property: 'adresse', label: 'Adresse'}, {property: 'code_postal', label: 'Code postal'}, {property: 'ville', label: 'Ville'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Email'}]
 
-        
+
         ArticleBlog:
             class: App\Entity\ArticleBlog
             label: "Blog"
@@ -139,8 +136,8 @@ easy_admin:
                     - {property: 'imageFile', type: 'vich_image', label: 'Image'}
                     - {property: 'createdAt', label: 'Date création'}
                     - {property: 'imageDescription', label: 'Description image'}
-            
-            
+
+
 
 
         Evenements:
@@ -149,7 +146,7 @@ easy_admin:
             list:
                 fields: [{property: 'title', label: 'Titre'}, {property: 'description', label: 'Description'}, {property: 'logo', label: 'Logo', type: 'image'}, {property: 'date', label: 'Date evenement'}, {property: 'logoDescription', label: 'Description du logo'}, {property: 'lienEvent', label: 'LienEvenement'}, {property: 'lieu', label: 'Lieu'}]
             form:
-                fields: 
+                fields:
                     - {property: 'title'}
                     - {property: 'description',type: 'fos_ckeditor', type_options: {config_name: 'my_config_3'}}
                     - {property: 'logo'}
