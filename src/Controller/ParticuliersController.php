@@ -94,7 +94,7 @@ class ParticuliersController
             }
         }
 
-        return $this->render( 'particuliers/particuliers.html.twig',
+        return $this->render( 'particuliers/inscription.html.twig',
             [
                 'form'    => $form->createView(),
                 'siteKey' => $this->getParameter( 'google_recaptcha_site_key' ),
