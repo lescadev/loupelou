@@ -49,3 +49,5 @@ security:
          - { path: ^/_admin_back, roles: ROLE_ADMIN }
          - { path : ^/profil/modifdescription, roles: [ROLE_COMPTOIR, ROLE_PRESTATAIRE, ROLE_PRESTA&COMPT] }
          - { path : ^/profil, roles: ROLE_USER}
+         - { path : ^/transaction, roles: ROLE_COMPTOIR }
+    access_denied_url: /profil
