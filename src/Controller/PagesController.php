@@ -7,17 +7,19 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\ArticleBlog;
 use App\Entity\Evenements;
 
-
-class PagesController extends AbstractController
+class PagesController
+    extends AbstractController
 {
+
     /**
      * @Route("/pages", name="pages")
      */
     public function index()
     {
-        return $this->render('pages/index.html.twig', [
-            'controller_name' => 'PagesController',
-        ]);
+        return $this->render( 'pages/index.html.twig',
+            [
+                'controller_name' => 'PagesController',
+            ] );
     }
 
     /**
@@ -26,11 +28,11 @@ class PagesController extends AbstractController
 
     public function utiliser()
     {
-        return $this->render('map/utiliser.html.twig', [
-            'status' => 'prestataire'
-        ]);
+        return $this->render( 'map/utiliser.html.twig',
+            [
+                'status' => 'prestataire',
+            ] );
     }
-
 
     /**
      * @Route("/rejoindre", name="rejoindre")
@@ -38,9 +40,8 @@ class PagesController extends AbstractController
 
     public function rejoindre()
     {
-        return $this->render('/rejoindre.html.twig');
+        return $this->render( '/rejoindre.html.twig' );
     }
-
 
     /**
      * @Route("/blog", name="blog")
@@ -48,30 +49,31 @@ class PagesController extends AbstractController
 
     public function blog()
     {
-        $repo = $this->getDoctrine()->getRepository(ArticleBlog::class);
+        $repo = $this->getDoctrine()->getRepository( ArticleBlog::class );
 
         $articles = $repo->findAll();
 
-        return $this->render('pages/blog.html.twig', [
-            'articles' => $articles
-        ]);
+        return $this->render( 'pages/blog.html.twig',
+            [
+                'articles' => $articles,
+            ] );
     }
 
     /**
      * @Route("/blog/{id}", name="blogArticle")
      */
 
-    public function blogArticle($id)
+    public function blogArticle( $id )
     {
-        $repo = $this->getDoctrine()->getRepository(ArticleBlog::class);
+        $repo = $this->getDoctrine()->getRepository( ArticleBlog::class );
 
-        $article = $repo->find($id);
+        $article = $repo->find( $id );
 
-        return $this->render('pages/blogArticle.html.twig', [
-            "article" => $article
-        ]);
+        return $this->render( 'pages/blogArticle.html.twig',
+            [
+                "article" => $article,
+            ] );
     }
-
 
     /**
      * @Route("/evenements", name="evenements")
@@ -79,64 +81,69 @@ class PagesController extends AbstractController
 
     public function evenement()
     {
-        $repo = $this->getDoctrine()->getRepository(Evenements::class);
+        $repo = $this->getDoctrine()->getRepository( Evenements::class );
 
         $events = $repo->findAll();
 
-        return $this->render('pages/evenements.html.twig', [
-            "events" => $events
-        ]);
+        return $this->render( 'pages/evenements.html.twig',
+            [
+                "events" => $events,
+            ] );
     }
-            
+
     /**
      * @Route("/reglement", name="reglement")
      */
 
     public function reglement()
     {
-        return $this->render('pages/reglement.html.twig');
+        return $this->render( 'pages/reglement.html.twig' );
     }
+
     /**
      * @Route("/rendu", name="rendu")
      */
 
     public function rendu()
     {
-        return $this->render('pages/rendu.html.twig');
+        return $this->render( 'pages/rendu.html.twig' );
     }
+
     /**
      * @Route("/statut", name="statut")
      */
 
     public function statut()
     {
-        return $this->render('/statut.html.twig');
+        return $this->render( '/statut.html.twig' );
     }
+
     /**
      * @Route("/logins", name="logins")
      */
 
     public function logins()
     {
-        return $this->render('/logins.html.twig');
+        return $this->render( '/logins.html.twig' );
     }
+
     /**
      * @Route("/procurer", name="procurer")
      */
     public function procurer()
     {
-        return $this->render('map/procurer.html.twig', [
-            'status' => 'comptoir'
-        ]);
-        
+        return $this->render( 'map/procurer.html.twig',
+            [
+                'status' => 'comptoir',
+            ] );
     }
+
     /**
      * @Route("/success", name="sucess")
      */
     public function success()
     {
-        return $this->render('/success.html.twig');
-        
+        return $this->render( '/success.html.twig' );
     }
 }
 

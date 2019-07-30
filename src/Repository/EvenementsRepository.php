@@ -7,16 +7,18 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Evenements|null find($id, $lockMode = null, $lockVersion = null)
- * @method Evenements|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Evenements|null find( $id, $lockMode = null, $lockVersion = null )
+ * @method Evenements|null findOneBy( array $criteria, array $orderBy = null )
  * @method Evenements[]    findAll()
- * @method Evenements[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Evenements[]    findBy( array $criteria, array $orderBy = null, $limit = null, $offset = null )
  */
-class EvenementsRepository extends ServiceEntityRepository
+class EvenementsRepository
+    extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+
+    public function __construct( RegistryInterface $registry )
     {
-        parent::__construct($registry, Evenements::class);
+        parent::__construct( $registry, Evenements::class );
     }
 
     // /**

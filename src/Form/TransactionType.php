@@ -20,17 +20,18 @@ class TransactionType extends AbstractType
 
            ->add('nom', TextType::class, [
                 'required'   => true,
-                'label' => "Nom  *"
+                'label' => false
             ])
 
            ->add('prenom', TextType::class, [
                 'required'   => true,
-                'label' => "Prénom  *"
+                'label' => false
             ])
 
             ->add('montant', MoneyType::class, [
                 'required'   => true,
-                'label' => "Montant  *"
+                'label' => false,
+                'currency' => false
             ]);
     }
 

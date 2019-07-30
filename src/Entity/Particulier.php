@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Particulier
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -32,7 +33,7 @@ class Particulier
         return $this->user;
     }
 
-    public function setUser(User $user): self
+    public function setUser( User $user ): self
     {
         $this->user = $user;
 
