@@ -12,38 +12,34 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TransactionType
-    extends AbstractType
+class TransactionType extends AbstractType
 {
-
-    public function buildForm( FormBuilderInterface $builder, array $options )
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add( 'nom',
-                TextType::class,
-                [
-                    'required' => true,
-                    'label'    => "Nom  *",
-                ] )
-            ->add( 'prenom',
-                TextType::class,
-                [
-                    'required' => true,
-                    'label'    => "Prénom  *",
-                ] )
-            ->add( 'montant',
-                MoneyType::class,
-                [
-                    'required' => true,
-                    'label'    => "Montant  *",
-                ] );
+
+           ->add('nom', TextType::class, [
+                'required'   => true,
+                'label' => false
+            ])
+
+           ->add('prenom', TextType::class, [
+                'required'   => true,
+                'label' => false
+            ])
+
+            ->add('montant', MoneyType::class, [
+                'required'   => true,
+                'label' => false,
+                'currency' => false
+            ]);
     }
 
-    public function configureOptions( OptionsResolver $resolver )
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults( [
+        $resolver->setDefaults([
             // Configure your form options here
             'data_class' => Transaction::class,
-        ] );
+        ]);
     }
 }
