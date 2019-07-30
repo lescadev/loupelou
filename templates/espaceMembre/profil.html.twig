@@ -19,7 +19,7 @@
             <p>Adresse : {{ adresse }}</p>
             <p>Ville : {{ ville }}</p>
             <p>Code postal : {{ codepostal }}</p>
-            {% if not is_granted('ROLE_PARTICULIER') %}
+            {% if (is_granted('ROLE_COMPTOIR') or is_granted('ROLE_PRESTATAIRE')) %}
                 <p>Description : {{ description }}</p>
             {% endif %}
         </div>

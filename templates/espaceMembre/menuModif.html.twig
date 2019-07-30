@@ -11,7 +11,7 @@
     <div class="itemMenu">
         <a class="modif" href={{ path('modifinfo') }}>Modifier mes informations personnelles</a>
     </div>
-    {% if not is_granted('ROLE_PARTICULIER') %}
+    {% if (is_granted('ROLE_COMPTOIR') or is_granted('ROLE_PRESTATAIRE')) %}
         <div class="itemMenu">
             <a class="modif" href={{ path('modifdescription') }}>Modifier ma description</a>
         </div>
