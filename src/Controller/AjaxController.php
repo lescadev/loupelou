@@ -11,31 +11,32 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-
-class AjaxController extends AbstractController
+class AjaxController
+    extends AbstractController
 {
+
     /**
      * @Route("/ajax-annuaire", name="ajax-annuaire")
      * @param UserRepository $userRepository
      * @param Request $request
+     *
      * @return Response
      */
-    public function ajaxAnnuaire(UserRepository $userRepository, Request $request)
+    public function ajaxAnnuaire( UserRepository $userRepository, Request $request )
     {
 
         $params = [];
 
-        if ($request->getMethod() == 'POST') {
-            $body = $request->getContent();
-            $params = json_decode($body, true);
+        if( $request->getMethod() == 'POST' ) {
+            $body   = $request->getContent();
+            $params = json_decode( $body, true );
         }
 
-        $res = $userRepository->findByParams($params);
+        $res = $userRepository->findByParams( $params );
 
-        return $this->render('map/annuairePartial.html.twig',
-            array('response' => $res));
+        return $this->render( 'map/annuairePartial.html.twig',
+            array( 'response' => $res ) );
     }
-
 
     /**
      * @Route("/ajax-modal", name="ajax-modal")
@@ -44,43 +45,45 @@ class AjaxController extends AbstractController
      * @param PrestataireRepository $prestataireRepository
      * @param PrestataireHasCategorieRepository $prestataireHasCategorieRepository
      * @param Request $request
+     *
      * @return false|string
      */
-    public function AjaxModal(UserRepository $userRepository, CategorieRepository $categorieRepository,
-                              PrestataireRepository $prestataireRepository, PrestataireHasCategorieRepository $prestataireHasCategorieRepository,
-                              Request $request)
-    {
+    public function AjaxModal(
+        UserRepository $userRepository, CategorieRepository $categorieRepository,
+        PrestataireRepository $prestataireRepository,
+        PrestataireHasCategorieRepository $prestataireHasCategorieRepository,
+        Request $request
+    ) {
 
-        if($request->getMethod() == 'POST') {
+        if( $request->getMethod() == 'POST' ) {
 
             $body = $request->getContent();
 
-            $id = json_decode($body, true);
+            $id = json_decode( $body, true );
 
-            $user = $userRepository->find($id);
+            $user = $userRepository->find( $id );
 
-            $prestataire = $prestataireRepository->findBy(array('user' => $user))[0];
+            $prestataire = $prestataireRepository->findBy( array( 'user' => $user ) )[0];
 
-            $prestataireHasCategorie = $prestataireHasCategorieRepository->findBy(array('prestataire' => $prestataire))[0];
+            $prestataireHasCategorie =
+                $prestataireHasCategorieRepository->findBy( array( 'prestataire' => $prestataire ) )[0];
 
             $data = [
-                'nom' => $prestataire->getDenomination(),
-                'categorie' => $prestataireHasCategorie->getCategorie()->getNom(),
-                'description' => $user->getDescription(),
-                'ville' => $user->getVille(),
-                'rue' => $user->getAdresse(),
-                'code_postal' => $user->getCodePostal(),
+                'nom'           => $prestataire->getDenomination(),
+                'categorie'     => $prestataireHasCategorie->getCategorie()->getNom(),
+                'description'   => $user->getDescription(),
+                'ville'         => $user->getVille(),
+                'rue'           => $user->getAdresse(),
+                'code_postal'   => $user->getCodePostal(),
                 'date_creation' => $user->getDateCreation(),
                 'site_internet' => $prestataire->getSiteInternet(),
             ];
 
-            $json = json_encode($data);
-
-        }
-        else {
+            $json = json_encode( $data );
+        } else {
             $json = '';
         }
 
-        return new Response($json);
+        return new Response( $json );
     }
 }

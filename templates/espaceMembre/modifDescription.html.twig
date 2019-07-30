@@ -1,14 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div id="containerProfil">
-{% include "espaceMembre/menuModif.html.twig" %}
-<div id="blockProfil">
-    <h2 id="profilTitle">Modifier ma description</h2>
-    {{form_start(form)}}  
-        {{ form_row(form.description, {'value' : user.description }) }}
-        <button type="submit">Valider</button>
-    {{ form_end(form, {'render_rest': false}) }}
-</div>
-</div>
+
+    {% if not isactive %}
+
+        <div>
+            <p>Ce compte n'est pas actif</p>
+        </div>
+
+    {% endif %}
+    <div id="containerProfil">
+        {% include "espaceMembre/menuModif.html.twig" %}
+        <div id="blockProfil">
+            <h2 id="profilTitle">Modifier ma description</h2>
+            {{ form_start(form) }}
+            {{ form_row(form.description, {'value' : user.description }) }}
+            <button type="submit">Valider</button>
+            {{ form_end(form, {'render_rest': false}) }}
+        </div>
+    </div>
 {% endblock %}

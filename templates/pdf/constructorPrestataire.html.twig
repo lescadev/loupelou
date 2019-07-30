@@ -1,78 +1,67 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Annuaire prestataire</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>Annuaire prestataire</title>
+    </head>
 
-<body>
-    <img src="images/pdf/alimentation.jpg" style="width: 100%">
-    {% include 'pdf/partialPresta.html.twig'
-        with{'presta' : presta,
-        'category' : 'Alimentation'}
-    %}
+    <body>
+        <img src="images/pdf/alimentation.jpg" style="width: 100%">
+        {% include 'pdf/partialPresta.html.twig'
+            with{'presta' : presta,
+            'category' : 'Alimentation'} %}
 
-    <img src="images/pdf/restauration.jpg" style="width: 100%">
-    {% include 'pdf/partialPresta.html.twig'
-        with{'presta' : presta,
-        'category' : 'Restauration'}
-    %}
+        <img src="images/pdf/restauration.jpg" style="width: 100%">
+        {% include 'pdf/partialPresta.html.twig'
+            with{'presta' : presta,
+            'category' : 'Restauration'} %}
 
-    <img src="images/pdf/associations.jpg" style="width: 100%">
-    {% include 'pdf/partialPresta.html.twig'
-        with{'presta' : presta,
-        'category' : 'Association'}
-    %}
+        <img src="images/pdf/associations.jpg" style="width: 100%">
+        {% include 'pdf/partialPresta.html.twig'
+            with{'presta' : presta,
+            'category' : 'Association'} %}
 
-    <img src="images/pdf/artisanat.jpg" style="width: 100%">
-    {% include 'pdf/partialPresta.html.twig'
-        with{'presta' : presta,
-        'category' : 'Artisanat'}
-    %}
+        <img src="images/pdf/artisanat.jpg" style="width: 100%">
+        {% include 'pdf/partialPresta.html.twig'
+            with{'presta' : presta,
+            'category' : 'Artisanat'} %}
 
-    <img src="images/pdf/culture.jpg" style="width: 100%">
-    {% include 'pdf/partialPresta.html.twig'
-        with{'presta' : presta,
-        'category' : 'Culture'}
-    %}
+        <img src="images/pdf/culture.jpg" style="width: 100%">
+        {% include 'pdf/partialPresta.html.twig'
+            with{'presta' : presta,
+            'category' : 'Culture'} %}
 
-    <img src="images/pdf/formation.jpg" style="width: 100%">
-    {% include 'pdf/partialPresta.html.twig'
-        with{'presta' : presta,
-        'category' : 'Formation'}
-    %}
+        <img src="images/pdf/formation.jpg" style="width: 100%">
+        {% include 'pdf/partialPresta.html.twig'
+            with{'presta' : presta,
+            'category' : 'Formation'} %}
 
-    <img src="images/pdf/hotellerie.jpg" style="width: 100%">
-    {% include 'pdf/partialPresta.html.twig'
-        with{'presta' : presta,
-        'category' : 'Hotellerie'}
-    %}
+        <img src="images/pdf/hotellerie.jpg" style="width: 100%">
+        {% include 'pdf/partialPresta.html.twig'
+            with{'presta' : presta,
+            'category' : 'Hotellerie'} %}
 
-    <img src="images/pdf/magasin.jpg" style="width: 100%">
-    {% include 'pdf/partialPresta.html.twig'
-        with{'presta' : presta,
-        'category' : 'Magasin'}
-    %}
+        <img src="images/pdf/magasin.jpg" style="width: 100%">
+        {% include 'pdf/partialPresta.html.twig'
+            with{'presta' : presta,
+            'category' : 'Magasin'} %}
 
-    <img src="images/pdf/sante.jpg" style="width: 100%">
-    {% include 'pdf/partialPresta.html.twig'
-        with{'presta' : presta,
-        'category' : 'Sante'}
-    %}
+        <img src="images/pdf/sante.jpg" style="width: 100%">
+        {% include 'pdf/partialPresta.html.twig'
+            with{'presta' : presta,
+            'category' : 'Sante'} %}
 
-    <img src="images/pdf/service.jpg" style="width: 100%">
-    {% include 'pdf/partialPresta.html.twig'
-        with{'presta' : presta,
-        'category' : 'Service'}
-    %}
+        <img src="images/pdf/service.jpg" style="width: 100%">
+        {% include 'pdf/partialPresta.html.twig'
+            with{'presta' : presta,
+            'category' : 'Service'} %}
 
-    <img src="images/pdf/social.jpg" style="width: 100%">
-    {% include 'pdf/partialPresta.html.twig'
-        with{'presta' : presta,
-        'category' : 'Social'}
-    %}
+        <img src="images/pdf/social.jpg" style="width: 100%">
+        {% include 'pdf/partialPresta.html.twig'
+            with{'presta' : presta,
+            'category' : 'Social'} %}
 
-</body>
-<script src="https://kit.fontawesome.com/84a428c253.js"></script>
+    </body>
+    <script src="https://kit.fontawesome.com/84a428c253.js"></script>
 </html>

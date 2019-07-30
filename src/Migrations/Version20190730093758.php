@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190729073651 extends AbstractMigration
+final class Version20190730093758 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,7 @@ final class Version20190729073651 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE informations ADD logo VARCHAR(255) DEFAULT NULL, ADD updated_at DATETIME DEFAULT NULL, DROP image_1, DROP image_2, DROP image_3');
+        $this->addSql('ALTER TABLE admin ADD prenom VARCHAR(255) DEFAULT NULL, ADD nom VARCHAR(255) DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +30,6 @@ final class Version20190729073651 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE informations ADD image_2 VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci, ADD image_3 VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci, DROP updated_at, CHANGE logo image_1 VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci');
+        $this->addSql('ALTER TABLE admin DROP prenom, DROP nom');
     }
 }

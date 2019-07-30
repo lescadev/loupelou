@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Evenements
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -61,7 +62,7 @@ class Evenements
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate( \DateTimeInterface $date ): self
     {
         $this->date = $date;
 
@@ -73,7 +74,7 @@ class Evenements
         return $this->logo;
     }
 
-    public function setLogo(string $logo): self
+    public function setLogo( string $logo ): self
     {
         $this->logo = $logo;
 
@@ -85,7 +86,7 @@ class Evenements
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription( string $description ): self
     {
         $this->description = $description;
 
@@ -97,7 +98,7 @@ class Evenements
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle( string $title ): self
     {
         $this->title = $title;
 
@@ -109,7 +110,7 @@ class Evenements
         return $this->logoDescription;
     }
 
-    public function setLogoDescription(string $logoDescription): self
+    public function setLogoDescription( string $logoDescription ): self
     {
         $this->logoDescription = $logoDescription;
 
@@ -121,7 +122,7 @@ class Evenements
         return $this->lienEvent;
     }
 
-    public function setLienEvent(string $lienEvent): self
+    public function setLienEvent( string $lienEvent ): self
     {
         $this->lienEvent = $lienEvent;
 
@@ -133,7 +134,7 @@ class Evenements
         return $this->lieu;
     }
 
-    public function setLieu(string $lieu): self
+    public function setLieu( string $lieu ): self
     {
         $this->lieu = $lieu;
 

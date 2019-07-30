@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class PrestataireHasCategorie
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -38,7 +39,7 @@ class PrestataireHasCategorie
         return $this->prestataire;
     }
 
-    public function setPrestataire(?Prestataire $prestataire): self
+    public function setPrestataire( ?Prestataire $prestataire ): self
     {
         $this->prestataire = $prestataire;
 
@@ -50,7 +51,7 @@ class PrestataireHasCategorie
         return $this->categorie;
     }
 
-    public function setCategorie(?Categorie $categorie): self
+    public function setCategorie( ?Categorie $categorie ): self
     {
         $this->categorie = $categorie;
 
