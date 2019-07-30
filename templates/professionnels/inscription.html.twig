@@ -64,11 +64,11 @@
 
                     <div class="row">
                         <div class="form-group col-6">
-                            {{ form_row(formPro.presta, {'attr' : {'placeholder': "Prestataire", "class": "form-check-input", "id":"presta", "onClick":"check()"}}) }}
+                            {{ form_row(formPro.presta, {'attr' : {"id":"presta", 'style': 'margin-left: 0.5em;', "onClick":"check()"}}) }}
                         </div>
 
                         <div class="form-group col-6">
-                            {{ form_row(formPro.compt, {'attr' : {'label': "Comptoir", "class": "form-check-input text-right", "id":"comptoir"}}) }}
+                            {{ form_row(formPro.compt, {'attr' : {"id":"comptoir", 'style': 'margin-left: 0.5em;'}}) }}
                         </div>
                         <div class="form-group col-12">
                             {{ form_row(formCategorie.categorie, {'attr' : {"class":"custom-select ", "id":"categorie", "disabled":"disabled"}}) }}
