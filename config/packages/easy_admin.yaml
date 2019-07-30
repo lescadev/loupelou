@@ -36,7 +36,6 @@ easy_admin:
                 icon: "money"
                 entity: 'Transactions'
 
-
     entities:
         User:
             class: App\Entity\User
@@ -99,9 +98,6 @@ easy_admin:
             edit:
                 actions: ['-new', '-delete']
 
-
-
-
         Informations:
             class: App\Entity\Informations
             form:
@@ -109,6 +105,7 @@ easy_admin:
                 fields:
                     - {property: 'imageFile', type: 'vich_image', label: 'Logo'}
                     - {property: 'slogan', label: 'Slogan' ,type: 'fos_ckeditor', type_options: {config_name: 'my_config_3'}}
+                    - {property: 'titrepresentation', label: 'Titre de la présentation', type: 'text'}
                     - {property: 'presentation', label: 'Présentation', type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
                     - {property: 'adresse', label: 'Adresse'}
                     - {property: 'code_postal', label: 'Code postal'}
@@ -122,8 +119,7 @@ easy_admin:
                 actions: ['-new', '-delete']
             list:
                 actions: ['-new', '-delete']
-                fields: [{property: 'logo', type: 'image', label: 'Logo', base_path: '%app.path.logo_images%'}, {property: 'slogan', label: 'Slogan'}, {property: 'presentation', label: 'Présentation'}, {property: 'adresse', label: 'Adresse'}, {property: 'code_postal', label: 'Code postal'}, {property: 'ville', label: 'Ville'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Email'}, {property: 'facebook', label: 'Facebook'}]
-
+                fields: [{property: 'logo', type: 'image', label: 'Logo', base_path: '%app.path.logo_images%'}, {property: 'slogan', label: 'Slogan'}, {property: 'titre_presentation', label: 'Titre Présentation'}, {property: 'presentation', label: 'Présentation'}, {property: 'adresse', label: 'Adresse'}, {property: 'code_postal', label: 'Code postal'}, {property: 'ville', label: 'Ville'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Email'}]
 
         ArticleBlog:
             class: App\Entity\ArticleBlog
@@ -139,9 +135,6 @@ easy_admin:
                     - {property: 'imageFile', type: 'vich_image', label: 'Image'}
                     - {property: 'createdAt', label: 'Date création'}
                     - {property: 'imageDescription', label: 'Description image'}
-
-
-
 
         Evenements:
             class: App\Entity\Evenements

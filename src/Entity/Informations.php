@@ -86,6 +86,11 @@ class Informations
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    private $titre_presentation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -248,6 +253,18 @@ class Informations
     public function setUpdatedAt( \DateTimeInterface $updatedAt ): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getTitrePresentation(): ?string
+    {
+        return $this->titre_presentation;
+    }
+
+    public function setTitrePresentation(?string $titre_presentation): self
+    {
+        $this->titre_presentation = $titre_presentation;
 
         return $this;
     }
