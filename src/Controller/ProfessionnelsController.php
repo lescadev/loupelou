@@ -131,7 +131,7 @@ class ProfessionnelsController
                 }
 
                 if( ! empty( $data['compt'] ) && ! empty( $data['presta'] ) ) {
-                    $user->setRoles( [ "ROLE_PRESTA&COMPT" ] );
+                    $user->setRoles( [ "ROLE_PRESTATAIRE","ROLE_COMPTOIR" ] );
                 }
 
                 if( ! empty( $data['compt'] ) | ! empty( $data['presta'] ) ) {
