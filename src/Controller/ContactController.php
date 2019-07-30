@@ -37,22 +37,14 @@ class ContactController
             }
         }
 
-        $res = $informationsRepository->findAll();
-
-        if( $res ) {
-            $info = $res[0];
-        }
+        $infosContact = $informationsRepository->findAll()[0];
 
         return $this->render( 'contact/contacter.html.twig',
             [
                 'controller_name' => 'ContactController',
                 'form'            => $form->createView(),
                 'siteKey'         => $this->getParameter( 'google_recaptcha_site_key' ),
-                'tel'             => $info->getTelephone(),
-                'mail'            => $info->getEmail(),
-                'facebook'        => $info->getFacebook(),
-                'insta'           => $info->getInstagram(),
-                'twitter'         => $info->getTwitter(),
+                'infosContact'    => $infosContact,
             ] );
     }
 }
