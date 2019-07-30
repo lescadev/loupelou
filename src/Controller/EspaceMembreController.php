@@ -149,6 +149,7 @@ class EspaceMembreController
             [
                 'form' => $form->createView(),
                 'user' => $user,
+                'isactive' => $user->getIsActive()
             ] );
     }
 }
