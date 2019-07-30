@@ -41,9 +41,11 @@ class AppFixtures
 
         // Fixtures de l'entité "admin"
         $admin = new Admin();
-        $admin->setUsername( "admin" );
-        $admin->setPassword( $this->encoder->encodePassword( $admin, 'admin' ) );
-        $admin->setRoles( [ 'ROLE_ADMIN' ] );
+        $admin->setPrenom( 'Administrateur' )
+              ->setNom( 'Lou Pélou' )
+              ->setUsername( "admin" )
+              ->setPassword( $this->encoder->encodePassword( $admin, 'admin' ) )
+              ->setRoles( [ 'ROLE_ADMIN' ] );
         $manager->persist( $admin );
 
         // Fixtures de l'entité "Informations"
