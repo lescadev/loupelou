@@ -4,11 +4,10 @@ namespace App\DataFixtures;
 
 use App\Entity\Admin;
 use App\Entity\User;
-use App\Entity\Particulier;
-use App\Entity\Prestataire;
 use App\Entity\Comptoir;
 use App\Entity\Categorie;
-use App\Entity\PrestataireHasCategorie;
+use App\Entity\Particulier;
+use App\Entity\Prestataire;
 use App\Entity\Informations;
 use App\Entity\InformationsLegales;
 use App\Entity\InformationsAssociation;
@@ -219,20 +218,26 @@ class AppFixtures
             $manager->persist( $category[ $i ] );
         }
 
-        $prestaHasCategorie = new PrestataireHasCategorie();
-        $prestaHasCategorie->setPrestataire( $presta )
-                           ->setCategorie( $category[0] );
-        $manager->persist( $prestaHasCategorie );
+        $presta->addCategory($category[1]);
+        $presta->addCategory($category[0]);
 
-        $prestaHasCategorie2 = new PrestataireHasCategorie();
-        $prestaHasCategorie2->setPrestataire( $presta2 )
-                            ->setCategorie( $category[9] );
-        $manager->persist( $prestaHasCategorie2 );
+        $presta2->addCategory($category[5]);
+        $presta2->addCategory($category[8]);
+        $presta2->addCategory($category[3]);
 
-        $prestaHasCategorie3 = new PrestataireHasCategorie();
-        $prestaHasCategorie3->setPrestataire( $presta3 )
-                            ->setCategorie( $category[1] );
-        $manager->persist( $prestaHasCategorie3 );
+        $presta3->addCategory($category[6]);
+        $presta3->addCategory($category[5]);
+
+        $manager->persist($user);
+        $manager->persist($user2);
+        $manager->persist($user5);
+        $manager->persist($presta3);
+        $manager->persist($comptoir);
+        $manager->persist($comptoir2);
+        $manager->persist($presta);
+        $manager->persist($presta2);
+
+        // Blog fixtures
 
         // Fixtures de l'entité "Blog"
         for( $i = 1; $i <= 10; $i ++ ) {
