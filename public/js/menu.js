@@ -19,17 +19,13 @@ let setActiveLink = function (route) {
 
     for (const index in links) {
         if (route === index) {
+            let focusLink = document.getElementsByClassName(links[index])
             if (route === 'inscription_particulier' || route == 'inscription_pro') {
-                let focusLink = document.getElementsByClassName(links[index])
                 focusLink[0].setAttribute('class', 'nav-item dropdown active ' + links[index])
             } else if (route === 'contacter') {
-                let focusLink = document.getElementsByClassName(links[index])
-                console.log(focusLink)
                 focusLink[0].setAttribute('class', 'nav-link active ' + links[index])
                 focusLink[1].setAttribute('class', 'nav-link active ' + links[index])
             } else {
-                let focusLink = document.getElementsByClassName(links[index])
-                console.log(focusLink)
                 focusLink[0].setAttribute('class', 'nav-link active ' + links[index])
             }
         }
