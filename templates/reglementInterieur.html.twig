@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Règlement intérieur de l'association - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1 class="principale mb-3">Règlement intérieur de l'association</h1>
+
+    {{ infosAsso.reglementInterieur | raw }}
+
+{% endblock %}

@@ -12,22 +12,24 @@ easy_admin:
             css:
                 - 'css/admin.css'
         menu:
-            -   label: "Utilisateurs"
-                icon: "user-o"
-                children:
-                    - {entity: 'User'}
-                    - {entity: 'Particulier'}
-                    - {entity: 'Prestataire'}
-                    - {entity: 'Comptoir'}
+            - label: "Utilisateurs"
+              icon: "user-o"
+              children:
+                  - {entity: 'Particulier'}
+                  - {entity: 'Prestataire'}
+                  - {entity: 'Comptoir'}
 
-            -   label: "Informations Légales"
+            -   label: "Informations générales"
+                icon: "newspaper"
+                entity: 'Informations'
+
+            -   label: "Informations légales"
                 icon: "file-alt"
                 entity: 'InformationsLegales'
 
-
-            -   label: "Informations"
-                icon: "newspaper"
-                entity: 'Informations'
+            -   label:  "Informations association"
+                icon: "file-alt"
+                entity: 'InformationsAssociation'
 
             -   label: "Blog"
                 icon: "blog"
@@ -42,51 +44,66 @@ easy_admin:
                 entity: 'Transactions'
 
     entities:
-        User:
-            class: App\Entity\User
-            label: "Membres"
-            list:
-                fields: [{ property: 'is_active',  type: 'toggle' }, 'prenom', 'nom', 'email', 'adresse','code_postal', 'ville']
-                actions:
-                    - {name: 'new', label: 'Ajouter membre' }
-            form:
-                title: 'Adhérent'
-                fields:
-                    - {property: 'email'}
-                    - {property: 'password'}
-                    - {property: 'prenom'}
-                    - {property: 'nom'}
-                    - {property: 'telephone'}
-                    - {property: 'adresse'}
-                    - {property: 'code_postal'}
-                    - {property: 'ville'}
-                    - {property: 'description'}
-                    - {property: 'date_creation'}
         Particulier:
-            label: "Particuliers"
             class: App\Entity\Particulier
+            label: "Particuliers"
+            disabled_actions: ['new']
+            list:
+                fields:
+                  [ {property: 'is_active', type: 'toggle', label: 'Actif' }, {property: 'prenom', label: 'Prénom'}, {property: 'nom', label: 'Nom'}, {property: 'email', label: 'Adresse e-mail'}, {property: 'telephone', label: 'Téléphone'}, {property: 'ville', label: 'Ville'} ]
             form:
                 title: 'Particulier'
-            list:
-                fields: [{property: 'user.nom', label: 'Nom'}, {property: 'user.prenom', label: 'Prénom'}, {property: 'user.email', label: 'Email'}, {property: 'user.adresse', label: 'Adresse'},{property: 'user.code_postal', label: 'Code postal'}, {property: 'user.ville', label: 'Ville'}]
-                actions:
-                    - {name: 'new', label: 'Ajouter Particuler' }
+                fields:
+                    - {property: 'prenom', label: 'Prénom', type: 'text'}
+                    - {property: 'nom', label: 'Nom', type: 'text'}
+                    - {property: 'telephone', label: 'Téléphone', type: 'text'}
+                    - {property: 'email', label: 'Adresse e-mail', type: 'email'}
+                    - {property: 'adresse', label: 'Adresse', type: 'text' }
+                    - {property: 'code_postal', label: 'Code postal', type: 'text' }
+                    - {property: 'ville', label: 'Ville', type: 'text'}
         Prestataire:
-            label: "Prestataires"
             class: App\Entity\Prestataire
-            form:
-                title: 'Prestataire'
+            label: 'Prestataires'
+            disabled_actions: ['new']
             list:
+                fields: [ {property: 'is_active',  type: 'toggle', label: 'Actif'}, {property: 'denomination', label: 'Enseigne'}, {property: 'prenom', label: 'Prénom'}, {property: 'nom', label: 'Nom'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Adresse e-mail'}, {property: 'ville', label: 'Ville'}]
                 actions:
                     - {name: 'new', label: 'Ajouter Prestataire' }
-        Comptoir:
-            label: "Comptoirs"
-            class: App\Entity\Comptoir
             form:
-                title: 'Comptoir'
+                title: 'Prestataire'
+                fields:
+                    - {property: 'denomination', label: 'Enseigne', type: 'text'}
+                    - {property: 'prenom', label: 'Prénom', type: 'text'}
+                    - {property: 'nom', label: 'Nom', type: 'text'}
+                    - {property: 'telephone', label: 'Téléphone', type: 'text'}
+                    - {property: 'email', label: 'Adresse e-mail', type: 'email'}
+                    - {property: 'adresse', label: 'Adresse', type: 'text' }
+                    - {property: 'code_postal', label: 'Code postal', type: 'text' }
+                    - {property: 'ville', label: 'Ville', type: 'text'}
+                    - {property: 'siret', label: 'Siret', type: 'text'}
+                    - {property: 'site_internet', label: 'Site', type: 'text'}
+                    - {property: 'categories', label: 'Catégorie'}
+        Comptoir:
+            class: App\Entity\Comptoir
+            label: "Comptoirs"
+            disabled_actions: ['new']
             list:
                 actions:
                     - {name: 'new', label: 'Ajouter Comptoir' }
+                fields: [ {property: 'is_active',  type: 'toggle', label: 'Actif'}, {property: 'denomination', label: 'Enseigne'}, {property: 'prenom', label: 'Prénom'}, {property: 'nom', label: 'Nom'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Adresse e-mail'}, {property: 'ville', label: 'Ville'}]
+            form:
+                title: 'Comptoir'
+                fields:
+                    - {property: 'denomination', label: 'Enseigne', type: 'text'}
+                    - {property: 'prenom', label: 'Prénom', type: 'text'}
+                    - {property: 'nom', label: 'Nom', type: 'text'}
+                    - {property: 'telephone', label: 'Téléphone', type: 'text'}
+                    - {property: 'email', label: 'Adresse e-mail', type: 'email'}
+                    - {property: 'adresse', label: 'Adresse', type: 'text' }
+                    - {property: 'code_postal', label: 'Code postal', type: 'text' }
+                    - {property: 'ville', label: 'Ville', type: 'text'}
+                    - {property: 'siret', label: 'Siret', type: 'text'}
+                    - {property: 'site_internet', label: 'Site', type: 'text'}
 
         InformationsLegales:
             class: App\Entity\InformationsLegales
@@ -106,7 +123,7 @@ easy_admin:
         Informations:
             class: App\Entity\Informations
             form:
-                title: 'Informations'
+                title: 'Informations générales'
                 fields:
                     - {property: 'imageFile', type: 'vich_image', label: 'Logo'}
                     - {property: 'slogan', label: 'Slogan' ,type: 'fos_ckeditor', type_options: {config_name: 'my_config_3'}}
@@ -125,6 +142,21 @@ easy_admin:
             list:
                 actions: ['-new', '-delete']
                 fields: [{property: 'logo', type: 'image', label: 'Logo', base_path: '%app.path.logo_images%'}, {property: 'slogan', label: 'Slogan'}, {property: 'titre_presentation', label: 'Titre Présentation'}, {property: 'presentation', label: 'Présentation'}, {property: 'adresse', label: 'Adresse'}, {property: 'code_postal', label: 'Code postal'}, {property: 'ville', label: 'Ville'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Email'}]
+
+        InformationsAssociation:
+            class: App\Entity\InformationsAssociation
+            label: "Informations de l'association"
+            disabled_actions: ['search','delete','new']
+            list:
+                fields: ['Statuts', 'ReglementInterieur', 'CompteRenduAG']
+            form:
+                title: 'Informations association'
+                fields:
+                    - {property: 'Statuts',type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
+                    - {property: 'ReglementInterieur',type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
+                    - {property: 'CompteRenduAG',type: 'fos_ckeditor',type_options: {config_name: 'my_config_1'}}
+            edit:
+                actions: ['-new', '-delete']
 
         ArticleBlog:
             class: App\Entity\ArticleBlog
@@ -162,6 +194,3 @@ easy_admin:
             disabled_actions: ['search','delete','new','edit']
             list:
                 fields: [{property: 'nom', label: 'Nom'}, {property: 'prenom', label: 'Prénom'}, {property: 'comptoir', label: 'Comptoir'}, {property: 'montant', label: 'Montant'}, {property: 'date_transaction', label: 'Date'}]
-
-
-

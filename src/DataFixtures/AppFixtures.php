@@ -4,13 +4,13 @@ namespace App\DataFixtures;
 
 use App\Entity\Admin;
 use App\Entity\User;
-use App\Entity\Particulier;
-use App\Entity\Prestataire;
 use App\Entity\Comptoir;
 use App\Entity\Categorie;
-use App\Entity\PrestataireHasCategorie;
+use App\Entity\Particulier;
+use App\Entity\Prestataire;
 use App\Entity\Informations;
 use App\Entity\InformationsLegales;
+use App\Entity\InformationsAssociation;
 use App\Entity\ArticleBlog;
 use App\Entity\Evenements;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -66,6 +66,13 @@ class AppFixtures
                ->setCgu( "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida et nulla ac lacinia. Nullam ut lorem eget leo faucibus tempus id et purus. Vivamus venenatis feugiat commodo. Donec lobortis ut lectus sit amet iaculis. Nunc fringilla turpis sem, interdum interdum dolor faucibus volutpat. Donec sed ante nisi. Cras bibendum molestie odio placerat dictum. Vestibulum venenatis nulla diam, eget mollis magna mollis sed. Cras eget sollicitudin mi. Aliquam in enim vitae libero varius lobortis ut quis libero. Etiam tincidunt egestas metus, at laoreet ante rutrum id.</p>" )
                ->setMentionsLegales( "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida et nulla ac lacinia. Nullam ut lorem eget leo faucibus tempus id et purus. Vivamus venenatis feugiat commodo. Donec lobortis ut lectus sit amet iaculis. Nunc fringilla turpis sem, interdum interdum dolor faucibus volutpat. Donec sed ante nisi. Cras bibendum molestie odio placerat dictum. Vestibulum venenatis nulla diam, eget mollis magna mollis sed. Cras eget sollicitudin mi. Aliquam in enim vitae libero varius lobortis ut quis libero. Etiam tincidunt egestas metus, at laoreet ante rutrum id.</p>" );
         $manager->persist( $infosL );
+
+        // Fixtures de l'entité "InformationsAssociation"
+        $infosA = new InformationsAssociation();
+        $infosA->setStatuts( "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida et nulla ac lacinia. Nullam ut lorem eget leo faucibus tempus id et purus. Vivamus venenatis feugiat commodo. Donec lobortis ut lectus sit amet iaculis. Nunc fringilla turpis sem, interdum interdum dolor faucibus volutpat. Donec sed ante nisi. Cras bibendum molestie odio placerat dictum. Vestibulum venenatis nulla diam, eget mollis magna mollis sed. Cras eget sollicitudin mi. Aliquam in enim vitae libero varius lobortis ut quis libero. Etiam tincidunt egestas metus, at laoreet ante rutrum id.</p>" )
+               ->setReglementInterieur( "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida et nulla ac lacinia. Nullam ut lorem eget leo faucibus tempus id et purus. Vivamus venenatis feugiat commodo. Donec lobortis ut lectus sit amet iaculis. Nunc fringilla turpis sem, interdum interdum dolor faucibus volutpat. Donec sed ante nisi. Cras bibendum molestie odio placerat dictum. Vestibulum venenatis nulla diam, eget mollis magna mollis sed. Cras eget sollicitudin mi. Aliquam in enim vitae libero varius lobortis ut quis libero. Etiam tincidunt egestas metus, at laoreet ante rutrum id.</p>" )
+               ->setCompteRenduAG( "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida et nulla ac lacinia. Nullam ut lorem eget leo faucibus tempus id et purus. Vivamus venenatis feugiat commodo. Donec lobortis ut lectus sit amet iaculis. Nunc fringilla turpis sem, interdum interdum dolor faucibus volutpat. Donec sed ante nisi. Cras bibendum molestie odio placerat dictum. Vestibulum venenatis nulla diam, eget mollis magna mollis sed. Cras eget sollicitudin mi. Aliquam in enim vitae libero varius lobortis ut quis libero. Etiam tincidunt egestas metus, at laoreet ante rutrum id.</p>" );
+        $manager->persist( $infosA );
 
         // Fixtures de l'entité "User"
         $user = new User();
@@ -211,20 +218,26 @@ class AppFixtures
             $manager->persist( $category[ $i ] );
         }
 
-        $prestaHasCategorie = new PrestataireHasCategorie();
-        $prestaHasCategorie->setPrestataire( $presta )
-                           ->setCategorie( $category[0] );
-        $manager->persist( $prestaHasCategorie );
+        $presta->addCategory($category[1]);
+        $presta->addCategory($category[0]);
 
-        $prestaHasCategorie2 = new PrestataireHasCategorie();
-        $prestaHasCategorie2->setPrestataire( $presta2 )
-                            ->setCategorie( $category[9] );
-        $manager->persist( $prestaHasCategorie2 );
+        $presta2->addCategory($category[5]);
+        $presta2->addCategory($category[8]);
+        $presta2->addCategory($category[3]);
 
-        $prestaHasCategorie3 = new PrestataireHasCategorie();
-        $prestaHasCategorie3->setPrestataire( $presta3 )
-                            ->setCategorie( $category[1] );
-        $manager->persist( $prestaHasCategorie3 );
+        $presta3->addCategory($category[6]);
+        $presta3->addCategory($category[5]);
+
+        $manager->persist($user);
+        $manager->persist($user2);
+        $manager->persist($user5);
+        $manager->persist($presta3);
+        $manager->persist($comptoir);
+        $manager->persist($comptoir2);
+        $manager->persist($presta);
+        $manager->persist($presta2);
+
+        // Blog fixtures
 
         // Fixtures de l'entité "Blog"
         for( $i = 1; $i <= 10; $i ++ ) {
