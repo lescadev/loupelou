@@ -54,13 +54,13 @@ easy_admin:
             form:
                 title: 'Particulier'
                 fields:
-                    - {property: 'prenom', label: 'Prénom', type: 'text'}
-                    - {property: 'nom', label: 'Nom', type: 'text'}
+                    - {property: 'prenom', label: 'Prénom', type: 'text', type_options: {required: true}}
+                    - {property: 'nom', label: 'Nom', type: 'text', type_options: {required: true}}
                     - {property: 'telephone', label: 'Téléphone', type: 'text'}
-                    - {property: 'email', label: 'Adresse e-mail', type: 'email'}
-                    - {property: 'adresse', label: 'Adresse', type: 'text' }
-                    - {property: 'code_postal', label: 'Code postal', type: 'text' }
-                    - {property: 'ville', label: 'Ville', type: 'text'}
+                    - {property: 'email', label: 'Adresse e-mail', type: 'email', type_options: {required: true}}
+                    - {property: 'adresse', label: 'Adresse', type: 'text', type_options: {required: true} }
+                    - {property: 'code_postal', label: 'Code postal', type: 'text', type_options: {required: true} }
+                    - {property: 'ville', label: 'Ville', type: 'text', type_options: {required: true}}
         Prestataire:
             class: App\Entity\Prestataire
             label: 'Prestataires'
@@ -73,13 +73,13 @@ easy_admin:
                 title: 'Prestataire'
                 fields:
                     - {property: 'denomination', label: 'Enseigne', type: 'text'}
-                    - {property: 'prenom', label: 'Prénom', type: 'text'}
-                    - {property: 'nom', label: 'Nom', type: 'text'}
+                    - {property: 'prenom', label: 'Prénom', type: 'text', type_options: {required: true}}
+                    - {property: 'nom', label: 'Nom', type: 'text', type_options: {required: true}}
                     - {property: 'telephone', label: 'Téléphone', type: 'text'}
-                    - {property: 'email', label: 'Adresse e-mail', type: 'email'}
-                    - {property: 'adresse', label: 'Adresse', type: 'text' }
-                    - {property: 'code_postal', label: 'Code postal', type: 'text' }
-                    - {property: 'ville', label: 'Ville', type: 'text'}
+                    - {property: 'email', label: 'Adresse e-mail', type: 'email', type_options: {required: true}}
+                    - {property: 'adresse', label: 'Adresse', type: 'text', type_options: {required: true} }
+                    - {property: 'code_postal', label: 'Code postal', type: 'text', type_options: {required: true} }
+                    - {property: 'ville', label: 'Ville', type: 'text', type_options: {required: true}}
                     - {property: 'siret', label: 'Siret', type: 'text'}
                     - {property: 'site_internet', label: 'Site', type: 'text'}
                     - {property: 'categories', label: 'Catégorie'}
@@ -95,13 +95,13 @@ easy_admin:
                 title: 'Comptoir'
                 fields:
                     - {property: 'denomination', label: 'Enseigne', type: 'text'}
-                    - {property: 'prenom', label: 'Prénom', type: 'text'}
-                    - {property: 'nom', label: 'Nom', type: 'text'}
+                    - {property: 'prenom', label: 'Prénom', type: 'text', type_options: {required: true}}
+                    - {property: 'nom', label: 'Nom', type: 'text', type_options: {required: true}}
                     - {property: 'telephone', label: 'Téléphone', type: 'text'}
-                    - {property: 'email', label: 'Adresse e-mail', type: 'email'}
-                    - {property: 'adresse', label: 'Adresse', type: 'text' }
-                    - {property: 'code_postal', label: 'Code postal', type: 'text' }
-                    - {property: 'ville', label: 'Ville', type: 'text'}
+                    - {property: 'email', label: 'Adresse e-mail', type: 'email', type_options: {required: true}}
+                    - {property: 'adresse', label: 'Adresse', type: 'text', type_options: {required: true} }
+                    - {property: 'code_postal', label: 'Code postal', type: 'text', type_options: {required: true} }
+                    - {property: 'ville', label: 'Ville', type: 'text', type_options: {required: true}}
                     - {property: 'siret', label: 'Siret', type: 'text'}
                     - {property: 'site_internet', label: 'Site', type: 'text'}
 

@@ -55,7 +55,7 @@ class Particulier
         return $this->getUser()->getNom();
     }
 
-    public function setNom(string $nom): self
+    public function setNom(string $nom)
     {
         return $this->getUser()->setNom($nom);
     }
@@ -65,7 +65,7 @@ class Particulier
         return $this->getUser()->getPrenom();
     }
 
-    public function setPrenom(string $prenom): self
+    public function setPrenom(string $prenom)
     {
         return $this->getUser()->setPrenom($prenom);
     }
@@ -75,7 +75,7 @@ class Particulier
         return $this->getUser()->getEmail();
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(string $email)
     {
         return $this->getUser()->setEmail($email);
     }
@@ -85,7 +85,7 @@ class Particulier
         return $this->getUser()->getAdresse();
     }
 
-    public function setAdresse(string $adresse): self
+    public function setAdresse(string $adresse)
     {
         return $this->getUser()->setAdresse($adresse);
     }
@@ -95,7 +95,7 @@ class Particulier
         return $this->getUser()->getCodePostal();
     }
 
-    public function setCodePostal(string $codePostal): self
+    public function setCodePostal(string $codePostal)
     {
         return $this->getUser()->setCodePostal($codePostal);
     }
@@ -115,7 +115,7 @@ class Particulier
         return $this->getUser()->getTelephone();
     }
 
-    public function setTelephone(string $telephone): self
+    public function setTelephone(string $telephone)
     {
         return $this->getUser()->setTelephone($telephone);
     }
