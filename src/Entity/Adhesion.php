@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Adhesion
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -42,7 +43,7 @@ class Adhesion
         return $this->debut_adhesion;
     }
 
-    public function setDebutAdhesion(\DateTimeInterface $debut_adhesion): self
+    public function setDebutAdhesion( \DateTimeInterface $debut_adhesion ): self
     {
         $this->debut_adhesion = $debut_adhesion;
 
@@ -54,7 +55,7 @@ class Adhesion
         return $this->fin_adhesion;
     }
 
-    public function setFinAdhesion(?\DateTimeInterface $fin_adhesion): self
+    public function setFinAdhesion( ?\DateTimeInterface $fin_adhesion ): self
     {
         $this->fin_adhesion = $fin_adhesion;
 
@@ -66,7 +67,7 @@ class Adhesion
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser( ?User $user ): self
     {
         $this->user = $user;
 

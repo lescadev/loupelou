@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Comptoir
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -37,6 +38,11 @@ class Comptoir
      */
     private $denomination;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $solde;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -47,7 +53,7 @@ class Comptoir
         return $this->user;
     }
 
-    public function setUser(User $user): self
+    public function setUser( User $user ): self
     {
         $this->user = $user;
 
@@ -59,7 +65,7 @@ class Comptoir
         return $this->site_internet;
     }
 
-    public function setSiteInternet(?string $site_internet): self
+    public function setSiteInternet( ?string $site_internet ): self
     {
         $this->site_internet = $site_internet;
 
@@ -71,7 +77,7 @@ class Comptoir
         return $this->siret;
     }
 
-    public function setSiret(?string $siret): self
+    public function setSiret( ?string $siret ): self
     {
         $this->siret = $siret;
 
@@ -83,7 +89,7 @@ class Comptoir
         return $this->denomination;
     }
 
-    public function setDenomination(string $denomination): self
+    public function setDenomination( string $denomination ): self
     {
         $this->denomination = $denomination;
 
@@ -168,5 +174,22 @@ class Comptoir
     public function setCodePostal(string $codePostal)
     {
         return $this->getUser()->setCodePostal($codePostal);
+    }
+
+    public function getSolde(): ?float
+    {
+        return $this->solde;
+    }
+
+    public function setSolde( ?float $solde ): self
+    {
+        $this->solde = $solde;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->denomination;
     }
 }

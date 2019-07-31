@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Prestataire
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -62,7 +63,7 @@ class Prestataire
         return $this->user;
     }
 
-    public function setUser(User $user): self
+    public function setUser( User $user ): self
     {
         $this->user = $user;
 
@@ -92,7 +93,7 @@ class Prestataire
         return $this->site_internet;
     }
 
-    public function setSiteInternet(?string $site_internet): self
+    public function setSiteInternet( ?string $site_internet ): self
     {
         $this->site_internet = $site_internet;
 
@@ -104,7 +105,7 @@ class Prestataire
         return $this->siret;
     }
 
-    public function setSiret(string $siret): self
+    public function setSiret( string $siret ): self
     {
         $this->siret = $siret;
 
@@ -116,7 +117,7 @@ class Prestataire
         return $this->denomination;
     }
 
-    public function setDenomination(string $denomination): self
+    public function setDenomination( string $denomination ): self
     {
         $this->denomination = $denomination;
 

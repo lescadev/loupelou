@@ -3,12 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\InformationsRepository")
+ * @Vich\Uploadable
  */
 class Informations
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -25,21 +29,6 @@ class Informations
      * @ORM\Column(type="text")
      */
     private $presentation;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $image_1;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $image_2;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $image_3;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -81,6 +70,27 @@ class Informations
      */
     private $twitter;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable= true)
+     */
+    private $logo;
+
+    /**
+     * @Vich\UploadableField(mapping="logo_images", fileNameProperty="logo")
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="datetime", nullable= true)
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    private $titre_presentation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,7 +101,7 @@ class Informations
         return $this->slogan;
     }
 
-    public function setSlogan(?string $slogan): self
+    public function setSlogan( ?string $slogan ): self
     {
         $this->slogan = $slogan;
 
@@ -103,45 +113,9 @@ class Informations
         return $this->presentation;
     }
 
-    public function setPresentation(string $presentation): self
+    public function setPresentation( string $presentation ): self
     {
         $this->presentation = $presentation;
-
-        return $this;
-    }
-
-    public function getImage1(): ?string
-    {
-        return $this->image_1;
-    }
-
-    public function setImage1(?string $image_1): self
-    {
-        $this->image_1 = $image_1;
-
-        return $this;
-    }
-
-    public function getImage2(): ?string
-    {
-        return $this->image_2;
-    }
-
-    public function setImage2(?string $image_2): self
-    {
-        $this->image_2 = $image_2;
-
-        return $this;
-    }
-
-    public function getImage3(): ?string
-    {
-        return $this->image_3;
-    }
-
-    public function setImage3(?string $image_3): self
-    {
-        $this->image_3 = $image_3;
 
         return $this;
     }
@@ -151,7 +125,7 @@ class Informations
         return $this->adresse;
     }
 
-    public function setAdresse(?string $adresse): self
+    public function setAdresse( ?string $adresse ): self
     {
         $this->adresse = $adresse;
 
@@ -163,7 +137,7 @@ class Informations
         return $this->code_postal;
     }
 
-    public function setCodePostal(?string $code_postal): self
+    public function setCodePostal( ?string $code_postal ): self
     {
         $this->code_postal = $code_postal;
 
@@ -175,7 +149,7 @@ class Informations
         return $this->ville;
     }
 
-    public function setVille(?string $ville): self
+    public function setVille( ?string $ville ): self
     {
         $this->ville = $ville;
 
@@ -187,7 +161,7 @@ class Informations
         return $this->telephone;
     }
 
-    public function setTelephone(?string $telephone): self
+    public function setTelephone( ?string $telephone ): self
     {
         $this->telephone = $telephone;
 
@@ -199,7 +173,7 @@ class Informations
         return $this->email;
     }
 
-    public function setEmail(?string $email): self
+    public function setEmail( ?string $email ): self
     {
         $this->email = $email;
 
@@ -211,7 +185,7 @@ class Informations
         return $this->facebook;
     }
 
-    public function setFacebook(?string $facebook): self
+    public function setFacebook( ?string $facebook ): self
     {
         $this->facebook = $facebook;
 
@@ -223,7 +197,7 @@ class Informations
         return $this->instagram;
     }
 
-    public function setInstagram(?string $instagram): self
+    public function setInstagram( ?string $instagram ): self
     {
         $this->instagram = $instagram;
 
@@ -235,10 +209,64 @@ class Informations
         return $this->twitter;
     }
 
-    public function setTwitter(?string $twitter): self
+    public function setTwitter( ?string $twitter ): self
     {
         $this->twitter = $twitter;
 
         return $this;
     }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo( ?string $logo ): self
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    public function setImageFile( File $logo = null )
+    {
+        $this->imageFile = $logo;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if( $logo ) {
+            $this->updatedAt = new \DateTime( 'now' );
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt( \DateTimeInterface $updatedAt ): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getTitrePresentation(): ?string
+    {
+        return $this->titre_presentation;
+    }
+
+    public function setTitrePresentation(?string $titre_presentation): self
+    {
+        $this->titre_presentation = $titre_presentation;
+
+        return $this;
+    }
+
 }

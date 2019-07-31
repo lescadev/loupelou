@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Categorie
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -43,7 +44,7 @@ class Categorie
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom( string $nom ): self
     {
         $this->nom = $nom;
 

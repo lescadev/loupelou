@@ -4,10 +4,10 @@
 /.env.local.php
 /.env.*.local
 /public/bundles/
-/public/uploads/
+/public/uploads/images/articles/*
+/public/uploads/images/logo/*
 /var/
 /vendor/
-/.idea/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
@@ -22,3 +22,5 @@
 .DS_Store
 /error_l
 public/error_l
+/.idea/
+/.vscode/

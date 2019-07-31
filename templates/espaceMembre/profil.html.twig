@@ -1,19 +1,27 @@
 {% extends 'base.html.twig' %}
-{% block stylesheets %}<link rel="stylesheet" href="/css/stylesEspaceMembres.css">{% endblock %}
 {% block body %}
-<div id="containerProfil">
-    {% include "espaceMembre/menuModif.html.twig" %}
-    <div id="blockProfil">
-        <h2 id="profilTitle">Mon profil</h2>
-        <p>Prénom : {{ prenom }}</p>
-        <p>Nom : {{ nom }}</p>
-        <p>Email : {{ mail }}</p>
-        <p>Adresse : {{ adresse }}</p>
-        <p>Ville : {{ ville }}</p>
-        <p>Code postal : {{ codepostal }}</p>
-        {% if not is_granted('ROLE_PARTICULIER') %}
-        <p>Description : {{ description }}</p>
-        {% endif %}
+
+    {% if not isactive %}
+
+        <div>
+            <p>Ce compte n'est pas actif</p>
+        </div>
+
+    {% endif %}
+
+    <div id="containerProfil">
+        {% include "espaceMembre/menuModif.html.twig" %}
+        <div id="blockProfil">
+            <h2 id="profilTitle">Mon profil</h2>
+            <p>Prénom : {{ prenom }}</p>
+            <p>Nom : {{ nom }}</p>
+            <p>Email : {{ mail }}</p>
+            <p>Adresse : {{ adresse }}</p>
+            <p>Ville : {{ ville }}</p>
+            <p>Code postal : {{ codepostal }}</p>
+            {% if (is_granted('ROLE_COMPTOIR') or is_granted('ROLE_PRESTATAIRE')) %}
+                <p>Description : {{ description }}</p>
+            {% endif %}
+        </div>
     </div>
-</div>
 {% endblock %}

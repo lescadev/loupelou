@@ -30,7 +30,9 @@ class UserRepository extends ServiceEntityRepository
     public function findByParams( array $params )
     {
 
-        $query = $this->createQueryBuilder( 'user' );
+        $query = $this->createQueryBuilder( 'user' )
+            ->andWhere('user.isActive = true');
+
 
         if( ! empty( $params['status'] ) ) {
             if( $params['status'] === 'prestataire' ) {
@@ -58,13 +60,13 @@ class UserRepository extends ServiceEntityRepository
                         ->andWhere( 'user.id = prestataire.user' );
                 }
                 $query->select('user')->distinct();
-                $query->addSelect(  'user.longitude', 'prestataire.id', 'user.latitude', 'prestataire.denomination', 'categorie.nom', 'prestataire.site_internet' );
+                $query->addSelect(  'user.id as userId', 'user.longitude', 'prestataire.id', 'user.latitude', 'prestataire.denomination', 'categorie.nom', 'prestataire.site_internet' );
             } elseif( $params['status'] === 'comptoir' ) {
 
                 $query->innerJoin( comptoir::class, 'comptoir' )
                     ->andWhere( 'user.id = comptoir.user' )
                     ->select('user')->distinct()
-                    ->addSelect( 'user.longitude', 'user.latitude', 'comptoir.denomination', 'comptoir.site_internet' );
+                    ->addSelect( 'user.id as userId', 'user.longitude', 'user.latitude', 'comptoir.denomination', 'comptoir.site_internet' );
 
                 if( ! empty( $params['search'] ) ) {
                     $query->andWhere( "comptoir.denomination LIKE :search OR user.description LIKE :search" )

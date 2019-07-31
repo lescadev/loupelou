@@ -8,8 +8,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdminRepository")
  */
-class Admin implements UserInterface
+class Admin
+    implements UserInterface
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -33,6 +35,16 @@ class Admin implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $prenom;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nom;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -48,7 +60,7 @@ class Admin implements UserInterface
         return (string) $this->username;
     }
 
-    public function setUsername(string $username): self
+    public function setUsername( string $username ): self
     {
         $this->username = $username;
 
@@ -64,10 +76,10 @@ class Admin implements UserInterface
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
+        return array_unique( $roles );
     }
 
-    public function setRoles(array $roles): self
+    public function setRoles( array $roles ): self
     {
         $this->roles = $roles;
 
@@ -82,7 +94,7 @@ class Admin implements UserInterface
         return (string) $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword( string $password ): self
     {
         $this->password = $password;
 
@@ -104,5 +116,34 @@ class Admin implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(?string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(?string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getFullName(): ?string
+    {
+        return $this->prenom . ' ' . $this->nom;
     }
 }

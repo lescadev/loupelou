@@ -1,16 +1,25 @@
 {% extends 'base.html.twig' %}
-{% block stylesheets %}<link rel="stylesheet" href="/css/stylesEspaceMembres.css">{% endblock %}
+
 {% block body %}
-<div id="containerProfil">
-{% include "espaceMembre/menuModif.html.twig" %}
-<div id="blockProfil">
-    <h2 id="profilTitle">Modifier mon adresse mail</h2>
-    <input class="blockInput" disabled value="{{ mail }}" required type="text">
-    {{form_start(form)}}
-        {{ form_row(form.email) }}
-        <button type="submit">Valider</button>
-    {{ form_end(form, {'render_rest': false}) }}
-        
-</div>
-</div>
+
+    {% if not isactive %}
+
+        <div>
+            <p>Ce compte n'est pas actif</p>
+        </div>
+
+    {% endif %}
+
+    <div id="containerProfil">
+        {% include "espaceMembre/menuModif.html.twig" %}
+        <div id="blockProfil">
+            <h2 id="profilTitle">Modifier mon adresse mail</h2>
+            <input class="blockInput" disabled value="{{ mail }}" required type="text">
+            {{ form_start(form) }}
+            {{ form_row(form.email) }}
+            <button type="submit">Valider</button>
+            {{ form_end(form, {'render_rest': false}) }}
+
+        </div>
+    </div>
 {% endblock %}

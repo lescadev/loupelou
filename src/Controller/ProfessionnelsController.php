@@ -12,140 +12,175 @@ use App\Form\InscriptionType;
 use App\Form\InscriptionProType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use GuzzleHttp\Client;
+use ReCaptcha\ReCaptcha;
+use App\Form\CategorieType;
 
-class ProfessionnelsController extends AbstractController
+class ProfessionnelsController
+    extends AbstractController
 {
+
     /**
      * @Route("/professionnel/inscription", name="inscription_pro")
      */
-    public function inscriptionPro(Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer)
-    {
+    public function inscriptionPro(
+        Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer
+    ) {
+        $recaptcha = new ReCaptcha( $this->getParameter( 'google_recaptcha_secret' ) );
+
         $user = new User();
-        $user -> setDateCreation(date_create());
-        $user -> setIsActive(false);
+        $user->setDateCreation( date_create() );
+        $user->setIsActive( false );
 
-        $form = $this->createForm(InscriptionType::class, $user);
-        $form -> handleRequest($request);
+        $form = $this->createForm( InscriptionType::class, $user );
+        $form->handleRequest( $request );
 
-        $formPro = $this->createForm(InscriptionProType::class);
-        $formPro->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) {
-            $form->getData();
-            $user = $form->getData();
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
-                    $user,
-                    $form->get('password')->getData()
-                )
-            );
-            $data = $formPro->getData();
+        $formPro = $this->createForm( InscriptionProType::class );
+        $formPro->handleRequest( $request );
 
-            $entityManager = $this->getDoctrine()->getManager();
+        $formCategorie = $this->createForm( CategorieType::class );
+        $formCategorie->handleRequest( $request );
 
-            //Conversion de l'adresse en coordonnées GPS pour la map
-            $client = new Client();
+        if( $form->isSubmitted() && $form->isValid() ) {
 
-            $address = $form->get('adresse')->getData();
-            $ville = $form->get('ville')->getData();
-            $address_f = $address . " " . $ville;
-            $prepAddr = str_replace(' ','+',$address_f);
+            $resp = $recaptcha->verify( $request->request->get( 'recaptchaToken' ), $request->getClientIp() );
+            if( $resp->isSuccess() ) {
 
-            try {
-                $res = $client->request('GET', 'https://api-adresse.data.gouv.fr/search/?q='.$prepAddr);
+                $form->getData();
+                $user = $form->getData();
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $form->get( 'password' )->getData()
+                    )
+                );
+                $data = $formPro->getData();
 
-                $json = $res->getBody();
-                $json_d = json_decode($json);
+                $entityManager = $this->getDoctrine()->getManager();
 
-                $lon = $json_d->features[0]->geometry->coordinates[0];
-                $lat = $json_d->features[0]->geometry->coordinates[1];
+                //Conversion de l'adresse en coordonnées GPS pour la map
+                $client = new Client();
 
-            } catch (\Exception $exception) {
-                $lat = null;
-                $lon = null;
-            }
+                $address   = $form->get( 'adresse' )->getData();
+                $ville     = $form->get( 'ville' )->getData();
+                $address_f = $address . " " . $ville;
+                $prepAddr  = str_replace( ' ', '+', $address_f );
 
-            $user->setLongitude($lon);
-            $user->setLatitude($lat);
+                try {
+                    $res = $client->request( 'GET', 'https://api-adresse.data.gouv.fr/search/?q=' . $prepAddr );
 
-            if(!empty($data['compt'])) {
-                $comptoir = new Comptoir;
-                $comptoir->setUser($user);
-                $user -> setRoles(["ROLE_COMPTOIR"]);
+                    $json   = $res->getBody();
+                    $json_d = json_decode( $json );
 
-                if(!empty($data['siret'])){
-                    $comptoir ->setSiret($data["siret"]);
-                }
-                if(!empty($data['site_internet'])){
-                    $comptoir ->setSiteInternet($data["site_internet"]);
+                    $lon = $json_d->features[0]->geometry->coordinates[0];
+                    $lat = $json_d->features[0]->geometry->coordinates[1];
+                } catch( \Exception $exception ) {
+                    $lat = null;
+                    $lon = null;
                 }
 
-                $comptoir ->setDenomination($data["denomination"]);
+                $user->setLongitude( $lon );
+                $user->setLatitude( $lat );
 
-                $entityManager->persist($comptoir);
-            }
+                if( ! empty( $data['compt'] ) ) {
+                    $comptoir = new Comptoir;
+                    $comptoir->setUser( $user );
+                    $user->setRoles( [ "ROLE_COMPTOIR" ] );
 
-            if(!empty($data['presta'])) {
-                $prestataire = new Prestataire;
-                $prestataire->setUser($user);
-                $user -> setRoles(["ROLE_PRESTATAIRE"]);
+                    if( ! empty( $data['siret'] ) ) {
+                        $comptoir->setSiret( $data["siret"] );
+                    }
+                    if( ! empty( $data['site_internet'] ) ) {
+                        $comptoir->setSiteInternet( $data["site_internet"] );
+                    }
 
-                if(!empty($data['siret'])){ 
-                    $prestataire ->setSiret($data["siret"]);
+                    $comptoir->setDenomination( $data["denomination"] );
+
+                    $entityManager->persist( $comptoir );
                 }
-                if(!empty($data['site_internet'])){
-                    $prestataire ->setSiteInternet($data["site_internet"]);
+
+                if( ! empty( $data['presta'] ) ) {
+                    $prestataire = new Prestataire;
+                    $prestataire->setUser( $user );
+                    $categorie = $formCategorie->getData();
+                    $user->setRoles( [ "ROLE_PRESTATAIRE" ] );
+
+                    if( ! empty( $data['siret'] ) ) {
+                        $prestataire->setSiret( $data["siret"] );
+                    }
+                    if( ! empty( $data['site_internet'] ) ) {
+                        $prestataire->setSiteInternet( $data["site_internet"] );
+                    }
+
+                    $prestataire->setDenomination( $data["denomination"] );
+
+                    $categorieObject = array_reduce(
+                        $categorie,
+                        function( $result, $categorie ) {
+                            return $categorie;
+                        }
+                    );
+
+                    $prestataire->addCategory($categorieObject);
+
+                    $entityManager->persist( $prestataire );
+
                 }
 
-                $prestataire ->setDenomination($data["denomination"]);
-                
-                $entityManager->persist($prestataire);
-            }
+                if( ! empty( $data['compt'] ) && ! empty( $data['presta'] ) ) {
+                    $user->setRoles( [ "ROLE_PRESTATAIRE","ROLE_COMPTOIR" ] );
+                }
 
+                if( ! empty( $data['compt'] ) | ! empty( $data['presta'] ) ) {
+                    $entityManager->flush();
 
-            if(!empty($data['compt']) && !empty($data['presta'])){
-                $user -> setRoles(["ROLE_PRESTA&COMPT"]);
-            }
+                    $message = ( new \Swift_Message( 'Inscription loupelou' ) )
+                        ->setFrom( $this->getParameter( 'mail.site' ) )
+                        ->setTo( $form->get( 'email' )->getData() )
+                        ->setBody(
+                            $this->renderView(
+                                'emails/inscription.html.twig',
+                                [
+                                    'nom'    => $form->get( 'nom' )->getData(),
+                                    'prenom' => $form->get( 'prenom' )->getData(),
+                                    'email'  => $form->get( 'email' )->getData(),
+                                ]
+                            ),
+                            'text/html'
+                        );
 
-            if(!empty($data['compt']) | !empty($data['presta'])) {
-                $entityManager->flush();
+                    $mailer->send( $message );
 
-                $message = (new \Swift_Message('Inscription loupelou'))
-                ->setFrom($this->getParameter('mail.site'))
-                ->setTo( $form->get('email')->getData())
-                ->setBody(
-                $this-> renderView(
-                    'emails/inscription.html.twig',
-                    ['nom' =>  $form->get('nom')->getData(), 'prenom' =>  $form->get('prenom')->getData(), 'email' => $form->get('email')->getData()]
-                ),
-                'text/html'
-            );
+                    $adminMessage = ( new \Swift_Message( 'Inscription loupelou' ) )
+                        ->setFrom( $this->getParameter( 'mail.site' ) )
+                        ->setTo( $this->getParameter( 'mail.admin' ) )
+                        ->setBody(
+                            $this->renderView(
+                                'emails/adminInscription.html.twig',
+                                [
+                                    'nom'    => $form->get( 'nom' )->getData(),
+                                    'prenom' => $form->get( 'prenom' )->getData(),
+                                    'email'  => $form->get( 'email' )->getData(),
+                                ]
+                            ),
+                            'text/html'
+                        );
 
-            $mailer->send($message);
+                    $mailer->send( $adminMessage );
 
-            $adminMessage = (new \Swift_Message('Inscription loupelou'))
-                ->setFrom($this->getParameter('mail.site'))
-                ->setTo($this->getParameter('mail.admin'))
-                ->setBody(
-                $this-> renderView(
-                    'emails/adminInscription.html.twig',
-                    ['nom' =>  $form->get('nom')->getData(), 'prenom' =>  $form->get('prenom')->getData(), 'email' => $form->get('email')->getData()]
-                ),
-                'text/html'
-            );
+                    $this->addFlash( 'success',
+                        'Votre inscription est effective et va être prise en compte prochainement.' );
 
-            $mailer->send($adminMessage);
-
-                $this->addFlash('success', 'Votre inscription est effective et va être prise en compte prochainement.');
-                return $this->redirectToRoute('sucess');
-                
+                    return $this->redirectToRoute( 'sucess' );
+                }
             }
         }
 
-
-        return $this->render('professionnels/professionnels.html.twig', [
-            'form' => $form->createView(),
-            'formPro' => $formPro->createView(),
-        ]);
+        return $this->render( 'professionnels/professionnels.html.twig',
+            [
+                'form'          => $form->createView(),
+                'formPro'       => $formPro->createView(),
+                'formCategorie' => $formCategorie->createView(),
+                'siteKey'       => $this->getParameter( 'google_recaptcha_site_key' ),
+            ] );
     }
 }

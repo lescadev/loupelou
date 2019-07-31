@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <section class="contact-container">
+        {#Titre Principal#}
+        <div class="main-title">
+            <h1 class="principale text-center mb-3">Formulaire de transactions</h1>
+        </div>
+        {# ****************************************************************** #}
+        {# Contenu de la vue #}
+        <main class="content-display">
+            <div class="row justify-content-md-center">
+                <div class="col-md-6">
+                    <div class="border-principale py-3 px-3">
+            {# Formulaire de transactions #}
+            {{form_start(form, {'attr': {'id': 'transaction-form'}})}}
+                        {% for message in app.flashes('error') %}
+                            <p class="text-danger">{{ message }}</p>
+                        {% endfor %}
+                        <div class="form-group">
+                            {{ form_row(form.nom, {'attr' : {'placeholder': "Nom *","class": "form-control"}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.prenom, {'attr' : {'placeholder': "Prénom *","class": "form-control"}}) }}
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">€</span>
+                            </div>
+                            {{ form_row(form.montant, {'attr' : {'placeholder': "Montant *","class": "form-control"}}) }}
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><img src="{{ asset('favicon-16x16.png') }}"></span>
+                            </div>
+                            <input id="pelou" type="text" disabled="disabled" class="form-control" placeholder="0">
+                        </div>
+                        <div class="form-group text-right">
+                            <input type="submit" class="btn blanc bg-principale" value="Enregistrer" />
+                        </div>
+                {{form_end(form)}}
+                        {% for message in app.flashes('success') %}
+                            <p class="text-success">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border text-center mb-3" style="max-width: 20rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Informations du comptoir</h5>
+                            <p class="card-text">{{ nom }}</p>
+                            <p class="card-text">Solde: {{ solde }} <img src="{{ asset('favicon-16x16.png') }}"></p>
+                        </div>
+                    </div>
+                        <div>
+                </div>
+                </div>
+            </div>
+        </main>
+    </section>
+    {# ****************************************************************** #}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        const montant = document.getElementById("{{ form.montant.vars.id }}");
+        const montantPelou = document.getElementById('pelou');
+
+        montant.addEventListener("input", function() {
+            montantPelou.value = montant.value;
+        });
+
+    </script>
+{% endblock %}

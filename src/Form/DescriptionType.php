@@ -7,15 +7,17 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class DescriptionType extends AbstractType
+class DescriptionType
+    extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+
+    public function buildForm( FormBuilderInterface $builder, array $options )
     {
         $builder
-            ->add('description', TextareaType::class, [
-                'required'   => true,
-            ])
-            
-        ;
+            ->add( 'description',
+                TextareaType::class,
+                [
+                    'required' => true,
+                ] );
     }
 }
