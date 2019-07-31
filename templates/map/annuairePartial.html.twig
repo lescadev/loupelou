@@ -4,15 +4,19 @@
             {% for result in response %}
                 <div class="card p-0 mb-2" id="{{ result.0.id }}">
                     <div class="card-header">
-                        {{ result.denomination }}
-                        {% if result.nom is defined %}
-                            <h6 class="card-subtitle mb-2 text-muted">{{ result.nom }}</h6>
-                        {% endif %}
+                            {{ result.denomination }}
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            {% if result.categories is defined %}
+                                {% for res in result.categories %}
+                                    {{ res }}
+                                {% endfor %}
+                            {% endif %}
+                        </h6>
                     </div>
                     <div class="card-body text-dark">
                         {% if result.0.adresse | length > 0 or result.0.ville | length > 0 %}
                             <p class="card-text">
-                                <i class="fa fa-map-marker" aria-hidden="true"></i> {{ result.0.adresse }}, {{ result.0.code_postal }} {{ result.0.ville }}
+                                <i class="fa fa-map-marker" aria-hidden="true"></i> {{ result.0.adresse }}, {{ result.0.codePostal }} {{ result.0.ville }}
                             </p>
                         {% endif %}
                         {% if result.0.telephone | length > 0 %}

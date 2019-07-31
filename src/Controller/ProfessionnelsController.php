@@ -14,7 +14,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use GuzzleHttp\Client;
 use ReCaptcha\ReCaptcha;
 use App\Form\CategorieType;
-use App\Entity\PrestataireHasCategorie;
 
 class ProfessionnelsController
     extends AbstractController
@@ -114,11 +113,6 @@ class ProfessionnelsController
 
                     $prestataire->setDenomination( $data["denomination"] );
 
-                    $entityManager->persist( $prestataire );
-
-                    $prestatairehascategorie = new PrestataireHasCategorie;
-                    $prestatairehascategorie->setPrestataire( $prestataire );
-
                     $categorieObject = array_reduce(
                         $categorie,
                         function( $result, $categorie ) {
@@ -126,12 +120,14 @@ class ProfessionnelsController
                         }
                     );
 
-                    $prestatairehascategorie->setCategorie( $categorieObject );
-                    $entityManager->persist( $prestatairehascategorie );
+                    $prestataire->addCategory($categorieObject);
+
+                    $entityManager->persist( $prestataire );
+
                 }
 
                 if( ! empty( $data['compt'] ) && ! empty( $data['presta'] ) ) {
-                    $user->setRoles( [ "ROLE_PRESTATAIRE","ROLE_COMPTOIR" ] );
+                    $user->setRoles( [ "ROLE_PRESTATAIRE", "ROLE_COMPTOIR" ] );
                 }
 
                 if( ! empty( $data['compt'] ) | ! empty( $data['presta'] ) ) {
@@ -179,7 +175,7 @@ class ProfessionnelsController
             }
         }
 
-        return $this->render( 'professionnels/professionnels.html.twig',
+        return $this->render( 'professionnels/inscription.html.twig',
             [
                 'form'          => $form->createView(),
                 'formPro'       => $formPro->createView(),

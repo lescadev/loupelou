@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Repository\UserRepository;
 use App\Repository\PrestataireRepository;
 use App\Repository\CategorieRepository;
-use App\Repository\PrestataireHasCategorieRepository;
+use JMS\Serializer\SerializerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +22,7 @@ class AjaxController
      *
      * @return Response
      */
-    public function ajaxAnnuaire( UserRepository $userRepository, Request $request )
+    public function ajaxAnnuaire(UserRepository $userRepository, PrestataireRepository $prestataireRepository, Request $request)
     {
 
         $params = [];
@@ -34,8 +34,17 @@ class AjaxController
 
         $res = $userRepository->findByParams( $params );
 
-        return $this->render( 'map/annuairePartial.html.twig',
-            array( 'response' => $res ) );
+        if($params['status'] == 'prestataire') {
+            for($i = 0; $i<count($res); $i++){
+                $id = $res[$i]['id'];
+                $presta = $prestataireRepository->find($id);
+                $categories = $presta->getCategories();
+                $res[$i]['categories'] = $categories->getValues();
+            }
+        }
+
+        return $this->render('map/annuairePartial.html.twig',
+            array('response' => $res));
     }
 
     /**
@@ -43,7 +52,6 @@ class AjaxController
      * @param UserRepository $userRepository
      * @param CategorieRepository $categorieRepository
      * @param PrestataireRepository $prestataireRepository
-     * @param PrestataireHasCategorieRepository $prestataireHasCategorieRepository
      * @param Request $request
      *
      * @return false|string
@@ -51,8 +59,7 @@ class AjaxController
     public function AjaxModal(
         UserRepository $userRepository, CategorieRepository $categorieRepository,
         PrestataireRepository $prestataireRepository,
-        PrestataireHasCategorieRepository $prestataireHasCategorieRepository,
-        Request $request
+        Request $request, SerializerInterface $serialize
     ) {
 
         if( $request->getMethod() == 'POST' ) {
@@ -65,12 +72,11 @@ class AjaxController
 
             $prestataire = $prestataireRepository->findBy( array( 'user' => $user ) )[0];
 
-            $prestataireHasCategorie =
-                $prestataireHasCategorieRepository->findBy( array( 'prestataire' => $prestataire ) )[0];
+            $categories = $prestataire->getCategories()->getValues();
 
             $data = [
                 'nom'           => $prestataire->getDenomination(),
-                'categorie'     => $prestataireHasCategorie->getCategorie()->getNom(),
+                'categorie'     => $categories,
                 'description'   => $user->getDescription(),
                 'ville'         => $user->getVille(),
                 'rue'           => $user->getAdresse(),
@@ -79,7 +85,8 @@ class AjaxController
                 'site_internet' => $prestataire->getSiteInternet(),
             ];
 
-            $json = json_encode( $data );
+            $json = $serialize->serialize($data, 'json');
+
         } else {
             $json = '';
         }

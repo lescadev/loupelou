@@ -77,9 +77,9 @@ function displayMap(data) {
     layerGroup.clearLayers();
     let markers = {};
     for (let i = 0; i < Object.keys( data ).length - 1; i++) {
-        markers[data[i][0].id] = L.marker([
-            data[i][0].latitude,
-            data[i][0].longitude,
+        markers[data[i].userId] = L.marker([
+            data[i].latitude,
+            data[i].longitude,
         ], {icon: ifCategory(data, i)}).bindPopup(data[i].denomination).addTo(layerGroup);
     }
     for(let card of cards) {

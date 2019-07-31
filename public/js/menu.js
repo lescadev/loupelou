@@ -12,9 +12,9 @@ let setActiveLink = function (route) {
         'mentions': 'nav-mentions',
         'cgv': 'nav-cgv',
         'cgu': 'nav-cgu',
-        'statut': 'nav-statut',
-        'reglement': 'nav-reglement',
-        'rendu': 'nav-rendu'
+        'statuts': 'nav-statuts',
+        'reglementInterieur': 'nav-reglement',
+        'compteRenduAG': 'nav-rendu'
     }
 
     for (const index in links) {
