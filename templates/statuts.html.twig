@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Statuts de l'association - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1 class="principale mb-3">Statuts de l'association</h1>
+
+    {{ infosAsso.statuts | raw }}
+
+{% endblock %}

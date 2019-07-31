@@ -20,14 +20,17 @@ easy_admin:
                     - {entity: 'Prestataire'}
                     - {entity: 'Comptoir'}
 
-            -   label: "Informations Légales"
+            -   label: "Informations générales"
+                icon: "newspaper"
+                entity: 'Informations'
+
+            -   label: "Informations légales"
                 icon: "file-alt"
                 entity: 'InformationsLegales'
 
-
-            -   label: "Informations"
-                icon: "newspaper"
-                entity: 'Informations'
+            -   label:  "Informations association"
+                icon: "file-alt"
+                entity: 'InformationsAssociation'
 
             -   label: "Blog"
                 icon: "blog"
@@ -106,7 +109,7 @@ easy_admin:
         Informations:
             class: App\Entity\Informations
             form:
-                title: 'Informations'
+                title: 'Informations générales'
                 fields:
                     - {property: 'imageFile', type: 'vich_image', label: 'Logo'}
                     - {property: 'slogan', label: 'Slogan' ,type: 'fos_ckeditor', type_options: {config_name: 'my_config_3'}}
@@ -125,6 +128,21 @@ easy_admin:
             list:
                 actions: ['-new', '-delete']
                 fields: [{property: 'logo', type: 'image', label: 'Logo', base_path: '%app.path.logo_images%'}, {property: 'slogan', label: 'Slogan'}, {property: 'titre_presentation', label: 'Titre Présentation'}, {property: 'presentation', label: 'Présentation'}, {property: 'adresse', label: 'Adresse'}, {property: 'code_postal', label: 'Code postal'}, {property: 'ville', label: 'Ville'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Email'}]
+
+        InformationsAssociation:
+            class: App\Entity\InformationsAssociation
+            label: "Informations de l'association"
+            disabled_actions: ['search','delete','new']
+            list:
+                fields: ['Statuts', 'ReglementInterieur', 'CompteRenduAG']
+            form:
+                title: 'Informations association'
+                fields:
+                    - {property: 'Statuts',type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
+                    - {property: 'ReglementInterieur',type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
+                    - {property: 'CompteRenduAG',type: 'fos_ckeditor',type_options: {config_name: 'my_config_1'}}
+            edit:
+                actions: ['-new', '-delete']
 
         ArticleBlog:
             class: App\Entity\ArticleBlog
