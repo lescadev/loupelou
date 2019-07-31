@@ -1,10 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} LouPelou{% endblock %}
+{% block title %}Mentions légales - {{ parent() }}{% endblock %}
 
 {% block body %}
-    <h1 class="principale">Mentions Légales</h1>
+    <h1 class="principale">Mentions légales</h1>
 
-    <p>{{ Mentions.mentionsLegales | raw }}</p>
-
+    {{ Mentions.mentionsLegales | raw }}
 {% endblock %}
