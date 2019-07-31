@@ -242,7 +242,7 @@ class AppFixtures
             $event = new Evenements();
             $event->setTitle( "Événement: $i" )
                   ->setDescription( "voici la description de l'événement n°$i" )
-                  ->setLogo( "http://placehold.it/250x100" )
+                  ->setLogo( "http://placehold.it/350x200" )
                   ->setLogoDescription( "description de l'image $i" )
                   ->setLienEvent( "https://www.google.com" )
                   ->setLieu( "le lieu ce situe ici" )

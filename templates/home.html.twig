@@ -5,4 +5,49 @@
 <h2> {{ Infos.titrepresentation | raw}} </h2>
 <p> {{ Infos.presentation | raw}} <p>
 
+{{ Infos.presentation | raw }}
+
+    <h3 class="principale mb-5">Nos futurs événements</h3>
+
+    <div class="row d-flex justify-content-around">
+        {% for event in events|reverse %}
+            <div class="col-md-3 col-sm-8 mb-3">
+                <div class="card border-principale mb-2">
+                    <div class="card-header">
+                        <strong>Date : </strong>{{ event.date | date('d/m/Y') }} &nbsp;&nbsp; | &nbsp;&nbsp;
+                        <strong>Heure : </strong>{{ event.date | date('H:i') }} &nbsp;&nbsp; | &nbsp;&nbsp;
+                        <strong>Lieu : </strong>{{ event.lieu }}
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title principale">{{ event.title }}</h4>
+                        <img style="max-width: 50%;" src={{ event.logo }} alt={{ event.logoDescription }} class="py-4">
+                        <a href="{{ event.lienEvent }}" class="btn text-right blanc bg-principale" target="_blank">lien de l'événement</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <h3 class="principale mb-5">Nos derniers articles</h3>
+
+    <div class="row d-flex justify-content-around">
+        {% for article in articles|reverse if article.isActive == true %}
+            <div class="col-md-3 col-sm-8 mb-3">
+                <div class="card border-principale">
+                    <div class="card-header principale">
+                        <h4 class="card-title">{{ article.title }}</h4>
+                    </div>
+                    <div class="card-body">
+                        {% if 'http' in article.image %}
+                            <img style="max-width: 50%;" src="{{ article.image }}" alt="{{ article.imageDescription }}" class="py-4">
+                        {% else %}
+                            <img style="max-width: 50%;" src="/uploads/images/articles/{{ article.image }}" alt="{{ article.imageDescription }}" class="py-4">
+                        {% endif %}
+                    </div>
+                    <a href={{ path('blogArticle', {'id': article.id}) }} class="btn blanc bg-principale">En savoir plus &nbsp; &#62;</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
 {% endblock %}
