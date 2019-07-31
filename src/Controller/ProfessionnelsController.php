@@ -127,7 +127,7 @@ class ProfessionnelsController
                 }
 
                 if( ! empty( $data['compt'] ) && ! empty( $data['presta'] ) ) {
-                    $user->setRoles( [ "ROLE_PRESTATAIRE","ROLE_COMPTOIR" ] );
+                    $user->setRoles( [ "ROLE_PRESTATAIRE", "ROLE_COMPTOIR" ] );
                 }
 
                 if( ! empty( $data['compt'] ) | ! empty( $data['presta'] ) ) {
@@ -175,7 +175,7 @@ class ProfessionnelsController
             }
         }
 
-        return $this->render( 'professionnels/professionnels.html.twig',
+        return $this->render( 'professionnels/inscription.html.twig',
             [
                 'form'          => $form->createView(),
                 'formPro'       => $formPro->createView(),

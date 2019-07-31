@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Compte-rendu de la dernière Assemblée Générale de l'association - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1 class="principale mb-3">Compte-rendu de la dernière Assemblée Générale de l'association</h1>
+
+    {{ infosAsso.compteRenduAG | raw }}
+
+{% endblock %}
