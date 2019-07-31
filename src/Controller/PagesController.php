@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\ArticleBlog;
 use App\Entity\Evenements;
+use App\Entity\InformationsAssociation;
 
 class PagesController
     extends AbstractController
@@ -25,7 +26,6 @@ class PagesController
     /**
      * @Route("/utiliser", name="utiliser")
      */
-
     public function utiliser()
     {
         return $this->render( 'map/utiliser.html.twig',
@@ -37,7 +37,6 @@ class PagesController
     /**
      * @Route("/rejoindre", name="rejoindre")
      */
-
     public function rejoindre()
     {
         return $this->render( '/rejoindre.html.twig' );
@@ -46,7 +45,6 @@ class PagesController
     /**
      * @Route("/blog", name="blog")
      */
-
     public function blog()
     {
         $repo = $this->getDoctrine()->getRepository( ArticleBlog::class );
@@ -62,7 +60,6 @@ class PagesController
     /**
      * @Route("/blog/{id}", name="blogArticle")
      */
-
     public function blogArticle( $id )
     {
         $repo = $this->getDoctrine()->getRepository( ArticleBlog::class );
@@ -78,7 +75,6 @@ class PagesController
     /**
      * @Route("/evenements", name="evenements")
      */
-
     public function evenement()
     {
         $repo = $this->getDoctrine()->getRepository( Evenements::class );
@@ -91,58 +87,46 @@ class PagesController
             ] );
     }
 
-     /**
-     * @Route("/Statuts", name="Statuts")
+    /**
+     * @Route("/statuts", name="statuts")
      */
-
-    public function Statuts()
+    public function statuts()
     {
-        $repo     = $this->getDoctrine()->getRepository( InformationsAssociation::class );
-        $Mentions = $repo->findAll()[0];
+        $repo      = $this->getDoctrine()->getRepository( InformationsAssociation::class );
+        $infosAsso = $repo->findAll()[0];
 
-        return $this->render( 'informationsAssociation/Statuts.html.twig',
+        return $this->render( 'statuts.html.twig',
             [
-                'Mentions' => $Mentions,
-            ] );
-    }
-
-     /**
-     * @Route("/ReglementInterieur", name="reglementInterieur")
-     */
-
-    public function reglementInterieur()
-    {
-        $repo     = $this->getDoctrine()->getRepository( InformationsAssociation::class );
-        $Mentions = $repo->findAll()[0];
-
-        return $this->render( 'informationsAssociation/reglementInterieur.html.twig',
-            [
-                'Mentions' => $Mentions,
-            ] );
-    }
-
-         /**
-     * @Route("/CompteRenduAG", name="CompteRenduAG")
-     */
-
-    public function CompteRenduAG()
-    {
-        $repo     = $this->getDoctrine()->getRepository( InformationsAssociation::class );
-        $Mentions = $repo->findAll()[0];
-
-        return $this->render( 'informationsAssociation/CompteRenduAG.html.twig',
-            [
-                'Mentions' => $Mentions,
+                'infosAsso' => $infosAsso,
             ] );
     }
 
     /**
-     * @Route("/logins", name="logins")
+     * @Route("/reglement-interieur", name="reglementInterieur")
      */
-
-    public function logins()
+    public function reglementInterieur()
     {
-        return $this->render( '/logins.html.twig' );
+        $repo      = $this->getDoctrine()->getRepository( InformationsAssociation::class );
+        $infosAsso = $repo->findAll()[0];
+
+        return $this->render( 'reglementInterieur.html.twig',
+            [
+                'infosAsso' => $infosAsso,
+            ] );
+    }
+
+    /**
+     * @Route("/compte-rendu-ag", name="compteRenduAG")
+     */
+    public function CompteRenduAG()
+    {
+        $repo      = $this->getDoctrine()->getRepository( InformationsAssociation::class );
+        $infosAsso = $repo->findAll()[0];
+
+        return $this->render( 'compteRenduAG.html.twig',
+            [
+                'infosAsso' => $infosAsso,
+            ] );
     }
 
     /**
@@ -164,4 +148,3 @@ class PagesController
         return $this->render( '/success.html.twig' );
     }
 }
-
