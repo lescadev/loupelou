@@ -18,11 +18,11 @@ easy_admin:
                   - {entity: 'Particulier'}
                   - {entity: 'Prestataire'}
                   - {entity: 'Comptoir'}
-                  
+
             - label: "Informations Légales"
               icon: "file-alt"
-              entity: 'InformationsLegales' 
-             
+              entity: 'InformationsLegales'
+
 
             -   label: "Informations"
                 icon: "newspaper"
@@ -42,19 +42,19 @@ easy_admin:
 
     entities:
         Particulier:
-            label: "Particuliers"
             class: App\Entity\Particulier
+            label: "Particuliers"
             disabled_actions: ['new']
             list:
                 fields:
-                    [{ property: 'is_active',  type: 'toggle', label: 'Actif' }, {property: 'nom', label: 'Nom'}, {property: 'prenom', label: 'Prénom'},{property: 'email', label: 'Email'}, {property: 'adresse', label: 'Adresse'}, {property: 'code_postal', label: 'Code postal'} ]
+                  [ {property: 'is_active', type: 'toggle', label: 'Actif' }, {property: 'prenom', label: 'Prénom'}, {property: 'nom', label: 'Nom'}, {property: 'email', label: 'Adresse e-mail'}, {property: 'telephone', label: 'Téléphone'}, {property: 'ville', label: 'Ville'} ]
             form:
                 title: 'Particulier'
                 fields:
-                    - {property: 'nom', label: 'Nom', type: 'text'}
                     - {property: 'prenom', label: 'Prénom', type: 'text'}
-                    - {property: 'telephone', label: 'Télépone', type: 'text'}
-                    - {property: 'email', label: 'Email', type: 'email'}
+                    - {property: 'nom', label: 'Nom', type: 'text'}
+                    - {property: 'telephone', label: 'Téléphone', type: 'text'}
+                    - {property: 'email', label: 'Adresse e-mail', type: 'email'}
                     - {property: 'adresse', label: 'Adresse', type: 'text' }
                     - {property: 'code_postal', label: 'Code postal', type: 'text' }
                     - {property: 'ville', label: 'Ville', type: 'text'}
@@ -63,17 +63,17 @@ easy_admin:
             label: 'Prestataires'
             disabled_actions: ['new']
             list:
-                fields: [{ property: 'is_active',  type: 'toggle', label: 'Actif' }, 'prenom', 'nom', {property: 'denomination', label: 'Nom enseigne'}, 'telephone']
+                fields: [ {property: 'is_active',  type: 'toggle', label: 'Actif'}, {property: 'denomination', label: 'Enseigne'}, {property: 'prenom', label: 'Prénom'}, {property: 'nom', label: 'Nom'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Adresse e-mail'}, {property: 'ville', label: 'Ville'}]
                 actions:
                     - {name: 'new', label: 'Ajouter Prestataire' }
             form:
                 title: 'Prestataire'
                 fields:
-                    - {property: 'nom', label: 'Nom', type: 'text'}
+                    - {property: 'denomination', label: 'Enseigne', type: 'text'}
                     - {property: 'prenom', label: 'Prénom', type: 'text'}
-                    - {property: 'denomination', label: 'Nom enseigne', type: 'text'}
-                    - {property: 'telephone', label: 'Télépone', type: 'text'}
-                    - {property: 'email', label: 'Email', type: 'email'}
+                    - {property: 'nom', label: 'Nom', type: 'text'}
+                    - {property: 'telephone', label: 'Téléphone', type: 'text'}
+                    - {property: 'email', label: 'Adresse e-mail', type: 'email'}
                     - {property: 'adresse', label: 'Adresse', type: 'text' }
                     - {property: 'code_postal', label: 'Code postal', type: 'text' }
                     - {property: 'ville', label: 'Ville', type: 'text'}
@@ -81,26 +81,26 @@ easy_admin:
                     - {property: 'site_internet', label: 'Site', type: 'text'}
                     - {property: 'categories', label: 'Catégorie'}
         Comptoir:
-            label: "Comptoirs"
             class: App\Entity\Comptoir
+            label: "Comptoirs"
             disabled_actions: ['new']
+            list:
+                actions:
+                    - {name: 'new', label: 'Ajouter Comptoir' }
+                fields: [ {property: 'is_active',  type: 'toggle', label: 'Actif'}, {property: 'denomination', label: 'Enseigne'}, {property: 'prenom', label: 'Prénom'}, {property: 'nom', label: 'Nom'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Adresse e-mail'}, {property: 'ville', label: 'Ville'}]
             form:
                 title: 'Comptoir'
                 fields:
-                    - {property: 'nom', label: 'Nom', type: 'text'}
+                    - {property: 'denomination', label: 'Enseigne', type: 'text'}
                     - {property: 'prenom', label: 'Prénom', type: 'text'}
-                    - {property: 'denomination', label: 'Nom enseigne', type: 'text'}
-                    - {property: 'telephone', label: 'Télépone', type: 'text'}
-                    - {property: 'email', label: 'Email', type: 'email'}
+                    - {property: 'nom', label: 'Nom', type: 'text'}
+                    - {property: 'telephone', label: 'Téléphone', type: 'text'}
+                    - {property: 'email', label: 'Adresse e-mail', type: 'email'}
                     - {property: 'adresse', label: 'Adresse', type: 'text' }
                     - {property: 'code_postal', label: 'Code postal', type: 'text' }
                     - {property: 'ville', label: 'Ville', type: 'text'}
                     - {property: 'siret', label: 'Siret', type: 'text'}
                     - {property: 'site_internet', label: 'Site', type: 'text'}
-            list:
-                actions:
-                    - {name: 'new', label: 'Ajouter Comptoir' }
-                fields: [{ property: 'is_active',  type: 'toggle', label: 'Actif' }, 'prenom', 'nom', {property: 'denomination', label: 'Nom enseigne'}, 'telephone']
 
         InformationsLegales:
             class: App\Entity\InformationsLegales
@@ -176,6 +176,3 @@ easy_admin:
             disabled_actions: ['search','delete','new','edit']
             list:
                 fields: [{property: 'nom', label: 'Nom'}, {property: 'prenom', label: 'Prénom'}, {property: 'comptoir', label: 'Comptoir'}, {property: 'montant', label: 'Montant'}, {property: 'date_transaction', label: 'Date'}]
-
-
-
