@@ -91,31 +91,49 @@ class PagesController
             ] );
     }
 
-    /**
-     * @Route("/reglement", name="reglement")
+     /**
+     * @Route("/Statuts", name="Statuts")
      */
 
-    public function reglement()
+    public function Statuts()
     {
-        return $this->render( 'pages/reglement.html.twig' );
+        $repo     = $this->getDoctrine()->getRepository( InformationsAssociation::class );
+        $Mentions = $repo->findAll()[0];
+
+        return $this->render( 'informationsAssociation/Statuts.html.twig',
+            [
+                'Mentions' => $Mentions,
+            ] );
     }
 
-    /**
-     * @Route("/rendu", name="rendu")
+     /**
+     * @Route("/ReglementInterieur", name="reglementInterieur")
      */
 
-    public function rendu()
+    public function reglementInterieur()
     {
-        return $this->render( 'pages/rendu.html.twig' );
+        $repo     = $this->getDoctrine()->getRepository( InformationsAssociation::class );
+        $Mentions = $repo->findAll()[0];
+
+        return $this->render( 'informationsAssociation/reglementInterieur.html.twig',
+            [
+                'Mentions' => $Mentions,
+            ] );
     }
 
-    /**
-     * @Route("/statut", name="statut")
+         /**
+     * @Route("/CompteRenduAG", name="CompteRenduAG")
      */
 
-    public function statut()
+    public function CompteRenduAG()
     {
-        return $this->render( '/statut.html.twig' );
+        $repo     = $this->getDoctrine()->getRepository( InformationsAssociation::class );
+        $Mentions = $repo->findAll()[0];
+
+        return $this->render( 'informationsAssociation/CompteRenduAG.html.twig',
+            [
+                'Mentions' => $Mentions,
+            ] );
     }
 
     /**
