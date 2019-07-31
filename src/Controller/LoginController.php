@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -24,6 +25,23 @@ class LoginController
             [
                 'last_username' => $lastUsername,
                 'error'         => $error,
+            ] );
+    }
+
+    /**
+     * @Route("/forgot", name="forgot")
+     */
+    public function forgot(Request $request){
+        if ($request->isMethod('POST')) {
+            return $this->render( 'resetpassword.html.twig',
+                [
+
+                ] );
+        }
+
+        return $this->render( 'forgotpassword.html.twig',
+            [
+
             ] );
     }
 }
