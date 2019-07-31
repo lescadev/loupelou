@@ -13,38 +13,33 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
 
-    <body>
-        {% block navbar %}
-            <header class="principale bg-secondaire">
-                <nav class="navbar navbar-expand-md navbar-dark bg-secondaire d-flex flex-fill">
-                    <a class="navbar-brand" href={{ path('index') }}><img src="/uploads/images/logo/{{ logo.getInfo() }}" width="100"
-                                alt="lou pelou"></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-                            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+    {% block stylesheets %}
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+    <link crossorigin="" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        rel="stylesheet" />
+    <link href="/css/main.min.css" rel="stylesheet" />
+    {% endblock %}
+</head>
 
-                    <div class="collapse navbar-collapse row">
-                        <a href="{{ path('index') }}" class="col-10 blanc text-decoration-none"  id="slogan"> <h1> {{ slogan.getInfo() | raw }} </h1> </a> 
-                            {% if not app.user %}
-                                <div class="col-2 text-right">
-                                    <a class="nav-link btn-sm text-center alternative btn-connexion" href={{ path('login') }}><i class="fa fa-2x fa-user" aria-hidden="true"></i></a>
-                                </div>
-                            {% else %}
-                                <div class="col-1">
-                                    <a class="nav-link alternative" href={{ path('profil') }}><i class="fa fa-2x fa-user" aria-hidden="true"></i></a>
-                                </div>
-                                <div class="col-1">
-                                    <a href="{{ path('app_logout') }}" class="nav-link alternative"><i class="fa fa-2x fa-sign-out" aria-hidden="true"></i></a>
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                </nav>
-            </header>
+<body>
+    {% block navbar %}
+    <header class="principale bg-secondaire">
+        <nav class="navbar navbar-expand-md navbar-dark bg-secondaire d-flex flex-fill">
+            <a class="navbar-brand" href={{ path('index') }}><img src="/uploads/images/logo/{{ logo.getInfo() }}"
+                    width="100" alt="lou pelou"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
             <div class="collapse navbar-collapse row">
-                <h1 class="col-10 blanc" id="slogan">{{ slogan.getInfo() | raw }}</h1>
+                <a href="{{ path('index') }}" class="col-10 blanc text-decoration-none" id="slogan">
+                    <h1> {{ slogan.getInfo() | raw }} </h1>
+                </a>
                 {% if not app.user %}
                 <div class="col-2 text-right">
                     <a class="nav-link btn-sm text-center alternative btn-connexion" href={{ path('login') }}><i
@@ -64,20 +59,41 @@
             </div>
         </nav>
     </header>
-    <h3>{{app.request.get('_route')}}</h3>
+
+    <div class="collapse navbar-collapse row">
+        <h1 class="col-10 blanc" id="slogan">{{ slogan.getInfo() | raw }}</h1>
+        {% if not app.user %}
+        <div class="col-2 text-right">
+            <a class="nav-link btn-sm text-center alternative btn-connexion" href={{ path('login') }}><i
+                    class="fa fa-2x fa-user" aria-hidden="true"></i></a>
+        </div>
+        {% else %}
+        <div class="col-1">
+            <a class="nav-link alternative" href={{ path('profil') }}><i class="fa fa-2x fa-user"
+                    aria-hidden="true"></i></a>
+        </div>
+        <div class="col-1">
+            <a href="{{ path('app_logout') }}" class="nav-link alternative"><i class="fa fa-2x fa-sign-out"
+                    aria-hidden="true"></i></a>
+        </div>
+        {% endif %}
+    </div>
+    </div>
+    </nav>
+    </header>
     <nav class="navbar navigation navbar-expand-md navbar-dark bg-principale sticky-top">
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto flex-fill justify-content-between">
                 <li class="nav-item home-icon">
-                    <a class="nav-link" href={{ path('index') }}><i class="fa fa-home" aria-hidden="true"></i></a>
+                    <a class="nav-link nav-index" href={{ path('index') }}><i class="fa fa-home" aria-hidden="true"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href={{ path('procurer') }}>Où s'en procurer</a>
+                    <a class="nav-link nav-procurer" href={{ path('procurer') }}>Où s'en procurer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href={{ path('utiliser') }}>Où les utiliser</a>
+                    <a class="nav-link nav-utiliser" href={{ path('utiliser') }}>Où les utiliser</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown nav-rejoindre">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Nous rejoindre</a>
                     <div class="dropdown-menu" x-placement="bottom-start"
                         style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
@@ -86,13 +102,13 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href={{ path('evenements') }}>Événements</a>
+                    <a class="nav-link nav-evenements" href={{ path('evenements') }}>Événements</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href={{ path('blog') }}>Blog</a>
+                    <a class="nav-link nav-blog" href={{ path('blog') }}>Blog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href={{ path('contacter') }}>Contact</a>
+                    <a class="nav-link nav-contacter" href={{ path('contacter') }}>Contact</a>
                 </li>
             </ul>
         </div>
@@ -108,25 +124,25 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-principale">
             <ul class="navbar-nav mr-auto flex-fill justify-content-center">
                 <li class="nav-item ">
-                    <a class="nav-link alternative opac-moyen" href={{ path('mentions') }}>Mentions légales</a>
+                    <a class="nav-link alternative opac-moyen nav-mentions" href={{ path('mentions') }}>Mentions légales</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link alternative opac-moyen" href={{ path('cgv') }}>Cgv</a>
+                    <a class="nav-link alternative opac-moyen nav-cgv" href={{ path('cgv') }}>Cgv</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link alternative opac-moyen" href={{ path('cgu') }}>Cgu</a>
+                    <a class="nav-link alternative opac-moyen nav-cgu" href={{ path('cgu') }}>Cgu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link alternative opac-moyen" href={{ path('statut') }}>Statut</a>
+                    <a class="nav-link alternative opac-moyen nav-statut" href={{ path('statut') }}>Statut</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link alternative opac-moyen" href={{ path('reglement') }}>Règlement intérieur</a>
+                    <a class="nav-link alternative opac-moyen nav-reglement" href={{ path('reglement') }}>Règlement intérieur</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link alternative opac-moyen" href={{ path('rendu') }}>Compte rendu ag</a>
+                    <a class="nav-link alternative opac-moyen nav-rendu" href={{ path('rendu') }}>Compte rendu ag</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link alternative opac-moyen" href={{ path('contacter') }}>Contact</a>
+                    <a class="nav-link alternative opac-moyen nav-contacter" href={{ path('contacter') }}>Contact</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link alternative opac-moyen" href="https://www.facebook.com/lechemindupelou/"

@@ -54,15 +54,6 @@
 {% endblock %}
 
 {% block javascripts %}
-<<<<<<< HEAD
-{{parent()}}
-<script src="https://www.google.com/recaptcha/api.js?render={{siteKey}}"></script>
-
-<script>
-  grecaptcha.ready(function() {
-      grecaptcha.execute("{{siteKey}}", {action: 'homepage'}).then(function(token) {
-        document.getElementById('recaptchaToken').value = token;
-=======
     {{ parent() }}
     <script src="https://www.google.com/recaptcha/api.js?render={{siteKey}}"></script>
 
@@ -71,7 +62,6 @@
           grecaptcha.execute("{{siteKey}}", {action: 'homepage'}).then(function(token) {
             document.getElementById('recaptchaToken').value = token;
           });
->>>>>>> dev
       });
     </script>
 
