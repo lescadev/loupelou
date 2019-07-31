@@ -35,15 +35,6 @@ class PagesController
     }
 
     /**
-     * @Route("/rejoindre", name="rejoindre")
-     */
-
-    public function rejoindre()
-    {
-        return $this->render( '/rejoindre.html.twig' );
-    }
-
-    /**
      * @Route("/blog", name="blog")
      */
 

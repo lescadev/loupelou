@@ -29,7 +29,7 @@ class InscriptionType
                 RepeatedType::class,
                 [
                     'type'            => PasswordType::class,
-                    'invalid_message' => 'Mots de passes différents',
+                    'invalid_message' => 'Mots de passe différents',
                     'options'         => [ 'attr' => [ 'class' => 'password-field' ] ],
                     'required'        => true,
                     'first_options'   => [ 'label' => false ],
