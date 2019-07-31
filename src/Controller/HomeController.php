@@ -18,19 +18,18 @@ class HomeController
 
     public function index()
     {
-        $repo         = $this->getDoctrine()->getRepository( Informations::class );
-        $repoEvent         = $this->getDoctrine()->getRepository( Evenements::class );
-        $repoArticle         = $this->getDoctrine()->getRepository( ArticleBlog::class );
+        $repo        = $this->getDoctrine()->getRepository( Informations::class );
+        $repoEvent   = $this->getDoctrine()->getRepository( Evenements::class );
+        $repoArticle = $this->getDoctrine()->getRepository( ArticleBlog::class );
 
         $Informations = $repo->findAll()[0];
-        $events = $repoEvent->findBy(array(), array('date' => 'DESC'),3);
-        $articles = $repoArticle->findBy(array(), array('id' => 'DESC'),3);
-
+        $events       = $repoEvent->findBy( array(), array( 'date' => 'DESC' ), 3 );
+        $articles     = $repoArticle->findBy( array(), array( 'id' => 'DESC' ), 3 );
 
         return $this->render( 'home.html.twig',
             [
-                'Infos' => $Informations,
-                'events' => $events,
+                'Infos'    => $Informations,
+                'events'   => $events,
                 'articles' => $articles,
             ] );
     }
