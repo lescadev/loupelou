@@ -35,7 +35,7 @@ easy_admin:
                 icon: "blog"
                 entity: 'ArticleBlog'
 
-            -   label: "Evénements"
+            -   label: "Evènements"
                 icon: "calendar"
                 entity: 'Evenements'
 
@@ -66,9 +66,9 @@ easy_admin:
             label: 'Prestataires'
             disabled_actions: ['new']
             list:
-                fields: [ {property: 'is_active',  type: 'toggle', label: 'Actif'}, {property: 'denomination', label: 'Enseigne'}, {property: 'prenom', label: 'Prénom'}, {property: 'nom', label: 'Nom'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Adresse e-mail'}, {property: 'ville', label: 'Ville'}]
+                fields: [ {property: 'is_active',  type: 'toggle', label: 'Actif'}, {property: 'denomination', label: 'Enseigne'}, {property: 'prenom', label: 'Prénom'}, {property: 'nom', label: 'Nom'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Adresse e-mail'}, {property: 'ville', label: 'Ville'} ]
                 actions:
-                    - {name: 'new', label: 'Ajouter Prestataire' }
+                    - {name: 'new', label: 'Ajouter Prestataire'}
             form:
                 title: 'Prestataire'
                 fields:
@@ -89,8 +89,8 @@ easy_admin:
             disabled_actions: ['new']
             list:
                 actions:
-                    - {name: 'new', label: 'Ajouter Comptoir' }
-                fields: [ {property: 'is_active',  type: 'toggle', label: 'Actif'}, {property: 'denomination', label: 'Enseigne'}, {property: 'prenom', label: 'Prénom'}, {property: 'nom', label: 'Nom'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Adresse e-mail'}, {property: 'ville', label: 'Ville'}]
+                    - {name: 'new', label: 'Ajouter Comptoir'}
+                fields: [ {property: 'is_active',  type: 'toggle', label: 'Actif'}, {property: 'denomination', label: 'Enseigne'}, {property: 'prenom', label: 'Prénom'}, {property: 'nom', label: 'Nom'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Adresse e-mail'}, {property: 'ville', label: 'Ville'} ]
             form:
                 title: 'Comptoir'
                 fields:
@@ -105,23 +105,11 @@ easy_admin:
                     - {property: 'siret', label: 'Siret', type: 'text'}
                     - {property: 'site_internet', label: 'Site', type: 'text'}
 
-        InformationsLegales:
-            class: App\Entity\InformationsLegales
-            label: "Informations Légales"
-            disabled_actions: ['search','delete','new']
-            list:
-                fields: ['cgu', 'cgv', 'mentionsLegales']
-            form:
-                title: 'Informations Légales'
-                fields:
-                    - {property: 'cgu',type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
-                    - {property: 'cgv',type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
-                    - {property: 'mentionsLegales',type: 'fos_ckeditor',type_options: {config_name: 'my_config_1'}}
-            edit:
-                actions: ['-new', '-delete']
-
         Informations:
             class: App\Entity\Informations
+            list:
+                actions: ['-new', '-delete']
+                fields: [ {property: 'logo', type: 'image', label: 'Logo', base_path: '%app.path.logo_images%'}, {property: 'slogan', label: 'Slogan'}, {property: 'titre_presentation', label: 'Titre Présentation'}, {property: 'presentation', label: 'Présentation'}, {property: 'adresse', label: 'Adresse'}, {property: 'code_postal', label: 'Code postal'}, {property: 'ville', label: 'Ville'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Email'} ]
             form:
                 title: 'Informations générales'
                 fields:
@@ -139,22 +127,34 @@ easy_admin:
                     - {property: 'twitter', label: 'Twitter'}
             edit:
                 actions: ['-new', '-delete']
+
+        InformationsLegales:
+            class: App\Entity\InformationsLegales
+            label: "Informations Légales"
+            disabled_actions: ['search','delete','new']
             list:
+                fields: [ {property: 'mentionslegales', label: 'Mentions légales'}, {property: 'cgv', label: 'CGV'}, {property: 'cgu', label: 'CGU'} ]
+            form:
+                title: 'Informations Légales'
+                fields:
+                    - {property: 'mentionsLegales', label: 'Mentions légales', type: 'fos_ckeditor',type_options: {config_name: 'my_config_1'}}
+                    - {property: 'cgv', label: 'Conditions Générales de Vente', type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
+                    - {property: 'cgu', label: "Conditions Générales d'Utilisation", type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
+            edit:
                 actions: ['-new', '-delete']
-                fields: [{property: 'logo', type: 'image', label: 'Logo', base_path: '%app.path.logo_images%'}, {property: 'slogan', label: 'Slogan'}, {property: 'titre_presentation', label: 'Titre Présentation'}, {property: 'presentation', label: 'Présentation'}, {property: 'adresse', label: 'Adresse'}, {property: 'code_postal', label: 'Code postal'}, {property: 'ville', label: 'Ville'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Email'}]
 
         InformationsAssociation:
             class: App\Entity\InformationsAssociation
             label: "Informations de l'association"
             disabled_actions: ['search','delete','new']
             list:
-                fields: ['Statuts', 'ReglementInterieur', 'CompteRenduAG']
+                fields: [ {property: 'statuts', label: 'Statuts'}, {property: 'ReglementInterieur', label: 'Règlement intérieur'}, {property: 'CompteRenduAG', label: 'CR dernière AG'} ]
             form:
                 title: 'Informations association'
                 fields:
-                    - {property: 'Statuts',type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
-                    - {property: 'ReglementInterieur',type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
-                    - {property: 'CompteRenduAG',type: 'fos_ckeditor',type_options: {config_name: 'my_config_1'}}
+                    - {property: 'Statuts', label: "Statuts de l'association", type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
+                    - {property: 'ReglementInterieur', label: 'Règlement intérieur', type: 'fos_ckeditor', type_options: {config_name: 'my_config_1'}}
+                    - {property: 'CompteRenduAG', label: 'Compte-rendu de la dernière AG', type: 'fos_ckeditor',type_options: {config_name: 'my_config_1'}}
             edit:
                 actions: ['-new', '-delete']
 
@@ -162,7 +162,7 @@ easy_admin:
             class: App\Entity\ArticleBlog
             label: "Blog"
             list:
-                fields: [{ property: 'is_active',  type: 'toggle', label: 'Activation article' }, {property: 'title', label: 'Titre'}, {property: 'content', label: 'Article'}, {property: 'image', type: 'image', label: 'Image', base_path: '%app.path.articles_images%'}, {property: 'createdAt', label: 'Date création'}, {property: 'imageDescription', label: 'Description image'}]
+                fields: [ { property: 'is_active', type: 'toggle', label: 'Activation article' }, {property: 'image', type: 'image', label: 'Image', base_path: '%app.path.articles_images%'}, {property: 'title', label: 'Titre'}, {property: 'createdAt', label: 'Date création'} ]
             form:
                 title: 'Article'
                 fields:
@@ -170,27 +170,27 @@ easy_admin:
                     - {property: 'title', label: 'Titre'}
                     - {property: 'content', label: 'Article', type: 'fos_ckeditor', type_options: {config_name: 'my_config_2'}}
                     - {property: 'imageFile', type: 'vich_image', label: 'Image'}
-                    - {property: 'createdAt', label: 'Date création'}
                     - {property: 'imageDescription', label: 'Description image'}
+                    - {property: 'createdAt', label: 'Date création'}
 
         Evenements:
             class: App\Entity\Evenements
             label: "Evénements"
             list:
-                fields: [{property: 'title', label: 'Titre'}, {property: 'description', label: 'Description'}, {property: 'logo', label: 'Logo', type: 'image'}, {property: 'date', label: 'Date evenement'}, {property: 'logoDescription', label: 'Description du logo'}, {property: 'lienEvent', label: 'LienEvenement'}, {property: 'lieu', label: 'Lieu'}]
+                fields: [ {property: 'image', label: 'Image', type: 'image'}, {property: 'date', label: 'Date'}, {property: 'title', label: 'Titre'}, {property: 'lieu', label: 'Lieu'}, {property: 'lienEvent', label: 'Lien'} ]
             form:
                 fields:
-                    - {property: 'title'}
-                    - {property: 'description',type: 'fos_ckeditor', type_options: {config_name: 'my_config_3'}}
-                    - {property: 'logo'}
-                    - {property: 'date'}
-                    - {property: 'logoDescription'}
-                    - {property: 'lienEvent'}
+                    - {property: 'date', label: "Date de l'évènement"}
                     - {property: 'lieu'}
+                    - {property: 'title', label: 'Titre'}
+                    - {property: 'description',type: 'fos_ckeditor', type_options: {config_name: 'my_config_3'}}
+                    - {property: 'image', label: 'Image'}
+                    - {property: 'imageDescription', label: "Description de l'image"}
+                    - {property: 'lienEvent', label: "Lien externe de l'évènement"}
 
         Transactions:
             class: App\Entity\Transaction
             label: "Transactions"
             disabled_actions: ['search','delete','new','edit']
             list:
-                fields: [{property: 'nom', label: 'Nom'}, {property: 'prenom', label: 'Prénom'}, {property: 'comptoir', label: 'Comptoir'}, {property: 'montant', label: 'Montant'}, {property: 'date_transaction', label: 'Date'}]
+                fields: [ {property: 'nom', label: 'Nom'}, {property: 'prenom', label: 'Prénom'}, {property: 'comptoir', label: 'Comptoir'}, {property: 'montant', label: 'Montant'}, {property: 'date_transaction', label: 'Date'} ]
