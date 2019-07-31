@@ -87,7 +87,7 @@ class PagesController
         $repo      = $this->getDoctrine()->getRepository( InformationsAssociation::class );
         $infosAsso = $repo->findAll()[0];
 
-        return $this->render( 'statuts.html.twig',
+        return $this->render( 'pages/statuts.html.twig',
             [
                 'infosAsso' => $infosAsso,
             ] );
@@ -101,7 +101,7 @@ class PagesController
         $repo      = $this->getDoctrine()->getRepository( InformationsAssociation::class );
         $infosAsso = $repo->findAll()[0];
 
-        return $this->render( 'reglementInterieur.html.twig',
+        return $this->render( 'pages/reglementInterieur.html.twig',
             [
                 'infosAsso' => $infosAsso,
             ] );
@@ -115,7 +115,7 @@ class PagesController
         $repo      = $this->getDoctrine()->getRepository( InformationsAssociation::class );
         $infosAsso = $repo->findAll()[0];
 
-        return $this->render( 'compteRenduAG.html.twig',
+        return $this->render( 'pages/compteRenduAG.html.twig',
             [
                 'infosAsso' => $infosAsso,
             ] );
