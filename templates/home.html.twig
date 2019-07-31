@@ -15,8 +15,8 @@
                 <div class="col-md-4 col-sm-8 mb-3">
                     <div class="card border-principale mb-2">
                         <div class="card-header">
-                            <strong>Le </strong>{{ event.date | date('d/m/Y') }} à {{ event.date | date('H:i') }}<br />
-                            <strong>Lieu : </strong>{{ event.lieu }}
+                            <span class="font-weight-bold">Le </span>{{ event.date | date('d/m/Y') }} <span class="font-weight-bold">à</span> {{ event.date | date('H:i') }}<br />
+                            <span class="font-weight-bold">Lieu : </span>{{ event.lieu }}
                         </div>
                         <div class="card-body">
                             <h4 class="card-title principale">{{ event.title }}</h4>
