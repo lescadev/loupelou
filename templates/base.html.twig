@@ -1,178 +1,169 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>
-        {% block title %}Lou Pélou - Monnaie locale{% endblock %}
-    </title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <title>
+            {% block title %}Lou Pélou - Monnaie locale{% endblock %}
+        </title>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
 
-    {% block stylesheets %}
-    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet" />
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
-    <link crossorigin="" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-        rel="stylesheet" />
-    <link href="/css/main.min.css" rel="stylesheet" />
-    {% endblock %}
-</head>
+        {% block stylesheets %}
+            <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet" />
+            <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+                    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+            <link crossorigin="" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+                    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+                    rel="stylesheet" />
+            <link href="/css/main.min.css" rel="stylesheet" />
+        {% endblock %}
+    </head>
 
-<body>
-    {% block navbar %}
-    <header class="principale bg-secondaire">
-        <nav class="navbar navbar-expand-md navbar-dark bg-secondaire d-flex flex-fill">
-            <a class="navbar-brand" href={{ path('index') }}>
-                {% if logo.getInfo() %}
-                <img src="/uploads/images/logo/{{ logo.getInfo() }}" width="100" alt="lou pelou" />
-                {% else %}
-                <img src="{{ asset('images/logo-lou-pelou.png') }}" width="100" alt="lou pelou" />
-                {% endif %}
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <body>
+        {% block navbar %}
+            <header class="principale bg-secondaire">
+                <nav class="navbar navbar-expand-md navbar-dark bg-secondaire d-flex flex-fill">
+                    <a class="navbar-brand" href={{ path('index') }}>
+                        {% if logo.getInfo() %}
+                            <img src="/uploads/images/logo/{{ logo.getInfo() }}" width="100" alt="lou pelou" />
+                        {% else %}
+                            <img src="{{ asset('images/logo-lou-pelou.png') }}" width="100" alt="lou pelou" />
+                        {% endif %}
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+                            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse row">
+                        <a href="{{ path('index') }}" class="col-10 blanc text-decoration-none" id="slogan">
+                            <h1> {{ slogan.getInfo() | raw }} </h1>
+                        </a>
+                        {% if not app.user %}
+                            <div class="col-2 text-right">
+                                <a class="nav-link btn-sm text-center alternative btn-connexion" href={{ path('login') }}><i
+                                            class="fa fa-2x fa-user" aria-hidden="true"></i></a>
+                            </div>
+                        {% else %}
+                            <div class="col-1">
+                                <a class="nav-link alternative" href={{ path('profil') }}><i class="fa fa-2x fa-user"
+                                            aria-hidden="true"></i></a>
+                            </div>
+                            <div class="col-1">
+                                <a href="{{ path('app_logout') }}" class="nav-link alternative"><i class="fa fa-2x fa-sign-out"
+                                            aria-hidden="true"></i></a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </nav>
+            </header>
+
+            <nav class="navbar navigation navbar-expand-md navbar-dark bg-principale sticky-top">
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav mr-auto flex-fill justify-content-between">
+                        <li class="nav-item home-icon">
+                            <a class="nav-link nav-index" href={{ path('index') }}><i class="fa fa-home" aria-hidden="true"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-procurer" href={{ path('procurer') }}>Où s'en procurer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-utiliser" href={{ path('utiliser') }}>Où les utiliser</a>
+                        </li>
+                        <li class="nav-item dropdown nav-rejoindre">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Nous rejoindre</a>
+                            <div class="dropdown-menu" x-placement="bottom-start"
+                                    style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                <a class="dropdown-item" href={{ path('user.inscriptionParticulier') }}>Particuliers</a>
+                                <a class="dropdown-item" href={{ path('user.inscriptionProfessionnel') }}>Professionnels</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-evenements" href={{ path('evenements') }}>Évènements</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-blog" href={{ path('blog') }}>Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-contacter" href={{ path('contact') }}>Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
 
             <div class="collapse navbar-collapse row">
-                <a href="{{ path('index') }}" class="col-10 blanc text-decoration-none" id="slogan">
-                    <h1> {{ slogan.getInfo() | raw }} </h1>
-                </a>
+                <h1 class="col-10 blanc" id="slogan">{{ slogan.getInfo() | raw }}</h1>
                 {% if not app.user %}
-                <div class="col-2 text-right">
-                    <a class="nav-link btn-sm text-center alternative btn-connexion" href={{ path('login') }}><i
-                            class="fa fa-2x fa-user" aria-hidden="true"></i></a>
-                </div>
+                    <div class="col-2 text-right">
+                        <a class="nav-link btn-sm text-center alternative btn-connexion" href={{ path('login') }}><i
+                                    class="fa fa-2x fa-user" aria-hidden="true"></i></a>
+                    </div>
                 {% else %}
-                <div class="col-1">
-                    <a class="nav-link alternative" href={{ path('profil') }}><i class="fa fa-2x fa-user"
-                            aria-hidden="true"></i></a>
-                </div>
-                <div class="col-1">
-                    <a href="{{ path('app_logout') }}" class="nav-link alternative"><i class="fa fa-2x fa-sign-out"
-                            aria-hidden="true"></i></a>
-                </div>
+                    <div class="col-1">
+                        <a class="nav-link alternative" href={{ path('profil') }}><i class="fa fa-2x fa-user"
+                                    aria-hidden="true"></i></a>
+                    </div>
+                    <div class="col-1">
+                        <a href="{{ path('app_logout') }}" class="nav-link alternative"><i class="fa fa-2x fa-sign-out"
+                                    aria-hidden="true"></i></a>
+                    </div>
                 {% endif %}
             </div>
-            </div>
-        </nav>
-    </header>
+        {% endblock %}
 
-    <nav class="navbar navigation navbar-expand-md navbar-dark bg-principale sticky-top">
-        <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav mr-auto flex-fill justify-content-between">
-                <li class="nav-item home-icon">
-                    <a class="nav-link nav-index" href={{ path('index') }}><i class="fa fa-home" aria-hidden="true"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-procurer" href={{ path('procurer') }}>Où s'en procurer</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-utiliser" href={{ path('utiliser') }}>Où les utiliser</a>
-                </li>
-                <li class="nav-item dropdown nav-rejoindre">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Nous rejoindre</a>
-                    <div class="dropdown-menu" x-placement="bottom-start"
-                        style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-                        <a class="dropdown-item" href={{ path('inscription_particulier') }}>Particuliers</a>
-                        <a class="dropdown-item" href={{ path('inscription_pro') }}>Professionnels</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-evenements" href={{ path('evenements') }}>Évènements</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-blog" href={{ path('blog') }}>Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-contacter" href={{ path('contacter') }}>Contact</a>
-                </li>
-            </ul>
-        </div>
-        </div>
-        </div>
-    </nav>
-    </header>
+        <section class="container mt-5 mb-5">
+            {% block body %}{% endblock %}
+        </section>
 
-    <div class="collapse navbar-collapse row">
-        <h1 class="col-10 blanc" id="slogan">{{ slogan.getInfo() | raw }}</h1>
-        {% if not app.user %}
-        <div class="col-2 text-right">
-            <a class="nav-link btn-sm text-center alternative btn-connexion" href={{ path('login') }}><i
-                    class="fa fa-2x fa-user" aria-hidden="true"></i></a>
-        </div>
-        {% else %}
-        <div class="col-1">
-            <a class="nav-link alternative" href={{ path('profil') }}><i class="fa fa-2x fa-user"
-                    aria-hidden="true"></i></a>
-        </div>
-        <div class="col-1">
-            <a href="{{ path('app_logout') }}" class="nav-link alternative"><i class="fa fa-2x fa-sign-out"
-                    aria-hidden="true"></i></a>
-        </div>
-        {% endif %}
-    </div>
-    </div>
-    </nav>
-    </header>
-    {% endblock %}
+        {% block footer %}
+            <footer class="mt-5">
+                <nav class="navbar navbar-expand-md navbar-dark bg-principale">
+                    <ul class="navbar-nav mr-auto flex-fill justify-content-center">
+                        <li class="nav-item ">
+                            <a class="nav-link alternative opac-moyen nav-mentions" href={{ path('mentions') }}>Mentions légales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link alternative opac-moyen nav-cgv" href={{ path('cgv') }}>CGV</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link alternative opac-moyen nav-cgu" href={{ path('cgu') }}>CGU</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link alternative opac-moyen nav-statuts" href={{ path('statuts') }}>Statuts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link alternative opac-moyen nav-reglement" href={{ path('reglementInterieur') }}>Règlement intérieur</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link alternative opac-moyen nav-rendu" href={{ path('compteRenduAG') }}>Compte rendu AG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link alternative opac-moyen nav-contacter" href={{ path('contact') }}>Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link alternative opac-moyen" href="https://www.facebook.com/lechemindupelou/"
+                                    target="_blank"><i class="fa fa-facebook-square facebook-icon" aria-hidden="true"></i></a>
+                        </li>
+                    </ul>
+                </nav>
+            </footer>
+        {% endblock %}
 
-    <section class="container mt-5 mb-5">
-        {% block body %}{% endblock %}
-    </section>
-
-    {% block footer %}
-    <footer class="mt-5">
-        <nav class="navbar navbar-expand-md navbar-dark bg-principale">
-            <ul class="navbar-nav mr-auto flex-fill justify-content-center">
-                <li class="nav-item ">
-                    <a class="nav-link alternative opac-moyen nav-mentions" href={{ path('mentions') }}>Mentions légales</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link alternative opac-moyen nav-cgv" href={{ path('cgv') }}>CGV</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link alternative opac-moyen nav-cgu" href={{ path('cgu') }}>CGU</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link alternative opac-moyen nav-statuts" href={{ path('statuts') }}>Statuts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link alternative opac-moyen nav-reglement" href={{ path('reglementInterieur') }}>Règlement
-                        intérieur</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link alternative opac-moyen nav-rendu" href={{ path('compteRenduAG') }}>Compte rendu AG</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link alternative opac-moyen nav-contacter" href={{ path('contacter') }}>Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link alternative opac-moyen" href="https://www.facebook.com/lechemindupelou/"
-                        target="_blank"><i class="fa fa-facebook-square facebook-icon" aria-hidden="true"></i></a>
-                </li>
-            </ul>
-        </nav>
-    </footer>
-    {% endblock %}
-
-    {% block javascripts %}
-    <script src="/js/menu.js"></script>
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/popper.min.js"></script>
-    <script>
-        let route = '{{app.request.get('_route')}}'
-        setActiveLink(route)
-    </script>
-    {% endblock %}
-</body>
-
+        {% block javascripts %}
+            <script type="text/javascript" src="/js/menu.js"></script>
+            <script type="text/javascript" src="/js/jquery.min.js"></script>
+            <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="/js/popper.min.js"></script>
+            <script type="text/javascript">
+                let route = '{{ app.request.get('_route') }}';
+                setActiveLink(route);
+            </script>
+        {% endblock %}
+    </body>
 </html>

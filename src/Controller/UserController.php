@@ -2,27 +2,117 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-use App\Entity\User;
 use App\Entity\Comptoir;
+use App\Entity\Particulier;
 use App\Entity\Prestataire;
-use App\Form\InscriptionType;
+use App\Entity\User;
+use App\Form\CategorieType;
 use App\Form\InscriptionProType;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Form\InscriptionType;
 use GuzzleHttp\Client;
 use ReCaptcha\ReCaptcha;
-use App\Form\CategorieType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class ProfessionnelsController
+class UserController
     extends AbstractController
 {
 
     /**
-     * @Route("/professionnel/inscription", name="inscription_pro")
+     * Inscription Adhérent
+     * @Route("/particulier/inscription", name="user.inscriptionParticulier")
      */
-    public function inscriptionPro(
+    public function inscriptionParticulier(
+        Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer
+    ) {
+        $recaptcha = new ReCaptcha( $this->getParameter( 'google_recaptcha_secret' ) );
+
+        $user = new User();
+        $user->setDateCreation( date_create() );
+        $user->setRoles( [ "ROLE_PARTICULIER" ] );
+        $user->setIsActive( false );
+
+        $particulier = new Particulier();
+        $particulier->setUser( $user );
+
+        $form = $this->createForm( InscriptionType::class, $user );
+        $form->handleRequest( $request );
+
+        if( $form->isSubmitted() && $form->isValid() ) {
+
+            $resp = $recaptcha->verify( $request->request->get( 'recaptchaToken' ), $request->getClientIp() );
+            if( $resp->isSuccess() ) {
+
+                $form->getData();
+                $user = $form->getData();
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $form->get( 'password' )->getData()
+                    )
+                );
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist( $user );
+                $entityManager->persist( $particulier );
+                $entityManager->flush();
+
+                $message = ( new \Swift_Message( 'Inscription loupelou' ) )
+                    ->setFrom( $this->getParameter( 'mail.site' ) )
+                    ->setTo( $form->get( 'email' )->getData() )
+                    ->setBody(
+                        $this->renderView(
+                            'emails/inscription.html.twig',
+                            [
+                                'nom'    => $form->get( 'nom' )->getData(),
+                                'prenom' => $form->get( 'prenom' )->getData(),
+                                'email'  => $form->get( 'email' )->getData(),
+                            ]
+                        ),
+                        'text/html'
+                    );
+
+                $mailer->send( $message );
+
+                $adminMessage = ( new \Swift_Message( 'Inscription loupelou' ) )
+                    ->setFrom( $this->getParameter( 'mail.site' ) )
+                    ->setTo( $this->getParameter( 'mail.admin' ) )
+                    ->setBody(
+                        $this->renderView(
+                            'emails/adminInscription.html.twig',
+                            [
+                                'nom'    => $form->get( 'nom' )->getData(),
+                                'prenom' => $form->get( 'prenom' )->getData(),
+                                'email'  => $form->get( 'email' )->getData(),
+                            ]
+                        ),
+                        'text/html'
+                    );
+
+                $mailer->send( $adminMessage );
+
+                $this->addFlash( 'success',
+                    'Votre inscription est effective et va être prise en compte prochainement' );
+
+                return $this->redirectToRoute( 'user.inscriptionSuccess' );
+            }
+        }
+
+        return $this->render( 'user/inscriptionParticulier.html.twig',
+            [
+                'form'    => $form->createView(),
+                'siteKey' => $this->getParameter( 'google_recaptcha_site_key' ),
+            ] );
+    }
+
+    /**
+     * Inscription Prestataire & Comptoir
+     * @Route("/professionnel/inscription", name="user.inscriptionProfessionnel")
+     */
+    public function inscriptionProfessionnel(
         Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer
     ) {
         $recaptcha = new ReCaptcha( $this->getParameter( 'google_recaptcha_secret' ) );
@@ -120,10 +210,9 @@ class ProfessionnelsController
                         }
                     );
 
-                    $prestataire->addCategory($categorieObject);
+                    $prestataire->addCategory( $categorieObject );
 
                     $entityManager->persist( $prestataire );
-
                 }
 
                 if( ! empty( $data['compt'] ) && ! empty( $data['presta'] ) ) {
@@ -170,17 +259,43 @@ class ProfessionnelsController
                     $this->addFlash( 'success',
                         'Votre inscription est effective et va être prise en compte prochainement.' );
 
-                    return $this->redirectToRoute( 'sucess' );
+                    return $this->redirectToRoute( 'user.inscriptionSuccess' );
                 }
             }
         }
 
-        return $this->render( 'professionnels/inscription.html.twig',
+        return $this->render( 'user/inscriptionProfessionnel.html.twig',
             [
                 'form'          => $form->createView(),
                 'formPro'       => $formPro->createView(),
                 'formCategorie' => $formCategorie->createView(),
                 'siteKey'       => $this->getParameter( 'google_recaptcha_site_key' ),
             ] );
+    }
+
+    /**
+     * @Route("/login", name="login")
+     */
+    public function login( AuthenticationUtils $authenticationUtils )
+    {
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render( 'user/login.html.twig',
+            [
+                'last_username' => $lastUsername,
+                'error'         => $error,
+            ] );
+    }
+
+    /**
+     * @Route("/confirmation-inscription", name="user.inscriptionSuccess")
+     */
+    public function success()
+    {
+        return $this->render( 'user/success.html.twig' );
     }
 }

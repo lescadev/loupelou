@@ -101,9 +101,9 @@ class Comptoir
         return $this->getUser()->getNom();
     }
 
-    public function setNom(string $nom)
+    public function setNom( string $nom )
     {
-        return $this->getUser()->setNom($nom);
+        return $this->getUser()->setNom( $nom );
     }
 
     public function getPrenom()
@@ -111,9 +111,9 @@ class Comptoir
         return $this->getUser()->getPrenom();
     }
 
-    public function setPrenom(string $prenom)
+    public function setPrenom( string $prenom )
     {
-        return $this->getUser()->setPrenom($prenom);
+        return $this->getUser()->setPrenom( $prenom );
     }
 
     public function getIsActive()
@@ -121,9 +121,9 @@ class Comptoir
         return $this->getUser()->getIsActive();
     }
 
-    public function setIsActive(bool $isActive)
+    public function setIsActive( bool $isActive )
     {
-        return $this->getUser()->setIsActive($isActive);
+        return $this->getUser()->setIsActive( $isActive );
     }
 
     public function getTelephone()
@@ -131,9 +131,9 @@ class Comptoir
         return $this->getUser()->getTelephone();
     }
 
-    public function setTelephone(string $telephone)
+    public function setTelephone( string $telephone )
     {
-        return $this->getUser()->setTelephone($telephone);
+        return $this->getUser()->setTelephone( $telephone );
     }
 
     public function getEmail()
@@ -141,9 +141,9 @@ class Comptoir
         return $this->getUser()->getEmail();
     }
 
-    public function setEmail(string $email)
+    public function setEmail( string $email )
     {
-        return $this->getUser()->setEmail($email);
+        return $this->getUser()->setEmail( $email );
     }
 
     public function getAdresse()
@@ -151,9 +151,9 @@ class Comptoir
         return $this->getUser()->getAdresse();
     }
 
-    public function setAdresse(string $adresse)
+    public function setAdresse( string $adresse )
     {
-        return $this->getUser()->setAdresse($adresse);
+        return $this->getUser()->setAdresse( $adresse );
     }
 
     public function getVille()
@@ -161,9 +161,9 @@ class Comptoir
         return $this->getUser()->getVille();
     }
 
-    public function setVille(string $ville)
+    public function setVille( string $ville )
     {
-        return $this->getUser()->setVille($ville);
+        return $this->getUser()->setVille( $ville );
     }
 
     public function getCodePostal()
@@ -171,9 +171,9 @@ class Comptoir
         return $this->getUser()->getCodePostal();
     }
 
-    public function setCodePostal(string $codePostal)
+    public function setCodePostal( string $codePostal )
     {
-        return $this->getUser()->setCodePostal($codePostal);
+        return $this->getUser()->setCodePostal( $codePostal );
     }
 
     public function getSolde(): ?float

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% if not isactive %}
+
+        <div>
+            <p>Ce compte n'est pas actif</p>
+        </div>
+
+    {% endif %}
+
+    <div id="containerProfil">
+        {% include "espaceMembre/menuModif.html.twig" %}
+        <div id="blockProfil">
+            <h2 id="profilTitle">Modifier mes informations personnelles</h2>
+            {{ form_start(form) }}
+            {{ form_row(form.prenom, {'label': 'Prénom : ', 'value' : user.prenom }) }}
+            {{ form_row(form.nom, {'label': 'Nom : ', 'value' : user.nom }) }}
+            {{ form_row(form.telephone,{'label': 'Téléphone : ', 'value' : user.telephone }) }}
+            {{ form_row(form.adresse,{'label': 'Adresse : ', 'value' : user.adresse }) }}
+            {{ form_row(form.code_postal,{'label': 'Code postal : ', 'value' : user.codePostal }) }}
+            {{ form_row(form.ville,{'label': 'Ville : ', 'value' : user.ville }) }}
+            <button type="submit">Modifier mes informations &raquo;</button>
+            {{ form_end(form, {'render_rest': false}) }}
+        </div>
+    </div>
+{% endblock %}

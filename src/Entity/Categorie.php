@@ -51,7 +51,8 @@ class Categorie
         return $this;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->nom;
     }
 
@@ -63,21 +64,21 @@ class Categorie
         return $this->prestataires;
     }
 
-    public function addPrestataire(Prestataire $prestataire): self
+    public function addPrestataire( Prestataire $prestataire ): self
     {
-        if (!$this->prestataires->contains($prestataire)) {
+        if( ! $this->prestataires->contains( $prestataire ) ) {
             $this->prestataires[] = $prestataire;
-            $prestataire->addCategory($this);
+            $prestataire->addCategory( $this );
         }
 
         return $this;
     }
 
-    public function removePrestataire(Prestataire $prestataire): self
+    public function removePrestataire( Prestataire $prestataire ): self
     {
-        if ($this->prestataires->contains($prestataire)) {
-            $this->prestataires->removeElement($prestataire);
-            $prestataire->removeCategory($this);
+        if( $this->prestataires->contains( $prestataire ) ) {
+            $this->prestataires->removeElement( $prestataire );
+            $prestataire->removeCategory( $this );
         }
 
         return $this;

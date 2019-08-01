@@ -1,25 +1,22 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Modifier mon adresse e-mail - {{ parent() }}{% endblock %}
+
 {% block body %}
-
     {% if not isactive %}
-
         <div>
             <p>Ce compte n'est pas actif</p>
         </div>
-
     {% endif %}
 
     <div id="containerProfil">
         {% include "espaceMembre/menuModif.html.twig" %}
         <div id="blockProfil">
             <h2 id="profilTitle">Modifier mon adresse mail</h2>
-            <input class="blockInput" disabled value="{{ mail }}" required type="text">
             {{ form_start(form) }}
-            {{ form_row(form.email) }}
-            <button type="submit">Valider</button>
+            {{ form_row(form.email, {'label': 'Adresse e-mail : ', 'value' : user.email }) }}
+            <button type="submit">Modifier mon adresse e-mail &raquo;</button>
             {{ form_end(form, {'render_rest': false}) }}
-
         </div>
     </div>
 {% endblock %}

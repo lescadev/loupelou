@@ -9,7 +9,7 @@
     <h1 class="principale mb-4">Où utiliser les pelous</h1>
     <div class="row py-3 px-3">
         <div class="input-group mb-3">
-            <input class="form-control" type="text" placeholder="Rechercher" id="search" name="search">
+            <input class="form-control" type="text" placeholder="Rechercher" id="search" name="search" />
             <select class="custom-select" id="sel1">
                 <option>Tous les services</option>
                 <option>Association</option>
@@ -33,26 +33,26 @@
         </div>
         <div class="col-md-8 mt-3">
             <div id="map"></div>
-            <div><a href={{ path('pdf_prestataire') }}>Annuaire prestataire</a></div>
+            <div><a href={{ path('pdf.prestataires') }}>Annuaire prestataire</a></div>
         </div>
         <div class="col mt-3">
             <div id="annuaire" class="prestataire"></div>
         </div>
     </div>
-    {% include 'map/modalPartial.html.twig' %}
+    {% include 'pages/modalPartial.html.twig' %}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+    <script type="text/javascript" src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
             integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
             crossorigin="">
     </script>
-    <script src="/js/geolocalisation.js"></script>
-    <script src="/js/set_map.js"></script>
-    <script src="/js/ajax-annuaire.js"></script>
-    <script src="/js/event.js"></script>
-    <script>
+    <script type="text/javascript" src="/js/geolocalisation.js"></script>
+    <script type="text/javascript" src="/js/set_map.js"></script>
+    <script type="text/javascript" src="/js/ajax-annuaire.js"></script>
+    <script type="text/javascript" src="/js/event.js"></script>
+    <script type="text/javascript">
         setEvent('{{ status }}');
     </script>
 {% endblock %}

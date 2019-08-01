@@ -90,7 +90,7 @@ easy_admin:
             list:
                 actions:
                     - {name: 'new', label: 'Ajouter Comptoir'}
-                fields: [ {property: 'is_active',  type: 'toggle', label: 'Actif'}, {property: 'denomination', label: 'Enseigne'}, {property: 'prenom', label: 'Prénom'}, {property: 'nom', label: 'Nom'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Adresse e-mail'}, {property: 'ville', label: 'Ville'} ]
+                fields: [ {property: 'is_active',  type: 'toggle', label: 'Actif'}, {property: 'denomination', label: 'Enseigne'}, {property: 'prenom', label: 'Prénom'}, {property: 'nom', label: 'Nom'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Adresse e-mail'}, {property: 'ville', label: 'Ville'}, {property: 'solde', label: 'Solde Pélous'} ]
             form:
                 title: 'Comptoir'
                 fields:
@@ -104,6 +104,7 @@ easy_admin:
                     - {property: 'ville', label: 'Ville', type: 'text', type_options: {required: true}}
                     - {property: 'siret', label: 'Siret', type: 'text'}
                     - {property: 'site_internet', label: 'Site', type: 'text'}
+                    - {property: 'solde', label: 'Solde de Pélous', type: 'number'}
 
         Informations:
             class: App\Entity\Informations

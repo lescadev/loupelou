@@ -3,24 +3,25 @@
 {% block body %}
 
     <section class="presentation">
-        <h2 class="principale mb-4">{{ Infos.titrepresentation | raw }}</h2>
-        {{ Infos.presentation | raw }}
+        <h2 class="principale mb-4">{{ informations.titrepresentation | raw }}</h2>
+        {{ informations.presentation | raw }}
     </section>
 
     <section class="evenements">
         <h2 class="principale mb-4">Nos futurs événements</h2>
 
         <div class="row d-flex justify-content-around">
-            {% for event in events|reverse %}
+            {% for event in evenements|reverse %}
                 <div class="col-md-4 col-sm-8 mb-3">
                     <div class="card border-principale mb-2">
                         <div class="card-header">
-                            <span class="font-weight-bold">Le </span>{{ event.date | date('d/m/Y') }} <span class="font-weight-bold">à</span> {{ event.date | date('H:i') }}<br />
+                            <span class="font-weight-bold">Le </span>{{ event.date | date('d/m/Y') }}
+                            <span class="font-weight-bold">à</span> {{ event.date | date('H:i') }}<br />
                             <span class="font-weight-bold">Lieu : </span>{{ event.lieu }}
                         </div>
                         <div class="card-body">
                             <h4 class="card-title principale">{{ event.title }}</h4>
-                            <img src={{ event.image }} alt={{ event.imageDescription }} class="py-4">
+                            <img src="{{ event.image }}" alt="{{ event.imageDescription }}" class="py-4">
                         </div>
                         <div class="card-footer p-0">
                             <a href="{{ event.lienEvent }}" class="btn btn-block blanc bg-principale rounded-0 rounded-bottom">Lien de l'évènement &raquo;</a>

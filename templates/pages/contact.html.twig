@@ -20,7 +20,7 @@
             {# Message de succès de l'envoi du formulaire #}
             {% for message in app.flashes('success') %}
                 <div class="text-center alert alert-dismissible alert-success">
-                    <i class="fas fa-check"></i> <span>{{ message }}</span>
+                    <i class="fa fa-check"></i> <span>{{ message }}</span>
                 </div>
             {% endfor %}
 
@@ -36,7 +36,7 @@
 
             {# Formulaire de contact #}
             <div class="border-principale py-3 px-3">
-                <form action="{{ path('contacter') }}" method="post">
+                <form action="{{ path('contact') }}" method="post">
                     {{ form_start(form, {'attr': {'id': 'contact-form'}}) }}
                     <div class="row">
                         <div class="form-group col-6">
@@ -128,10 +128,8 @@
 
 {% block javascripts %}
     {{ parent() }}
-
-    <script src="https://www.google.com/recaptcha/api.js?render={{ siteKey }}"></script>
-
-    <script>
+    <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?render={{ siteKey }}"></script>
+    <script type="text/javascript">
         grecaptcha.ready(function () {
             grecaptcha.execute("{{ siteKey }}", {
                 action: 'homepage'
@@ -140,5 +138,4 @@
             });
         });
     </script>
-
 {% endblock %}

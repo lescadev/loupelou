@@ -14,7 +14,9 @@
                         <h4 class="card-title mb-0">{{ article.title }}</h4>
                     </div>
                     <div class="card-body">
-                        <p class="text-muted"><span class="font-weight-bold">Publié le</span> {{ article.createdAt | date('d/m/Y') }} <span class="font-weight-bold">à</span> {{ article.createdAt | date('H:i') }}</p>
+                        <p class="text-muted">
+                            <span class="font-weight-bold">Publié le</span> {{ article.createdAt | date('d/m/Y') }}
+                            <span class="font-weight-bold">à</span> {{ article.createdAt | date('H:i') }}</p>
                         {% if 'http' in article.image %}
                             <img style="max-width: 50%;" src="{{ article.image }}" alt="{{ article.imageDescription }}" class="py-4">
                         {% else %}

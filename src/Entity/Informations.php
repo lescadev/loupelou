@@ -262,7 +262,7 @@ class Informations
         return $this->titre_presentation;
     }
 
-    public function setTitrePresentation(?string $titre_presentation): self
+    public function setTitrePresentation( ?string $titre_presentation ): self
     {
         $this->titre_presentation = $titre_presentation;
 

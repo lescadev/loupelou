@@ -218,24 +218,24 @@ class AppFixtures
             $manager->persist( $category[ $i ] );
         }
 
-        $presta->addCategory($category[1]);
-        $presta->addCategory($category[0]);
+        $presta->addCategory( $category[1] );
+        $presta->addCategory( $category[0] );
 
-        $presta2->addCategory($category[5]);
-        $presta2->addCategory($category[8]);
-        $presta2->addCategory($category[3]);
+        $presta2->addCategory( $category[5] );
+        $presta2->addCategory( $category[8] );
+        $presta2->addCategory( $category[3] );
 
-        $presta3->addCategory($category[6]);
-        $presta3->addCategory($category[5]);
+        $presta3->addCategory( $category[6] );
+        $presta3->addCategory( $category[5] );
 
-        $manager->persist($user);
-        $manager->persist($user2);
-        $manager->persist($user5);
-        $manager->persist($presta3);
-        $manager->persist($comptoir);
-        $manager->persist($comptoir2);
-        $manager->persist($presta);
-        $manager->persist($presta2);
+        $manager->persist( $user );
+        $manager->persist( $user2 );
+        $manager->persist( $user5 );
+        $manager->persist( $presta3 );
+        $manager->persist( $comptoir );
+        $manager->persist( $comptoir2 );
+        $manager->persist( $presta );
+        $manager->persist( $presta2 );
 
         // Blog fixtures
 
