@@ -38,7 +38,6 @@ function setEventModal() {
 }
 
 function setModalContent(data) {
-    //Visiblement y'a JQuery j'étais pas au courant
 
     let denomination = $('#presta_denomination');
     let categorie = $('#categorie');
@@ -53,7 +52,9 @@ function setModalContent(data) {
     adresse.empty();
 
     denomination.append(data.nom);
-    categorie.append(data.categorie);
+    for(c of data.categorie) {
+        categorie.append(c.nom + ' ');
+    }
     description.append(data.description);
     site.append(data.site);
     adresse.append(data.rue + " " + data.code_postal + " " + data.ville);

@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+
     <section class="contact-container">
         {#Titre Principal#}
         <div class="main-title">
@@ -17,10 +18,12 @@
                             <p class="text-danger">{{ message }}</p>
                         {% endfor %}
                         <div class="form-group">
-                            {{ form_row(form.nom, {'attr' : {'placeholder': "Nom *","class": "form-control"}}) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_row(form.prenom, {'attr' : {'placeholder': "Prénom *","class": "form-control"}}) }}
+                                <select style="width: 100%" class="js-example-basic-single" id="id_label_single" placeholder="Adhérent" method="post" name="select">
+                                    <option value="" disabled selected>Selectionner un adhérent</option>
+                                    {% for user in users %}
+                                        <option  value="{{user[0]}}">{{user[2]}} {{user[3]}} - {{user[1]}}</option>
+                                    {% endfor %}
+                                </select>
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -60,12 +63,22 @@
 {% block javascripts %}
     {{ parent() }}
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+
     <script>
         const montant = document.getElementById("{{ form.montant.vars.id }}");
         const montantPelou = document.getElementById('pelou');
 
         montant.addEventListener("input", function() {
             montantPelou.value = montant.value;
+        });
+
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+        $(".js-example-responsive").select2({
+            width: 'resolve' // need to override the changed default
         });
 
     </script>
