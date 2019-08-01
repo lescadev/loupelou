@@ -2,6 +2,12 @@
 
 {% block body %}
 
+     {% for message in app.flashes('danger') %}
+        <div class="text-center alert alert-dismissible alert-danger">
+            <i class="fas fa-check"></i> <span>{{ message }}</span>
+        </div>
+    {% endfor %}
+
     <section class="presentation">
         <h2 class="principale mb-4">{{ Infos.titrepresentation | raw }}</h2>
         {{ Infos.presentation | raw }}

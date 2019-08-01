@@ -72,7 +72,7 @@ class LoginController
         $user->setPasswordRequestedAt(new \Datetime());
         $em->flush();
 
-        $message = ( new \Swift_Message( 'Objet : Réinitialisation mots de passe'  ))
+        $message = ( new \Swift_Message( 'Objet : Réinitialisation mot de passe'  ))
             ->setFrom( $this->getParameter( 'mail.site' )  )
             ->setTo( $user->getEmail() )
             ->setBody( $this->renderView( "emails/resettingpassword.html.twig",
@@ -114,7 +114,8 @@ class LoginController
         
         if ($user->getToken() === null || $token !== $user->getToken() || !$this->isRequestInTime($user->getPasswordRequestedAt()))
         {
-            throw new AccessDeniedHttpException();
+            $this->addFlash('danger', "Ce lien n'est plus valide");
+            return $this->redirectToRoute("index");
         }
 
         
@@ -139,7 +140,7 @@ class LoginController
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash('success', "Votre mot de passe a été renouvelé.");
+            $this->addFlash('success', "Votre mot de passe a été réinitialisé.");
 
             return $this->redirectToRoute("login");
 
