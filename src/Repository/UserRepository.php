@@ -91,6 +91,23 @@ class UserRepository
         return $res;
     }
 
+    public function loadUserByEmail($email)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.email = :email')
+            ->setParameter('email', $email)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function loadUserByToken($token)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.token = :token')
+            ->setParameter('token', $token)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 
 
     // /**
