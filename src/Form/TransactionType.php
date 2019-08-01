@@ -18,16 +18,6 @@ class TransactionType extends AbstractType
     {
         $builder
 
-           ->add('nom', TextType::class, [
-                'required'   => true,
-                'label' => false
-            ])
-
-           ->add('prenom', TextType::class, [
-                'required'   => true,
-                'label' => false
-            ])
-
             ->add('montant', MoneyType::class, [
                 'required'   => true,
                 'label' => false,

@@ -24,14 +24,24 @@ class TransactionController extends AbstractController
         $form = $this->createForm(TransactionType::class, $transaction);
         $form->handleRequest($request);
 
+        $test = $userRepository->findBy(array("isActive"=> true));
+
+        $users = [];
+        foreach ( $test as $user){
+           array_push($users, [$user->getId(), $user->getEmail(), strtoupper($user->getNom()), $user->getPrenom()]);  
+        };
+
         if ($form->isSubmitted() && $form->isValid()) {
             $transaction = $form->getData();
-            $nom = $form->getData()->nom;
-            $prenom = $form->getData()->prenom;
             $montant = $form->getData()->getMontant();
 
             $user = $this->getUser();
             $comptoir = $comptoirRepository->findBy(array("user"=> $user))[0];
+
+            $target= $request->request->get('select');
+            
+    
+
             if(($comptoir->getSolde() - $montant) <0)
             {
             	$this->addFlash('error', "Transaction refusée, solde insuffisant! ");
@@ -48,7 +58,7 @@ class TransactionController extends AbstractController
             {
             	$comptoir->setSolde($comptoir->getSolde() - $montant);
             }
-            $adherent = $userRepository->findBy(array("nom"=> $nom, "prenom"=> $prenom));
+            $adherent = $userRepository->findBy(array("id"=> $target));
              $adherentObject = array_reduce(
                         $adherent,
                         function ($result, $adherent) {
@@ -59,7 +69,7 @@ class TransactionController extends AbstractController
         	$this->addFlash('error', "Adhérent non reconnu.");
         	return $this->redirectToRoute('transaction');
         }
-            $transaction->setUser($adherent[0]);
+            $transaction->setUser($adherentObject);
             $transaction->setComptoir($comptoir);
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -72,7 +82,7 @@ class TransactionController extends AbstractController
             ->setBody(
                 $this-> renderView(
                     'emails/transaction.html.twig',
-                    ['nom' =>  $form->get('nom')->getData(), 'prenom' =>  $form->get('prenom')->getData(), 'montant' => $form->get('montant')->getData(), 'date_transaction' => $transaction->getDateTransaction()->format('d-m-Y'), 'comptoir' => $comptoir->getDenomination()]
+                    ['nom' =>  $adherentObject->getNom(), 'prenom' =>  $adherentObject->getPrenom(), 'montant' => $form->get('montant')->getData(), 'date_transaction' => $transaction->getDateTransaction()->format('d-m-Y'), 'comptoir' => $comptoir->getDenomination()]
                 ),
                 'text/html'
             );
@@ -108,7 +118,8 @@ class TransactionController extends AbstractController
             'controller_name' => 'TransactionController',
             'nom' => $comptoir->getDenomination(),
             'solde' => $comptoir->getSolde(),
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'users' => $users,
         ]);
 	}
 }
