@@ -28,7 +28,7 @@ class TransactionController extends AbstractController
 
         $users = [];
         foreach ( $test as $user){
-           array_push($users, [$user->getId(), $user->getEmail(), strtoupper($user->getNom()), $user->getPrenom()]);  
+           array_push($users, [$user->getId(), $user->getEmail(), $user->getNom(), $user->getPrenom()]);  
         };
 
         if ($form->isSubmitted() && $form->isValid()) {
