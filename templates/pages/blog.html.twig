@@ -1,27 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} LouPelou{% endblock %}
+{% block title %}Le blog - {{ parent() }}{% endblock %}
 
 {% block body %}
 
-    <h1 class="principale mb-3">Blog</h1>
+    <h1 class="principale">Le blog</h1>
 
     <div class="row d-flex justify-content-center">
         {% for article in articles|reverse if article.isActive == true %}
-            <div class="col-12 py-3 px-3">
+            <div class="col-6 py-3 px-3">
                 <div class="card border-principale">
                     <div class="card-header principale">
-                        <h4 class="card-title">{{ article.title }}</h4>
+                        <h4 class="card-title mb-0">{{ article.title }}</h4>
                     </div>
                     <div class="card-body">
-                        <p class="text-muted">Publié le {{ article.createdAt | date('d/m/Y') }} &nbsp; à {{ article.createdAt | date('H:i') }}</p>
+                        <p class="text-muted"><span class="font-weight-bold">Publié le</span> {{ article.createdAt | date('d/m/Y') }} <span class="font-weight-bold">à</span> {{ article.createdAt | date('H:i') }}</p>
                         {% if 'http' in article.image %}
                             <img style="max-width: 50%;" src="{{ article.image }}" alt="{{ article.imageDescription }}" class="py-4">
                         {% else %}
                             <img style="max-width: 50%;" src="/uploads/images/articles/{{ article.image }}" alt="{{ article.imageDescription }}" class="py-4">
                         {% endif %}
                         <p class="card-text mb-4">{{ article.content |easyadmin_truncate(100) |raw }}</p>
-                        <a href={{ path('blogArticle', {'id': article.id}) }} class="btn blanc bg-principale">lire la suite &nbsp; &#62;</a>
+                    </div>
+                    <div class="card-footer p-0">
+                        <a href="{{ path('blogArticle', {'id': article.id}) }}" class="btn btn-block blanc bg-principale rounded-0 rounded-bottom">Lire la suite &raquo;</a>
                     </div>
                 </div>
             </div>
