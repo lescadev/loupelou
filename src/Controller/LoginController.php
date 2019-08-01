@@ -139,13 +139,12 @@ class LoginController
             $em->persist($user);
             $em->flush();
 
+            $this->addFlash('success', "Votre mot de passe a été renouvelé.");
 
             return $this->redirectToRoute("login");
 
         }
-        else if ($form->isSubmitted() && !$form->isValid()){
-            exit('KO');
-        }
+        
         return $this->render('resetpassword.html.twig', [
             'form' => $form->createView()
         ]);
