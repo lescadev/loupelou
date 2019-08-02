@@ -222,8 +222,4 @@ class Prestataire
         return $this;
     }
 
-    public function removePrestataireEntity() {
-        return $this;
-    }
-
 }
