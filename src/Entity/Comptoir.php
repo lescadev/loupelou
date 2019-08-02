@@ -106,6 +106,16 @@ class Comptoir
         return $this->getUser()->setNom($nom);
     }
 
+    public function getDescription()
+    {
+        return $this->getUser()->getDescription();
+    }
+
+    public function setDescription($description)
+    {
+        return $this->getUser()->setDescription($description);
+    }
+
     public function getPrenom()
     {
         return $this->getUser()->getPrenom();

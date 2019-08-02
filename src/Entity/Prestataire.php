@@ -194,6 +194,16 @@ class Prestataire
         return $this->getUser()->setVille($ville);
     }
 
+    public function getDescription()
+    {
+        return $this->getUser()->getDescription();
+    }
+
+    public function setDescription($description)
+    {
+        return $this->getUser()->setDescription($description);
+    }
+
     public function getCodePostal()
     {
         return $this->getUser()->getCodePostal();
