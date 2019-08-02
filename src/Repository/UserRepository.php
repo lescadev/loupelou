@@ -74,7 +74,7 @@ class UserRepository extends ServiceEntityRepository
                 }
             }
 
-            if( ! empty( $params['distance'] ) and ! empty( $params['longitude'] )
+            if(! empty( $params['longitude'] )
                 and ! empty( $params['latitude'] ) ) {
                 $query->addSelect(
                     '( 6371 * acos(cos(radians(' . $params['latitude'] . '))' .
@@ -84,7 +84,11 @@ class UserRepository extends ServiceEntityRepository
                     '+ sin( radians(' . $params['latitude'] . ') )' .
                     '* sin( radians( user.latitude ) ) ) ) as distance'
                 )
-                    ->andHaving( 'distance < :radius' )
+                ->orderBy("distance", 'ASC');
+            }
+
+            if( ! empty( $params['distance'] )) {
+                $query->andHaving( 'distance < :radius' )
                     ->setParameter( 'radius', $params['distance'] );
             }
         }

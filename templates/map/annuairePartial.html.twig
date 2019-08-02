@@ -4,7 +4,12 @@
             {% for result in response %}
                 <div class="card p-0 mb-2" id="{{ result.0.id }}">
                     <div class="card-header">
-                            {{ result.denomination }}
+
+                        <p>{{ result.denomination }}
+                            {% if result.distance is defined %}
+                            <span class="pull-right text-primary">{{ result.distance | slice(0, 4) }} Km</span>
+                            {% endif %}
+                        </p>
                         <h6 class="card-subtitle mb-2 text-muted">
                             {% if result.categories is defined %}
                                 {% for res in result.categories %}
