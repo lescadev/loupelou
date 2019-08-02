@@ -19,6 +19,10 @@ easy_admin:
                   - {entity: 'Prestataire'}
                   - {entity: 'Comptoir'}
 
+            -   label: "Catégorie Prestataire"
+                icon: "tag"
+                entity: 'Categorie'
+
             -   label: "Informations générales"
                 icon: "newspaper"
                 entity: 'Informations'
@@ -105,6 +109,18 @@ easy_admin:
                     - {property: 'siret', label: 'Siret', type: 'text'}
                     - {property: 'site_internet', label: 'Site', type: 'text'}
                     - {property: 'solde', label: 'Solde de Pélous', type: 'number'}
+
+        Categorie:
+            class: App\Entity\Categorie
+            label: 'Catégorie'
+            list:
+                fields: [ {property: 'nom'} ]
+                actions:
+                    - {name: 'new', label: 'Ajouter une catégorie'}
+            form:
+                title: 'Catégorie'
+                fields:
+                    - {property: 'nom', label: 'Catégorie', type: 'text'}
 
         Informations:
             class: App\Entity\Informations

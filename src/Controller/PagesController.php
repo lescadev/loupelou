@@ -10,6 +10,7 @@ use App\Entity\InformationsAssociation;
 use App\Entity\InformationsLegales;
 use App\Form\ContactType;
 use App\Notification\ContactNotification;
+use App\Repository\CategorieRepository;
 use App\Repository\InformationsRepository;
 use ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -55,11 +56,13 @@ class PagesController
     /**
      * @Route("/utiliser", name="utiliser")
      */
-    public function utiliser()
+    public function utiliser(CategorieRepository $categorieRepository)
     {
+        $categories = $categorieRepository->findAll();
         return $this->render( 'pages/utiliser.html.twig',
             [
                 'status' => 'prestataire',
+                'categories' => $categories
             ] );
     }
 

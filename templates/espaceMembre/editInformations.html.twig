@@ -1,13 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Modifier mes informations - {{ parent() }}{% endblock %}
+
 {% block body %}
-
     {% if not isactive %}
-
         <div>
             <p>Ce compte n'est pas actif</p>
         </div>
-
     {% endif %}
 
     <div id="containerProfil">

@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block body %}
+
+    <h1 class="principale text-center mb-3">Connexion</h1>
+
     {% if error %}
         <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -12,18 +15,34 @@
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="border-principale py-3 px-3">
-                <h2 class="principale text-center mb-3">Connexion</h2>
+                <p class="text-center text-muted"><small>Veuillez saisir vos identifiants dans le formulaire ci-dessous.</small></p>
+
+                <hr class="mb-4" />
+
+                {% for message in app.flashes('success') %}
+                    <div class="text-center alert alert-dismissible alert-success">
+                        <i class="fa fa-check"></i> <span>{{ message }}</span>
+                    </div>
+                {% endfor %}
+
                 <form action="{{ path('login') }}" method="post">
                     <div class="form-group">
-                        <input type="text" name="_username" required class="form-control" placeholder="Adresse email" value="{{ last_username }}" />
+                        <input type="text" name="_username" required class="form-control" placeholder="Votre adresse email *" value="{{ last_username }}" />
                     </div>
                     <div class="form-group">
-                        <input type="password" name="_password" required class="form-control" placeholder="Mot de passe" />
+                        <input type="password" name="_password" required class="form-control" placeholder="Votre mot de passe *" />
                     </div>
                     <div class="form-group text-center">
                         <button type="submit" class="btn blanc bg-principale">Connexion</button>
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
                         <input type="hidden" name="_target_path" value="/profil" />
+                    </div>
+                    <div class="form-group text-center">
+                        <p>
+                            <a href="{{ path('forgot') }}" class="text-muted" title="Mot de passe oublié"><small>Mot de passe oublié</small></a><br />
+                            <a href="{{ path('user.inscriptionParticulier') }}" class="text-muted" title="Créer un compte adhérent"><small>Créer un compte adhérent</small></a><br />
+                            <a href="{{ path('user.inscriptionProfessionnel') }}" class="text-muted" title="Créer un compte professionnel"><small>Créer un compte professionnel</small></a>
+                        </p>
                     </div>
                 </form>
             </div>
