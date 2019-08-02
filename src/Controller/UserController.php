@@ -274,6 +274,14 @@ class UserController
     }
 
     /**
+     * @Route("/confirmation-inscription", name="user.inscriptionSuccess")
+     */
+    public function success()
+    {
+        return $this->render( 'user/success.html.twig' );
+    }
+
+    /**
      * @Route("/login", name="login")
      */
     public function login( AuthenticationUtils $authenticationUtils )
@@ -289,13 +297,5 @@ class UserController
                 'last_username' => $lastUsername,
                 'error'         => $error,
             ] );
-    }
-
-    /**
-     * @Route("/confirmation-inscription", name="user.inscriptionSuccess")
-     */
-    public function success()
-    {
-        return $this->render( 'user/success.html.twig' );
     }
 }
