@@ -12,17 +12,9 @@
             <input class="form-control" type="text" placeholder="Rechercher" id="search" name="search" />
             <select class="custom-select" id="sel1">
                 <option>Tous les services</option>
-                <option>Association</option>
-                <option>Alimentation</option>
-                <option>Artisanat</option>
-                <option>Sante</option>
-                <option>Culture</option>
-                <option>Education</option>
-                <option>Hotellerie</option>
-                <option>Social</option>
-                <option>Magasin</option>
-                <option>Restauration</option>
-                <option>Service</option>
+                {% for categorie in categories %}
+                    <option>{{ categorie }}</option>
+                {% endfor %}
             </select> <select class="custom-select" id="sel2">
                 <option>Toutes les distances</option>
                 <option>15km</option>
