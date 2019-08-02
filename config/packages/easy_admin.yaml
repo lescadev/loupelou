@@ -19,6 +19,10 @@ easy_admin:
                   - {entity: 'Prestataire'}
                   - {entity: 'Comptoir'}
 
+            -   label: "Catégorie Prestataire"
+                icon: "tag"
+                entity: 'Categorie'
+
             -   label: "Informations générales"
                 icon: "newspaper"
                 entity: 'Informations'
@@ -104,7 +108,18 @@ easy_admin:
                     - {property: 'ville', label: 'Ville', type: 'text', type_options: {required: true}}
                     - {property: 'siret', label: 'Siret', type: 'text'}
                     - {property: 'site_internet', label: 'Site', type: 'text'}
-
+        Categorie:
+            class: App\Entity\Categorie
+            label: 'Catégorie'
+            list:
+                fields: [ {property: 'nom'} ]
+                actions:
+                    - {name: 'new', label: 'Ajouter une catégorie'}
+            form:
+                title: 'Catégorie'
+                fields:
+                    - {property: 'nom', label: 'Catégorie', type: 'text'}
+                    
         Informations:
             class: App\Entity\Informations
             list:
