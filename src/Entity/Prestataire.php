@@ -21,7 +21,7 @@ class Prestataire
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -219,6 +219,10 @@ class Prestataire
             $this->categories->removeElement($category);
         }
 
+        return $this;
+    }
+
+    public function removePrestataireEntity() {
         return $this;
     }
 
