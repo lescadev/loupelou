@@ -1,0 +1,20 @@
+.img-container {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    min-height: 300px;
+}
+
+.img-contain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.images {
+    width: 350px;
+    height: 175px;
+    overflow: hidden;
+}

@@ -1,25 +1,37 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<h1 class="principale text-center mb-3">Mon Compte</h1>
 
-    {% if not isactive %}
+{% if not isactive %}
+<div>
+    <p class="text-warning text-center blanc bg-warning py-1 px-1">Ce compte n'est pas actif</p>
+</div>
+{% endif %}
 
-        <div>
-            <p>Ce compte n'est pas actif</p>
-        </div>
-
-    {% endif %}
-
-    <div id="containerProfil">
-        {% include "espaceMembre/menuModif.html.twig" %}
-        <div id="blockProfil">
-            <h2 id="profilTitle">Modifier mon adresse mail</h2>
-            <input class="blockInput" disabled value="{{ mail }}" required type="text">
-            {{ form_start(form) }}
-            {{ form_row(form.email) }}
-            <button type="submit">Valider</button>
-            {{ form_end(form, {'render_rest': false}) }}
-
+<div class="row mb-5">
+    <div class="col-md-4 mt-2 mb-4">
+        <div class="border-principale py-3 px-3">
+            {% include "espaceMembre/menuModif.html.twig" %}
         </div>
     </div>
+
+    <div class="col-md-8 mt-2">
+        <div class="form-group border-principale py-4 px-4">
+            <h3 class="mb-4">Modifier mon adresse mail</h3>
+            {# Message d'erreur (adresse déjà utilisée) #}
+            {% for message in app.flashes('error') %}
+            <div class="text-center alert alert-danger">
+                <i class="fa fa-times"></i> <span>{{ message }}</span>
+            </div>
+            {% endfor %}
+            <input class="blockInput form-control col-7 mb-3" disabled value="{{ mail }}" required type="text">
+            {{ form_start(form) }}
+            {{ form_row(form.email, {'attr' : {"class": "form-control col-7 mb-3", "placeholder": "Nouvelle adresse mail"}})
+            }}
+            <button class="btn bg-principale blanc" type="submit">Valider</button>
+            {{ form_end(form, {'render_rest': false}) }}
+        </div>
+    </div>
+</div>
 {% endblock %}

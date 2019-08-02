@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Security;
+use App\Repository\UserRepository;
 
 class EspaceMembreController
     extends AbstractController
@@ -67,7 +68,7 @@ class EspaceMembreController
     /**
      * @Route("/profil/modifemail", name="modifemail")
      */
-    public function modifemail(
+    public function modifemail(UserRepository $userRepository,
         Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em
     ) {
         $user = $this->getUser();
@@ -78,10 +79,15 @@ class EspaceMembreController
 
         if( $form->isSubmitted() && $form->get( 'email' )->isValid() ) {
 
+            $verifEmail = $userRepository->findBy(['email'=>$form->get( 'email' )->getData()]);
+            if ($verifEmail) {
+                $this->addFlash('error', "Email déjà utilisé ! ");
+            } else {
             $user->setEmail( $form->get( 'email' )->getData() );
 
             $em->persist( $user );
             $em->flush();
+            }
         }
 
         return $this->render( "/espaceMembre/modifEmail.html.twig",

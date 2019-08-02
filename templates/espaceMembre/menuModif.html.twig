@@ -1,29 +1,29 @@
-<div id="menuModif">
-    <div class="itemMenu">
-        <a class="modif" href={{ path('profil') }}>Profil</a>
+<div>
+    <div class="mb-2">
+        <a class="btn btn-block bg-principale border-secondaire blanc" href={{ path('profil') }}>Profil</a>
     </div>
-    <div class="itemMenu">
-        <a class="modif" href={{ path('modifmdp') }}>Modifier mon mot de passe</a>
+    <div class="mb-2">
+        <a class="btn btn-block text-sm bg-principale border-secondaire blanc" href={{ path('modifinfo') }}>Modifier mes informations personnelles</a>
     </div>
-    <div class="itemMenu">
-        <a class="modif" href={{ path('modifemail') }}>Modifier mon email</a>
+    <div class="mb-2">
+        <a class="btn btn-block bg-principale border-secondaire blanc" href={{ path('modifemail') }}>Modifier mon email</a>
     </div>
-    <div class="itemMenu">
-        <a class="modif" href={{ path('modifinfo') }}>Modifier mes informations personnelles</a>
+    <div class="mb-2">
+        <a class="btn btn-block bg-principale border-secondaire blanc" href={{ path('modifmdp') }}>Modifier mon mot de passe</a>
     </div>
     {% if (is_granted('ROLE_COMPTOIR') or is_granted('ROLE_PRESTATAIRE')) %}
-        <div class="itemMenu">
-            <a class="modif" href={{ path('modifdescription') }}>Modifier ma description</a>
+        <div class="mb-2">
+            <a class="btn btn-block bg-principale border-secondaire blanc" href={{ path('modifdescription') }}>Modifier ma description</a>
         </div>
     {% endif %}
     {% if is_granted('ROLE_COMPTOIR') %}
-        <div class="itemMenu">
-            <br> <a class="modif" href={{ path('transaction') }}>Effectuer une transaction</a>
+        <div class="mb-2">
+            <br> <a class="btn btn-block bg-principale blanc" href={{ path('transaction') }}>Effectuer une transaction</a>
         </div>
     {% endif %}
     {% if is_granted('ROLE_PARTICULIER') %}
-        <div class="itemMenu">
-            <a class="modif" href={{ path('mypdf') }} target="_blank">Formulaire d'inscription</a>
+        <div class="mt-4 mb-2">
+            <a class="btn btn-block bg-principale blanc" href={{ path('mypdf') }} target="_blank">Formulaire d'inscription</a>
         </div>
     {% endif %}
 </div>
