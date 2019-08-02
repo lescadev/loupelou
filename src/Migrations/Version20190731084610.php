@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190729130317 extends AbstractMigration
+final class Version20190731084610 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,9 +22,7 @@ final class Version20190729130317 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE prestataire_categorie (id INT NOT NULL, categorie INT NOT NULL, INDEX IDX_80B50294BF396750 (id), INDEX IDX_80B50294497DD634 (categorie), PRIMARY KEY(id, categorie)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE prestataire_categorie ADD CONSTRAINT FK_80B50294BF396750 FOREIGN KEY (id) REFERENCES prestataire (id)');
-        $this->addSql('ALTER TABLE prestataire_categorie ADD CONSTRAINT FK_80B50294497DD634 FOREIGN KEY (categorie) REFERENCES categorie (id)');
+        $this->addSql('ALTER TABLE admin ADD prenom VARCHAR(255) DEFAULT NULL, ADD nom VARCHAR(255) DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -32,6 +30,6 @@ final class Version20190729130317 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP TABLE prestataire_categorie');
+        $this->addSql('ALTER TABLE admin DROP prenom, DROP nom');
     }
 }

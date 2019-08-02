@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} LouPelou{% endblock %}
+{% block title %}Le blog - {{ parent() }}{% endblock %}
 
 {% block body %}
 
-<h1 class="principale mb-3">Blog</h1>
+<h1 class="principale mb-3">Le Blog</h1>
 
 <div class="mb-3">
     {% for article in articles|reverse if article.isActive == true %}

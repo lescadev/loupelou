@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} LouPelou{% endblock %}
+{% block title %}Tous les évènements - {{ parent() }}{% endblock %}
 
 {% block body %}
 <h1 class="principale mb-3">Événements</h1>
@@ -10,7 +10,7 @@
     <div class="py-4">
         <div class="row">
             <div class="overflow-hidden col-md-4 mb-3">
-                <img src="{{ event.logo }}" alt="{{ event.logoDescription }}" class="images">
+                <img src="{{ event.image }}" alt="{{ event.imageDescription }}" class="images">
             </div>
             <div class="col-md-8">
                 <h5 class="mt-2">

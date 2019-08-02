@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\CategorieRepository;
 use App\Entity\ArticleBlog;
 use App\Entity\Evenements;
 use App\Entity\InformationsAssociation;
@@ -26,11 +27,14 @@ class PagesController
     /**
      * @Route("/utiliser", name="utiliser")
      */
-    public function utiliser()
+    public function utiliser(CategorieRepository $categorieRepository)
     {
+        $categories = $categorieRepository->findAll();
+
         return $this->render( 'map/utiliser.html.twig',
             [
                 'status' => 'prestataire',
+                'categories' => $categories
             ] );
     }
 

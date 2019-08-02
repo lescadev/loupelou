@@ -1,14 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} LouPelou{% endblock %}
-
 {% block body %}
-    <h1 class="principale text-center mb-3">Professionnels</h1>
+    <h1 class="principale text-center mb-3">Créer un compte Professionnel</h1>
 
     <div class="row">
         <div class="col-md-3">&nbsp;</div>
         <div class="col-md-6">
             <div class="border-principale py-3 px-3">
+                <p class="text-center text-muted"><small>* Champs Obligatoires</small></p>
+
+                <hr class="mb-4" />
+
                 <form action="" method="post">
                     {{ form_start(form) }}
                     <div class="row">
@@ -92,15 +94,18 @@
                     <hr class="mb-4" />
 
                     <div class="row">
-                        <div class="form-group col-6 offset-6">
-                            <input type="submit" class="btn btn-block blanc bg-principale" value="S'inscrire &raquo;" />
+                        <div class="form-group col-6 offset-3">
+                            <input type="submit" class="btn btn-block blanc bg-principale" value="Adhérer en ligne &raquo;" />
                             <input id="recaptchaToken" name="recaptchaToken" type="hidden">
+                        </div>
+                        <div class="form-group text-center col-12">
+                            <p>
+                                <a href="{{ path('login') }}" class="text-muted" title="Connexion"><small>J'ai déjà un compte</small></a>
+                            </p>
                         </div>
                     </div>
                     {{ form_end(form) }}
                 </form>
-                </br>
-                <p> * Champs Obligatoires</p>
             </div>
         </div>
     </div>

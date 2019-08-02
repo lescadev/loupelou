@@ -1,21 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} LouPelou{% endblock %}
+{% block title %}{{ article.title }} - Le blog - {{ parent() }}{% endblock %}
 
 {% block body %}
-    <a href="{{ path('blog') }}" class="btn blanc bg-principale mb-5">&#60;&nbsp;&nbsp; Retour</a>
+    <a href="{{ path('blog') }}" class="btn blanc bg-principale mb-5">&laquo; Retour au blog</a>
     <article class="mb-5">
         <h2 class="principale">{{ article.title }}</h2>
-        <p class="text-muted mb-3">Publié le {{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i') }}
-            <div>
-                <div class="content">
-                    {% if 'http' in article.image %}
-                        <img style="max-width: 50%;" src="{{ article.image }}" alt="{{ article.imageDescription }}">
-                    {% else %}
-                        <img style="max-width: 50%;" src="/uploads/images/articles/{{ article.image }}" alt="{{ article.imageDescription }}">
-                    {% endif %}
-        <p class="mt-5">{{ article.content | raw }}</p>
+        <p class="text-muted mb-3">
+            <span class="font-weight-bold">Publié le</span> {{ article.createdAt | date('d/m/Y') }}
+            <span class="font-weight-bold">à</span> {{ article.createdAt | date('H:i') }}
+        </p>
+        <div class="content">
+            {% if 'http' in article.image %}
+                <img src="{{ article.image }}" alt="{{ article.imageDescription }}" />
+            {% else %}
+                <img src="/uploads/images/articles/{{ article.image }}" alt="{{ article.imageDescription }}" />
+            {% endif %}
+            <div class="mt-5">{{ article.content | raw }}</div>
         </div>
     </article>
-
 {% endblock %}

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190729144005 extends AbstractMigration
+final class Version20190730080007 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,9 @@ final class Version20190729144005 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE informations ADD logo VARCHAR(255) DEFAULT NULL, ADD updated_at DATETIME DEFAULT NULL, ADD titre_presentation VARCHAR(255) NOT NULL, DROP image_1, DROP image_2, DROP image_3');
+        $this->addSql('CREATE TABLE prestataire_categorie (prestataire_id INT NOT NULL, categorie_id INT NOT NULL, INDEX IDX_80B50294BE3DB2B7 (prestataire_id), INDEX IDX_80B50294BCF5E72D (categorie_id), PRIMARY KEY(prestataire_id, categorie_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE prestataire_categorie ADD CONSTRAINT FK_80B50294BE3DB2B7 FOREIGN KEY (prestataire_id) REFERENCES prestataire (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE prestataire_categorie ADD CONSTRAINT FK_80B50294BCF5E72D FOREIGN KEY (categorie_id) REFERENCES categorie (id) ON DELETE CASCADE');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +32,6 @@ final class Version20190729144005 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE informations ADD image_1 VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci, ADD image_2 VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci, ADD image_3 VARCHAR(255) DEFAULT NULL COLLATE utf8mb4_unicode_ci, DROP logo, DROP updated_at, DROP titre_presentation');
+        $this->addSql('DROP TABLE prestataire_categorie');
     }
 }

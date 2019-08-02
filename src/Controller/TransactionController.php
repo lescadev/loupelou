@@ -24,11 +24,13 @@ class TransactionController extends AbstractController
         $form = $this->createForm(TransactionType::class, $transaction);
         $form->handleRequest($request);
 
-        $test = $userRepository->findBy(array("isActive"=> true));
+        $repo = $userRepository->findBy(array("isActive"=> true));
 
         $users = [];
-        foreach ( $test as $user){
-           array_push($users, [$user->getId(), $user->getEmail(), strtoupper($user->getNom()), $user->getPrenom()]);  
+        foreach ( $repo as $user){
+            if ($user->getRoles()[0] == "ROLE_PARTICULIER"){
+                array_push($users, [$user->getId(), $user->getEmail(), $user->getNom(), $user->getPrenom()]);
+            }
         };
 
         if ($form->isSubmitted() && $form->isValid()) {

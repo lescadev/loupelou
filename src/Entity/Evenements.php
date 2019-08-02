@@ -25,7 +25,7 @@ class Evenements
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $logo;
+    private $image;
 
     /**
      * @ORM\Column(type="text")
@@ -40,10 +40,10 @@ class Evenements
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $logoDescription;
+    private $imageDescription;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lienEvent;
 
@@ -69,14 +69,14 @@ class Evenements
         return $this;
     }
 
-    public function getLogo(): ?string
+    public function getImage(): ?string
     {
-        return $this->logo;
+        return $this->image;
     }
 
-    public function setLogo( string $logo ): self
+    public function setImage( string $image ): self
     {
-        $this->logo = $logo;
+        $this->image = $image;
 
         return $this;
     }
@@ -105,14 +105,14 @@ class Evenements
         return $this;
     }
 
-    public function getLogoDescription(): ?string
+    public function getImageDescription(): ?string
     {
-        return $this->logoDescription;
+        return $this->imageDescription;
     }
 
-    public function setLogoDescription( string $logoDescription ): self
+    public function setImageDescription( string $imageDescription ): self
     {
-        $this->logoDescription = $logoDescription;
+        $this->imageDescription = $imageDescription;
 
         return $this;
     }
