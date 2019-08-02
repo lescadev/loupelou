@@ -42,7 +42,7 @@ class UserRepository extends ServiceEntityRepository
                     ->select( 'user', 'prestataire.denomination' );
 
                 if( ! empty( $params['search'] ) ) {
-                    $query->andWhere( "prestataire.denomination LIKE :search OR user.description LIKE :search" )
+                    $query->andWhere( "prestataire.denomination LIKE :search OR user.description LIKE :search OR user.ville LIKE :search" )
                         ->setParameter( 'search', '%' . $params['search'] . '%' );
                 }
 
@@ -69,12 +69,12 @@ class UserRepository extends ServiceEntityRepository
                     ->addSelect( 'user.id as userId', 'user.longitude', 'user.latitude', 'comptoir.denomination', 'comptoir.site_internet' );
 
                 if( ! empty( $params['search'] ) ) {
-                    $query->andWhere( "comptoir.denomination LIKE :search OR user.description LIKE :search" )
+                    $query->andWhere( "comptoir.denomination LIKE :search OR user.description LIKE :search OR user.ville LIKE :search" )
                         ->setParameter( 'search', '%' . $params['search'] . '%' );
                 }
             }
 
-            if( ! empty( $params['distance'] ) and ! empty( $params['longitude'] )
+            if(! empty( $params['longitude'] )
                 and ! empty( $params['latitude'] ) ) {
                 $query->addSelect(
                     '( 6371 * acos(cos(radians(' . $params['latitude'] . '))' .
@@ -84,7 +84,11 @@ class UserRepository extends ServiceEntityRepository
                     '+ sin( radians(' . $params['latitude'] . ') )' .
                     '* sin( radians( user.latitude ) ) ) ) as distance'
                 )
-                    ->andHaving( 'distance < :radius' )
+                ->orderBy("distance", 'ASC');
+            }
+
+            if( ! empty( $params['distance'] )) {
+                $query->andHaving( 'distance < :radius' )
                     ->setParameter( 'radius', $params['distance'] );
             }
         }

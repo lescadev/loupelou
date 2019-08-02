@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\UserRepository;
+use App\Repository\CategorieRepository;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
@@ -52,7 +53,7 @@ class PdfController
     /**
      * @Route("/pdf_comptoir", name="pdf_comptoir")
      */
-    public function pdfComptoir( UserRepository $userRepository )
+    public function pdfComptoir( UserRepository $userRepository)
     {
 
         $pdfOptions = new Options();
@@ -81,7 +82,7 @@ class PdfController
     /**
      * @Route("/pdf_prestataire", name="pdf_prestataire")
      */
-    public function pdfPresta( UserRepository $userRepository )
+    public function pdfPresta(CategorieRepository $categorieRepo)
     {
 
         $pdfOptions = new Options();
@@ -89,12 +90,20 @@ class PdfController
 
         $dompdf = new Dompdf( $pdfOptions );
 
-        $resPresta =
-            $userRepository->findByParams( array( 'status' => 'prestataire', 'filter' => 'Tous les services' ) );
+        $categories = $categorieRepo->findAll();
+
+        $prestaCate = array();
+        
+        foreach( $categories as $categorie ) {
+            $nom = $categorie->getNom();
+            $prestataireCate = $categorie->getPrestataires()->getValues();
+            $prestaCate[$nom] = $prestataireCate; 
+
+        }
 
         $html = $this->renderView( 'pdf/constructorPrestataire.html.twig',
             [
-                'presta' => $resPresta,
+                'prestaCate' => $prestaCate,
             ] );
 
         $dompdf->loadHtml( $html );

@@ -21,7 +21,7 @@ class Prestataire
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -192,6 +192,16 @@ class Prestataire
     public function setVille(string $ville)
     {
         return $this->getUser()->setVille($ville);
+    }
+
+    public function getDescription()
+    {
+        return $this->getUser()->getDescription();
+    }
+
+    public function setDescription($description)
+    {
+        return $this->getUser()->setDescription($description);
     }
 
     public function getCodePostal()
