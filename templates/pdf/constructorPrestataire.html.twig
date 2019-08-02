@@ -7,61 +7,35 @@
     </head>
 
     <body>
-        <img src="images/pdf/alimentation.jpg" style="width: 100%">
-        {% include 'pdf/partialPresta.html.twig'
-            with{'presta' : presta,
-            'category' : 'Alimentation'} %}
-
-        <img src="images/pdf/restauration.jpg" style="width: 100%">
-        {% include 'pdf/partialPresta.html.twig'
-            with{'presta' : presta,
-            'category' : 'Restauration'} %}
-
-        <img src="images/pdf/associations.jpg" style="width: 100%">
-        {% include 'pdf/partialPresta.html.twig'
-            with{'presta' : presta,
-            'category' : 'Association'} %}
-
-        <img src="images/pdf/artisanat.jpg" style="width: 100%">
-        {% include 'pdf/partialPresta.html.twig'
-            with{'presta' : presta,
-            'category' : 'Artisanat'} %}
-
-        <img src="images/pdf/culture.jpg" style="width: 100%">
-        {% include 'pdf/partialPresta.html.twig'
-            with{'presta' : presta,
-            'category' : 'Culture'} %}
-
-        <img src="images/pdf/formation.jpg" style="width: 100%">
-        {% include 'pdf/partialPresta.html.twig'
-            with{'presta' : presta,
-            'category' : 'Formation'} %}
-
-        <img src="images/pdf/hotellerie.jpg" style="width: 100%">
-        {% include 'pdf/partialPresta.html.twig'
-            with{'presta' : presta,
-            'category' : 'Hotellerie'} %}
-
-        <img src="images/pdf/magasin.jpg" style="width: 100%">
-        {% include 'pdf/partialPresta.html.twig'
-            with{'presta' : presta,
-            'category' : 'Magasin'} %}
-
-        <img src="images/pdf/sante.jpg" style="width: 100%">
-        {% include 'pdf/partialPresta.html.twig'
-            with{'presta' : presta,
-            'category' : 'Sante'} %}
-
-        <img src="images/pdf/service.jpg" style="width: 100%">
-        {% include 'pdf/partialPresta.html.twig'
-            with{'presta' : presta,
-            'category' : 'Service'} %}
-
-        <img src="images/pdf/social.jpg" style="width: 100%">
-        {% include 'pdf/partialPresta.html.twig'
-            with{'presta' : presta,
-            'category' : 'Social'} %}
-
+        {% for key,value in prestaCate %}
+            {% if not value is empty  %}
+                <div class="text-center" style="width: 100%; background-color: #960A00; margin: 20px; box-sizing:border-box; padding: 10px; color: #FFE803">
+                    <h1>{{key}}</h1>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Adresse</th>
+                            <th scope="col">Téléphone</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Site</th>
+                        </tr>
+                    </thead>
+            {% for presta in value %}
+               <tbody>
+                    <tr>
+                        <td>{{ presta.denomination }}</td>
+                        <td>{{ presta.user.adresse }} <br> {{ presta.user.codePostal }} <br> {{ presta.user.ville }}</td>
+                        <td>{{ presta.user.telephone }}</td>
+                        <td>{{ presta.user.email }}</td>
+                        <td>{{ presta.siteInternet }}</td>
+                    </tr>
+                 </tbody>
+            {% endfor %}
+                </table>
+            {% endif %}
+        {% endfor %}
     </body>
     <script src="https://kit.fontawesome.com/84a428c253.js"></script>
 </html>
