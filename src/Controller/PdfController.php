@@ -22,8 +22,6 @@ class PdfController
         $pdfOptions->set( 'defaultFont', 'Arial' );
         $dompdf = new Dompdf( $pdfOptions );
 
-        $user = $this->getUser();
-
         $html = $this->renderView( 'pdf/adhesionPdf.html.twig' );
 
         $dompdf->loadHtml( $html );
