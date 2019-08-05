@@ -72,7 +72,6 @@ class EspaceMembreController
         Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em
     ) {
         $user = $this->getUser();
-        $user = $this->getUser();
 
         $form = $this->createForm( InscriptionType::class );
         $form->handleRequest( $request );
@@ -115,7 +114,6 @@ class EspaceMembreController
             && $form->get( 'ville' )->isValid()
             && $form->get( 'code_postal' )->isValid() ) {
 
-            $user->setEmail( $user->getEmail() );
             $user->setPrenom( $form->get( 'prenom' )->getData() );
             $user->setNom( $form->get( 'nom' )->getData() );
             $user->setTelephone( $form->get( 'telephone' )->getData() );
