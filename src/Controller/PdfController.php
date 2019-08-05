@@ -14,6 +14,29 @@ class PdfController
 {
 
     /**
+     * @Route("/formulaire_adhesion", name="pdf.adhesion")
+     */
+    public function pdfAdhesion()
+    {
+        $pdfOptions = new Options();
+        $pdfOptions->set( 'defaultFont', 'Arial' );
+        $dompdf = new Dompdf( $pdfOptions );
+
+        $user = $this->getUser();
+
+        $html = $this->renderView( 'pdf/adhesionPdf.html.twig' );
+
+        $dompdf->loadHtml( $html );
+        $dompdf->setPaper( 'A4', 'portrait' );
+        $dompdf->render();
+
+        $dompdf->stream( "adhesion-lou-pelou.pdf",
+            [
+                "Attachment" => false,
+            ] );
+    }
+
+    /**
      * @Route("profil/imprimer", name="profil.pdf")
      */
     public function pdfAdherent()
