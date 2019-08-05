@@ -1,22 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<h1 class="principale text-center mb-3">Mon compte</h1>
 
-    {% if not isactive %}
+{% if not isactive %}
+<div>
+    <p class="text-warning text-center blanc bg-warning py-1 px-1">Ce compte n'est pas actif</p>
+</div>
+{% endif %}
 
-        <div>
-            <p>Ce compte n'est pas actif</p>
+<div class="row mb-5">
+    <div class="col-md-4 mt-2 mb-4">
+        <div class="border-principale py-3 px-3">
+            {% include "espaceMembre/menuModif.html.twig" %}
         </div>
+    </div>
 
-    {% endif %}
-    <div id="containerProfil">
-        {% include "espaceMembre/menuModif.html.twig" %}
-        <div id="blockProfil">
-            <h2 id="profilTitle">Modifier ma description</h2>
+    <div class="col-md-8 mt-2">
+        <div class="form-group border-principale py-4 px-4">
+            <h3 class="mb-4">Modifier ma description</h3>
             {{ form_start(form) }}
-            {{ form_row(form.description, {'value' : user.description }) }}
-            <button type="submit">Valider</button>
+            {{ form_row(form.description, {'value' : user.description, 'attr' : {"class": "form-control mb-3", "rows": "12"} }) }}
+            </textarea>
+            <button class="btn bg-principale blanc" type="submit">Valider</button>
             {{ form_end(form, {'render_rest': false}) }}
         </div>
     </div>
-{% endblock %}
+</div {% endblock %}

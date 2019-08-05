@@ -2,64 +2,67 @@
 
 {% block body %}
 
-     {% for message in app.flashes('danger') %}
-        <div class="text-center alert alert-dismissible alert-danger">
-            <i class="fas fa-check"></i> <span>{{ message }}</span>
+<section class="presentation mb-5">
+    <h2 class="principale mb-4">{{ Infos.titrepresentation | raw }}</h2>
+    {{ Infos.presentation | raw }}
+</section>
+
+<section class="evenements">
+    <h2 class="principale mt-5">Événements à venir</h2>
+<div class="mb-3">
+    {% for event in events|reverse %}
+    <div class="py-4">
+        <div class="row">
+            <div class="overflow-hidden col-md-4 mb-3">
+                <img src="{{ event.image }}" alt="{{ event.imageDescription }}" class="images">
+            </div>
+            <div class="col-md-8">
+                <h5 class="mt-2">
+                    {{ event.title }}
+                </h5>
+                <p class="text-muted"><strong>Date : </strong>{{ event.date | date('d/m/Y') }} &nbsp;&nbsp; |
+                    &nbsp;&nbsp;
+                    <strong>Heure : </strong>{{ event.date | date('H:i') }} &nbsp;&nbsp; | &nbsp;&nbsp;
+                    <strong>Lieu : </strong>{{ event.lieu }}</small></p>
+                <p>{{ event.description |easyadmin_truncate(100) |raw }}</p>
+                <a href={{ event.lienEvent }} class="btn btn-sm blanc bg-principale" target="_blank">voir
+                    l'événement</a>
+            </div>
         </div>
+    </div>
     {% endfor %}
+</div>
+</section>
 
-    <section class="presentation">
-        <h2 class="principale mb-4">{{ Infos.titrepresentation | raw }}</h2>
-        {{ Infos.presentation | raw }}
-    </section>
-
-    <section class="evenements">
-        <h2 class="principale mb-4">Nos futurs événements</h2>
-
-        <div class="row d-flex justify-content-around">
-            {% for event in events|reverse %}
-                <div class="col-md-4 col-sm-8 mb-3">
-                    <div class="card border-principale mb-2">
-                        <div class="card-header">
-                            <span class="font-weight-bold">Le </span>{{ event.date | date('d/m/Y') }} <span class="font-weight-bold">à</span> {{ event.date | date('H:i') }}<br />
-                            <span class="font-weight-bold">Lieu : </span>{{ event.lieu }}
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title principale">{{ event.title }}</h4>
-                            <img src={{ event.image }} alt={{ event.imageDescription }} class="py-4">
-                        </div>
-                        <div class="card-footer p-0">
-                            <a href="{{ event.lienEvent }}" class="btn btn-block blanc bg-principale rounded-0 rounded-bottom">Lien de l'évènement &raquo;</a>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
+<section class="evenements">
+    <h2 class="principale">Derniers articles</h2>
+    <div class="mb-3">
+    {% for article in articles|reverse if article.isActive == true %}
+    <div class="py-4">
+        <div class="row">
+            {% if 'http' in article.image %}
+            <div class="overflow-hidden col-md-4 mb-3">
+                <img src="{{ article.image }}" alt="{{ article.imageDescription }}" class="images">
+            </div>
+            {% else %}
+            <div class="overflow-hidden col-md-4 mb-3">
+                <img src="/uploads/images/articles/{{ article.image }}" alt="{{ article.imageDescription }}"
+                    class="images">
+            </div>
+            {% endif %}
+            <div class="col-md-8">
+                <h5 class="mt-2">
+                    {{ article.title }}
+                </h5>
+                <p class="text-muted"><small>Publié le {{ article.createdAt | date('d/m/Y') }} &nbsp; à
+                        {{ article.createdAt | date('H:i') }}</small></p>
+                <p>{{ article.content |easyadmin_truncate(100) |raw }}</p>
+                <a href={{ path('blogArticle', {'id': article.id}) }} class="btn btn-sm blanc bg-principale">lire la
+                    suite</a>
+            </div>
         </div>
-    </section>
-
-    <section class="blog">
-        <h2 class="principale mb-4">Nos derniers articles</h2>
-
-        <div class="row d-flex justify-content-around">
-            {% for article in articles|reverse if article.isActive == true %}
-                <div class="col-md-4 col-sm-8 mb-3">
-                    <div class="card border-principale">
-                        <div class="card-header principale">
-                            <h4 class="card-title mb-0">{{ article.title }}</h4>
-                        </div>
-                        <div class="card-body">
-                            {% if 'http' in article.image %}
-                                <img src="{{ article.image }}" alt="{{ article.imageDescription }}" class="py-4">
-                            {% else %}
-                                <img src="/uploads/images/articles/{{ article.image }}" alt="{{ article.imageDescription }}" class="py-4">
-                            {% endif %}
-                        </div>
-                        <div class="card-footer p-0">
-                            <a href="{{ path('blogArticle', {'id': article.id}) }}" class="btn btn-block blanc bg-principale rounded-0 rounded-bottom">En savoir plus &raquo;</a>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </section>
+    </div>
+    {% endfor %}
+</div>
+</section>
 {% endblock %}

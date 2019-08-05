@@ -23,8 +23,8 @@ class HomeController
         $repoArticle = $this->getDoctrine()->getRepository( ArticleBlog::class );
 
         $Informations = $repo->findAll()[0];
-        $events       = $repoEvent->findBy( array(), array( 'date' => 'DESC' ), 3 );
-        $articles     = $repoArticle->findBy( array(), array( 'id' => 'DESC' ), 3 );
+        $events       = $repoEvent->findBy( array(), array( 'date' => 'DESC' ), 2 );
+        $articles     = $repoArticle->findBy( array(), array( 'id' => 'DESC' ), 2 );
 
         return $this->render( 'home.html.twig',
             [
