@@ -25,9 +25,9 @@
                 <i class="fa fa-times"></i> <span>{{ message }}</span>
             </div>
             {% endfor %}
-            <input class="blockInput form-control col-7 mb-3" disabled value="{{ mail }}" required type="text">
+            <input class="blockInput form-control col-md-7 mb-3" disabled value="{{ mail }}" required type="text">
             {{ form_start(form) }}
-            {{ form_row(form.email, {'attr' : {"class": "form-control col-7 mb-3", "placeholder": "Nouvelle adresse mail"}})
+            {{ form_row(form.email, {'attr' : {"class": "form-control col-md-7 mb-3", "placeholder": "Nouvelle adresse mail"}})
             }}
             <button class="btn bg-principale blanc" type="submit">Valider</button>
             {{ form_end(form, {'render_rest': false}) }}
