@@ -18,7 +18,7 @@ class DescriptionType
                 TextareaType::class,
                 [
                     'required' => true,
-                    'label'       => false
+                    'label'    => false,
                 ] );
     }
 }

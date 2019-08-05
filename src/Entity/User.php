@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -19,18 +20,16 @@ class User
 {
 
     /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email
+     */
+    protected $email;
+    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\Email
-     */
-    protected $email;
-
     /**
      * @ORM\Column(type="json")
      */
@@ -207,18 +206,6 @@ class User
         return $this;
     }
 
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom( string $nom ): self
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
     public function getTelephone(): ?string
     {
         return $this->telephone;
@@ -267,12 +254,12 @@ class User
         return $this;
     }
 
-    public function getDateCreation(): ?\DateTimeInterface
+    public function getDateCreation(): ?DateTimeInterface
     {
         return $this->date_creation;
     }
 
-    public function setDateCreation( \DateTimeInterface $date_creation ): self
+    public function setDateCreation( DateTimeInterface $date_creation ): self
     {
         $this->date_creation = $date_creation;
 
@@ -313,6 +300,18 @@ class User
     public function __toString()
     {
         return $this->getNom();
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom( string $nom ): self
+    {
+        $this->nom = $nom;
+
+        return $this;
     }
 
     public function getIsActive(): ?bool
@@ -363,12 +362,12 @@ class User
         return $this;
     }
 
-    public function getPasswordRequestedAt(): ?\DateTimeInterface
+    public function getPasswordRequestedAt(): ?DateTimeInterface
     {
         return $this->passwordRequestedAt;
     }
 
-    public function setPasswordRequestedAt(?\DateTimeInterface $passwordRequestedAt): self
+    public function setPasswordRequestedAt( ?DateTimeInterface $passwordRequestedAt ): self
     {
         $this->passwordRequestedAt = $passwordRequestedAt;
 
@@ -380,7 +379,7 @@ class User
         return $this->token;
     }
 
-    public function setToken(?string $token): self
+    public function setToken( ?string $token ): self
     {
         $this->token = $token;
 

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -228,6 +230,11 @@ class Informations
         return $this;
     }
 
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
     public function setImageFile( File $logo = null )
     {
         $this->imageFile = $logo;
@@ -236,21 +243,16 @@ class Informations
         // It is required that at least one field changes if you are using Doctrine,
         // otherwise the event listeners won't be called and the file is lost
         if( $logo ) {
-            $this->updatedAt = new \DateTime( 'now' );
+            $this->updatedAt = new DateTime( 'now' );
         }
     }
 
-    public function getImageFile()
-    {
-        return $this->imageFile;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt( \DateTimeInterface $updatedAt ): self
+    public function setUpdatedAt( DateTimeInterface $updatedAt ): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -262,7 +264,7 @@ class Informations
         return $this->titre_presentation;
     }
 
-    public function setTitrePresentation(?string $titre_presentation): self
+    public function setTitrePresentation( ?string $titre_presentation ): self
     {
         $this->titre_presentation = $titre_presentation;
 

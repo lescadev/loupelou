@@ -1,62 +1,70 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Espace personnel - {{ parent() }}{% endblock %}
+
 {% block body %}
-<h1 class="principale text-center mb-3">Mon Compte</h1>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-dismissible alert-success mb-3">
+            <i class="fa fa-check"></i> <span>{{ message }}</span>
+        </div>
+    {% endfor %}
+    <h1 class="principale text-center">Mon Compte</h1>
 
     {% if not isactive %}
-    <div>
-        <p class="text-warning text-center blanc bg-warning py-1 px-1">Ce compte n'est pas actif</p>
-    </div>
+
+        <div>
+            <p>Ce compte n'est pas actif</p>
+        </div>
+
     {% endif %}
 
-<div class="row mb-5">
-    <div class="col-md-4 mt-2 mb-4">
-        <div class="border-principale py-3 px-3">
-            {% include "espaceMembre/menuModif.html.twig" %}
+    <div class="row mb-5">
+        <div class="col-md-4 mt-2 mb-4">
+            <div class="border-principale py-3 px-3">
+                {% include "espaceMembre/menuModif.html.twig" %}
+            </div>
         </div>
-    </div>
 
-    <div class="col-md-8 mt-2">
-        <div class="border-principale py-4 px-5">
-            <div class="d-flex justify-content-center">
-                <div>
-                    <div class="row">
-                        <h3 class="mb-4">Mon profil</h3>
+        <div class="col-md-8 mt-2">
+            <div class="border-principale py-4 px-5">
+                <div class="d-flex justify-content-center">
+                    <div>
+                        <div class="row">
+                            <h3 class="mb-4">Mon profil</h3>
+                        </div>
+                        <div class="row">
+                            <p class="h6 secondaire">PRÉNOM :</p>
+                            <p> &nbsp;&nbsp;&nbsp;{{ prenom }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="h6 secondaire">NOM :</p>
+                            <p> &nbsp;&nbsp;&nbsp;{{ nom }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="h6 secondaire">EMAIL :</p>
+                            <p> &nbsp;&nbsp;&nbsp;{{ mail }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="h6 secondaire">ADRESSE :</p>
+                            <p> &nbsp;&nbsp;&nbsp;{{ adresse }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="h6 secondaire">VILLE :</p>
+                            <p> &nbsp;&nbsp;&nbsp;{{ ville }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="h6 secondaire">CODE POSTAL :</p>
+                            <p> &nbsp;&nbsp;&nbsp;{{ codepostal }}</p>
+                        </div>
+                        {% if (is_granted('ROLE_COMPTOIR') or is_granted('ROLE_PRESTATAIRE')) %}
+                            <div class="row">
+                                <p class="h6 secondaire">DESCRIPTION :</p>
+                                <p>{{ description }}</p>
+                            </div>
+                        {% endif %}
                     </div>
-                    <div class="row">
-                        <p class="h6 secondaire">PRÉNOM :</p>
-                        <p> &nbsp;&nbsp;&nbsp;{{ prenom }}</p>
-                    </div>
-                    <div class="row">
-                        <p class="h6 secondaire">NOM :</p>
-                        <p> &nbsp;&nbsp;&nbsp;{{ nom }}</p>
-                    </div>
-                    <div class="row">
-                        <p class="h6 secondaire">EMAIL :</p>
-                        <p> &nbsp;&nbsp;&nbsp;{{ mail }}</p>
-                    </div>
-                    <div class="row">
-                        <p class="h6 secondaire">ADRESSE :</p>
-                        <p> &nbsp;&nbsp;&nbsp;{{ adresse }}</p>
-                    </div>
-                    <div class="row">
-                        <p class="h6 secondaire">VILLE :</p>
-                        <p> &nbsp;&nbsp;&nbsp;{{ ville }}</p>
-                    </div>
-                    <div class="row">
-                        <p class="h6 secondaire">CODE POSTAL :</p>
-                        <p> &nbsp;&nbsp;&nbsp;{{ codepostal }}</p>
-                    </div>
-                    {% if (is_granted('ROLE_COMPTOIR') or is_granted('ROLE_PRESTATAIRE')) %}
-                    <div class="row">
-                        <p class="h6 secondaire">DESCRIPTION :</p>
-                        <p>{{ description }}</p>
-                    </div>
-                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
-</div>
-
 {% endblock %}

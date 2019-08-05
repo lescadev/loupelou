@@ -13,6 +13,7 @@ use App\Entity\InformationsLegales;
 use App\Entity\InformationsAssociation;
 use App\Entity\ArticleBlog;
 use App\Entity\Evenements;
+use Datetime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -218,24 +219,24 @@ class AppFixtures
             $manager->persist( $category[ $i ] );
         }
 
-        $presta->addCategory($category[1]);
-        $presta->addCategory($category[0]);
+        $presta->addCategory( $category[1] );
+        $presta->addCategory( $category[0] );
 
-        $presta2->addCategory($category[5]);
-        $presta2->addCategory($category[8]);
-        $presta2->addCategory($category[3]);
+        $presta2->addCategory( $category[5] );
+        $presta2->addCategory( $category[8] );
+        $presta2->addCategory( $category[3] );
 
-        $presta3->addCategory($category[6]);
-        $presta3->addCategory($category[5]);
+        $presta3->addCategory( $category[6] );
+        $presta3->addCategory( $category[5] );
 
-        $manager->persist($user);
-        $manager->persist($user2);
-        $manager->persist($user5);
-        $manager->persist($presta3);
-        $manager->persist($comptoir);
-        $manager->persist($comptoir2);
-        $manager->persist($presta);
-        $manager->persist($presta2);
+        $manager->persist( $user );
+        $manager->persist( $user2 );
+        $manager->persist( $user5 );
+        $manager->persist( $presta3 );
+        $manager->persist( $comptoir );
+        $manager->persist( $comptoir2 );
+        $manager->persist( $presta );
+        $manager->persist( $presta2 );
 
         // Blog fixtures
 
@@ -246,7 +247,7 @@ class AppFixtures
                     ->setContent( "Voici le contenu de l'article n°$i Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum repellat iure laboriosam dolore esse dolor!" )
                     ->setImage( "http://placehold.it/350x200" )
                     ->setImageDescription( "description de l'image $i" )
-                    ->setCreatedAt( new \DateTime() );
+                    ->setCreatedAt( new DateTime() );
             $manager->persist( $article );
         };
 
@@ -259,7 +260,7 @@ class AppFixtures
                   ->setImageDescription( "description de l'image $i" )
                   ->setLienEvent( "https://www.google.com" )
                   ->setLieu( "le lieu ce situe ici" )
-                  ->setDate( new \Datetime() );
+                  ->setDate( new Datetime() );
             $manager->persist( $event );
         };
 

@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% for message in app.flashes('danger') %}
+        <div class="text-center alert alert-dismissible alert-danger">
+            <i class="fa fa-times"></i> <span>{{ message }}</span>
+        </div>
+    {% endfor %}
+
+    <section class="presentation mb-5">
+        <h2 class="principale mb-4">{{ informations.titrepresentation | raw }}</h2>
+        {{ informations.presentation | raw }}
+    </section>
+
+    <section class="evenements">
+        <h2 class="principale mt-5">Événements à venir</h2>
+        <div class="mb-3">
+            {% for event in evenements|reverse %}
+                <div class="py-4">
+                    <div class="row">
+                        <div class="overflow-hidden col-md-4 mb-3">
+                            <img src="{{ event.image }}" alt="{{ event.imageDescription }}" class="images">
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="mt-2">
+                                {{ event.title }}
+                            </h5>
+                            <p class="text-muted">
+                                <strong>Date : </strong>{{ event.date | date('d/m/Y') }} &nbsp;&nbsp; |
+                                &nbsp;&nbsp;
+                                <strong>Heure : </strong>{{ event.date | date('H:i') }} &nbsp;&nbsp; | &nbsp;&nbsp;
+                                <strong>Lieu : </strong>{{ event.lieu }}</small></p>
+                            <p>{{ event.description |easyadmin_truncate(100) |raw }}</p>
+                            <a href="{{ event.lienEvent }}" class="btn btn-sm blanc bg-principale" target="_blank">voir l'événement</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="evenements">
+        <h2 class="principale">Derniers articles</h2>
+        <div class="mb-3">
+            {% for article in articles|reverse if article.isActive == true %}
+                <div class="py-4">
+                    <div class="row">
+                        {% if 'http' in article.image %}
+                            <div class="overflow-hidden col-md-4 mb-3">
+                                <img src="{{ article.image }}" alt="{{ article.imageDescription }}" class="images">
+                            </div>
+                        {% else %}
+                            <div class="overflow-hidden col-md-4 mb-3">
+                                <img src="/uploads/images/articles/{{ article.image }}" alt="{{ article.imageDescription }}"
+                                        class="images">
+                            </div>
+                        {% endif %}
+                        <div class="col-md-8">
+                            <h5 class="mt-2">
+                                {{ article.title }}
+                            </h5>
+                            <p class="text-muted"><small>Publié le {{ article.createdAt | date('d/m/Y') }} &nbsp; à
+                                    {{ article.createdAt | date('H:i') }}</small></p>
+                            <p>{{ article.content |easyadmin_truncate(100) |raw }}</p>
+                            <a href="{{ path('blogArticle', {'id': article.id}) }}" class="btn btn-sm blanc bg-principale">lire la suite</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

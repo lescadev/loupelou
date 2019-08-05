@@ -95,7 +95,7 @@ easy_admin:
             list:
                 actions:
                     - {name: 'new', label: 'Ajouter Comptoir'}
-                fields: [ {property: 'is_active',  type: 'toggle', label: 'Actif'}, {property: 'denomination', label: 'Enseigne'}, {property: 'prenom', label: 'Prénom'}, {property: 'nom', label: 'Nom'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Adresse e-mail'}, {property: 'ville', label: 'Ville'} ]
+                fields: [ {property: 'is_active',  type: 'toggle', label: 'Actif'}, {property: 'denomination', label: 'Enseigne'}, {property: 'prenom', label: 'Prénom'}, {property: 'nom', label: 'Nom'}, {property: 'telephone', label: 'Téléphone'}, {property: 'email', label: 'Adresse e-mail'}, {property: 'ville', label: 'Ville'}, {property: 'solde', label: 'Solde Pélous'} ]
             form:
                 title: 'Comptoir'
                 fields:
@@ -110,6 +110,8 @@ easy_admin:
                     - {property: 'siret', label: 'Siret', type: 'text'}
                     - {property: 'site_internet', label: 'Site', type: 'text'}
                     - {property: 'description', label: 'Description', type: 'fos_ckeditor'}
+                    - {property: 'solde', label: 'Solde de Pélous', type: 'number'}
+
         Categorie:
             class: App\Entity\Categorie
             label: 'Catégorie'
@@ -121,7 +123,7 @@ easy_admin:
                 title: 'Catégorie'
                 fields:
                     - {property: 'nom', label: 'Catégorie', type: 'text'}
-                    
+
         Informations:
             class: App\Entity\Informations
             list:

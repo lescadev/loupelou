@@ -123,7 +123,7 @@ class Admin
         return $this->prenom;
     }
 
-    public function setPrenom(?string $prenom): self
+    public function setPrenom( ?string $prenom ): self
     {
         $this->prenom = $prenom;
 
@@ -135,7 +135,7 @@ class Admin
         return $this->nom;
     }
 
-    public function setNom(?string $nom): self
+    public function setNom( ?string $nom ): self
     {
         $this->nom = $nom;
 

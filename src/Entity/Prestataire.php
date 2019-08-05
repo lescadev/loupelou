@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+
 // use Symfony\Component\Validator\Constraints\Collection;
 
 /**
@@ -43,45 +44,33 @@ class Prestataire
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Categorie", inversedBy="prestataires")
-     * @ORM\JoinTable(name="prestataire_categorie", 
-    *   joinColumns={ 
-    *     @ORM\JoinColumn(name="id", referencedColumnName="id")
-    *   },
-    *   inverseJoinColumns={ 
-    *     @ORM\JoinColumn(name="categorie", referencedColumnName="id")
-    *   })
+     * @ORM\JoinTable(name="prestataire_categorie",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="categorie", referencedColumnName="id")
+     *   })
      */
     private $categories;
+
+    public function __construct()
+    {
+        // $this->category = new Collection();
+        $this->categories = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser( User $user ): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function __construct() {
-        // $this->category = new Collection();
-        $this->categories = new ArrayCollection();
-    }
-
     public function getCategories()
     {
         return $this->categories;
-        
     }
 
-    public function setCategories(Categorie $categories)
+    public function setCategories( Categorie $categories )
     {
         $this->categories = $categories;
 
@@ -129,9 +118,21 @@ class Prestataire
         return $this->getUser()->getNom();
     }
 
-    public function setNom(string $nom)
+    public function getUser(): ?User
     {
-        return $this->getUser()->setNom($nom);
+        return $this->user;
+    }
+
+    public function setUser( User $user ): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function setNom( string $nom )
+    {
+        return $this->getUser()->setNom( $nom );
     }
 
     public function getPrenom()
@@ -139,9 +140,9 @@ class Prestataire
         return $this->getUser()->getPrenom();
     }
 
-    public function setPrenom(string $prenom)
+    public function setPrenom( string $prenom )
     {
-        return $this->getUser()->setPrenom($prenom);
+        return $this->getUser()->setPrenom( $prenom );
     }
 
     public function getIsActive()
@@ -149,9 +150,9 @@ class Prestataire
         return $this->getUser()->getIsActive();
     }
 
-    public function setIsActive(bool $isActive)
+    public function setIsActive( bool $isActive )
     {
-        return $this->getUser()->setIsActive($isActive);
+        return $this->getUser()->setIsActive( $isActive );
     }
 
     public function getTelephone()
@@ -159,9 +160,9 @@ class Prestataire
         return $this->getUser()->getTelephone();
     }
 
-    public function setTelephone(string $telephone)
+    public function setTelephone( string $telephone )
     {
-        return $this->getUser()->setTelephone($telephone);
+        return $this->getUser()->setTelephone( $telephone );
     }
 
     public function getEmail()
@@ -169,9 +170,9 @@ class Prestataire
         return $this->getUser()->getEmail();
     }
 
-    public function setEmail(string $email)
+    public function setEmail( string $email )
     {
-        return $this->getUser()->setEmail($email);
+        return $this->getUser()->setEmail( $email );
     }
 
     public function getAdresse()
@@ -179,9 +180,9 @@ class Prestataire
         return $this->getUser()->getAdresse();
     }
 
-    public function setAdresse(string $adresse)
+    public function setAdresse( string $adresse )
     {
-        return $this->getUser()->setAdresse($adresse);
+        return $this->getUser()->setAdresse( $adresse );
     }
 
     public function getVille()
@@ -189,9 +190,9 @@ class Prestataire
         return $this->getUser()->getVille();
     }
 
-    public function setVille(string $ville)
+    public function setVille( string $ville )
     {
-        return $this->getUser()->setVille($ville);
+        return $this->getUser()->setVille( $ville );
     }
 
     public function getDescription()
@@ -199,9 +200,9 @@ class Prestataire
         return $this->getUser()->getDescription();
     }
 
-    public function setDescription($description)
+    public function setDescription( $description )
     {
-        return $this->getUser()->setDescription($description);
+        return $this->getUser()->setDescription( $description );
     }
 
     public function getCodePostal()
@@ -209,24 +210,24 @@ class Prestataire
         return $this->getUser()->getCodePostal();
     }
 
-    public function setCodePostal(string $codePostal)
+    public function setCodePostal( string $codePostal )
     {
-        return $this->getUser()->setCodePostal($codePostal);
+        return $this->getUser()->setCodePostal( $codePostal );
     }
 
-    public function addCategory(Categorie $category): self
+    public function addCategory( Categorie $category ): self
     {
-        if (!$this->categories->contains($category)) {
+        if( ! $this->categories->contains( $category ) ) {
             $this->categories[] = $category;
         }
 
         return $this;
     }
 
-    public function removeCategory(Categorie $category): self
+    public function removeCategory( Categorie $category ): self
     {
-        if ($this->categories->contains($category)) {
-            $this->categories->removeElement($category);
+        if( $this->categories->contains( $category ) ) {
+            $this->categories->removeElement( $category );
         }
 
         return $this;
