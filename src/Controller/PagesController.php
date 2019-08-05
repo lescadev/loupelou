@@ -56,13 +56,14 @@ class PagesController
     /**
      * @Route("/utiliser", name="utiliser")
      */
-    public function utiliser(CategorieRepository $categorieRepository)
+    public function utiliser( CategorieRepository $categorieRepository )
     {
         $categories = $categorieRepository->findAll();
+
         return $this->render( 'pages/utiliser.html.twig',
             [
-                'status' => 'prestataire',
-                'categories' => $categories
+                'status'     => 'prestataire',
+                'categories' => $categories,
             ] );
     }
 

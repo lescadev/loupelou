@@ -28,6 +28,11 @@ class Particulier
         return $this->id;
     }
 
+    public function getIsActive()
+    {
+        return $this->getUser()->getIsActive();
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -38,11 +43,6 @@ class Particulier
         $this->user = $user;
 
         return $this;
-    }
-
-    public function getIsActive()
-    {
-        return $this->getUser()->getIsActive();
     }
 
     public function setIsActive( bool $isActive )

@@ -87,6 +87,7 @@ easy_admin:
                     - {property: 'siret', label: 'Siret', type: 'text'}
                     - {property: 'site_internet', label: 'Site', type: 'text'}
                     - {property: 'categories', label: 'Catégorie'}
+                    - {property: 'description', label: 'Description', type: 'fos_ckeditor'}
         Comptoir:
             class: App\Entity\Comptoir
             label: "Comptoirs"
@@ -108,6 +109,7 @@ easy_admin:
                     - {property: 'ville', label: 'Ville', type: 'text', type_options: {required: true}}
                     - {property: 'siret', label: 'Siret', type: 'text'}
                     - {property: 'site_internet', label: 'Site', type: 'text'}
+                    - {property: 'description', label: 'Description', type: 'fos_ckeditor'}
                     - {property: 'solde', label: 'Solde de Pélous', type: 'number'}
 
         Categorie:

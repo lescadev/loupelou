@@ -6,8 +6,8 @@ use App\Entity\Transaction;
 use App\Form\InscriptionType;
 use App\Form\DescriptionType;
 use App\Form\TransactionType;
-use App\Repository\ComptoirRepository;
 use App\Repository\UserRepository;
+use App\Repository\ComptoirRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -76,6 +76,7 @@ class EspaceMembreController
      * @Route("/profil/email", name="profil.email")
      */
     public function editEmail(
+        UserRepository $userRepository,
         Request $request, EntityManagerInterface $em
     ) {
         $user = $this->getUser();
@@ -84,11 +85,17 @@ class EspaceMembreController
         $form->handleRequest( $request );
 
         if( $form->isSubmitted() && $form->get( 'email' )->isValid() ) {
-            $user->setEmail( $form->get( 'email' )->getData() );
-            $em->persist( $user );
-            $em->flush();
 
-            $this->addFlash( 'success', 'Votre adresse e-mail a été modifiée' );
+            $verifEmail = $userRepository->findBy( [ 'email' => $form->get( 'email' )->getData() ] );
+            if( $verifEmail ) {
+                $this->addFlash( 'error', "Email déjà utilisé ! " );
+            } else {
+                $user->setEmail( $form->get( 'email' )->getData() );
+                $em->persist( $user );
+                $em->flush();
+
+                $this->addFlash( 'success', 'Votre adresse e-mail a été modifiée' );
+            }
 
             return $this->redirectToRoute( 'profil' );
         }
@@ -183,11 +190,13 @@ class EspaceMembreController
         $form = $this->createForm( TransactionType::class, $transaction );
         $form->handleRequest( $request );
 
-        $test = $userRepository->findBy( array( "isActive" => true ) );
+        $repo = $userRepository->findBy( array( "isActive" => true ) );
 
         $users = [];
-        foreach( $test as $user ) {
-            array_push( $users, [ $user->getId(), $user->getEmail(), $user->getNom(), $user->getPrenom() ] );
+        foreach( $repo as $user ) {
+            if( $user->getRoles()[0] == "ROLE_PARTICULIER" ) {
+                array_push( $users, [ $user->getId(), $user->getEmail(), $user->getNom(), $user->getPrenom() ] );
+            }
         };
 
         if( $form->isSubmitted() && $form->isValid() ) {
@@ -200,13 +209,13 @@ class EspaceMembreController
             $target = $request->request->get( 'select' );
 
             if( ( $comptoir->getSolde() - $montant ) < 0 ) {
-                $this->addFlash( 'error', "Transaction refusée, solde insuffisant !" );
+                $this->addFlash( 'error', "Transaction refusée, solde insuffisant! " );
 
-                return $this->redirectToRoute( 'profil.transaction' );
+                return $this->redirectToRoute( 'transaction' );
             } else if( ( $comptoir->getSolde() - $montant ) <= 50 ) {
-                $this->addFlash( 'error', "Transaction refusée, votre solde risque d'être trop bas !" );
+                $this->addFlash( 'error', "Transaction refusée, votre solde risque d'être trop bas! " );
 
-                return $this->redirectToRoute( 'profil.transaction' );
+                return $this->redirectToRoute( 'transaction' );
             } else {
                 $comptoir->setSolde( $comptoir->getSolde() - $montant );
             }
@@ -220,7 +229,7 @@ class EspaceMembreController
             if( empty( $adherent ) ) {
                 $this->addFlash( 'error', "Adhérent non reconnu." );
 
-                return $this->redirectToRoute( 'profil.transaction' );
+                return $this->redirectToRoute( 'transaction' );
             }
             $transaction->setUser( $adherentObject );
             $transaction->setComptoir( $comptoir );
@@ -273,10 +282,11 @@ class EspaceMembreController
 
         return $this->render( "espaceMembre/transaction.html.twig",
             [
-                'nom'   => $comptoir->getDenomination(),
-                'solde' => $comptoir->getSolde(),
-                'form'  => $form->createView(),
-                'users' => $users,
+                'controller_name' => 'TransactionController',
+                'nom'             => $comptoir->getDenomination(),
+                'solde'           => $comptoir->getSolde(),
+                'form'            => $form->createView(),
+                'users'           => $users,
             ] );
     }
 }

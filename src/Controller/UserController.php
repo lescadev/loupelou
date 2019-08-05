@@ -364,21 +364,6 @@ class UserController
             ] );
     }
 
-    private function isRequestInTime( \Datetime $passwordRequestedAt = null )
-    {
-        if( $passwordRequestedAt === null ) {
-            return false;
-        }
-
-        $now      = new \DateTime();
-        $interval = $now->getTimestamp() - $passwordRequestedAt->getTimestamp();
-
-        $daySeconds = 3600 * 24;
-        $response   = $interval > $daySeconds ? false : $reponse = true;
-
-        return $response;
-    }
-
     /**
      * @Route("/reinitialiser/{id}/{token}", name="resettingPassword")
      */
@@ -422,5 +407,20 @@ class UserController
             [
                 'form' => $form->createView(),
             ] );
+    }
+
+    private function isRequestInTime( \Datetime $passwordRequestedAt = null )
+    {
+        if( $passwordRequestedAt === null ) {
+            return false;
+        }
+
+        $now      = new \DateTime();
+        $interval = $now->getTimestamp() - $passwordRequestedAt->getTimestamp();
+
+        $daySeconds = 3600 * 24;
+        $response   = $interval > $daySeconds ? false : $reponse = true;
+
+        return $response;
     }
 }

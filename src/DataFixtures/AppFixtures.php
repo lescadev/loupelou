@@ -13,6 +13,7 @@ use App\Entity\InformationsLegales;
 use App\Entity\InformationsAssociation;
 use App\Entity\ArticleBlog;
 use App\Entity\Evenements;
+use Datetime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -246,7 +247,7 @@ class AppFixtures
                     ->setContent( "Voici le contenu de l'article n°$i Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum repellat iure laboriosam dolore esse dolor!" )
                     ->setImage( "http://placehold.it/350x200" )
                     ->setImageDescription( "description de l'image $i" )
-                    ->setCreatedAt( new \DateTime() );
+                    ->setCreatedAt( new DateTime() );
             $manager->persist( $article );
         };
 
@@ -259,7 +260,7 @@ class AppFixtures
                   ->setImageDescription( "description de l'image $i" )
                   ->setLienEvent( "https://www.google.com" )
                   ->setLieu( "le lieu ce situe ici" )
-                  ->setDate( new \Datetime() );
+                  ->setDate( new Datetime() );
             $manager->persist( $event );
         };
 

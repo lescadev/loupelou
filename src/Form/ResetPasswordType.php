@@ -9,27 +9,34 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class ResetPasswordType extends AbstractType
+class ResetPasswordType
+    extends AbstractType
 {
+
     public function buildForm( FormBuilderInterface $builder, array $options )
     {
         $builder
-            ->add('password',
-            RepeatedType::class,
-            [
-                'type'            => PasswordType::class,
-                'invalid_message' => 'Mots de passe différents',
-                'options'         => [ 'attr' => [ 'class' => 'password-field' , 'placeholder' => 'Saisissez votre nouveau mot de passe'] ],
-                'required'        => true,
-                'first_options'   => [ 'label' => false ],
-                'second_options'  => [ 'label' => false ],
-            ]);
+            ->add( 'password',
+                RepeatedType::class,
+                [
+                    'type'            => PasswordType::class,
+                    'invalid_message' => 'Mots de passe différents',
+                    'options'         => [
+                        'attr' => [
+                            'class'       => 'password-field',
+                            'placeholder' => 'Saisissez votre nouveau mot de passe',
+                        ],
+                    ],
+                    'required'        => true,
+                    'first_options'   => [ 'label' => false ],
+                    'second_options'  => [ 'label' => false ],
+                ] );
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions( OptionsResolver $resolver )
     {
-        $resolver->setDefaults([
+        $resolver->setDefaults( [
             'data_class' => User::class,
-        ]);
+        ] );
     }
 }

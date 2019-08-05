@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -38,24 +39,24 @@ class Adhesion
         return $this->id;
     }
 
-    public function getDebutAdhesion(): ?\DateTimeInterface
+    public function getDebutAdhesion(): ?DateTimeInterface
     {
         return $this->debut_adhesion;
     }
 
-    public function setDebutAdhesion( \DateTimeInterface $debut_adhesion ): self
+    public function setDebutAdhesion( DateTimeInterface $debut_adhesion ): self
     {
         $this->debut_adhesion = $debut_adhesion;
 
         return $this;
     }
 
-    public function getFinAdhesion(): ?\DateTimeInterface
+    public function getFinAdhesion(): ?DateTimeInterface
     {
         return $this->fin_adhesion;
     }
 
-    public function setFinAdhesion( ?\DateTimeInterface $fin_adhesion ): self
+    public function setFinAdhesion( ?DateTimeInterface $fin_adhesion ): self
     {
         $this->fin_adhesion = $fin_adhesion;
 

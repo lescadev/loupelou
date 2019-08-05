@@ -3,30 +3,28 @@
 {% block title %}Tous les évènements - {{ parent() }}{% endblock %}
 
 {% block body %}
+    <h1 class="principale mb-3">Événements</h1>
 
-    <h1 class="principale">Évènements</h1>
-
-    <div class="row d-flex justify-content-center">
+    <div class="mb-3">
         {% for event in events|reverse %}
-            <div class="col-6 py-3 px-3">
-                <div class="card border-principale mb-2">
-                    <div class="card-header">
-                        <strong>Date : </strong>{{ event.date | date('d/m/Y') }} &nbsp;&nbsp; | &nbsp;&nbsp;
-                        <strong>Heure : </strong>{{ event.date | date('H:i') }} &nbsp;&nbsp; | &nbsp;&nbsp;
-                        <strong>Lieu : </strong>{{ event.lieu }}
+            <div class="py-4">
+                <div class="row">
+                    <div class="overflow-hidden col-md-4 mb-3">
+                        <img src="{{ event.image }}" alt="{{ event.imageDescription }}" class="images">
                     </div>
-                    <div class="card-body">
-                        <h4 class="card-title principale">{{ event.title }}</h4>
-                        <img src={{ event.image }} alt={{ event.imageDescription }} class="py-4">
-                        <p class="card-text">{{ event.description | raw }}</p>
-                    </div>
-                    <div class="card-footer p-0">
-                        <a href="{{ event.lienEvent }}" class="btn btn-block blanc bg-principale rounded-0 rounded-bottom">Lien de l'évènement &raquo;</a>
+                    <div class="col-md-8">
+                        <h5 class="mt-2">
+                            {{ event.title }}
+                        </h5>
+                        <p class="text-muted"><strong>Date : </strong>{{ event.date | date('d/m/Y') }} &nbsp;&nbsp; |
+                            &nbsp;&nbsp;
+                            <strong>Heure : </strong>{{ event.date | date('H:i') }} &nbsp;&nbsp; | &nbsp;&nbsp;
+                            <strong>Lieu : </strong>{{ event.lieu }}</small></p>
+                        <p>{{ event.description |easyadmin_truncate(100) |raw }}</p>
+                        <a href={{ event.lienEvent }} class="btn btn-sm blanc bg-principale" target="_blank">voir l'événement</a>
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
-
-
 {% endblock %}

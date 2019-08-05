@@ -42,7 +42,7 @@ class UserRepository
                       ->select( 'user', 'prestataire.denomination' );
 
                 if( ! empty( $params['search'] ) ) {
-                    $query->andWhere( "prestataire.denomination LIKE :search OR user.description LIKE :search" )
+                    $query->andWhere( "prestataire.denomination LIKE :search OR user.description LIKE :search OR user.ville LIKE :search" )
                           ->setParameter( 'search', '%' . $params['search'] . '%' );
                 }
 
@@ -79,13 +79,13 @@ class UserRepository
                           'comptoir.site_internet' );
 
                 if( ! empty( $params['search'] ) ) {
-                    $query->andWhere( "comptoir.denomination LIKE :search OR user.description LIKE :search" )
+                    $query->andWhere( "comptoir.denomination LIKE :search OR user.description LIKE :search OR user.ville LIKE :search" )
                           ->setParameter( 'search', '%' . $params['search'] . '%' );
                 }
             }
 
-            if( ! empty( $params['distance'] ) and ! empty( $params['longitude'] )
-                                                   and ! empty( $params['latitude'] ) ) {
+            if( ! empty( $params['longitude'] )
+                and ! empty( $params['latitude'] ) ) {
                 $query->addSelect(
                     '( 6371 * acos(cos(radians(' . $params['latitude'] . '))' .
                     '* cos( radians( user.latitude ) )' .
@@ -94,7 +94,11 @@ class UserRepository
                     '+ sin( radians(' . $params['latitude'] . ') )' .
                     '* sin( radians( user.latitude ) ) ) ) as distance'
                 )
-                      ->andHaving( 'distance < :radius' )
+                      ->orderBy( "distance", 'ASC' );
+            }
+
+            if( ! empty( $params['distance'] ) ) {
+                $query->andHaving( 'distance < :radius' )
                       ->setParameter( 'radius', $params['distance'] );
             }
         }
@@ -104,51 +108,22 @@ class UserRepository
         return $res;
     }
 
-    public function loadUserByEmail($email)
+    public function loadUserByEmail( $email )
     {
-        return $this->createQueryBuilder('u')
-            ->where('u.email = :email')
-            ->setParameter('email', $email)
-            ->getQuery()
-            ->getOneOrNullResult();
+        return $this->createQueryBuilder( 'u' )
+                    ->where( 'u.email = :email' )
+                    ->setParameter( 'email', $email )
+                    ->getQuery()
+                    ->getOneOrNullResult();
     }
 
-    public function loadUserByToken($token)
+    public function loadUserByToken( $token )
     {
-        return $this->createQueryBuilder('u')
-            ->where('u.token = :token')
-            ->setParameter('token', $token)
-            ->getQuery()
-            ->getOneOrNullResult();
+        return $this->createQueryBuilder( 'u' )
+                    ->where( 'u.token = :token' )
+                    ->setParameter( 'token', $token )
+                    ->getQuery()
+                    ->getOneOrNullResult();
     }
 
-
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

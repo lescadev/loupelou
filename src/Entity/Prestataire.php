@@ -22,7 +22,7 @@ class Prestataire
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -54,27 +54,15 @@ class Prestataire
      */
     private $categories;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser( User $user ): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function __construct()
     {
         // $this->category = new Collection();
         $this->categories = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
     public function getCategories()
@@ -128,6 +116,18 @@ class Prestataire
     public function getNom()
     {
         return $this->getUser()->getNom();
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser( User $user ): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 
     public function setNom( string $nom )
@@ -193,6 +193,16 @@ class Prestataire
     public function setVille( string $ville )
     {
         return $this->getUser()->setVille( $ville );
+    }
+
+    public function getDescription()
+    {
+        return $this->getUser()->getDescription();
+    }
+
+    public function setDescription( $description )
+    {
+        return $this->getUser()->setDescription( $description );
     }
 
     public function getCodePostal()

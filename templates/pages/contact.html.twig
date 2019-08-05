@@ -19,15 +19,15 @@
             </h4>
             {# Message de succès de l'envoi du formulaire #}
             {% for message in app.flashes('success') %}
-                <div class="text-center alert alert-dismissible alert-success">
-                    <i class="fa fa-check"></i> <span>{{ message }}</span>
+                <div class="text-center alert alert-success">
+                    <i class="fas fa-check"></i> <span>{{ message }}</span>
                 </div>
             {% endfor %}
 
             {# ****************************************************************** #}
             {# Message d'échec de l'envoi du formulaire #}
             {% if not form.vars.valid %}
-                <div class="text-center alert alert-dismissible alert-danger">
+                <div class="text-center alert alert-danger">
                     <i class="fa fa-times"></i>
                     <span>Les champs doivent contenir au moins 2 caractères et le message 10 caractères.</span>
                 </div>

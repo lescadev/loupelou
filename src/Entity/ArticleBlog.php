@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -97,6 +99,11 @@ class ArticleBlog
         return $this;
     }
 
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
     public function setImageFile( File $image = null )
     {
         $this->imageFile = $image;
@@ -105,21 +112,16 @@ class ArticleBlog
         // It is required that at least one field changes if you are using Doctrine,
         // otherwise the event listeners won't be called and the file is lost
         if( $image ) {
-            $this->createdAt = new \DateTime( 'now' );
+            $this->createdAt = new DateTime( 'now' );
         }
     }
 
-    public function getImageFile()
-    {
-        return $this->imageFile;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt( \DateTimeInterface $createdAt ): self
+    public function setCreatedAt( DateTimeInterface $createdAt ): self
     {
         $this->createdAt = $createdAt;
 

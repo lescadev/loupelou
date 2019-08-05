@@ -5,23 +5,32 @@
 {% block body %}
     {% if not isactive %}
         <div>
-            <p>Ce compte n'est pas actif</p>
+            <p class="text-warning text-center blanc bg-warning py-1 px-1">Ce compte n'est pas actif</p>
         </div>
     {% endif %}
 
-    <div id="containerProfil">
-        {% include "espaceMembre/menuModif.html.twig" %}
-        <div id="blockProfil">
-            <h2 id="profilTitle">Modifier mes informations personnelles</h2>
-            {{ form_start(form) }}
-            {{ form_row(form.prenom, {'label': 'Prénom : ', 'value' : user.prenom }) }}
-            {{ form_row(form.nom, {'label': 'Nom : ', 'value' : user.nom }) }}
-            {{ form_row(form.telephone,{'label': 'Téléphone : ', 'value' : user.telephone }) }}
-            {{ form_row(form.adresse,{'label': 'Adresse : ', 'value' : user.adresse }) }}
-            {{ form_row(form.code_postal,{'label': 'Code postal : ', 'value' : user.codePostal }) }}
-            {{ form_row(form.ville,{'label': 'Ville : ', 'value' : user.ville }) }}
-            <button type="submit">Modifier mes informations &raquo;</button>
-            {{ form_end(form, {'render_rest': false}) }}
+    <h1 class="principale text-center">Mon Compte</h1>
+
+    <div class="row mb-5">
+        <div class="col-md-4 mt-2 mb-4">
+            <div class="border-principale py-3 px-3">
+                {% include "espaceMembre/menuModif.html.twig" %}
+            </div>
+        </div>
+
+        <div class="col-md-8 mt-2">
+            <div class="form-group border-principale py-4 px-4">
+                <h3 class="mb-4">Modifier mes informations personnelles</h3>
+                {{ form_start(form) }}
+                {{ form_row(form.prenom, {'label': 'Prénom : ', 'value' : user.prenom, 'attr' : {"class": "form-control col-md-7 mb-3", "placeholder": "Votre prénom"}}) }}
+                {{ form_row(form.nom, {'label': 'Nom : ', 'value' : user.nom, 'attr' : {"class": "form-control col-md-7 mb-3", "placeholder": "Votre nom"}}) }}
+                {{ form_row(form.telephone,{'label': 'Téléphone : ', 'value' : user.telephone, 'attr' : {"class": "form-control col-md-7 mb-3", "placeholder": "Votre n° de téléphone"}}) }}
+                {{ form_row(form.adresse,{'label': 'Adresse : ', 'value' : user.adresse, 'attr' : {"class": "form-control col-md-7 mb-3", "placeholder": "Votre adresse"}}) }}
+                {{ form_row(form.code_postal,{'label': 'Code postal : ', 'value' : user.codePostal, 'attr' : {"class": "form-control col-md-7 mb-3", "placeholder": "Votre code postal"}}) }}
+                {{ form_row(form.ville,{'label': 'Ville : ', 'value' : user.ville, 'attr' : {"class": "form-control col-md-7 mb-3", "placeholder": "Votre ville"}}) }}
+                <button class="btn bg-principale blanc" type="submit">Modifier mes informations &raquo;</button>
+                {{ form_end(form, {'render_rest': false}) }}
+            </div>
         </div>
     </div>
 {% endblock %}
