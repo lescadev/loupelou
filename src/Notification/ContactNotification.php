@@ -3,13 +3,15 @@
 namespace App\Notification;
 
 use App\Entity\Contact;
+use Swift_Mailer;
+use Swift_Message;
 use Twig\Environment;
 
 class ContactNotification
 {
 
     /**
-     * @var \Swift_Mailer
+     * @var Swift_Mailer
      */
     private $mailer;
 
@@ -18,7 +20,7 @@ class ContactNotification
      */
     private $renderer;
 
-    public function __construct( \Swift_Mailer $mailer, Environment $renderer )
+    public function __construct( Swift_Mailer $mailer, Environment $renderer )
     {
         $this->mailer   = $mailer;
         $this->renderer = $renderer;
@@ -26,7 +28,7 @@ class ContactNotification
 
     public function notify( Contact $contact )
     {
-        $message = ( new \Swift_Message( 'Obejt :' . $contact->getObject() ) )
+        $message = ( new Swift_Message( 'Obejt :' . $contact->getObject() ) )
             ->setFrom( $contact->getEmail() )
             ->setTo( "loupelou@monnaie.fr" )
             ->setReplyTo( $contact->getEmail() )

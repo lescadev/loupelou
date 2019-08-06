@@ -19,7 +19,7 @@ class DescriptionType
                 CKEditorType::class,
                 [
                     'required' => true,
-                    'label'       => false
+                    'label'    => false,
                 ] );
     }
 }

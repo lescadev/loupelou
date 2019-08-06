@@ -16,14 +16,17 @@ class AjaxController
 {
 
     /**
+     * Récupération de l'annuaire
      * @Route("/ajax-annuaire", name="ajax-annuaire")
+     *
      * @param UserRepository $userRepository
      * @param Request $request
      *
      * @return Response
      */
-    public function ajaxAnnuaire(UserRepository $userRepository, PrestataireRepository $prestataireRepository, Request $request)
-    {
+    public function ajaxAnnuaire(
+        UserRepository $userRepository, PrestataireRepository $prestataireRepository, Request $request
+    ) {
 
         $params = [];
 
@@ -34,21 +37,23 @@ class AjaxController
 
         $res = $userRepository->findByParams( $params );
 
-        if($params['status'] == 'prestataire') {
-            for($i = 0; $i<count($res); $i++){
-                $id = $res[$i]['id'];
-                $presta = $prestataireRepository->find($id);
-                $categories = $presta->getCategories();
-                $res[$i]['categories'] = $categories->getValues();
+        if( $params['status'] == 'prestataire' ) {
+            for( $i = 0; $i < count( $res ); $i ++ ) {
+                $id                      = $res[ $i ]['id'];
+                $presta                  = $prestataireRepository->find( $id );
+                $categories              = $presta->getCategories();
+                $res[ $i ]['categories'] = $categories->getValues();
             }
         }
 
-        return $this->render('map/annuairePartial.html.twig',
-            array('response' => $res));
+        return $this->render( 'pages/annuairePartial.html.twig',
+            array( 'response' => $res ) );
     }
 
     /**
+     * Récupération des informations du prestataire pour affichage dans la boîte de dialogue
      * @Route("/ajax-modal", name="ajax-modal")
+     *
      * @param UserRepository $userRepository
      * @param CategorieRepository $categorieRepository
      * @param PrestataireRepository $prestataireRepository
@@ -85,8 +90,7 @@ class AjaxController
                 'site_internet' => $prestataire->getSiteInternet(),
             ];
 
-            $json = $serialize->serialize($data, 'json');
-
+            $json = $serialize->serialize( $data, 'json' );
         } else {
             $json = '';
         }

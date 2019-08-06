@@ -56,7 +56,7 @@ function setModalContent(data) {
         categorie.append(c.nom + ' ');
     }
     description.append(data.description);
-    site.append(data.site);
+    site.append(data.site_internet);
     adresse.append(data.rue + " " + data.code_postal + " " + data.ville);
 }
 

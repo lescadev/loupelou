@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class InformationsAssociation
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -41,7 +42,7 @@ class InformationsAssociation
         return $this->Statuts;
     }
 
-    public function setStatuts(string $Statuts): self
+    public function setStatuts( string $Statuts ): self
     {
         $this->Statuts = $Statuts;
 
@@ -53,7 +54,7 @@ class InformationsAssociation
         return $this->ReglementInterieur;
     }
 
-    public function setReglementInterieur(string $ReglementInterieur): self
+    public function setReglementInterieur( string $ReglementInterieur ): self
     {
         $this->ReglementInterieur = $ReglementInterieur;
 
@@ -65,7 +66,7 @@ class InformationsAssociation
         return $this->CompteRenduAG;
     }
 
-    public function setCompteRenduAG(string $CompteRenduAG): self
+    public function setCompteRenduAG( string $CompteRenduAG ): self
     {
         $this->CompteRenduAG = $CompteRenduAG;
 

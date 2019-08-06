@@ -160,6 +160,9 @@
             "config/packages/fos_rest.yaml"
         ]
     },
+    "fzaninotto/faker": {
+        "version": "v1.8.0"
+    },
     "google/recaptcha": {
         "version": "1.1",
         "recipe": {

@@ -7,16 +7,18 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method InformationsAssociation|null find($id, $lockMode = null, $lockVersion = null)
- * @method InformationsAssociation|null findOneBy(array $criteria, array $orderBy = null)
+ * @method InformationsAssociation|null find( $id, $lockMode = null, $lockVersion = null )
+ * @method InformationsAssociation|null findOneBy( array $criteria, array $orderBy = null )
  * @method InformationsAssociation[]    findAll()
- * @method InformationsAssociation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method InformationsAssociation[]    findBy( array $criteria, array $orderBy = null, $limit = null, $offset = null )
  */
-class InformationsAssociationRepository extends ServiceEntityRepository
+class InformationsAssociationRepository
+    extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+
+    public function __construct( RegistryInterface $registry )
     {
-        parent::__construct($registry, InformationsAssociation::class);
+        parent::__construct( $registry, InformationsAssociation::class );
     }
 
     // /**

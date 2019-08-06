@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,38 +11,32 @@ use Doctrine\ORM\Mapping as ORM;
 class Transaction
 {
 
+    public $nom;
+    public $prenom;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\user")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
-
     /**
      * @ORM\Column(type="float")
      */
     private $montant;
-
     /**
      * @ORM\Column(type="datetime")
      */
     private $date_transaction;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\comptoir")
      * @ORM\JoinColumn(nullable=false)
      */
     private $comptoir;
-
-    public $nom;
-
-    public $prenom;
 
     public function getId(): ?int
     {
@@ -72,12 +67,12 @@ class Transaction
         return $this;
     }
 
-    public function getDateTransaction(): ?\DateTimeInterface
+    public function getDateTransaction(): ?DateTimeInterface
     {
         return $this->date_transaction;
     }
 
-    public function setDateTransaction( \DateTimeInterface $date_transaction ): self
+    public function setDateTransaction( DateTimeInterface $date_transaction ): self
     {
         $this->date_transaction = $date_transaction;
 

@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conditions Générales de Vente - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <h1 class="principale">Conditions Générales de Vente</h1>
+
+    {{ informationsLegales.cgv | raw }}
+{% endblock %}

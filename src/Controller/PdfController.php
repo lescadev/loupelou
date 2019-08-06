@@ -14,46 +14,57 @@ class PdfController
 {
 
     /**
-     * @Route("profil/mypdf", name="mypdf")
+     * @Route("/formulaire_adhesion", name="pdf.adhesion")
      */
-
-    public function index()
+    public function pdfAdhesion()
     {
-        // Configure Dompdf according to your needs
         $pdfOptions = new Options();
         $pdfOptions->set( 'defaultFont', 'Arial' );
-
-        // Instantiate Dompdf with our options
         $dompdf = new Dompdf( $pdfOptions );
 
-        $user = $this->getUser();
-        // Retrieve the HTML generated in our twig file
-        $html = $this->renderView( 'espaceMembre/mypdf.html.twig',
-            [
-                'user' => $user,
+        $html = $this->renderView( 'pdf/adhesionPdf.html.twig' );
 
-            ] );
-
-        // Load HTML to Dompdf
         $dompdf->loadHtml( $html );
-
-        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
         $dompdf->setPaper( 'A4', 'portrait' );
-
-        // Render the HTML as PDF
         $dompdf->render();
 
-        // Output the generated PDF to Browser (force download)
-        $dompdf->stream( "mypdf.pdf",
+        $dompdf->stream( "adhesion-lou-pelou.pdf",
             [
                 "Attachment" => false,
             ] );
     }
 
     /**
-     * @Route("/pdf_comptoir", name="pdf_comptoir")
+     * @Route("profil/imprimer", name="profil.pdf")
      */
-    public function pdfComptoir( UserRepository $userRepository)
+    public function pdfAdherent()
+    {
+        $pdfOptions = new Options();
+        $pdfOptions->set( 'defaultFont', 'Arial' );
+        $dompdf = new Dompdf( $pdfOptions );
+
+        $user = $this->getUser();
+
+        $html = $this->renderView( 'pdf/profilPdf.html.twig',
+            [
+                'user' => $user,
+
+            ] );
+
+        $dompdf->loadHtml( $html );
+        $dompdf->setPaper( 'A4', 'portrait' );
+        $dompdf->render();
+
+        $dompdf->stream( "adherent.pdf",
+            [
+                "Attachment" => false,
+            ] );
+    }
+
+    /**
+     * @Route("/annuaire_comptoirs", name="pdf.comptoirs")
+     */
+    public function pdfComptoirs( UserRepository $userRepository )
     {
 
         $pdfOptions = new Options();
@@ -64,7 +75,7 @@ class PdfController
         $resComptoir =
             $userRepository->findByParams( array( 'status' => 'comptoir', 'filter' => 'Tous les services' ) );
 
-        $html = $this->renderView( 'pdf/constructorComptoir.html.twig',
+        $html = $this->renderView( 'pdf/pdfComptoirs.html.twig',
             [
                 'comptoir' => $resComptoir,
             ] );
@@ -73,16 +84,16 @@ class PdfController
 
         $dompdf->render();
 
-        $dompdf->stream( "annuaire_comptoir.pdf",
+        $dompdf->stream( "annuaire-comptoirs.pdf",
             [
                 "Attachment" => true,
             ] );
     }
 
     /**
-     * @Route("/pdf_prestataire", name="pdf_prestataire")
+     * @Route("/annuaire_prestataires", name="pdf.prestataires")
      */
-    public function pdfPresta(CategorieRepository $categorieRepo)
+    public function pdfPrestataires( CategorieRepository $categorieRepo )
     {
 
         $pdfOptions = new Options();
@@ -93,15 +104,14 @@ class PdfController
         $categories = $categorieRepo->findAll();
 
         $prestaCate = array();
-        
-        foreach( $categories as $categorie ) {
-            $nom = $categorie->getNom();
-            $prestataireCate = $categorie->getPrestataires()->getValues();
-            $prestaCate[$nom] = $prestataireCate; 
 
+        foreach( $categories as $categorie ) {
+            $nom                = $categorie->getNom();
+            $prestataireCate    = $categorie->getPrestataires()->getValues();
+            $prestaCate[ $nom ] = $prestataireCate;
         }
 
-        $html = $this->renderView( 'pdf/constructorPrestataire.html.twig',
+        $html = $this->renderView( 'pdf/pdfPrestataires.html.twig',
             [
                 'prestaCate' => $prestaCate,
             ] );
@@ -110,7 +120,7 @@ class PdfController
 
         $dompdf->render();
 
-        $dompdf->stream( "annuaire_prestataire.pdf",
+        $dompdf->stream( "annuaire-prestataires.pdf",
             [
                 "Attachment" => true,
             ] );
