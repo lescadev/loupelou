@@ -1,5 +1,19 @@
 <h1>Inscription !</h1>
 
-{{ prenom }} {{ nom }} s'est inscrit sur le site loupelou.
+<p>Bonjour,</p>
 
-<br /><a href="{{ url('app_login') }}">Voir l'utilisateur</a>
+<p>{{ prenom }} {{ nom }} s'est inscrit(e) sur le site
+    <a href="{{ url('index') }}">Lou Pélou</a> en tant que {{ type }}.
+</p>
+
+<p>
+    {% if 'particulier' in type %}
+        <a href="{{ url('index') }}_admin_back/?entity=Particulier">Voir l'utilisateur</a>
+    {% elseif 'comptoir' in type %}
+        <a href="{{ url('index') }}_admin_back/?entity=Comptoir">Voir l'utilisateur</a>
+    {% elseif 'prestataire' in type %}
+        <a href="{{ url('index') }}_admin_back/?entity=Prestataire">Voir l'utilisateur</a>
+    {% else %}
+        <a href="{{ url('index') }}_admin_back/?entity=Prestataire">Voir l'utilisateur</a>
+    {% endif %}
+</p>

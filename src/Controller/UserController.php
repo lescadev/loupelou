@@ -66,7 +66,7 @@ class UserController
                 $entityManager->persist( $particulier );
                 $entityManager->flush();
 
-                $message = ( new \Swift_Message( 'Inscription loupelou' ) )
+                $message = ( new \Swift_Message( 'Inscription sur le site Lou Pélou' ) )
                     ->setFrom( $this->getParameter( 'mail.site' ) )
                     ->setTo( $form->get( 'email' )->getData() )
                     ->setBody(
@@ -76,6 +76,7 @@ class UserController
                                 'nom'    => $form->get( 'nom' )->getData(),
                                 'prenom' => $form->get( 'prenom' )->getData(),
                                 'email'  => $form->get( 'email' )->getData(),
+                                'type'   => 'particulier',
                             ]
                         ),
                         'text/html'
@@ -83,7 +84,7 @@ class UserController
 
                 $mailer->send( $message );
 
-                $adminMessage = ( new \Swift_Message( 'Inscription loupelou' ) )
+                $adminMessage = ( new \Swift_Message( 'Inscription sur le site Lou Pélou' ) )
                     ->setFrom( $this->getParameter( 'mail.site' ) )
                     ->setTo( $this->getParameter( 'mail.admin' ) )
                     ->setBody(
@@ -93,6 +94,7 @@ class UserController
                                 'nom'    => $form->get( 'nom' )->getData(),
                                 'prenom' => $form->get( 'prenom' )->getData(),
                                 'email'  => $form->get( 'email' )->getData(),
+                                'type'   => 'particulier',
                             ]
                         ),
                         'text/html'
@@ -223,12 +225,17 @@ class UserController
 
                 if( ! empty( $data['compt'] ) && ! empty( $data['presta'] ) ) {
                     $user->setRoles( [ "ROLE_PRESTATAIRE", "ROLE_COMPTOIR" ] );
+                    $userType = 'comptoir & prestataire';
+                } else if( ! empty( $data['compt'] ) ) {
+                    $userType = 'comptoir';
+                } else if( ! empty( $data['presta'] ) ) {
+                    $userType = 'prestataire';
                 }
 
                 if( ! empty( $data['compt'] ) | ! empty( $data['presta'] ) ) {
                     $entityManager->flush();
 
-                    $message = ( new \Swift_Message( 'Inscription loupelou' ) )
+                    $message = ( new \Swift_Message( 'Inscription sur le site Lou Pélou' ) )
                         ->setFrom( $this->getParameter( 'mail.site' ) )
                         ->setTo( $form->get( 'email' )->getData() )
                         ->setBody(
@@ -238,6 +245,7 @@ class UserController
                                     'nom'    => $form->get( 'nom' )->getData(),
                                     'prenom' => $form->get( 'prenom' )->getData(),
                                     'email'  => $form->get( 'email' )->getData(),
+                                    'type'   => $userType,
                                 ]
                             ),
                             'text/html'
@@ -245,7 +253,7 @@ class UserController
 
                     $mailer->send( $message );
 
-                    $adminMessage = ( new \Swift_Message( 'Inscription loupelou' ) )
+                    $adminMessage = ( new \Swift_Message( 'Inscription sur le site Lou Pélou' ) )
                         ->setFrom( $this->getParameter( 'mail.site' ) )
                         ->setTo( $this->getParameter( 'mail.admin' ) )
                         ->setBody(
@@ -255,6 +263,7 @@ class UserController
                                     'nom'    => $form->get( 'nom' )->getData(),
                                     'prenom' => $form->get( 'prenom' )->getData(),
                                     'email'  => $form->get( 'email' )->getData(),
+                                    'type'   => $userType,
                                 ]
                             ),
                             'text/html'
@@ -343,7 +352,7 @@ class UserController
             $user->setPasswordRequestedAt( new \Datetime() );
             $em->flush();
 
-            $message = ( new \Swift_Message( 'Objet : Réinitialisation mot de passe' ) )
+            $message = ( new \Swift_Message( 'Lou Pélou - Réinitialisation de votre mot de passe' ) )
                 ->setFrom( $this->getParameter( 'mail.site' ) )
                 ->setTo( $user->getEmail() )
                 ->setBody( $this->renderView( "emails/resettingpassword.html.twig",

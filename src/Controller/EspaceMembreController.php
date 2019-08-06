@@ -238,7 +238,7 @@ class EspaceMembreController
             $entityManager->persist( $transaction );
             $entityManager->flush();
 
-            $message = ( new \Swift_Message( 'Transaction' ) )
+            $message = ( new \Swift_Message( 'Lou Pélou - Transaction effectuée' ) )
                 ->setFrom( $this->getParameter( 'mail.site' ) )
                 ->setTo( $adherentObject->getEmail() )
                 ->setBody(
@@ -258,7 +258,7 @@ class EspaceMembreController
             $mailer->send( $message );
 
             if( ( $comptoir->getSolde() ) < 60 ) {
-                $adminMessage = ( new \Swift_Message( 'Solde bas' ) )
+                $adminMessage = ( new \Swift_Message( 'Lou Pélou - Solde comptoir bas' ) )
                     ->setFrom( $this->getParameter( 'mail.site' ) )
                     ->setTo( $this->getParameter( 'mail.admin' ) )
                     ->setBody(

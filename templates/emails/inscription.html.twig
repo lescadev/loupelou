@@ -1,9 +1,11 @@
-<h1> Merci pour votre inscription !</h1>
+<h1>Merci pour votre inscription !</h1>
 
-Bonjour {{ prenom }} {{ nom }}! Vous êtes inscrit sur loupelou.
+<p>Bonjour {{ prenom }} {{ nom }},</p>
 
-<br />Rappel de votre identifiant pour vous connecter : {{ email }}
+<p>
+    Vous êtes inscrit sur le site <a href="{{ url('index') }}">Lou Pélou</a>.<br /> Vous pouvez désormais
+    <a href="{{ url('login') }}">vous connecter</a> en utilisant votre identifiant : {{ email }}, et le mot de passe que vous avez choisi.
+</p>
 
-<br />
-<button><a href="{{ url('login') }}">Se connecter</a></button>
+<p>Toute l'équipe de l'association Le Chemin Limousin vous souhaite une excellente journée !</p>
 
