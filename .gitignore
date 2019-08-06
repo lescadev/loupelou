@@ -1,4 +1,3 @@
-
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -24,3 +23,4 @@
 public/error_l
 /.idea/
 /.vscode/
+.htaccess
