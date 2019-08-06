@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\UserRepository;
+use App\Repository\ComptoirRepository;
 use App\Repository\PrestataireRepository;
 use App\Repository\CategorieRepository;
 use JMS\Serializer\SerializerInterface;
@@ -62,9 +63,10 @@ class AjaxController
      * @return false|string
      */
     public function AjaxModal(
-        UserRepository $userRepository, CategorieRepository $categorieRepository,
+        UserRepository $userRepository,
         PrestataireRepository $prestataireRepository,
-        Request $request, SerializerInterface $serialize
+        Request $request, SerializerInterface $serialize,
+        ComptoirRepository $comptoirRepository
     ) {
 
         if( $request->getMethod() == 'POST' ) {
@@ -75,19 +77,30 @@ class AjaxController
 
             $user = $userRepository->find( $id );
 
-            $prestataire = $prestataireRepository->findBy( array( 'user' => $user ) )[0];
+            $prestataire = $prestataireRepository->findBy( array( 'user' => $user ));
 
-            $categories = $prestataire->getCategories()->getValues();
+            if($prestataire) {
+                $presta = $prestataire[0];
+                $categories = $presta->getCategories()->getValues();
+                $nom = $presta->getDenomination();
+                $site = $presta->getSiteInternet();
+            }
+            else {
+                $comptoir = $comptoirRepository->findBy(array('user' => $user))[0];
+                $categories = '';
+                $nom = $comptoir->getDenomination();
+                $site = $comptoir->getSiteInternet();
+            }
 
             $data = [
-                'nom'           => $prestataire->getDenomination(),
+                'nom'           => $nom,
                 'categorie'     => $categories,
                 'description'   => $user->getDescription(),
                 'ville'         => $user->getVille(),
                 'rue'           => $user->getAdresse(),
                 'code_postal'   => $user->getCodePostal(),
                 'date_creation' => $user->getDateCreation(),
-                'site_internet' => $prestataire->getSiteInternet(),
+                'site_internet' => $site,
             ];
 
             $json = $serialize->serialize( $data, 'json' );

@@ -15,10 +15,10 @@ function ajaxPost(data) {
         });
 }
 
-function ajaxModal(id) {
+function ajaxModal(data) {
     fetch("ajax-modal", {
         method: "POST",
-        body: JSON.stringify(id)
+        body: JSON.stringify(data)
     }).then(function(response){
         return response.json();
     }).then(function(data){
