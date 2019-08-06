@@ -6,7 +6,7 @@
 
 {% block body %}
     <h1 class="principale mb-4">Où s'en procurer</h1>
-    <div class="row">
+    <div class="row py-3 px-3">
         <div class="input-group mb-3">
             <input class="form-control " type="text" placeholder="Rechercher" id="search" name="search" />
             <select class="custom-select" id="sel2">
@@ -21,7 +21,7 @@
     <div class="row">
         <div class="col-md-8 mt-3">
             <div id="map"></div>
-            <div><a href={{ path('pdf.comptoirs') }}>Annuaire comptoir</a></div>
+            <div class="mt-3"><a class="btn bg-principale blanc" href={{ path('pdf.comptoirs') }}>Annuaire comptoir</a></div>
         </div>
         <div class="col mt-3">
             <div id="annuaire"></div>
