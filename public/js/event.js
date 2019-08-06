@@ -44,19 +44,25 @@ function setModalContent(data) {
     let description = $('#description');
     let site = $('#site');
     let adresse = $('#adresse');
+    let pref = $('#pref');
 
-    denomination.empty();
+    denomination.html(data.nom);
     categorie.empty();
     description.empty();
     site.empty();
     adresse.empty();
 
-    denomination.append(data.nom);
-    for(c of data.categorie) {
-        categorie.append(c.nom + ' ');
+    if(data.categorie){
+        pref.replaceWith('Catégorie: ');
+        for(c of data.categorie) {
+            categorie.append(c.nom + ' ');
+        }
+    } else {
+        pref.empty();
     }
-    description.append(data.description);
-    site.append(data.site_internet);
-    adresse.append(data.rue + " " + data.code_postal + " " + data.ville);
+
+    description.html(data.description);
+    site.html(data.site_internet);
+    adresse.html(data.rue + " " + data.code_postal + " " + data.ville);
 }
 
