@@ -30,7 +30,7 @@ class PdfController
 
         $dompdf->stream( "adhesion-lou-pelou.pdf",
             [
-                "Attachment" => false,
+                "Attachment" => true,
             ] );
     }
 
@@ -57,7 +57,7 @@ class PdfController
 
         $dompdf->stream( "adherent.pdf",
             [
-                "Attachment" => false,
+                "Attachment" => true,
             ] );
     }
 
