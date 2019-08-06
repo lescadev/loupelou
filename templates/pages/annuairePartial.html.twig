@@ -1,6 +1,5 @@
 {% set card_construct %}
     {% if response is defined %}
-        <div class="row">
             {% for result in response %}
                 <div class="card p-0 mb-2" id="{{ result.0.id }}">
                     <div class="card-header">
@@ -39,7 +38,6 @@
                     </div>
                 </div>
             {% endfor %}
-        </div>
     {% endif %}
 {% endset %}
 

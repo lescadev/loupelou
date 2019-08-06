@@ -66,7 +66,7 @@
 
             <nav class="navbar navigation navbar-expand-md navbar-dark bg-principale sticky-top">
                 <div class="collapse navbar-collapse" id="navbarColor01">
-                    <ul class="navbar-nav mr-auto flex-fill justify-content-between">
+                    <ul class="navbar-nav mr-auto flex-fill justify-content-around">
                         <li class="nav-item home-icon">
                             <a class="nav-link nav-index" href={{ path('index') }}><i class="fa fa-home" aria-hidden="true"></i></a>
                         </li>
@@ -94,6 +94,19 @@
                             <a class="nav-link nav-contacter" href={{ path('contact') }}>Contact</a>
                         </li>
                     </ul>
+                    <hr class="mb-2">
+                    {% if not app.user %}
+                    <div class="navbar-nav d-md-none d-lg-none d-xl-none mb-3">
+                        <a class="nav-link nav-login" href={{ path('login') }}>Connexion</a>
+                    </div>
+                    {% else %}
+                    <div class="navbar-nav d-md-none d-lg-none d-xl-none">
+                        <a class="nav-link d-md-none d-lg-none d-xl-none nav-profil" href={{ path('profil') }}>Mon compte</a>
+                    </div>
+                    <div class="navbar-nav d-md-none d-lg-none d-xl-none mb-2">
+                        <a class="nav-link d-md-none d-lg-none d-xl-none" href={{ path('app_logout') }}>Déconnexion</a>
+                    </div>
+                    {% endif %}
                 </div>
             </nav>
 

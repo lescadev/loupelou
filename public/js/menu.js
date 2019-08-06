@@ -14,7 +14,12 @@ let setActiveLink = function (route) {
         'cgu': 'nav-cgu',
         'statuts': 'nav-statuts',
         'reglementInterieur': 'nav-reglement',
-        'compteRenduAG': 'nav-rendu'
+        'compteRenduAG': 'nav-rendu',
+        'login': 'nav-login',
+        'profil': 'nav-profil',
+        'profil.informations': 'nav-profil',
+        'profil.email': 'nav-profil',
+        'profil.password': 'nav-profil'
     }
 
     for (const index in links) {
@@ -25,6 +30,8 @@ let setActiveLink = function (route) {
             } else if (route === 'contact') {
                 focusLink[0].setAttribute('class', 'nav-link active ' + links[index])
                 focusLink[1].setAttribute('class', 'nav-link active ' + links[index])
+            } else if (route === 'profil' || route === 'profil.informations' || route === 'profil.email' || route === 'profil.password') {
+                focusLink[0].setAttribute('class', 'nav-link d-md-none d-lg-none d-xl-none active ' + links[index])
             } else {
                 focusLink[0].setAttribute('class', 'nav-link active ' + links[index])
             }
