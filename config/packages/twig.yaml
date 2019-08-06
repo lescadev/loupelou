@@ -5,3 +5,5 @@ twig:
     globals:
         slogan: '@App\Service\Slogan'
         logo: '@App\Service\Logo'
+    form_themes:
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
