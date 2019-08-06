@@ -16,6 +16,7 @@ use App\Entity\Evenements;
 use Datetime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Faker;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures
@@ -201,33 +202,34 @@ class AppFixtures
 
         // Fixtures de l'entité "Categorie"
         $categoryList = [
-            'Association',
             'Alimentation',
             'Artisanat',
-            'Sante',
+            'Association',
             'Culture',
             'Education',
             'Hotellerie',
-            'Social',
             'Magasin',
             'Restauration',
+            'Sante',
             'Service',
+            'Social',
         ];
+
         for( $i = 0; $i < count( $categoryList ); $i ++ ) {
             $category[ $i ] = new Categorie();
             $category[ $i ]->setNom( $categoryList[ $i ] );
             $manager->persist( $category[ $i ] );
         }
 
-        $presta->addCategory( $category[1] );
-        $presta->addCategory( $category[0] );
+        $presta->addCategory( $category[1] )
+               ->addCategory( $category[0] );
 
-        $presta2->addCategory( $category[5] );
-        $presta2->addCategory( $category[8] );
-        $presta2->addCategory( $category[3] );
+        $presta2->addCategory( $category[5] )
+                ->addCategory( $category[8] )
+                ->addCategory( $category[3] );
 
-        $presta3->addCategory( $category[6] );
-        $presta3->addCategory( $category[5] );
+        $presta3->addCategory( $category[6] )
+                ->addCategory( $category[5] );
 
         $manager->persist( $user );
         $manager->persist( $user2 );
@@ -238,15 +240,16 @@ class AppFixtures
         $manager->persist( $presta );
         $manager->persist( $presta2 );
 
-        // Blog fixtures
+        // Faker init
+        $faker = Faker\Factory::create( 'fr_FR' );
 
         // Fixtures de l'entité "Blog"
         for( $i = 1; $i <= 10; $i ++ ) {
             $article = new ArticleBlog();
-            $article->setTitle( "Titre de l'article n°$i" )
-                    ->setContent( "Voici le contenu de l'article n°$i Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum repellat iure laboriosam dolore esse dolor!" )
-                    ->setImage( "http://placehold.it/350x200" )
-                    ->setImageDescription( "description de l'image $i" )
+            $article->setTitle( $faker->sentence( 10, true ) )
+                    ->setContent( '<p>' . implode( '</p><p>', $faker->paragraphs( 3, false ) ) . '</p>' )
+                    ->setImage( $faker->imageUrl( 1920, 1280 ) )
+                    ->setImageDescription( $faker->sentence( 5, true ) )
                     ->setCreatedAt( new DateTime() );
             $manager->persist( $article );
         };
@@ -254,12 +257,12 @@ class AppFixtures
         // Fixtures de l'entité "Evenements"
         for( $i = 1; $i <= 10; $i ++ ) {
             $event = new Evenements();
-            $event->setTitle( "Événement: $i" )
-                  ->setDescription( "voici la description de l'événement n°$i" )
-                  ->setImage( "http://placehold.it/350x200" )
-                  ->setImageDescription( "description de l'image $i" )
-                  ->setLienEvent( "https://www.google.com" )
-                  ->setLieu( "le lieu ce situe ici" )
+            $event->setTitle( $faker->sentence( 10, true ) )
+                  ->setDescription( '<p>' . implode( '</p><p>', $faker->paragraphs( 3, false ) ) . '</p>' )
+                  ->setImage( $faker->imageUrl( 1920, 1280 ) )
+                  ->setImageDescription( $faker->sentence( 5, true ) )
+                  ->setLienEvent( $faker->url() )
+                  ->setLieu( $faker->address() )
                   ->setDate( new Datetime() );
             $manager->persist( $event );
         };

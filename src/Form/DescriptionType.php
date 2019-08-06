@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class DescriptionType
     extends AbstractType
@@ -15,7 +16,7 @@ class DescriptionType
     {
         $builder
             ->add( 'description',
-                TextareaType::class,
+                CKEditorType::class,
                 [
                     'required' => true,
                     'label'    => false,
